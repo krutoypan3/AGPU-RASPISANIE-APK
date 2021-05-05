@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Date date1 = new Date();
         long date_ms = date1.getTime() + 10800000;
-        week_id = (int) ((date_ms - 18489514000f) / 1000f / 60f / 60f / 24f / 7f);
+        week_id = (int) ((date_ms - 18489514000f) / 1000f / 60f / 60f / 24f / 7f); // Номер текущей недели
         listview = (ListView) findViewById(R.id.listview);
         subtitle = (TextView) findViewById(R.id.subtitle);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         main_button = findViewById(R.id.main_button);
         result = findViewById(R.id.result);
 
-        main_button.setOnClickListener(new View.OnClickListener() {
+        main_button.setOnClickListener(new View.OnClickListener() { // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
             @Override
             public void onClick(View v) {
                 if (rasp_search_edit.getText().toString().trim().equals("")) {
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class GetURLData extends AsyncTask<String, String, String> {
+    private class GetURLData extends AsyncTask<String, String, String> { // Класс отвечающий за поиск группы \ аудитории \ преподователя
 
         protected void onOreExecute() {
             super.onPreExecute();

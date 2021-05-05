@@ -12,6 +12,7 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +23,7 @@ public class raspisanie_show extends Activity {
     static String[][] daysps_time;
     static String [][][] daysps_time3;
     static int week_day012;
+    static int week_ids;
     TextView mainText;
     TextView addText;
     static int week_day;
@@ -40,20 +42,22 @@ public class raspisanie_show extends Activity {
         setContentView(R.layout.raspisanie_layout);
         daysps3 = MainActivity.daysp3;
         daysps = MainActivity.daysp;
+        week_ids = MainActivity.week_id;
         daysps_time3 = MainActivity.daysp_time3;
         daysps_time = MainActivity.daysp_time;
         mainText = findViewById(R.id.main_text);
         addText = findViewById(R.id.add_text);
-        Date date1 = new Date();
-        long date_ms = date1.getTime() + 10800000;
-        Date date2 = new Date(date_ms);
+        Date date1 = new Date(); // Эти строки отвечают за
+        long date_ms = date1.getTime() + 10800000; // получение текущего
+        Date date2 = new Date(date_ms); // дня недели и
         week_day = date2.getDay() - 1;
         if (week_day == -1){ // Если будет воскресенье, то будет показан понедельник
             week_day = 0;
+            week_ids += 1;
         }
 
         week_day012 = 1;
-        day_show();
+        day_show(week_day012, week_day, daysps3, daysps_time3);
         new getraspweek().execute("");
 
 
@@ -67,18 +71,13 @@ public class raspisanie_show extends Activity {
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
                 week_day -= 1;
-                if (week_day == -1){ // Если будет воскресенье, то будет показан понедельник
+                if (week_day == -1){ // Если будет воскресенье, то будет показана суббота
                     week_day = 5;
-                    MainActivity.week_id -= 1;
+                    week_ids -= 1;
                     week_day012 = 0;
                     new getraspweek().execute("");
                 }
-                day_show();
-                try {
-                    TimeUnit.MILLISECONDS.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                day_show(week_day012, week_day, daysps3, daysps_time3);
                 week_day_bt1.setClickable(true);
                 week_day_bt2.setClickable(true);
             }
@@ -92,35 +91,30 @@ public class raspisanie_show extends Activity {
                 week_day += 1;
                 if (week_day == 6){ // Если будет воскресенье, то будет показана суббота
                     week_day = 0;
-                    MainActivity.week_id += 1;
+                    week_ids += 1;
                     week_day012 = 2;
                     new getraspweek().execute("");
                 }
-                day_show();
-                try {
-                    TimeUnit.MILLISECONDS.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                day_show(week_day012, week_day, daysps3, daysps_time3);
                 week_day_bt1.setClickable(true);
                 week_day_bt2.setClickable(true);
             }
         });
     }
-    protected void day_show(){
+    protected void day_show(int week_day012_f, int week_day_f, String[][][][] daysps3_f, String[][][] daysps_time3_f){
 
         String str = "";
-        if (daysps_time3[week_day012][week_day][0] == null){
+        if (daysps_time3_f[week_day012_f][week_day_f][0] == null){
             mainText.setText("Расписание не успевает загрузиться! Пожалуйста, листайте странички медленнее!");
         }
         else {
-            mainText.setText((daysps_time3[week_day012][week_day][0] + " " + daysps_time3[week_day012][week_day][1]));
+            mainText.setText((daysps_time3_f[week_day012_f][week_day_f][0] + " " + daysps_time3_f[week_day012_f][week_day_f][1]));
         }
         boolean check = false;
-        for (int j = 0; j< daysps3[week_day012][week_day].length; j++){
-            for (int g = 0; g< daysps3[week_day012][week_day][j].length-1; g++) {
-                if (daysps3[week_day012][week_day][j][g] != null) {
-                    str += daysps3[week_day012][week_day][j][g] + "\n";
+        for (int j = 0; j< daysps3_f[week_day012_f][week_day_f].length; j++){
+            for (int g = 0; g< daysps3_f[week_day012_f][week_day_f][j].length-1; g++) {
+                if (daysps3_f[week_day012_f][week_day_f][j][g] != null) {
+                    str += daysps3_f[week_day012_f][week_day_f][j][g] + "\n";
                     check = true;
                 }
             }
@@ -132,14 +126,16 @@ public class raspisanie_show extends Activity {
         addText.setText(str);
     }
 
-     static public class getraspweek extends AsyncTask<String, String, String> {
+    private class getraspweek extends AsyncTask<String, String, String> {
+        private String[][][] dayspsf = new String[6][10][5];
+        private String[][][][] dayspsf3 = new String[3][6][10][5];
+        private String[][] dayspsf_time = new String[6][2];
+        private String[][][] dayspsf_time3 = new String[3][6][2];
 
          @Override
          protected String doInBackground(String... strings) {
-             daysps3 = new String[3][6][10][5];
-             daysps_time3 = new String[3][6][2];
              for(int ff = -1; ff<2; ff++) {
-                 String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + MainActivity.selectedItem_id + "&SearchString=" + MainActivity.selectedItem + "&Type=Group&WeekId=" + (MainActivity.week_id + ff);
+                 String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + MainActivity.selectedItem_id + "&SearchString=" + MainActivity.selectedItem + "&Type=Group&WeekId=" + (week_ids + ff);
                  Document doc = null;
                  try {
                      doc = Jsoup.connect(urlq).get();
@@ -153,8 +149,6 @@ public class raspisanie_show extends Activity {
                  }
                  String[][] day;
                  day = days.toArray(new String[0][0]);
-                 daysps = new String[6][10][5];
-                 daysps_time = new String[6][2];
                  for (int i = 0; i < 6; i++) {
                      for (int j = 0; j < 10; j++) {
 
@@ -172,18 +166,20 @@ public class raspisanie_show extends Activity {
                          }
                          catch (Exception e) {
                          }
-                         daysps[(i)][(j)] = new String[]{predmet_name, predmet_prepod, predmet_group, predmet_podgroup, predmet_razmer};
+                         dayspsf[(i)][(j)] = new String[]{predmet_name, predmet_prepod, predmet_group, predmet_podgroup, predmet_razmer};
                      }
                      String predmet_data_ned = day[i][0].split("row\">")[1].split("<br>")[0];
                      String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
-                     daysps_time[i] = new String[]{predmet_data_ned, predmet_data_chi};
+                     dayspsf_time[i] = new String[]{predmet_data_ned, predmet_data_chi};
                  }
-                 daysps3[ff+1] = daysps;
-                 daysps_time3[ff+1] = daysps_time;
+                 dayspsf3[(ff+1)] = Arrays.copyOf(dayspsf, dayspsf.length);
+                 dayspsf_time3[(ff+1)] = Arrays.copyOf(dayspsf_time, dayspsf_time.length);
              }
-             daysps_time = daysps_time3[1];
-             daysps = daysps3[1];
              week_day012 = 1;
+             daysps3 = Arrays.copyOf(dayspsf3, dayspsf3.length);
+             daysps_time3 = Arrays.copyOf(dayspsf_time3, dayspsf_time3.length);
+             daysps_time = Arrays.copyOf(dayspsf_time3[1], dayspsf_time3[1].length);
+             daysps = Arrays.copyOf(dayspsf3[1], dayspsf3[1].length);
              return null;
          }
      }
