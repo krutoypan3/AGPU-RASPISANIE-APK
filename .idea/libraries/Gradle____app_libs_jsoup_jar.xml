@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: ./app/libs/jsoup.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/jsoup.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
