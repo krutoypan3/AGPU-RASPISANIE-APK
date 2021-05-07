@@ -40,11 +40,9 @@ public class raspisanie_show extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raspisanie_layout);
-        daysps3 = MainActivity.daysp3;
-        daysps = MainActivity.daysp;
+        daysps3 = Arrays.copyOf(MainActivity.daysp3, MainActivity.daysp3.length);
         week_ids = MainActivity.week_id;
-        daysps_time3 = MainActivity.daysp_time3;
-        daysps_time = MainActivity.daysp_time;
+        daysps_time3 = Arrays.copyOf( MainActivity.daysp_time3, MainActivity.daysp_time3.length);
         mainText = findViewById(R.id.main_text);
         addText = findViewById(R.id.add_text);
         Date date1 = new Date(); // Эти строки отвечают за
@@ -172,14 +170,12 @@ public class raspisanie_show extends Activity {
                      String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
                      dayspsf_time[i] = new String[]{predmet_data_ned, predmet_data_chi};
                  }
-                 dayspsf3[(ff+1)] = Arrays.copyOf(dayspsf, dayspsf.length);
-                 dayspsf_time3[(ff+1)] = Arrays.copyOf(dayspsf_time, dayspsf_time.length);
+                 dayspsf3[ff+1] = dayspsf;
+                 dayspsf_time3[ff+1] = dayspsf_time;
              }
              week_day012 = 1;
              daysps3 = Arrays.copyOf(dayspsf3, dayspsf3.length);
              daysps_time3 = Arrays.copyOf(dayspsf_time3, dayspsf_time3.length);
-             daysps_time = Arrays.copyOf(dayspsf_time3[1], dayspsf_time3[1].length);
-             daysps = Arrays.copyOf(dayspsf3[1], dayspsf3[1].length);
              return null;
          }
      }
