@@ -18,10 +18,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class raspisanie_show extends Activity {
-    static String[][][] daysps;
-    static String[][][][] daysps3;
-    static String[][] daysps_time;
-    static String [][][] daysps_time3;
+    static String[][][][] daysps3 = new String[3][6][10][5];
+    static String [][][] daysps_time3 = new String[3][6][2];
     static int week_day012;
     static int week_ids;
     TextView mainText;
@@ -40,9 +38,9 @@ public class raspisanie_show extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raspisanie_layout);
-        daysps3 = Arrays.copyOf(MainActivity.daysp3, MainActivity.daysp3.length);
+        daysps3 = MainActivity.copy4d(MainActivity.daysp3);
         week_ids = MainActivity.week_id;
-        daysps_time3 = Arrays.copyOf( MainActivity.daysp_time3, MainActivity.daysp_time3.length);
+        daysps_time3 = MainActivity.copy3d(MainActivity.daysp_time3);
         mainText = findViewById(R.id.main_text);
         addText = findViewById(R.id.add_text);
         Date date1 = new Date(); // Эти строки отвечают за
@@ -170,12 +168,12 @@ public class raspisanie_show extends Activity {
                      String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
                      dayspsf_time[i] = new String[]{predmet_data_ned, predmet_data_chi};
                  }
-                 dayspsf3[ff+1] = dayspsf;
-                 dayspsf_time3[ff+1] = dayspsf_time;
+                 dayspsf3[ff+1] = MainActivity.copy3d(dayspsf);
+                 dayspsf_time3[(ff+1)] = MainActivity.copy2d(dayspsf_time);
              }
              week_day012 = 1;
-             daysps3 = Arrays.copyOf(dayspsf3, dayspsf3.length);
-             daysps_time3 = Arrays.copyOf(dayspsf_time3, dayspsf_time3.length);
+             daysps3 = MainActivity.copy4d(dayspsf3);
+             daysps_time3 = MainActivity.copy3d(dayspsf_time3);
              return null;
          }
      }

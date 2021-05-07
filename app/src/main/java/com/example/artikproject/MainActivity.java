@@ -91,6 +91,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public static String[][][][] copy4d(String[][][][] original) {//Независимая копия четырехмерного массива
+        String[][][][] copy = new String[original.length][][][];
+        for (int i = 0; i < original.length; i++) {
+            copy[i] = copy3d(original[i]);
+        }
+        return copy;
+    }
+    public static String[][][] copy3d(String[][][] original) {//Независимая копия трехмерного массива
+        String[][][] copy = new String[original.length][][];
+        for (int i = 0; i < original.length; i++) {
+            copy[i] = copy2d(original[i]);
+        }
+        return copy;
+    }
+
+    public static String[][] copy2d(String[][] original) {//Независимая копия двухмерного массива
+        String[][] copy = new String[original.length][];
+        for (int i = 0; i < original.length; i++) {
+            copy[i] = copy1d(original[i]);
+        }
+        return copy;
+    }
+
+    public static String[] copy1d(String[] original) {//Независимая копия одномерного массива (double)
+        int length = original.length;
+        String[] copy = new String[length];
+        System.arraycopy(original, 0, copy, 0, length);
+        return copy;
+    }
+
 
 
     class GetRasp extends AsyncTask<String, String, String>{
@@ -141,8 +171,8 @@ public class MainActivity extends AppCompatActivity {
                     String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
                     daysp_time[i] = new String[]{predmet_data_ned, predmet_data_chi};
                 }
-                daysp3[ff+1] = daysp;
-                daysp_time3[ff+1] = daysp_time;
+                daysp3[ff+1] = copy3d(daysp);
+                daysp_time3[(ff+1)] = copy2d(daysp_time);
             }
             daysp_time = daysp_time3[1];
             daysp = daysp3[1];
