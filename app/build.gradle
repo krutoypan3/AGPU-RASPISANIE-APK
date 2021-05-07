@@ -35,6 +35,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation files('C:\\Users\\Kruto\\OneDrive\\Desktop\\MyJavaProjects\\Artik\\app\\libs\\json.jar')
     implementation files('C:\\Users\\Kruto\\OneDrive\\Desktop\\MyJavaProjects\\Artik\\app\\libs\\jsoup.jar')
+    implementation files('C:\\Users\\Kruto\\OneDrive\\Desktop\\MyJavaProjects\\Artik\\app\\libs\\sqlite-jdbc-3.8.11.2 (1).jar')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

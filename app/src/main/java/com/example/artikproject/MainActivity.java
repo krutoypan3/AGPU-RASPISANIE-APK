@@ -37,11 +37,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private EditText rasp_search_edit;
-    private Button main_button;
     private TextView result;
     private String[] group_listed;
     private String[] group_listed_id;
-    private ArrayAdapter<String> adapter;
     private ListView listview;
     private TextView subtitle;
     static public String selectedItem;
@@ -71,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         rasp_search_edit = findViewById(R.id.rasp_search_edit);
-        main_button = findViewById(R.id.main_button);
+        Button main_button = findViewById(R.id.main_button);
         result = findViewById(R.id.result);
 
         main_button.setOnClickListener(new View.OnClickListener() { // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
@@ -89,36 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public static String[][][][] copy4d(String[][][][] original) {//Независимая копия четырехмерного массива
-        String[][][][] copy = new String[original.length][][][];
-        for (int i = 0; i < original.length; i++) {
-            copy[i] = copy3d(original[i]);
-        }
-        return copy;
-    }
-    public static String[][][] copy3d(String[][][] original) {//Независимая копия трехмерного массива
-        String[][][] copy = new String[original.length][][];
-        for (int i = 0; i < original.length; i++) {
-            copy[i] = copy2d(original[i]);
-        }
-        return copy;
-    }
-
-    public static String[][] copy2d(String[][] original) {//Независимая копия двухмерного массива
-        String[][] copy = new String[original.length][];
-        for (int i = 0; i < original.length; i++) {
-            copy[i] = copy1d(original[i]);
-        }
-        return copy;
-    }
-
-    public static String[] copy1d(String[] original) {//Независимая копия одномерного массива (double)
-        int length = original.length;
-        String[] copy = new String[length];
-        System.arraycopy(original, 0, copy, 0, length);
-        return copy;
     }
 
 
@@ -171,8 +139,8 @@ public class MainActivity extends AppCompatActivity {
                     String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
                     daysp_time[i] = new String[]{predmet_data_ned, predmet_data_chi};
                 }
-                daysp3[ff+1] = copy3d(daysp);
-                daysp_time3[(ff+1)] = copy2d(daysp_time);
+                daysp3[ff+1] = MassCopy.copy3d(daysp);
+                daysp_time3[(ff+1)] = MassCopy.copy2d(daysp_time);
             }
             daysp_time = daysp_time3[1];
             daysp = daysp3[1];
@@ -253,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String res) {
             super.onPostExecute(res);
-            adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
+            ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
             listview.setAdapter(adapter);
             result.setText(res);
         }

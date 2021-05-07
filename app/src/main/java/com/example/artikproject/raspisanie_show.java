@@ -1,6 +1,7 @@
 package com.example.artikproject;
 
 import android.app.Activity;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -38,9 +39,9 @@ public class raspisanie_show extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raspisanie_layout);
-        daysps3 = MainActivity.copy4d(MainActivity.daysp3);
+        daysps3 = MassCopy.copy4d(MainActivity.daysp3);
         week_ids = MainActivity.week_id;
-        daysps_time3 = MainActivity.copy3d(MainActivity.daysp_time3);
+        daysps_time3 = MassCopy.copy3d(MainActivity.daysp_time3);
         mainText = findViewById(R.id.main_text);
         addText = findViewById(R.id.add_text);
         Date date1 = new Date(); // Эти строки отвечают за
@@ -123,13 +124,13 @@ public class raspisanie_show extends Activity {
     }
 
     private class getraspweek extends AsyncTask<String, String, String> {
-        private String[][][] dayspsf = new String[6][10][5];
-        private String[][][][] dayspsf3 = new String[3][6][10][5];
-        private String[][] dayspsf_time = new String[6][2];
-        private String[][][] dayspsf_time3 = new String[3][6][2];
 
          @Override
          protected String doInBackground(String... strings) {
+             String[][][] dayspsf = new String[6][10][5];
+             String[][][][] dayspsf3 = new String[3][6][10][5];
+             String[][] dayspsf_time = new String[6][2];
+             String[][][] dayspsf_time3 = new String[3][6][2];
              for(int ff = -1; ff<2; ff++) {
                  String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + MainActivity.selectedItem_id + "&SearchString=" + MainActivity.selectedItem + "&Type=Group&WeekId=" + (week_ids + ff);
                  Document doc = null;
@@ -160,7 +161,7 @@ public class raspisanie_show extends Activity {
                              predmet_group = day[i][j].split("<span>")[3].split("</span>")[0];
                              predmet_podgroup = day[i][j].split("<span>")[4].split("</span>")[0];
                          }
-                         catch (Exception e) {
+                         catch (Exception ignored) {
                          }
                          dayspsf[(i)][(j)] = new String[]{predmet_name, predmet_prepod, predmet_group, predmet_podgroup, predmet_razmer};
                      }
@@ -168,12 +169,12 @@ public class raspisanie_show extends Activity {
                      String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
                      dayspsf_time[i] = new String[]{predmet_data_ned, predmet_data_chi};
                  }
-                 dayspsf3[ff+1] = MainActivity.copy3d(dayspsf);
-                 dayspsf_time3[(ff+1)] = MainActivity.copy2d(dayspsf_time);
+                 dayspsf3[ff+1] = MassCopy.copy3d(dayspsf);
+                 dayspsf_time3[(ff+1)] = MassCopy.copy2d(dayspsf_time);
              }
              week_day012 = 1;
-             daysps3 = MainActivity.copy4d(dayspsf3);
-             daysps_time3 = MainActivity.copy3d(dayspsf_time3);
+             daysps3 = MassCopy.copy4d(dayspsf3);
+             daysps_time3 = MassCopy.copy3d(dayspsf_time3);
              return null;
          }
      }
