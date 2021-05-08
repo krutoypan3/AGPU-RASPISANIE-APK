@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ArtikProject</string>
+    <string name="app_name">АГПУ расписание</string>
     <string name="logo">АГПУ расписание</string>
     <string name="no_user_input">Введите текст!</string>
 </resources>
