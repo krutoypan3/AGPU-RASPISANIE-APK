@@ -91,7 +91,8 @@ public class raspisanie_show extends Activity {
                 "r_week_number = " + MainActivity.week_id + " AND " +
                 "r_week_day = " + MainActivity.week_day, null);
         if (r.getCount()==0) {// Если даной недели нет в базе
-            mainText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
+            mainText.setText("\uD83E\uDD7A");
+            addText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
         }
         else{
             String str = "";

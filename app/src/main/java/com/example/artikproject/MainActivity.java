@@ -121,13 +121,13 @@ public class MainActivity extends AppCompatActivity {
                 else {
 
                     if (!isOnline(MainActivity.this)){
-                        Cursor r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group, r_group_code FROM rasp_test1 WHERE r_group NOT NULL", null); // SELECT запрос
+                        Cursor r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group FROM rasp_test1 WHERE r_group NOT NULL GROUP BY r_group_code", null); // SELECT запрос
                         if (r.moveToFirst()){
                             List<String> group_list = new ArrayList<>();
                             List<String> group_list_id = new ArrayList<>();
                             do{
-                                group_list.add(r.getString(0));
-                                group_list_id.add(r.getString(1));
+                                group_list.add(r.getString(1));
+                                group_list_id.add(r.getString(0));
                             }while(r.moveToNext());
 
                             MainActivity.this.group_listed = group_list.toArray(new String[0]);
