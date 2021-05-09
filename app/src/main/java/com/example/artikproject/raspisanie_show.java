@@ -1,7 +1,10 @@
 package com.example.artikproject;
 
 import android.app.Activity;
-import android.content.pm.PackageManager;
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -13,19 +16,12 @@ import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class raspisanie_show extends Activity {
-    static String[][][][] daysps3 = new String[3][6][10][5];
-    static String [][][] daysps_time3 = new String[3][6][2];
-    static int week_day012;
-    static int week_ids;
     TextView mainText;
     TextView addText;
-    static int week_day;
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -39,23 +35,12 @@ public class raspisanie_show extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raspisanie_layout);
-        daysps3 = MassCopy.copy4d(MainActivity.daysp3);
-        week_ids = MainActivity.week_id;
-        daysps_time3 = MassCopy.copy3d(MainActivity.daysp_time3);
         mainText = findViewById(R.id.main_text);
         addText = findViewById(R.id.add_text);
-        Date date1 = new Date(); // Эти строки отвечают за
-        long date_ms = date1.getTime() + 10800000; // получение текущего
-        Date date2 = new Date(date_ms); // дня недели и
-        week_day = date2.getDay() - 1;
-        if (week_day == -1){ // Если будет воскресенье, то будет показан понедельник
-            week_day = 0;
-            week_ids += 1;
+        day_show();
+        if(MainActivity.isOnline(raspisanie_show.this)){
+            new getraspweek().execute("");
         }
-
-        week_day012 = 1;
-        day_show(week_day012, week_day, daysps3, daysps_time3);
-        new getraspweek().execute("");
 
 
         Button week_day_bt1;
@@ -67,14 +52,15 @@ public class raspisanie_show extends Activity {
             public void onClick(View v) {
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
-                week_day -= 1;
-                if (week_day == -1){ // Если будет воскресенье, то будет показана суббота
-                    week_day = 5;
-                    week_ids -= 1;
-                    week_day012 = 0;
-                    new getraspweek().execute("");
+                MainActivity.week_day -= 1;
+                if (MainActivity.week_day == -1){ // Если будет воскресенье, то будет показана суббота
+                    MainActivity.week_day = 5;
+                    MainActivity.week_id -= 1;
+                    if(MainActivity.isOnline(raspisanie_show.this)){
+                        new getraspweek().execute("");
+                    }
                 }
-                day_show(week_day012, week_day, daysps3, daysps_time3);
+                day_show();
                 week_day_bt1.setClickable(true);
                 week_day_bt2.setClickable(true);
             }
@@ -85,99 +71,105 @@ public class raspisanie_show extends Activity {
             public void onClick(View v) {
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
-                week_day += 1;
-                if (week_day == 6){ // Если будет воскресенье, то будет показана суббота
-                    week_day = 0;
-                    week_ids += 1;
-                    week_day012 = 2;
-                    new getraspweek().execute("");
+                MainActivity.week_day += 1;
+                if (MainActivity.week_day == 6){ // Если будет воскресенье, то будет показана суббота
+                    MainActivity.week_day = 0;
+                    MainActivity.week_id += 1;
+                    if(MainActivity.isOnline(raspisanie_show.this)){
+                        new getraspweek().execute("");
+                    }
                 }
-                day_show(week_day012, week_day, daysps3, daysps_time3);
+                day_show();
                 week_day_bt1.setClickable(true);
                 week_day_bt2.setClickable(true);
             }
         });
     }
-    protected void day_show(int week_day012_f, int week_day_f, String[][][][] daysps3_f, String[][][] daysps_time3_f){
-
-        String str = "";
-        if (daysps_time3_f[week_day012_f][week_day_f][0] == null){
-            mainText.setText("Расписание не успевает загрузиться! Пожалуйста, листайте странички медленнее!");
+    protected void day_show(){
+        Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
+                "r_group_code = " + MainActivity.selectedItem_id + " AND " +
+                "r_week_number = " + MainActivity.week_id + " AND " +
+                "r_week_day = " + MainActivity.week_day, null);
+        if (r.getCount()==0) {// Если даной недели нет в базе
+            mainText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
         }
-        else {
-            mainText.setText((daysps_time3_f[week_day012_f][week_day_f][0] + " " + daysps_time3_f[week_day012_f][week_day_f][1]));
-        }
-        boolean check = false;
-        for (int j = 0; j< daysps3_f[week_day012_f][week_day_f].length; j++){
-            for (int g = 0; g< daysps3_f[week_day012_f][week_day_f][j].length-1; g++) {
-                if (daysps3_f[week_day012_f][week_day_f][j][g] != null) {
-                    str += daysps3_f[week_day012_f][week_day_f][j][g] + "\n";
-                    check = true;
+        else{
+            String str = "";
+            r.moveToFirst();
+            mainText.setText(r.getString(10) + " " + r.getString(11));
+            do{
+                if (r.getString(4) != null){
+                    str += r.getString(4) + "\n";
+                    if (r.getString(5) != null) str += r.getString(5) + "\n";
+                    if (r.getString(6) != null) str += r.getString(6) + "\n";
+                    if (r.getString(7) != null) str += r.getString(7) + "\n";
+                    if (r.getString(8) != null) str += r.getString(8) + "\n";
+                    str += "\n";
                 }
-            }
-            if (check) {
-                str += "\n";
-                check = false;
-            }
+            }while(r.moveToNext());
+            addText.setText(str);
         }
-        addText.setText(str);
     }
 
-    private class getraspweek extends AsyncTask<String, String, String> {
+    private class getraspweek extends AsyncTask<String, String, String> { // INTERNET ONLY
 
-         @Override
-         protected String doInBackground(String... strings) {
-             String[][][] dayspsf = new String[6][10][5];
-             String[][][][] dayspsf3 = new String[3][6][10][5];
-             String[][] dayspsf_time = new String[6][2];
-             String[][][] dayspsf_time3 = new String[3][6][2];
-             for(int ff = -1; ff<2; ff++) {
-                 String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + MainActivity.selectedItem_id + "&SearchString=" + MainActivity.selectedItem + "&Type=Group&WeekId=" + (week_ids + ff);
-                 Document doc = null;
-                 try {
-                     doc = Jsoup.connect(urlq).get();
-                 } catch (IOException e) {
-                     e.printStackTrace();
-                 }
-                 assert doc != null;
-                 List<String[]> days = new ArrayList<>();
-                 for (int i = 1; i < 7; i++) {
-                     days.add(doc.select("tbody").toString().split("th scope")[i].split("td colspan="));
-                 }
-                 String[][] day;
-                 day = days.toArray(new String[0][0]);
-                 for (int i = 0; i < 6; i++) {
-                     for (int j = 0; j < 10; j++) {
+        @Override
+        protected String doInBackground(String... strings) {
+            for (int ff = -1; ff < 2; ff++) {
+                String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + MainActivity.selectedItem_id + "&SearchString=" + MainActivity.selectedItem + "&Type=Group&WeekId=" + (MainActivity.week_id + ff);
+                Document doc = null;
+                try {
+                    doc = Jsoup.connect(urlq).get();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                assert doc != null;
+                List<String[]> days = new ArrayList<>();
+                for (int i = 1; i < 7; i++) {
+                    days.add(doc.select("tbody").toString().split("th scope")[i].split("td colspan="));
+                }
+                String[][] day;
+                day = days.toArray(new String[0][0]);
+                for (int i = 0; i < 6; i++) {
+                    String predmet_data_ned = day[i][0].split("row\">")[1].split("<br>")[0];
+                    String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
+                    for (int j = 0; j < 10; j++) {
 
-                         String predmet_name = null;
-                         String predmet_prepod = null;
-                         String predmet_group = null;
-                         String predmet_podgroup = null;
-                         String predmet_razmer = null;
-                         try {
-                             predmet_razmer = day[i][j].split("\"")[1];
-                             predmet_name = day[i][j].split("<span>")[1].split("</span>")[0];
-                             predmet_prepod = day[i][j].split("<span>")[2].split("</span>")[0];
-                             predmet_group = day[i][j].split("<span>")[3].split("</span>")[0];
-                             predmet_podgroup = day[i][j].split("<span>")[4].split("</span>")[0];
-                         }
-                         catch (Exception ignored) {
-                         }
-                         dayspsf[(i)][(j)] = new String[]{predmet_name, predmet_prepod, predmet_group, predmet_podgroup, predmet_razmer};
-                     }
-                     String predmet_data_ned = day[i][0].split("row\">")[1].split("<br>")[0];
-                     String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
-                     dayspsf_time[i] = new String[]{predmet_data_ned, predmet_data_chi};
-                 }
-                 dayspsf3[ff+1] = MassCopy.copy3d(dayspsf);
-                 dayspsf_time3[(ff+1)] = MassCopy.copy2d(dayspsf_time);
-             }
-             week_day012 = 1;
-             daysps3 = MassCopy.copy4d(dayspsf3);
-             daysps_time3 = MassCopy.copy3d(dayspsf_time3);
-             return null;
-         }
-     }
-
+                        String predmet_name = null;
+                        String predmet_prepod = null;
+                        String predmet_group = null;
+                        String predmet_podgroup = null;
+                        String predmet_razmer = null;
+                        try {
+                            predmet_razmer = day[i][j].split("\"")[1];
+                            predmet_name = day[i][j].split("<span>")[1].split("</span>")[0];
+                            predmet_prepod = day[i][j].split("<span>")[2].split("</span>")[0];
+                            predmet_group = day[i][j].split("<span>")[3].split("</span>")[0];
+                            predmet_podgroup = day[i][j].split("<span>")[4].split("</span>")[0];
+                        } catch (Exception ignored) {
+                        }
+                        Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + MainActivity.selectedItem_id + " AND r_week_number = " + (MainActivity.week_id + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j, null); // SELECT запрос
+                        if (r.getCount() == 0) {// Если даной недели нет в базе
+                            ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
+                            rowValues.put("r_group_code", MainActivity.selectedItem_id);
+                            rowValues.put("r_week_day", i);
+                            rowValues.put("r_week_number", (MainActivity.week_id + ff));
+                            rowValues.put("r_para_number", j);
+                            rowValues.put("r_name", predmet_name);
+                            rowValues.put("r_prepod", predmet_prepod);
+                            rowValues.put("r_group", predmet_group);
+                            rowValues.put("r_podgroup", predmet_podgroup);
+                            rowValues.put("r_aud", "");
+                            rowValues.put("r_razmer", predmet_razmer);
+                            rowValues.put("r_week_day_name", predmet_data_ned);
+                            rowValues.put("r_week_day_date", predmet_data_chi);
+                            rowValues.put("r_last_update", new Date().getTime());
+                            MainActivity.sqLiteDatabase.insert("rasp_test1", null, rowValues); // Вставка строки в базу данных
+                        }
+                    }
+                }}
+            return null;
+        }
+    }
 
  }
