@@ -117,7 +117,7 @@ public class raspisanie_show extends Activity {
         @Override
         protected String doInBackground(String... strings) {
             for (int ff = -1; ff < 2; ff++) {
-                String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + MainActivity.selectedItem_id + "&SearchString=" + MainActivity.selectedItem + "&Type=Group&WeekId=" + (MainActivity.week_id + ff);
+                String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + MainActivity.selectedItem_id + "&SearchString=" + MainActivity.selectedItem + "&Type="+ MainActivity.selectedItem_type + "&WeekId=" + (MainActivity.week_id + ff);
                 Document doc = null;
                 try {
                     doc = Jsoup.connect(urlq).get();

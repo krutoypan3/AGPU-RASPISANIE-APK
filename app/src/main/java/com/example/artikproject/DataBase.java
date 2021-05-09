@@ -35,6 +35,7 @@ public class DataBase extends SQLiteOpenHelper {
                 "\t\"r_razmer\"\tINTEGER,\n" +
                 "\t\"r_week_day_name\"\tTEXT,\n" +
                 "\t\"r_week_day_date\"\tTEXT,\n" +
+                "\t\"r_search_type\"\tTEXT,\n" +
                 "\t\"r_last_update\"\tNUMERIC\n" +
                 ")");
 

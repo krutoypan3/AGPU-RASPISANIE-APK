@@ -47,10 +47,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText rasp_search_edit;
     private TextView result;
     private String[] group_listed;
+    private String[] group_listed_type;
     private String[] group_listed_id;
     private ListView listview;
     private TextView subtitle;
     static public String selectedItem;
+    static public String selectedItem_type;
     static public String selectedItem_id;
     public static int week_id;
     public static SQLiteDatabase sqLiteDatabase;
@@ -88,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
                 selectedItem = MainActivity.this.group_listed[position];
+                selectedItem_type = MainActivity.this.group_listed_type[position];
                 selectedItem_id = MainActivity.this.group_listed_id[position];
                 MainActivity.this.subtitle.setText(selectedItem);
 
@@ -121,20 +124,38 @@ public class MainActivity extends AppCompatActivity {
                 else {
 
                     if (!isOnline(MainActivity.this)){
-                        Cursor r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group FROM rasp_test1 WHERE r_group NOT NULL GROUP BY r_group_code", null); // SELECT запрос
+                        Cursor r;
+                        r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM rasp_test1 WHERE r_group NOT NULL AND r_prepod NOT NULL GROUP BY r_group_code", null);
                         if (r.moveToFirst()){
                             List<String> group_list = new ArrayList<>();
+                            List<String> group_list_type = new ArrayList<>();
                             List<String> group_list_id = new ArrayList<>();
                             do{
-                                group_list.add(r.getString(1));
+                                switch (r.getString(2)) {
+                                    case "Group":
+                                        group_list.add(r.getString(1));
+                                        break;
+                                    case "Classroom":
+                                        group_list.add(r.getString(3).split(",")[2]);
+                                        break;
+                                    case "Teacher":
+                                        group_list.add(r.getString(3).split(",")[0]);
+                                        break;
+                                }
+                                group_list_type.add(r.getString(2));
                                 group_list_id.add(r.getString(0));
                             }while(r.moveToNext());
-
                             MainActivity.this.group_listed = group_list.toArray(new String[0]);
-                            MainActivity.this.group_listed_id =group_list_id.toArray(new String[0]);
+                            MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
+                            MainActivity.this.group_listed_id = group_list_id.toArray(new String[0]);
                         } // Вывод SELECT запроса
-                        ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
-                        listview.setAdapter(adapter);
+                        if( group_listed == null){
+                            result.setText("Увы, но у вас нет сохраненных групп...");
+                        }
+                        else {
+                            ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
+                            listview.setAdapter(adapter);
+                        }
                     }
                     else {
                         String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + rasp_search_edit.getText().toString();
@@ -155,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             for(int ff = -1; ff<2; ff++) {
-                String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + selectedItem_id + "&SearchString=" + selectedItem + "&Type=Group&WeekId=" + (week_id + ff);
+                String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + selectedItem_id + "&SearchString=" + selectedItem + "&Type=" + selectedItem_type + "&WeekId=" + (week_id + ff);
                 Document doc = null;
                 try {
                     doc = Jsoup.connect(urlq).get();
@@ -189,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         catch (Exception e) {
                         }
-                        Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + selectedItem_id + " AND r_week_number = " + (week_id + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j, null); // SELECT запрос
+                        Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + selectedItem_id + " AND r_week_number = " + (week_id + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j + " AND " + " r_search_type = '" + selectedItem_type + "'", null); // SELECT запрос
                         if (r.getCount()==0){// Если даной недели нет в базе
                             ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
                             rowValues.put("r_group_code", selectedItem_id);
@@ -204,9 +225,9 @@ public class MainActivity extends AppCompatActivity {
                             rowValues.put("r_razmer", predmet_razmer);
                             rowValues.put("r_week_day_name", predmet_data_ned);
                             rowValues.put("r_week_day_date", predmet_data_chi);
+                            rowValues.put("r_search_type", selectedItem_type);
                             rowValues.put("r_last_update", new Date().getTime());
                             sqLiteDatabase.insert("rasp_test1", null, rowValues); // Вставка строки в базу данных
-                            System.out.println(j + " пара за " + i + " день недели добавлена в базу");
                         }
                     }
                 }
@@ -242,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
                 String jsonString = buffer; // ЭТО JSON со списком групп
                 JSONArray obj = new JSONArray(jsonString);
                 List<String> group_list = new ArrayList<>();
+                List<String> group_list_type = new ArrayList<>();
                 List<String> group_list_id = new ArrayList<>();
 
                 for (int ii = 0; ii<obj.length(); ii++){
@@ -254,6 +276,10 @@ public class MainActivity extends AppCompatActivity {
                             String group_name = (String) value;
                             group_list.add(group_name);
                         }
+                        else if (value != null && i % 4 == 1) {
+                            String group_type = (String) value;
+                            group_list_type.add(group_type);
+                        }
                         else if (value != null && i % 4 == 2) {
                             String group_id = value.toString();
                             group_list_id.add(group_id);
@@ -264,6 +290,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 MainActivity.this.group_listed = group_list.toArray(new String[0]);
+                MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
                 MainActivity.this.group_listed_id =group_list_id.toArray(new String[0]);
 
             } catch (MalformedURLException e) {
