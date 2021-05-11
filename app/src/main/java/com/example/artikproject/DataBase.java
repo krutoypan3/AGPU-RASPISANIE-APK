@@ -38,6 +38,11 @@ public class DataBase extends SQLiteOpenHelper {
                 "\t\"r_search_type\"\tTEXT,\n" +
                 "\t\"r_last_update\"\tNUMERIC\n" +
                 ")");
+        sqLiteDatabase.execSQL("CREATE TABLE \"rasp_update\" (\n" +
+                "\t\"r_group_code\"\tINTEGER,\n" +
+                "\t\"r_selectedItem_type\"\tTEXT,\n" +
+                "\t\"r_selectedItem\"\tTEXT\n" +
+                ")");
 
     }
 

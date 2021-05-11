@@ -24,6 +24,15 @@
         android:textColorLink="#FF6565"
         android:textSize="24sp" />
 
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Уведомлять об изменениях"
+        android:layout_marginTop="-10dp"
+        android:layout_below="@id/logow"
+        />
+
     <Button
         android:id="@+id/week_day_bt2"
         android:layout_width="wrap_content"
@@ -50,7 +59,7 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/logow"
+        android:layout_below="@id/checkBox"
         >
         <ScrollView
             android:layout_width="match_parent"
@@ -81,9 +90,6 @@
         </ScrollView>
 
     </androidx.cardview.widget.CardView>
-
-
-
 
 
 </RelativeLayout>

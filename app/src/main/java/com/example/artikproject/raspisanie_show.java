@@ -5,10 +5,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import org.jsoup.Jsoup;
@@ -38,10 +40,33 @@ public class raspisanie_show extends Activity {
         mainText = findViewById(R.id.main_text);
         addText = findViewById(R.id.add_text);
         day_show();
-        if(MainActivity.isOnline(raspisanie_show.this)){
+        if(MainActivity.isOnline(raspisanie_show.this)) {
             new getraspweek().execute("");
         }
+        CheckBox mCheckBox;
+        mCheckBox = (CheckBox)findViewById(R.id.checkBox);
 
+        Cursor sss = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
+        if (sss.getCount()==0) mCheckBox.setChecked(false);
+        else mCheckBox.setChecked(true);
+
+        mCheckBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mCheckBox.isChecked()) {
+                    mCheckBox.setTextColor(Color.GREEN);
+                    ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
+                    rowValues.put("r_group_code", MainActivity.selectedItem_id);
+                    rowValues.put("r_selectedItem_type", MainActivity.selectedItem_type);
+                    rowValues.put("r_selectedItem", MainActivity.selectedItem);
+                    MainActivity.sqLiteDatabase.insert("rasp_update", null, rowValues);
+                }
+                else{
+                    mCheckBox.setTextColor(Color.BLACK);
+                    MainActivity.sqLiteDatabase.delete("rasp_update", "r_group_code = '" + MainActivity.selectedItem_id + "'", null);
+                }
+            }
+        });
 
         Button week_day_bt1;
         Button week_day_bt2;
@@ -89,7 +114,7 @@ public class raspisanie_show extends Activity {
         Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
                 "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                 "r_week_number = " + MainActivity.week_id + " AND " +
-                "r_week_day = " + MainActivity.week_day, null);
+                "r_week_day = " + MainActivity.week_day + " ORDER BY r_para_number", null);
         if (r.getCount()==0) {// Если даной недели нет в базе
             mainText.setText("\uD83E\uDD7A");
             addText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
@@ -112,7 +137,7 @@ public class raspisanie_show extends Activity {
         }
     }
 
-    private class getraspweek extends AsyncTask<String, String, String> { // INTERNET ONLY
+    public class getraspweek extends AsyncTask<String, String, String> { // INTERNET ONLY
 
         @Override
         protected String doInBackground(String... strings) {

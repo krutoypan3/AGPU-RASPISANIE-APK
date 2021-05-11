@@ -1,10 +1,16 @@
 package com.example.artikproject;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -22,6 +28,11 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import org.json.*;
 import org.jsoup.Jsoup;
@@ -39,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.sql.StatementEvent;
 
@@ -76,7 +88,6 @@ public class MainActivity extends AppCompatActivity {
         Date date1 = new Date();
         long date_ms = date1.getTime() + 10800000;
         week_id = (int) ((date_ms - 18489514000f) / 1000f / 60f / 60f / 24f / 7f); // Номер текущей недели
-
         Date date2 = new Date(date_ms); // дня недели и
         week_day = date2.getDay() - 1;
         if (week_day == -1){ // Если будет воскресенье, то будет показан понедельник
@@ -113,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         sqLiteDatabase = new DataBase(MainActivity.this).getWritableDatabase(); //Подключение к базе данных
+        startService(new Intent(getApplicationContext(), PlayService.class)); //ЗАПУСК СЛУЖБЫ
 
         main_button.setOnClickListener(new View.OnClickListener() { // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
             @Override
@@ -168,15 +180,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-
     class GetRasp extends AsyncTask<String, String, String>{
-
         @RequiresApi(api = Build.VERSION_CODES.N)
         @Override
         protected String doInBackground(String... strings) {
             for(int ff = -1; ff<2; ff++) {
-                String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + selectedItem_id + "&SearchString=" + selectedItem + "&Type=" + selectedItem_type + "&WeekId=" + (week_id + ff);
+                String urlq;
+                urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + selectedItem_id + "&SearchString=" + selectedItem + "&Type=" + selectedItem_type + "&WeekId=" + (week_id + ff);
                 Document doc = null;
                 try {
                     doc = Jsoup.connect(urlq).get();

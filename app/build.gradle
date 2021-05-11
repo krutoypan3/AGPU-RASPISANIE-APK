@@ -36,6 +36,7 @@ dependencies {
     implementation files('C:\\Users\\Kruto\\OneDrive\\Desktop\\MyJavaProjects\\Artik\\app\\libs\\json.jar')
     implementation files('C:\\Users\\Kruto\\OneDrive\\Desktop\\MyJavaProjects\\Artik\\app\\libs\\jsoup.jar')
     implementation files('C:\\Users\\Kruto\\OneDrive\\Desktop\\MyJavaProjects\\Artik\\app\\libs\\sqlite-jdbc-3.8.11.2 (1).jar')
+    implementation 'androidx.work:work-runtime:2.4.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
