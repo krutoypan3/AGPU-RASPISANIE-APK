@@ -1,16 +1,10 @@
 package com.example.artikproject;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.TaskStackBuilder;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -28,11 +22,6 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.work.PeriodicWorkRequest;
-import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
 
 import org.json.*;
 import org.jsoup.Jsoup;
@@ -50,9 +39,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.sql.StatementEvent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -126,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
         sqLiteDatabase = new DataBase(MainActivity.this).getWritableDatabase(); //Подключение к базе данных
         startService(new Intent(getApplicationContext(), PlayService.class)); //ЗАПУСК СЛУЖБЫ
 
+        see_group_rasp(); // Вывод групп которые были открыты ранее
+
         main_button.setOnClickListener(new View.OnClickListener() { // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
             @Override
             public void onClick(View v) {
@@ -136,38 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
 
                     if (!isOnline(MainActivity.this)){
-                        Cursor r;
-                        r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM rasp_test1 WHERE r_group NOT NULL AND r_prepod NOT NULL GROUP BY r_group_code", null);
-                        if (r.moveToFirst()){
-                            List<String> group_list = new ArrayList<>();
-                            List<String> group_list_type = new ArrayList<>();
-                            List<String> group_list_id = new ArrayList<>();
-                            do{
-                                switch (r.getString(2)) {
-                                    case "Group":
-                                        group_list.add(r.getString(1));
-                                        break;
-                                    case "Classroom":
-                                        group_list.add(r.getString(3).split(",")[2]);
-                                        break;
-                                    case "Teacher":
-                                        group_list.add(r.getString(3).split(",")[0]);
-                                        break;
-                                }
-                                group_list_type.add(r.getString(2));
-                                group_list_id.add(r.getString(0));
-                            }while(r.moveToNext());
-                            MainActivity.this.group_listed = group_list.toArray(new String[0]);
-                            MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
-                            MainActivity.this.group_listed_id = group_list_id.toArray(new String[0]);
-                        } // Вывод SELECT запроса
-                        if( group_listed == null){
-                            result.setText("Увы, но у вас нет сохраненных групп...");
-                        }
-                        else {
-                            ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
-                            listview.setAdapter(adapter);
-                        }
+                        see_group_rasp();
                     }
                     else {
                         String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + rasp_search_edit.getText().toString();
@@ -178,6 +135,40 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void see_group_rasp(){
+        Cursor r;
+        r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM rasp_test1 WHERE r_group NOT NULL AND r_prepod NOT NULL GROUP BY r_group_code", null);
+        if (r.moveToFirst()){
+            List<String> group_list = new ArrayList<>();
+            List<String> group_list_type = new ArrayList<>();
+            List<String> group_list_id = new ArrayList<>();
+            do{
+                switch (r.getString(2)) {
+                    case "Group":
+                        group_list.add(r.getString(1));
+                        break;
+                    case "Classroom":
+                        group_list.add(r.getString(3).split(",")[2]);
+                        break;
+                    case "Teacher":
+                        group_list.add(r.getString(3).split(",")[0]);
+                        break;
+                }
+                group_list_type.add(r.getString(2));
+                group_list_id.add(r.getString(0));
+            }while(r.moveToNext());
+            MainActivity.this.group_listed = group_list.toArray(new String[0]);
+            MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
+            MainActivity.this.group_listed_id = group_list_id.toArray(new String[0]);
+        } // Вывод SELECT запроса
+        if( group_listed == null){
+            result.setText("Увы, но у вас нет сохраненных групп...");
+        }
+        else {
+            ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
+            listview.setAdapter(adapter);
+        }
     }
 
     class GetRasp extends AsyncTask<String, String, String>{
