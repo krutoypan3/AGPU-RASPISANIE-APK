@@ -189,9 +189,18 @@ public class PlayService extends Service {
                 for (int i = 1; i < 7; i++) {
                     days.add(doc.select("tbody").toString().split("th scope")[i].split("td colspan="));
                 }
+                String[] day_data_razmer = new String[7];
+                String[] day_data_time = new String[7];
+                boolean prohod = false;
+                String[] dataaa = doc.select("thead").toString().split("colspan=\"");
+                for (int i = 1; i < 8; i++) {
+                    day_data_razmer[i-1] = (dataaa[i].split("\"")[0]);
+                    day_data_time[i-1] = (dataaa[i].split(">")[2].split("<")[0]);
+                }
                 String[][] day;
                 day = days.toArray(new String[0][0]);
                 for (int i = 0; i < 6; i++) {
+                    int schet = 0;
                     String predmet_data_ned = day[i][0].split("row\">")[1].split("<br>")[0];
                     String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
                     for (int j = 0; j < 10; j++) {
@@ -211,6 +220,27 @@ public class PlayService extends Service {
                         }
                         catch (Exception e) {
                         }
+                        String predmet_time = null;
+                        if((j>0) && (schet < 7)){
+                            predmet_time = day_data_time[schet];
+                            if(day_data_razmer[schet].equals(predmet_razmer)){
+                                if (prohod){
+                                    prohod = false;
+                                }
+                                else{
+                                    schet++;
+                                }
+                            }
+                            else{
+                                if (!prohod){
+                                    prohod = true;
+                                }
+                                else{
+                                    schet++;
+                                    prohod = false;
+                                }
+                            }
+                        }
 
                         Cursor r = sqLiteDatabaseS.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + r_selectedItem_id + " AND r_week_number = " + (week_id_upd + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j + " AND " + " r_search_type = '" + r_selectedItem_type + "'", null); // SELECT запрос
                         if (r.getCount()==0){// Если даной недели нет в базе
@@ -224,7 +254,7 @@ public class PlayService extends Service {
                             rowValues.put("r_group", predmet_group);
                             rowValues.put("r_podgroup", predmet_podgroup);
                             rowValues.put("r_aud", predmet_aud);
-                            rowValues.put("r_razmer", predmet_razmer);
+                            rowValues.put("r_razmer", predmet_time);
                             rowValues.put("r_week_day_name", predmet_data_ned);
                             rowValues.put("r_week_day_date", predmet_data_chi);
                             rowValues.put("r_search_type", r_selectedItem_type);

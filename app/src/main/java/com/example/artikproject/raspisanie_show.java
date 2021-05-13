@@ -125,6 +125,7 @@ public class raspisanie_show extends Activity {
             mainText.setText(r.getString(10) + " " + r.getString(11));
             do{
                 if (r.getString(4) != null){
+                    str += r.getString(9) + "\n";
                     str += r.getString(4) + "\n";
                     if (r.getString(5) != null) str += r.getString(5) + "\n";
                     if (r.getString(6) != null) str += r.getString(6) + "\n";
@@ -154,9 +155,18 @@ public class raspisanie_show extends Activity {
                 for (int i = 1; i < 7; i++) {
                     days.add(doc.select("tbody").toString().split("th scope")[i].split("td colspan="));
                 }
+                String[] day_data_razmer = new String[7];
+                String[] day_data_time = new String[7];
+                boolean prohod = false;
+                String[] dataaa = doc.select("thead").toString().split("colspan=\"");
+                for (int i = 1; i < 8; i++) {
+                    day_data_razmer[i-1] = (dataaa[i].split("\"")[0]);
+                    day_data_time[i-1] = (dataaa[i].split(">")[2].split("<")[0]);
+                }
                 String[][] day;
                 day = days.toArray(new String[0][0]);
                 for (int i = 0; i < 6; i++) {
+                    int schet = 0;
                     String predmet_data_ned = day[i][0].split("row\">")[1].split("<br>")[0];
                     String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
                     for (int j = 0; j < 10; j++) {
@@ -174,6 +184,27 @@ public class raspisanie_show extends Activity {
                             predmet_podgroup = day[i][j].split("<span>")[4].split("</span>")[0];
                         } catch (Exception ignored) {
                         }
+                        String predmet_time = null;
+                        if((j>0) && (schet < 7)){
+                            predmet_time = day_data_time[schet];
+                            if(day_data_razmer[schet].equals(predmet_razmer)){
+                                if (prohod){
+                                    prohod = false;
+                                }
+                                else{
+                                    schet++;
+                                }
+                            }
+                            else{
+                                if (!prohod){
+                                    prohod = true;
+                                }
+                                else{
+                                    schet++;
+                                    prohod = false;
+                                }
+                            }
+                        }
                         Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + MainActivity.selectedItem_id + " AND r_week_number = " + (MainActivity.week_id + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j, null); // SELECT запрос
                         if (r.getCount() == 0) {// Если даной недели нет в базе
                             ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
@@ -186,7 +217,7 @@ public class raspisanie_show extends Activity {
                             rowValues.put("r_group", predmet_group);
                             rowValues.put("r_podgroup", predmet_podgroup);
                             rowValues.put("r_aud", "");
-                            rowValues.put("r_razmer", predmet_razmer);
+                            rowValues.put("r_razmer", predmet_time);
                             rowValues.put("r_week_day_name", predmet_data_ned);
                             rowValues.put("r_week_day_date", predmet_data_chi);
                             rowValues.put("r_last_update", new Date().getTime());
