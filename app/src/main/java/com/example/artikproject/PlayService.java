@@ -191,7 +191,6 @@ public class PlayService extends Service {
                 }
                 String[] day_data_razmer = new String[7];
                 String[] day_data_time = new String[7];
-                boolean prohod = false;
                 String[] dataaa = doc.select("thead").toString().split("colspan=\"");
                 for (int i = 1; i < 8; i++) {
                     day_data_razmer[i-1] = (dataaa[i].split("\"")[0]);
@@ -200,6 +199,7 @@ public class PlayService extends Service {
                 String[][] day;
                 day = days.toArray(new String[0][0]);
                 for (int i = 0; i < 6; i++) {
+                    boolean prohod = false;
                     int schet = 0;
                     String predmet_data_ned = day[i][0].split("row\">")[1].split("<br>")[0];
                     String predmet_data_chi = day[i][0].split("<br>")[1].split("</th>")[0];
