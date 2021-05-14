@@ -13,7 +13,6 @@ public class DataBase extends SQLiteOpenHelper {
     public DataBase(Context context) {
 
         super(context, DATABASE_NAME, null, 1);
-        Log.d(LOG_TAG,"created database raspisanie");
 
     }
 
