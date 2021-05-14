@@ -11,7 +11,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -94,6 +102,75 @@ public class raspisanie_show extends Activity {
         week_day_bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                week_day_bt1.setClickable(false);
+                week_day_bt2.setClickable(false);
+                MainActivity.week_day += 1;
+                if (MainActivity.week_day == 6){ // Если будет воскресенье, то будет показана суббота
+                    MainActivity.week_day = 0;
+                    MainActivity.week_id += 1;
+                    if(MainActivity.isOnline(raspisanie_show.this)){
+                        new getraspweek().execute("");
+                    }
+                }
+                day_show();
+                week_day_bt1.setClickable(true);
+                week_day_bt2.setClickable(true);
+            }
+        });
+
+        ScrollView laylay = findViewById(R.id.laylay);
+        laylay.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
+            public void onSwipeRight() {
+                week_day_bt1.setClickable(false);
+                week_day_bt2.setClickable(false);
+                MainActivity.week_day -= 1;
+                if (MainActivity.week_day == -1){ // Если будет воскресенье, то будет показана суббота
+                    MainActivity.week_day = 5;
+                    MainActivity.week_id -= 1;
+                    if(MainActivity.isOnline(raspisanie_show.this)){
+                        new getraspweek().execute("");
+                    }
+                }
+                day_show();
+                week_day_bt1.setClickable(true);
+                week_day_bt2.setClickable(true);
+            }
+            public void onSwipeLeft() {
+                week_day_bt1.setClickable(false);
+                week_day_bt2.setClickable(false);
+                MainActivity.week_day += 1;
+                if (MainActivity.week_day == 6){ // Если будет воскресенье, то будет показана суббота
+                    MainActivity.week_day = 0;
+                    MainActivity.week_id += 1;
+                    if(MainActivity.isOnline(raspisanie_show.this)){
+                        new getraspweek().execute("");
+                    }
+                }
+                day_show();
+                week_day_bt1.setClickable(true);
+                week_day_bt2.setClickable(true);
+            }
+        });
+
+
+        RelativeLayout raspisanie_show = findViewById(R.id.raspisanie_show);
+        raspisanie_show.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
+            public void onSwipeRight() {
+                week_day_bt1.setClickable(false);
+                week_day_bt2.setClickable(false);
+                MainActivity.week_day -= 1;
+                if (MainActivity.week_day == -1){ // Если будет воскресенье, то будет показана суббота
+                    MainActivity.week_day = 5;
+                    MainActivity.week_id -= 1;
+                    if(MainActivity.isOnline(raspisanie_show.this)){
+                        new getraspweek().execute("");
+                    }
+                }
+                day_show();
+                week_day_bt1.setClickable(true);
+                week_day_bt2.setClickable(true);
+            }
+            public void onSwipeLeft() {
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
                 MainActivity.week_day += 1;
