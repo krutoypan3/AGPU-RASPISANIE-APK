@@ -94,6 +94,7 @@ public class getraspweek extends AsyncTask<String, String, String> { // INTERNET
                         rowValues.put("r_razmer", predmet_time);
                         rowValues.put("r_week_day_name", predmet_data_ned);
                         rowValues.put("r_week_day_date", predmet_data_chi);
+                        rowValues.put("r_search_type", MainActivity.selectedItem_type);
                         rowValues.put("r_last_update", new Date().getTime());
                         MainActivity.sqLiteDatabase.insert("rasp_test1", null, rowValues); // Вставка строки в базу данных
                     }

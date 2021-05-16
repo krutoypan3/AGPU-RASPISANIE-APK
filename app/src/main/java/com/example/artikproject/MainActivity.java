@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.format.Time;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -159,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void see_group_rasp(){ // Вывод ранее открываемых групп
         Cursor r;
-        r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM rasp_test1 WHERE r_group NOT NULL AND r_prepod NOT NULL GROUP BY r_group_code", null);
+        r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM rasp_test1 WHERE r_group NOT NULL AND r_prepod NOT NULL AND r_search_type NOT NULL GROUP BY r_group_code", null);
         if (r.moveToFirst()){
             List<String> group_list = new ArrayList<>();
             List<String> group_list_type = new ArrayList<>();
