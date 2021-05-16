@@ -77,4 +77,15 @@
 
     </ListView>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="15dp"
+        android:layout_margin="5dp">
+        <ImageView
+            android:id="@+id/GitHub"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/git" />
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

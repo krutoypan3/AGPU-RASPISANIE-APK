@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -143,6 +144,16 @@ public class MainActivity extends AppCompatActivity {
                         new GetURLData().onOreExecute();
                     }
                 }
+            }
+        });
+        ImageView GitHub = findViewById(R.id.GitHub);
+
+        GitHub.setOnClickListener(new View.OnClickListener() { // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases"));
+                startActivity(intent);
             }
         });
     }

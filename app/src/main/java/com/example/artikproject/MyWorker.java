@@ -28,6 +28,7 @@ public class MyWorker extends Worker {
 
         // Do the work here--in this case, upload the images.
         new PlayService().get_group_db(getApplicationContext());
+
         // Indicate whether the work finished successfully with the Result
         return Result.success();
     }
