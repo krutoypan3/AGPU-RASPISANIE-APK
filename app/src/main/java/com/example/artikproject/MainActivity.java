@@ -66,6 +66,15 @@ public class MainActivity extends AppCompatActivity {
         return false; // Интернета нет
     }
 
+    // Вызывается перед выходом из "полноценного" состояния.
+    @Override
+    public void onDestroy(){
+        // Очистите все ресурсы. Это касается завершения работы
+        // потоков, закрытия соединений с базой данных и т. д.
+        sqLiteDatabase.close();
+        super.onDestroy();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

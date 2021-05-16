@@ -9,10 +9,12 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -30,8 +32,8 @@ import java.util.Date;
 import java.util.List;
 
 public class raspisanie_show extends Activity {
+    ListView para_view;
     TextView mainText;
-    TextView addText;
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -46,7 +48,7 @@ public class raspisanie_show extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raspisanie_layout);
         mainText = findViewById(R.id.main_text);
-        addText = findViewById(R.id.add_text);
+        para_view = findViewById(R.id.para_view);
         day_show();
         if(MainActivity.isOnline(raspisanie_show.this)) {
             new getraspweek().execute("");
@@ -118,8 +120,8 @@ public class raspisanie_show extends Activity {
             }
         });
 
-        ScrollView laylay = findViewById(R.id.laylay);
-        laylay.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
+        ListView para_view = findViewById(R.id.para_view);
+        para_view.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
             public void onSwipeRight() {
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
@@ -188,31 +190,34 @@ public class raspisanie_show extends Activity {
         });
     }
     protected void day_show(){
+        List<String> group_list = new ArrayList<>();
         Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
                 "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                 "r_week_number = " + MainActivity.week_id + " AND " +
                 "r_week_day = " + MainActivity.week_day + " ORDER BY r_para_number", null);
         if (r.getCount()==0) {// Если даной недели нет в базе
-            mainText.setText("\uD83E\uDD7A"); // Тут типа грустный смайл
-            addText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
+//            mainText.setText("\uD83E\uDD7A"); // Тут типа грустный смайл
+//            addText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
         }
         else{
-            String str = "";
+            String str;
             r.moveToFirst();
             mainText.setText(r.getString(10) + " " + r.getString(11));
             do{
+                str = "";
                 if (r.getString(4) != null){
                     str += r.getString(9) + "\n";
                     str += r.getString(4) + "\n";
                     if (r.getString(5) != null) str += r.getString(5) + "\n";
                     if (r.getString(6) != null) str += r.getString(6) + "\n";
                     if (r.getString(7) != null) str += r.getString(7) + "\n";
-                    if (r.getString(8) != null) str += r.getString(8) + "\n";
-                    str += "\n";
+                    if (r.getString(8) != null) str += r.getString(8);
+                    group_list.add(str);
                 }
             }while(r.moveToNext());
-            addText.setText(str);
         }
+        ArrayAdapter<String> adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, group_list);
+        para_view.setAdapter(adapter);
     }
 
  }

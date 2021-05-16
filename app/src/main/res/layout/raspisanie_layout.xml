@@ -53,43 +53,22 @@
         android:clickable="true"
         android:text="Назад" />
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/main_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/checkBox">
+        android:layout_below="@id/checkBox"
+        android:text="Основной текст"
+        android:textSize="25sp" />
 
-        <ScrollView
-            android:id="@+id/laylay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:id="@+id/layout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/main_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:text="Основной текст"
-                    android:textSize="30sp" />
-
-                <TextView
-                    android:id="@+id/add_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/main_text"
-                    android:text="Дополнительный текст" />
-
-            </RelativeLayout>
-        </ScrollView>
-
-    </androidx.cardview.widget.CardView>
+    <ListView
+        android:id="@+id/para_view"
+        android:layout_width="match_parent"
+        android:background="@color/gray"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ListView>
 
 
 </RelativeLayout>

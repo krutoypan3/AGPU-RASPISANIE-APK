@@ -168,6 +168,7 @@ class GetRasp extends AsyncTask<String, String, String> {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
+        this.sqLiteDatabaseS.close();
         return null;
     }
 }

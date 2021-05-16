@@ -100,5 +100,6 @@ public class PlayService extends Service {
 
             }
         }
+        sqLiteDatabaseS.close();
     }
 }
