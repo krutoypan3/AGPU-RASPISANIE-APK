@@ -13,4 +13,18 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.MyApp.Main" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!--Base colors-->
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryVariant">@color/gray</item>
+        <item name="colorSecondary">@color/design_default_color_on_secondary</item>
+        <item name="colorOnPrimary">@color/cardview_light_background</item>
+        <item name="colorOnError">@color/design_default_color_error</item>
+        <item name="android:textColorPrimary">#333333</item>
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.FilledBox</item>
+        <item name="android:listViewStyle">@color/light_blue</item>
+
+    </style>
+
 </resources>
