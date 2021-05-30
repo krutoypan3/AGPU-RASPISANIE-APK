@@ -41,36 +41,34 @@
         android:layout_below="@id/logow"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="-50dp"
-        android:layout_marginEnd="40pt"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/refresh_btn"
         android:text="Вперед" />
 
     <Button
-        android:background="@drawable/small_button"
-        android:theme="@style/Theme.MyApp.Main"
         android:id="@+id/week_day_bt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/logow"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="78dp"
         android:layout_marginTop="-50dp"
-        android:clickable="true"
-        android:text="Назад" />
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/refresh_btn"
+        android:background="@drawable/small_button"
+        android:text="Назад"
+        android:theme="@style/Theme.MyApp.Main" />
+
 
     <ImageView
         android:id="@+id/refresh_btn"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_below="@id/logow"
-        android:layout_marginStart="12dp"
         android:layout_marginTop="-50dp"
-        android:layout_marginEnd="12dp"
-        android:layout_toStartOf="@+id/week_day_bt2"
-        android:layout_toEndOf="@+id/week_day_bt1"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/refresh_0"
         android:src="@drawable/refresh_ico"
         android:theme="@style/Theme.MyApp.Main" />
-
 
     <TextView
         android:textColor="@color/white"
@@ -89,7 +87,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/main_text"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+    </ListView>
+
+    <ImageView
+        android:id="@+id/back_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/small_button"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:theme="@style/Theme.MyApp.Main" />
 
 
 </RelativeLayout>

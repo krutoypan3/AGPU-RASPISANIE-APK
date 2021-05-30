@@ -29,10 +29,15 @@ public class raspisanie_show extends Activity {
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         // Очистите все ресурсы. Это касается завершения работы
         // потоков, закрытия соединений с базой данных и т. д.
         super.onDestroy();
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
     }
 
     @Override
@@ -65,6 +70,14 @@ public class raspisanie_show extends Activity {
                     mCheckBox.setTextColor(Color.BLACK);
                     MainActivity.sqLiteDatabase.delete("rasp_update", "r_group_code = '" + MainActivity.selectedItem_id + "'", null);
                 }
+            }
+        });
+
+        ImageView back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -189,6 +202,15 @@ public class raspisanie_show extends Activity {
                 day_show(getApplicationContext());
                 week_day_bt1.setClickable(true);
                 week_day_bt2.setClickable(true);
+            }
+            public void onSwipeBottom(){
+                if (!refresh_on_off){
+                    refresh_btn.setClickable(false);
+                    refresh_on_off = true;
+                    refresh_btn.setBackgroundResource(R.drawable.refresh_1);
+                    new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
+                    new refresh_day_show().execute();
+                }
             }
         });
     }
