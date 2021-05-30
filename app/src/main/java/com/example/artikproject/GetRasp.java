@@ -7,6 +7,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
@@ -40,16 +43,21 @@ class GetRasp extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... strings) {
         this.sqLiteDatabaseS = new DataBase(context).getWritableDatabase(); //Подключение к базе данных
+        Document doc = null;
         for(int ff = -1; ff<2; ff++) {
             String urlq;
             urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + r_selectedItem_id + "&SearchString=" + r_selectedItem + "&Type=" + r_selectedItem_type + "&WeekId=" + (week_id_upd + ff);
-            Document doc = null;
+            doc = null;
             try {
-                doc = Jsoup.connect(urlq).get();
+                doc = Jsoup.connect(urlq).timeout(5000).get();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            assert doc != null;
+            if (doc == null){
+                raspisanie_show.refresh_on_off = false;
+                raspisanie_show.refresh_successful = false;
+                return null;
+            }
             List<String[]> days = new ArrayList<>();
             for (int i = 1; i < 7; i++) {
                 days.add(doc.select("tbody").toString().split("th scope")[i].split("td colspan="));
@@ -133,11 +141,12 @@ class GetRasp extends AsyncTask<String, String, String> {
                         String predmet_group_db = r.getString(6);
                         String predmet_podgroup_db = r.getString(7);
                         String predmet_aud_db = r.getString(8);
+                        String predmet_time_db = r.getString(9);
 
 
                         if (!(Objects.equals(predmet_name,predmet_name_db)) | !(Objects.equals(predmet_prepod, predmet_prepod_db)) |
                                 !(Objects.equals(predmet_group, predmet_group_db)) | !(Objects.equals(predmet_podgroup, predmet_podgroup_db)) |
-                                !(Objects.equals(predmet_aud, predmet_aud_db))){
+                                !(Objects.equals(predmet_aud, predmet_aud_db)) | !(Objects.equals(predmet_time, predmet_time_db))){
                             sqLiteDatabaseS.delete("rasp_test1", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
                             ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
                             rowValues.put("r_group_code", r_selectedItem_id);
@@ -149,7 +158,7 @@ class GetRasp extends AsyncTask<String, String, String> {
                             rowValues.put("r_group", predmet_group);
                             rowValues.put("r_podgroup", predmet_podgroup);
                             rowValues.put("r_aud", predmet_aud);
-                            rowValues.put("r_razmer", predmet_razmer);
+                            rowValues.put("r_razmer", predmet_time);
                             rowValues.put("r_week_day_name", predmet_data_ned);
                             rowValues.put("r_week_day_date", predmet_data_chi);
                             rowValues.put("r_search_type", r_selectedItem_type);
@@ -168,7 +177,9 @@ class GetRasp extends AsyncTask<String, String, String> {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
+        raspisanie_show.refresh_on_off = false;
         this.sqLiteDatabaseS.close();
+        raspisanie_show.refresh_successful = true;
         return null;
     }
 }

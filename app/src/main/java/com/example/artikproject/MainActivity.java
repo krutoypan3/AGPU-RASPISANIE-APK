@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -113,7 +114,11 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 }
-                else new GetRasp(true, selectedItem_id, selectedItem_type, selectedItem, week_id, getApplicationContext()).execute(selectedItem);
+                else{
+                    Intent intent = new Intent(MainActivity.this, raspisanie_show.class);
+                    startActivity(intent);
+                    new GetRasp(false, selectedItem_id, selectedItem_type, selectedItem, week_id, getApplicationContext()).execute(selectedItem);
+                }
             }
         });
         rasp_search_edit = findViewById(R.id.rasp_search_edit);
@@ -168,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
             do{
                 switch (r.getString(2)) {
                     case "Group":
-                        group_list.add(r.getString(1));
+                        group_list.add(r.getString(1).split(",")[0].replace(")","").replace("(", ""));
                         break;
                     case "Classroom":
                         group_list.add(r.getString(3).split(",")[2]);
@@ -208,8 +213,19 @@ public class MainActivity extends AppCompatActivity {
             try {
                 URL url = new URL(strings[0]);
                 connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
+                connection.setConnectTimeout(5000);
+                try{
+                connection.connect();}
+                catch (Exception e){
+                    runOnUiThread(new Runnable() {
 
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),"Проверьте подключение к интернету", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    return null;
+                }
                 InputStream stream = connection.getInputStream();
                 reader = new BufferedReader(new InputStreamReader(stream));
 
