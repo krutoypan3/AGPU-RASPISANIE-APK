@@ -1,7 +1,8 @@
 package com.example.artikproject;
 
-import android.content.ContentValues;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,9 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -25,12 +24,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.*;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 
 import java.io.BufferedReader;
@@ -166,6 +162,36 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ImageView delete_btn = findViewById(R.id.delete_btn);
+        delete_btn.setOnClickListener(new View.OnClickListener() { // Функция удаления групп
+            @Override
+            public void onClick(View v) {
+                delete_btn.startAnimation(animScale);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Удалить все сохранненные расписания?!")
+                        .setMessage("Подтвердите удаление!")
+                        .setCancelable(false)
+                        .setPositiveButton("Отмена",new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .setNegativeButton("Удалить все!",new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                sqLiteDatabase.execSQL("DELETE FROM rasp_test1");
+                                sqLiteDatabase.execSQL("DELETE FROM rasp_update");
+                                group_listed = null;
+                                see_group_rasp();
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog Error = builder.create();
+                Error.show();
+            }
+        });
     }
     public void see_group_rasp(){ // Вывод ранее открываемых групп
         Cursor r;
@@ -195,8 +221,10 @@ public class MainActivity extends AppCompatActivity {
         } // Вывод SELECT запроса
         if( group_listed == null){
             result.setText("Увы, но у вас нет сохраненных групп...");
+            listview.setVisibility(View.INVISIBLE);
         }
         else {
+            listview.setVisibility(View.VISIBLE);
             ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
             listview.setAdapter(adapter);
         }
@@ -295,6 +323,7 @@ public class MainActivity extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
             listview.setAdapter(adapter);
             result.setText(res);
+            listview.setVisibility(View.VISIBLE);
         }
     }
 }
