@@ -13,6 +13,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -83,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Animation animScale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale);
 
         Date date1 = new Date();
         long date_ms = date1.getTime() + 10800000;
@@ -134,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         main_button.setOnClickListener(new View.OnClickListener() { // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
             @Override
             public void onClick(View v) {
+                main_button.setAnimation(animScale);
                 if (rasp_search_edit.getText().toString().trim().equals("")) {
                     Toast.makeText(MainActivity.this, R.string.no_user_input, Toast.LENGTH_SHORT).show();
                     result.setText("");
