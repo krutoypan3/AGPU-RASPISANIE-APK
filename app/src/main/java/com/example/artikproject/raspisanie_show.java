@@ -47,9 +47,6 @@ public class raspisanie_show extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raspisanie_layout);
         context = getApplicationContext();
-        final Animation animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
-        final Animation animUehalVp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vpravo);
-        final Animation animUehalVl = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vlevo);
         mainText = findViewById(R.id.main_text);
         para_view = findViewById(R.id.para_view);
         new refresh_day_show().execute();
@@ -82,7 +79,7 @@ public class raspisanie_show extends Activity {
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                back_btn.startAnimation(animUehalVl);
+                back_btn.startAnimation(MainActivity.animUehalVl);
                 finish();
             }
         });
@@ -94,7 +91,7 @@ public class raspisanie_show extends Activity {
         week_day_bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                week_day_bt1.setAnimation(animUehalVl);
+                week_day_bt1.setAnimation(MainActivity.animUehalVl);
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
                 MainActivity.week_day -= 1;
@@ -114,7 +111,7 @@ public class raspisanie_show extends Activity {
         week_day_bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                week_day_bt2.setAnimation(animUehalVp);
+                week_day_bt2.setAnimation(MainActivity.animUehalVp);
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
                 MainActivity.week_day += 1;
@@ -137,7 +134,7 @@ public class raspisanie_show extends Activity {
             public void onClick(View v) {
                 refresh_btn.setClickable(false);
                 refresh_on_off = true;
-                refresh_btn.startAnimation(animRotate);
+                refresh_btn.startAnimation(MainActivity.animRotate);
                 refresh_btn.setBackgroundResource(R.drawable.refresh_1);
                 new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
                 new refresh_day_show().execute();
@@ -148,7 +145,7 @@ public class raspisanie_show extends Activity {
         ListView para_view = findViewById(R.id.para_view);
         para_view.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
             public void onSwipeRight() {
-                week_day_bt1.setAnimation(animUehalVl);
+                week_day_bt1.setAnimation(MainActivity.animUehalVl);
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
                 MainActivity.week_day -= 1;
@@ -164,7 +161,7 @@ public class raspisanie_show extends Activity {
                 week_day_bt2.setClickable(true);
             }
             public void onSwipeLeft() {
-                week_day_bt2.setAnimation(animUehalVp);
+                week_day_bt2.setAnimation(MainActivity.animUehalVp);
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
                 MainActivity.week_day += 1;
@@ -185,6 +182,7 @@ public class raspisanie_show extends Activity {
         RelativeLayout raspisanie_show = findViewById(R.id.raspisanie_show);
         raspisanie_show.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
             public void onSwipeRight() {
+                week_day_bt1.setAnimation(MainActivity.animUehalVl);
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
                 MainActivity.week_day -= 1;
@@ -200,6 +198,7 @@ public class raspisanie_show extends Activity {
                 week_day_bt2.setClickable(true);
             }
             public void onSwipeLeft() {
+                week_day_bt2.setAnimation(MainActivity.animUehalVp);
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
                 MainActivity.week_day += 1;
@@ -218,7 +217,7 @@ public class raspisanie_show extends Activity {
                 if (!refresh_on_off){
                     refresh_btn.setClickable(false);
                     refresh_on_off = true;
-                    refresh_btn.startAnimation(animRotate);
+                    refresh_btn.startAnimation(MainActivity.animRotate);
                     refresh_btn.setBackgroundResource(R.drawable.refresh_1);
                     new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
                     new refresh_day_show().execute();
@@ -252,8 +251,7 @@ public class raspisanie_show extends Activity {
                         refresh_btn.setBackgroundResource(R.drawable.refresh_0);
                     }
                     refresh_btn.setClickable(true);
-                    final Animation animRotate_ok = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_ok);
-                    refresh_btn.startAnimation(animRotate_ok);
+                    refresh_btn.startAnimation(MainActivity.animRotate_ok);
                 }
             });
             return null;

@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import org.json.*;
 
@@ -40,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,7 +57,12 @@ public class MainActivity extends AppCompatActivity {
     public static int week_id;
     public static SQLiteDatabase sqLiteDatabase;
     public static int week_day;
-
+    private static boolean star_toggle = false;
+    public static Animation animRotate;
+    public static Animation animUehalVp;
+    public static Animation animUehalVl;
+    public static Animation animScale;
+    public static Animation animRotate_ok;
     public static boolean isOnline(Context context){ // Функция определяющая есть ли интернет
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -81,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final Animation animScale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale);
-
+        animScale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale);
+        animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
+        animUehalVp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vpravo);
+        animUehalVl = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vlevo);
+        animRotate_ok = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_ok);
         Date date1 = new Date();
         long date_ms = date1.getTime() + 10800000;
         week_id = (int) ((date_ms - 18489514000f) / 1000f / 60f / 60f / 24f / 7f); // Номер текущей недели
@@ -163,13 +171,67 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        ImageView favorite = findViewById(R.id.favorite);
+        CardView favorite_card = findViewById(R.id.favorite_card);
+        favorite.setOnClickListener(new View.OnClickListener() { // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
+            @Override
+            public void onClick(View v) {
+                favorite_card.startAnimation(animScale);
+                if (!star_toggle) {
+                    group_listed = null;
+                    Cursor r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_selectedItem, r_selectedItem_type FROM rasp_update", null);
+                    if (r.moveToFirst()) {
+                        List<String> group_list = new ArrayList<>();
+                        List<String> group_list_type = new ArrayList<>();
+                        List<String> group_list_id = new ArrayList<>();
+                        do {
+                            switch (r.getString(2)) {
+                                case "Group":
+                                    group_list.add(r.getString(1).split(",")[0].replace(")", "").replace("(", ""));
+                                    break;
+                                case "Classroom":
+                                case "Teacher":
+                                    group_list.add(r.getString(1).split(",")[0]);
+                                    break;
+                            }
+                            group_list_type.add(r.getString(2));
+                            group_list_id.add(r.getString(0));
+                        } while (r.moveToNext());
+                        MainActivity.this.group_listed = group_list.toArray(new String[0]);
+                        MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
+                        MainActivity.this.group_listed_id = group_list_id.toArray(new String[0]);
+                    } // Вывод SELECT запроса
+                    if (group_listed == null) {
+                        result.setText("Вы не отслеживаете изменений в расписании...");
+                        listview.setVisibility(View.INVISIBLE);
+                    } else {
+                        ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
+                        listview.setAdapter(adapter);
+                        listview.setVisibility(View.VISIBLE);
+                        listview.setBackgroundResource(R.drawable.list_view_favorite);
+                        result.setText("");
+                        subtitle.setText("");
+                    }
+                    favorite.setBackgroundResource(R.color.yellow);
+                }
+                else{
+                    see_group_rasp();
+                    listview.setBackgroundResource(R.drawable.list_view);
+                    favorite.setBackgroundResource(R.color.gray);
+                }
+                star_toggle = !star_toggle;
+            }
+        });
+
+
         ImageView delete_btn = findViewById(R.id.delete_btn);
         delete_btn.setOnClickListener(new View.OnClickListener() { // Функция удаления групп
             @Override
             public void onClick(View v) {
                 delete_btn.startAnimation(animScale);
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Удалить все сохранненные расписания?!")
+                builder.setTitle("Удалить все сохраненные расписания?!")
                         .setMessage("Подтвердите удаление!")
                         .setCancelable(false)
                         .setPositiveButton("Отмена",new DialogInterface.OnClickListener() {
@@ -227,6 +289,7 @@ public class MainActivity extends AppCompatActivity {
             listview.setVisibility(View.VISIBLE);
             ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
             listview.setAdapter(adapter);
+            result.setText("");
         }
     }
 
