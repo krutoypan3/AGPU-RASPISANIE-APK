@@ -33,9 +33,6 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class PlayService extends Service {
-    private static SQLiteDatabase sqLiteDatabaseS;
-
-
 
     @Nullable
     @Override
@@ -50,13 +47,8 @@ public class PlayService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        WorkRequest uploadWorkRequest =
-                new PeriodicWorkRequest.Builder(MyWorker.class, 5, TimeUnit.MINUTES)
-                        .build();
-        WorkManager
-                .getInstance(getApplicationContext())
-                .enqueue(uploadWorkRequest);
-
+        WorkRequest uploadWorkRequest = new PeriodicWorkRequest.Builder(MyWorker.class, 5, TimeUnit.MINUTES).build();
+        WorkManager.getInstance(getApplicationContext()).enqueue(uploadWorkRequest);
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -75,7 +67,7 @@ public class PlayService extends Service {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void get_group_db(Context context) {
-        sqLiteDatabaseS = new DataBase(context).getWritableDatabase(); //Подключение к базе данных
+        SQLiteDatabase sqLiteDatabaseS = new DataBase(context).getWritableDatabase(); //Подключение к базе данных
         if (isOnline(context)) {
             Cursor r = sqLiteDatabaseS.rawQuery("SELECT r_group_code, r_selectedItem_type, r_selectedItem FROM rasp_update", null); // SELECT запрос
             ArrayList<String> r_group0 = new ArrayList<>();
@@ -95,9 +87,7 @@ public class PlayService extends Service {
             } while (r.moveToNext());
 
             for (int i = 0; i < r_group0.size(); i++) {
-                GetRasp x = new GetRasp(false, r_group0.get(i), r_group1.get(i), r_group2.get(i), week_id_upd, context);
-                x.execute("");
-
+                new GetRasp(false, r_group0.get(i), r_group1.get(i), r_group2.get(i), week_id_upd, context).execute("");
             }
         }
         sqLiteDatabaseS.close();

@@ -20,9 +20,10 @@ public class getraspweek extends AsyncTask<String, String, String> { // INTERNET
             String urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + MainActivity.selectedItem_id + "&SearchString=" + MainActivity.selectedItem + "&Type="+ MainActivity.selectedItem_type + "&WeekId=" + (MainActivity.week_id + ff);
             Document doc = null;
             try {
-                doc = Jsoup.connect(urlq).get();
+                doc = Jsoup.connect(urlq).timeout(5000).get();
             } catch (IOException e) {
                 e.printStackTrace();
+                return null;
             }
             assert doc != null;
             List<String[]> days = new ArrayList<>();

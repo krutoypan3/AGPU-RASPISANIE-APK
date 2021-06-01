@@ -25,11 +25,7 @@ public class MyWorker extends Worker {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public Result doWork() {
-
-        // Do the work here--in this case, upload the images.
         new PlayService().get_group_db(getApplicationContext());
-
-        // Indicate whether the work finished successfully with the Result
         return Result.success();
     }
 }

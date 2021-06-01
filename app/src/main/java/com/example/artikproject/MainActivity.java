@@ -45,24 +45,26 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private EditText rasp_search_edit;
-    private TextView result;
     private String[] group_listed;
     private String[] group_listed_type;
     private String[] group_listed_id;
     private ListView listview;
+    private TextView result;
     private TextView subtitle;
-    static public String selectedItem;
-    static public String selectedItem_type;
-    static public String selectedItem_id;
-    public static int week_id;
-    public static SQLiteDatabase sqLiteDatabase;
-    public static int week_day;
+    private Button main_button;
     private static boolean star_toggle = false;
+    public static String selectedItem;
+    public static String selectedItem_type;
+    public static String selectedItem_id;
+    public static int week_id;
+    public static int week_day;
+    public static SQLiteDatabase sqLiteDatabase;
     public static Animation animRotate;
     public static Animation animUehalVp;
     public static Animation animUehalVl;
     public static Animation animScale;
     public static Animation animRotate_ok;
+
     public static boolean isOnline(Context context){ // Функция определяющая есть ли интернет
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -86,11 +88,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         animScale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale);
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
         animUehalVp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vpravo);
         animUehalVl = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vlevo);
         animRotate_ok = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_ok);
+        rasp_search_edit = findViewById(R.id.rasp_search_edit);
+        main_button = findViewById(R.id.main_button);
+        result = findViewById(R.id.result);
+        listview = (ListView) findViewById(R.id.listview);
+        subtitle = (TextView) findViewById(R.id.subtitle);
+
+        // Получение актуального текущего времени
         Date date1 = new Date();
         long date_ms = date1.getTime() + 10800000;
         week_id = (int) ((date_ms - 18489514000f) / 1000f / 60f / 60f / 24f / 7f); // Номер текущей недели
@@ -101,8 +111,7 @@ public class MainActivity extends AppCompatActivity {
             week_id += 1;
         }
 
-        listview = (ListView) findViewById(R.id.listview);
-        subtitle = (TextView) findViewById(R.id.subtitle);
+        // Отслеживание нажатий на элемент в списке(группа\ауд\препод)
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
@@ -128,26 +137,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        rasp_search_edit = findViewById(R.id.rasp_search_edit);
-        Button main_button = findViewById(R.id.main_button);
-        result = findViewById(R.id.result);
-
 
         sqLiteDatabase = new DataBase(MainActivity.this).getWritableDatabase(); //Подключение к базе данных
         startService(new Intent(getApplicationContext(), PlayService.class)); //ЗАПУСК СЛУЖБЫ
 
         see_group_rasp(); // Вывод групп которые были открыты ранее
 
-        main_button.setOnClickListener(new View.OnClickListener() { // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
+        // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
+        main_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 main_button.setAnimation(animScale);
+                main_button.setClickable(false);
                 if (rasp_search_edit.getText().toString().trim().equals("")) {
                     Toast.makeText(MainActivity.this, R.string.no_user_input, Toast.LENGTH_SHORT).show();
                     result.setText("");
                 }
                 else {
-
                     if (!isOnline(MainActivity.this)){
                         see_group_rasp();
                     }
@@ -160,9 +166,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        ImageView GitHub = findViewById(R.id.GitHub);
 
-        GitHub.setOnClickListener(new View.OnClickListener() { // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
+        // Функция перехода на GitHub при нажатии на кнопку
+        ImageView GitHub = findViewById(R.id.GitHub);
+        GitHub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent;
@@ -172,9 +179,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        // Функция показа избранных групп при нажатии на кнопку
         ImageView favorite = findViewById(R.id.favorite);
         CardView favorite_card = findViewById(R.id.favorite_card);
-        favorite.setOnClickListener(new View.OnClickListener() { // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
+        favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 favorite_card.startAnimation(animScale);
@@ -224,9 +232,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        // Функция удаления групп
         ImageView delete_btn = findViewById(R.id.delete_btn);
-        delete_btn.setOnClickListener(new View.OnClickListener() { // Функция удаления групп
+        delete_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 delete_btn.startAnimation(animScale);
@@ -387,6 +395,7 @@ public class MainActivity extends AppCompatActivity {
             listview.setAdapter(adapter);
             result.setText(res);
             listview.setVisibility(View.VISIBLE);
+            main_button.setClickable(true);
         }
     }
 }

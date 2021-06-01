@@ -50,12 +50,10 @@ public class raspisanie_show extends Activity {
         mainText = findViewById(R.id.main_text);
         para_view = findViewById(R.id.para_view);
         new refresh_day_show().execute();
-        CheckBox mCheckBox;
-        mCheckBox = (CheckBox)findViewById(R.id.checkBox);
+        CheckBox mCheckBox = (CheckBox)findViewById(R.id.checkBox);
 
         Cursor sss = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
-        if (sss.getCount()==0) mCheckBox.setChecked(false);
-        else mCheckBox.setChecked(true);
+        mCheckBox.setChecked(sss.getCount() != 0);
 
         mCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +73,7 @@ public class raspisanie_show extends Activity {
             }
         });
 
+        // Возврат на главный экран
         ImageView back_btn = findViewById(R.id.back_btn);
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,10 +83,10 @@ public class raspisanie_show extends Activity {
             }
         });
 
-        Button week_day_bt1;
-        Button week_day_bt2;
-        week_day_bt1 = findViewById(R.id.week_day_bt1);
-        week_day_bt2 = findViewById(R.id.week_day_bt2);
+        Button week_day_bt1 = findViewById(R.id.week_day_bt1);
+        Button week_day_bt2 = findViewById(R.id.week_day_bt2);
+
+        // Переход к предыдущему дню
         week_day_bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,6 +107,8 @@ public class raspisanie_show extends Activity {
             }
 
         });
+
+        // Переход к следующему дню
         week_day_bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +129,7 @@ public class raspisanie_show extends Activity {
             }
         });
 
+        // Обновить расписание
         ImageView refresh_btn = findViewById(R.id.refresh_btn);
         refresh_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +143,7 @@ public class raspisanie_show extends Activity {
             }
         });
 
-
+        // отслеживание жестов
         ListView para_view = findViewById(R.id.para_view);
         para_view.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
             public void onSwipeRight() {
@@ -178,7 +180,7 @@ public class raspisanie_show extends Activity {
             }
         });
 
-
+        // отслеживание жестов
         RelativeLayout raspisanie_show = findViewById(R.id.raspisanie_show);
         raspisanie_show.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
             public void onSwipeRight() {
