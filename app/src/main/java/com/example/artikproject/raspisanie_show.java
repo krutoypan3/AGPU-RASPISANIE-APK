@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -16,10 +17,16 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class raspisanie_show extends Activity {
@@ -42,6 +49,7 @@ public class raspisanie_show extends Activity {
         super.finish();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +59,7 @@ public class raspisanie_show extends Activity {
         para_view = findViewById(R.id.para_view);
         new refresh_day_show().execute();
         CheckBox mCheckBox = (CheckBox)findViewById(R.id.checkBox);
-
+        week_show(context);
         Cursor sss = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
         mCheckBox.setChecked(sss.getCount() != 0);
 
@@ -259,6 +267,79 @@ public class raspisanie_show extends Activity {
             return null;
         }
     }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    protected void week_show(Context context){
+        Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
+                "r_group_code = " + MainActivity.selectedItem_id + " AND " +
+                "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
+        Cursor f = MainActivity.sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM rasp_test1 WHERE " +
+                "r_group_code = " + MainActivity.selectedItem_id + " AND " +
+                "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
+
+        if (r.getCount()==0) {// Если даной недели нет в базе
+//            mainText.setText("\uD83E\uDD7A"); // Тут типа грустный смайл
+//            addText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
+        }
+        else{
+            String prev_time = "";
+            TableLayout tableLayout = findViewById(R.id.table); // Инициализация таблицы
+            TableRow tableRow = new TableRow(this); // Новый столбец
+            String str = "";
+            TextView qty; // Новая ячейка
+            r.moveToFirst();
+            mainText.setText(r.getString(10) + " " + r.getString(11));
+            f.moveToFirst();
+            TableRow timeRow = new TableRow(this); // Новый столбец
+            do{
+                qty = new TextView(this); // Новая ячейка
+                qty.setMaxEms(10);
+                qty.setPadding(5,5,5,5);
+                qty.setTextColor(ContextCompat.getColor(this, R.color.white));
+                qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
+                qty.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                qty.setText(f.getString(0));
+                timeRow.addView(qty);
+            }while(f.moveToNext());
+            tableLayout.addView(timeRow);
+            do{
+                if (Objects.equals(prev_time, r.getString(9))){
+                    str += "\n";
+                    tableRow.removeView(qty);
+                }
+                else{
+                    str = "";
+                    qty = new TextView(this); // Новая ячейка
+                    qty.setMaxEms(10);
+                    qty.setPadding(5,5,5,5);
+                    qty.setTextColor(ContextCompat.getColor(this, R.color.white));
+                    qty.setBackgroundResource(R.drawable.table_granitsa);
+                    qty.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                }
+                prev_time = r.getString(9);
+                if (r.getString(4) != null){
+                    str += r.getString(4) + "\n";
+                    if (r.getString(5) != null) str += r.getString(5) + "\n";
+                    if (r.getString(6) != null) str += r.getString(6) + "\n";
+                    if (r.getString(7) != null) str += r.getString(7) + "\n";
+                    if (r.getString(8) != null) str += r.getString(8);
+                }
+                if (r.getString(3).equals("0")){
+                    tableRow = new TableRow(this); // Новый столбец
+                    str = r.getString(10);
+                    str += "\n" + (r.getString(11));
+                    tableLayout.addView(tableRow); // Добавление столбца в таблицу
+                    qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
+                }
+                qty.setText(str);
+                tableRow.addView(qty); // Добавление ячейки в столбец
+            }while(r.moveToNext());
+            mainText.setText("");
+        }
+    }
+
+
     protected void day_show(Context context){
         List<String> group_list = new ArrayList<>();
         Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +

@@ -80,6 +80,8 @@
         android:text="Дата"
         android:textSize="25sp" />
 
+
+
     <ListView
         android:id="@+id/para_view"
         android:layout_width="match_parent"
@@ -88,7 +90,32 @@
         android:layout_below="@id/main_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
+
     </ListView>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/main_text">
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    <TableLayout
+        android:id="@+id/table"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:stretchColumns="*" >
+
+    </TableLayout>
+    <!-- display this button in 3rd column via layout_column(zero based) -->
+    </HorizontalScrollView>
+    </ScrollView>
+
+
 
     <ImageView
         android:id="@+id/back_btn"
@@ -100,6 +127,18 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:theme="@style/Theme.MyApp.Main" />
+
+    <ImageView
+        android:id="@+id/week_day_change_btn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/refresh_1"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_baseline_date_range_24"
         android:theme="@style/Theme.MyApp.Main" />
 
 
