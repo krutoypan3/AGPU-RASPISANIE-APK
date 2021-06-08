@@ -108,20 +108,19 @@
         >
 
 
+        <TableLayout
+            android:id="@+id/table"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green"
+            android:measureWithLargestChild="false"
+            android:orientation="vertical"
+            android:shrinkColumns="false"
+            android:stretchColumns="false"
 
-    <TableLayout
-        android:measureWithLargestChild="true"
-        android:id="@+id/table"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:stretchColumns="true"
-        android:shrinkColumns="true"
-        android:background="@color/green"
+            >
 
-        >
-
-    </TableLayout>
+        </TableLayout>
     <!-- display this button in 3rd column via layout_column(zero based) -->
     </ScrollView>
 
