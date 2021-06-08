@@ -70,6 +70,16 @@
         android:src="@drawable/refresh_ico"
         android:theme="@style/Theme.MyApp.Main" />
 
+    <ImageView
+        android:id="@+id/refresh_btn_all"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_below="@id/logow"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-50dp"
+        android:theme="@style/Theme.MyApp.Main"
+        android:visibility="invisible" />
+
     <TextView
         android:textColor="@color/white"
         android:textAlignment="center"
@@ -77,10 +87,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox"
-        android:text="Дата"
+        android:text="расписание обновляется..."
         android:textSize="25sp" />
 
 
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/main_text"
+        android:scrollbars="none">
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:scrollbars="none">
+
+
+            <TableLayout
+                android:id="@+id/table"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dark_gray"
+                android:measureWithLargestChild="false"
+                android:orientation="vertical"
+                android:shrinkColumns="false"
+                android:stretchColumns="false"
+
+                >
+
+            </TableLayout>
+            <!-- display this button in 3rd column via layout_column(zero based) -->
+        </ScrollView>
+
+    </HorizontalScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/raspisanie_day"
+        android:layout_below="@id/main_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView
         android:id="@+id/para_view"
@@ -92,40 +140,6 @@
         app:layout_constraintTop_toTopOf="parent" >
 
     </ListView>
-
-
-
-    <HorizontalScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_below="@id/main_text"
-        android:scrollbars = "none"
-        >
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:scrollbars = "none"
-        >
-
-
-        <TableLayout
-            android:id="@+id/table"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/green"
-            android:measureWithLargestChild="false"
-            android:orientation="vertical"
-            android:shrinkColumns="false"
-            android:stretchColumns="false"
-
-            >
-
-        </TableLayout>
-    <!-- display this button in 3rd column via layout_column(zero based) -->
-    </ScrollView>
-
-    </HorizontalScrollView>
-
 
 
     <ImageView

@@ -43,19 +43,16 @@ class GetRasp extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... strings) {
         this.sqLiteDatabaseS = new DataBase(context).getWritableDatabase(); //Подключение к базе данных
-        Document doc = null;
+        Document doc;
         for(int ff = -1; ff<2; ff++) {
             String urlq;
             urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + r_selectedItem_id + "&SearchString=" + r_selectedItem + "&Type=" + r_selectedItem_type + "&WeekId=" + (week_id_upd + ff);
-            doc = null;
             try {
                 doc = Jsoup.connect(urlq).timeout(5000).get();
             } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (doc == null){
                 raspisanie_show.refresh_on_off = false;
                 raspisanie_show.refresh_successful = false;
+                this.sqLiteDatabaseS.close();
                 return null;
             }
             List<String[]> days = new ArrayList<>();
@@ -92,12 +89,12 @@ class GetRasp extends AsyncTask<String, String, String> {
                         predmet_group = day[i][j].split("<span>")[3].split("</span>")[0];
                         predmet_podgroup = day[i][j].split("<span>")[4].split("</span>")[0];
                     }
-                    catch (Exception e) {
+                    catch (Exception ignored) {
                     }
                     try {
                         predmet_color = day[i][j].split("style=\"background-color:")[1].split("\">")[0];
                     }
-                    catch (Exception e){
+                    catch (Exception ignored){
                     }
                     String predmet_time = null;
                     if((j>0) && (schet < 7)){

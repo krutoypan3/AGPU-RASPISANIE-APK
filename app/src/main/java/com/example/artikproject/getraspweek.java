@@ -51,13 +51,20 @@ public class getraspweek extends AsyncTask<String, String, String> { // INTERNET
                     String predmet_group = null;
                     String predmet_podgroup = null;
                     String predmet_razmer = null;
+                    String predmet_color = null;
                     try {
                         predmet_razmer = day[i][j].split("\"")[1];
                         predmet_name = day[i][j].split("<span>")[1].split("</span>")[0];
                         predmet_prepod = day[i][j].split("<span>")[2].split("</span>")[0];
                         predmet_group = day[i][j].split("<span>")[3].split("</span>")[0];
                         predmet_podgroup = day[i][j].split("<span>")[4].split("</span>")[0];
-                    } catch (Exception ignored) {
+                    }
+                    catch (Exception ignored) {
+                    }
+                    try {
+                        predmet_color = day[i][j].split("style=\"background-color:")[1].split("\">")[0];
+                    }
+                    catch (Exception ignored){
                     }
                     String predmet_time = null;
                     if((j>0) && (schet < 7)){
@@ -97,6 +104,7 @@ public class getraspweek extends AsyncTask<String, String, String> { // INTERNET
                         rowValues.put("r_week_day_date", predmet_data_chi);
                         rowValues.put("r_search_type", MainActivity.selectedItem_type);
                         rowValues.put("r_last_update", new Date().getTime());
+                        rowValues.put("r_color", predmet_color);
                         MainActivity.sqLiteDatabase.insert("rasp_test1", null, rowValues); // Вставка строки в базу данных
                     }
                 }

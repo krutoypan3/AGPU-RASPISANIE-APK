@@ -119,22 +119,12 @@ public class MainActivity extends AppCompatActivity {
                 selectedItem_type = MainActivity.this.group_listed_type[position];
                 selectedItem_id = MainActivity.this.group_listed_id[position];
                 MainActivity.this.subtitle.setText(selectedItem);
-
-                if (!isOnline(MainActivity.this)){
-                    Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + selectedItem_id + " AND r_week_number = " + week_id, null); // SELECT запрос
-                    if (r.getCount()==0){// Если даной недели нет в базе
-                        result.setText("НЕТ ПОДКЛЮЧЕНИЯ К ИНТЕРНЕТУ!");
-                    }
-                    else{ // Если неделя есть в базе
-                        Intent intent = new Intent(MainActivity.this, raspisanie_show.class);
-                        startActivity(intent);
-                    }
+                Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + selectedItem_id + " AND r_week_number = " + week_id, null); // SELECT запрос
+                Intent intent = new Intent(MainActivity.this, raspisanie_show.class);
+                if (isOnline(MainActivity.this)){
+                    new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 }
-                else{
-                    Intent intent = new Intent(MainActivity.this, raspisanie_show.class);
-                    startActivity(intent);
-                    new GetRasp(false, selectedItem_id, selectedItem_type, selectedItem, week_id, getApplicationContext()).execute(selectedItem);
-                }
+                startActivity(intent);
             }
         });
 
