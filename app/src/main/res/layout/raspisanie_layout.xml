@@ -12,17 +12,8 @@
         android:id="@+id/logow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
-        android:text="@string/logo"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#000000"
-        android:textColorHint="#C89595"
-        android:textColorLink="#FF6565"
-        android:textSize="24sp" />
+        />
 
     <CheckBox
         android:id="@+id/checkBox"

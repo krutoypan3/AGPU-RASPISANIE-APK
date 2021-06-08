@@ -123,18 +123,26 @@ public class raspisanie_show extends Activity {
                             new getraspweek().execute("");
                         }
                     }
+                    week_day_bt1.setClickable(true);
+                    week_day_bt2.setClickable(true);
                     day_show(getApplicationContext());
 
                 }
                 else{
                     MainActivity.week_id -= 1;
                     if(MainActivity.isOnline(raspisanie_show.this)){
-                        new getraspweek().execute("");
+                        new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
                     }
                     week_show(raspisanie_show.this);
+                    refresh_btn.setClickable(false);
+                    week_day_bt1.setClickable(false);
+                    week_day_bt2.setClickable(false);
+                    refresh_on_off = true;
+                    refresh_btn_all.setVisibility(View.VISIBLE);
+                    refresh_btn.startAnimation(MainActivity.animRotate);
+                    refresh_btn.setBackgroundResource(R.drawable.refresh_1);
+                    new refresh_day_show().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 }
-                week_day_bt1.setClickable(true);
-                week_day_bt2.setClickable(true);
             }
 
         });
@@ -155,17 +163,25 @@ public class raspisanie_show extends Activity {
                             new getraspweek().execute("");
                         }
                     }
+                    week_day_bt1.setClickable(true);
+                    week_day_bt2.setClickable(true);
                     day_show(getApplicationContext());
                 }
                 else{
                     MainActivity.week_id += 1;
                     if(MainActivity.isOnline(raspisanie_show.this)){
-                        new getraspweek().execute("");
+                        new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
                     }
+                    refresh_btn.setClickable(false);
+                    week_day_bt1.setClickable(false);
+                    week_day_bt2.setClickable(false);
+                    refresh_on_off = true;
+                    refresh_btn_all.setVisibility(View.VISIBLE);
+                    refresh_btn.startAnimation(MainActivity.animRotate);
+                    refresh_btn.setBackgroundResource(R.drawable.refresh_1);
+                    new refresh_day_show().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                     week_show(raspisanie_show.this);
                 }
-                week_day_bt1.setClickable(true);
-                week_day_bt2.setClickable(true);
             }
         });
 
@@ -365,6 +381,10 @@ public class raspisanie_show extends Activity {
                     refresh_btn.setClickable(true);
                     refresh_btn_all.setVisibility(View.INVISIBLE);
                     refresh_btn.startAnimation(MainActivity.animRotate_ok);
+                    Button week_day_bt1 = findViewById(R.id.week_day_bt1);
+                    Button week_day_bt2 = findViewById(R.id.week_day_bt2);
+                    week_day_bt1.setClickable(true);
+                    week_day_bt2.setClickable(true);
                 }
             });
             return null;
@@ -374,153 +394,136 @@ public class raspisanie_show extends Activity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     protected void week_show(Context context){
-        Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
-                "r_group_code = " + MainActivity.selectedItem_id + " AND " +
-                "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
-        Cursor f = MainActivity.sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM rasp_test1 WHERE " +
-                "r_group_code = " + MainActivity.selectedItem_id + " AND " +
-                "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
+        try{
+            Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
+                    "r_group_code = " + MainActivity.selectedItem_id + " AND " +
+                    "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
+            Cursor f = MainActivity.sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM rasp_test1 WHERE " +
+                    "r_group_code = " + MainActivity.selectedItem_id + " AND " +
+                    "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
 
-        if (r.getCount()==0) {// Если даной недели нет в базе
-//            mainText.setText("\uD83E\uDD7A"); // Тут типа грустный смайл
-//            addText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
-        }
-        else{
-            String prev_time = "";
-            tableLayout.removeAllViews();
-            TableRow tableRow = new TableRow(this); // Новый столбец
-            String str = "";
-            TextView qty; // Новая ячейка
-            TextView empty_cell; // Новая пустая ячейка
-            TextView[] qqty = new TextView[60];
-            TableRow[] tableRows = new TableRow[6];
-            int[] max_razmer = {0,0,0,0,0,0,0};
-            int ff = 0;
-            int fk = 0;
-            r.moveToFirst();
-            mainText.setText(r.getString(10) + " " + r.getString(11));
-            f.moveToFirst();
-            TableRow timeRow = new TableRow(this); // Новый столбец
-            do{
-                qty = new TextView(this); // Новая ячейка
-                qty.setMaxEms(10);
-                qty.setTextSize(14);
-                qty.setPadding(5,5,5,5);
-                qty.setTextColor(ContextCompat.getColor(this, R.color.white));
-                qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
-                qty.setGravity(Gravity.CENTER);
-                qty.setText(f.getString(0));
-                empty_cell = new TextView(this); // Новая пустая ячейка
-                empty_cell.setHeight(1);
-                empty_cell.setWidth(1);
-                timeRow.addView(empty_cell); // Добавление пустой ячейки в столбец
-                timeRow.addView(qty);
-            }while(f.moveToNext());
-            tableLayout.addView(timeRow);
-            do{
-                if (Objects.equals(prev_time, r.getString(9))){
-                    str += "\n";
-                    tableRow.removeView(qty);
-                    tableRow.removeView(empty_cell);
-                }
-                else{
-                    str = "";
+            if (r.getCount()==0) {// Если даной недели нет в базе
+    //            mainText.setText("\uD83E\uDD7A"); // Тут типа грустный смайл
+    //            addText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
+            }
+            else{
+                String prev_time = "";
+                tableLayout.removeAllViews();
+                TableRow tableRow = new TableRow(this); // Новый столбец
+                String str = "";
+                TextView qty; // Новая ячейка
+                TextView empty_cell; // Новая пустая ячейка
+                TextView[] qqty = new TextView[60];
+                TableRow[] tableRows = new TableRow[6];
+                int[] max_razmer = {0,0,0,0,0,0,0};
+                int ff = 0;
+                int fk = 0;
+                r.moveToFirst();
+                mainText.setText(r.getString(10) + " " + r.getString(11));
+                f.moveToFirst();
+                TableRow timeRow = new TableRow(this); // Новый столбец
+                do{
                     qty = new TextView(this); // Новая ячейка
                     qty.setMaxEms(10);
                     qty.setTextSize(14);
-                    qty.setPadding(0,5,5,5);
-                    qty.setTextColor(ContextCompat.getColor(this, R.color.black));
-                    try {
-                        qty.setBackgroundColor(Color.parseColor(r.getString(14)));
-                    }
-                    catch (Exception e){
-                        qty.setBackgroundResource(R.color.gray);
-                    }
+                    qty.setPadding(5,5,5,5);
+                    qty.setTextColor(ContextCompat.getColor(this, R.color.white));
+                    qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
                     qty.setGravity(Gravity.CENTER);
-                }
-                prev_time = r.getString(9);
-                if (r.getString(4) != null){
-                    str += r.getString(4) + "\n";
-                    if (r.getString(5) != null) str += r.getString(5) + "\n";
-                    if (r.getString(6) != null) str += r.getString(6) + "\n";
-                    if (r.getString(7) != null) str += r.getString(7) + "\n";
-                    if (r.getString(8) != null) str += r.getString(8);
-                }
-                if (r.getString(3).equals("0")){
-
-                    tableRow = new TableRow(this); // Новый пустой столбец
+                    qty.setText(f.getString(0));
                     empty_cell = new TextView(this); // Новая пустая ячейка
                     empty_cell.setHeight(1);
-                    tableRow.addView(empty_cell); // Добавление пустой ячейки в столбец
-                    tableLayout.addView(tableRow); // Добавление столбца в таблицу
-                    tableRow = new TableRow(this); // Новый столбец
-                    tableRow.setGravity(Gravity.CENTER_VERTICAL);
-                    str = r.getString(10);
-//                    switch (str) {
-//                        case  ("Понедельник"):
-//                            str = "ПН";
-//                            break;
-//                        case ("Вторник"):
-//                            str = "ВТ";
-//                            break;
-//                        case ("Среда"):
-//                            str = "СР";
-//                            break;
-//                        case  ("Четверг"):
-//                            str = "ЧТ";
-//                            break;
-//                        case ("Пятница"):
-//                            str = "ПТ";
-//                            break;
-//                        case ("Суббота"):
-//                            str = "СБ";
-//                            break;
-//                        default:
-//                            break;
-//                    }
-                    str += "\n" + (r.getString(11));
-                    tableLayout.addView(tableRow); // Добавление столбца в таблицу
-                    tableRows[fk] = tableRow;
-                    fk++;
-                    try {
-                        qty.setBackgroundColor(Color.parseColor(r.getString(14)));
+                    empty_cell.setWidth(1);
+                    timeRow.addView(empty_cell); // Добавление пустой ячейки в столбец
+                    timeRow.addView(qty);
+                }while(f.moveToNext());
+                tableLayout.addView(timeRow);
+                do{
+                    if (Objects.equals(prev_time, r.getString(9))){
+                        str += "\n";
+                        tableRow.removeView(qty);
+                        tableRow.removeView(empty_cell);
                     }
-                    catch (Exception e){
-                        qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
+                    else{
+                        str = "";
+                        qty = new TextView(this); // Новая ячейка
+                        qty.setMaxEms(10);
+                        qty.setTextSize(14);
+                        qty.setPadding(0,5,5,5);
+                        qty.setTextColor(ContextCompat.getColor(this, R.color.black));
+                        try {
+                            qty.setBackgroundColor(Color.parseColor(r.getString(14)));
+                        }
+                        catch (Exception e){
+                            qty.setBackgroundResource(R.color.gray);
+                        }
+                        qty.setGravity(Gravity.CENTER);
                     }
-                    qty.setTextColor(ContextCompat.getColor(this, R.color.white));
-                }
-                qty.setText(str);
-                empty_cell = new TextView(this); // Новая пустая ячейка
-                empty_cell.setHeight(1);
-                empty_cell.setWidth(1);
-                tableRow.addView(empty_cell); // Добавление пустой ячейки в столбец
-                tableRow.addView(qty); // Добавление ячейки в столбец
-                qqty[ff] = qty;
-                ff++;
-            }while(r.moveToNext());
-            tableRow.removeView(qty); // Удаление последней ячейки(хз что за ячейка (мусор какой-то))
-            fk = 0;
-            for (ff = 0; ff < 60; ff++){
-                if ((ff % 10) == 0 & ff != 0) {
-                    fk++;
-                }
-                if (qqty[ff].getText().length() * 4 > max_razmer[fk]){
-                    max_razmer[fk] = (int) (qqty[ff].getText().length() * 4);
-                }
-            }
-            fk = 0;
-            for (ff = 0; ff < 60; ff++){
-                if ((ff % 10) == 0 & ff != 0) {
-                    fk++;
-                }
-                if (max_razmer[fk] < 120){
-                    max_razmer[fk] = 120;
-                }
-                qqty[ff].setMinHeight(max_razmer[fk]);
-            }
+                    prev_time = r.getString(9);
+                    if (r.getString(4) != null){
+                        str += r.getString(4) + "\n";
+                        if (r.getString(5) != null) str += r.getString(5) + "\n";
+                        if (r.getString(6) != null) str += r.getString(6) + "\n";
+                        if (r.getString(7) != null) str += r.getString(7) + "\n";
+                        if (r.getString(8) != null) str += r.getString(8);
+                    }
+                    if (r.getString(3).equals("0")){
 
-            mainText.setText("");
+                        tableRow = new TableRow(this); // Новый пустой столбец
+                        empty_cell = new TextView(this); // Новая пустая ячейка
+                        empty_cell.setHeight(1);
+                        tableRow.addView(empty_cell); // Добавление пустой ячейки в столбец
+                        tableLayout.addView(tableRow); // Добавление столбца в таблицу
+                        tableRow = new TableRow(this); // Новый столбец
+                        tableRow.setGravity(Gravity.CENTER_VERTICAL);
+                        str = r.getString(10);
+                        str += "\n" + (r.getString(11));
+                        tableLayout.addView(tableRow); // Добавление столбца в таблицу
+                        tableRows[fk] = tableRow;
+                        fk++;
+                        try {
+                            qty.setBackgroundColor(Color.parseColor(r.getString(14)));
+                        }
+                        catch (Exception e){
+                            qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
+                        }
+                        qty.setTextColor(ContextCompat.getColor(this, R.color.white));
+                    }
+                    qty.setText(str);
+                    empty_cell = new TextView(this); // Новая пустая ячейка
+                    empty_cell.setHeight(1);
+                    empty_cell.setWidth(1);
+                    tableRow.addView(empty_cell); // Добавление пустой ячейки в столбец
+                    tableRow.addView(qty); // Добавление ячейки в столбец
+                    qqty[ff] = qty;
+                    ff++;
+                }while(r.moveToNext());
+                tableRow.removeView(qty); // Удаление последней ячейки(хз что за ячейка (мусор какой-то))
+                fk = 0;
+                for (ff = 0; ff < 60; ff++){
+                    if ((ff % 10) == 0 & ff != 0) {
+                        fk++;
+                    }
+                    if (qqty[ff].getText().length() * 4 > max_razmer[fk]){
+                        max_razmer[fk] = (int) (qqty[ff].getText().length() * 4);
+                    }
+                }
+                fk = 0;
+                for (ff = 0; ff < 60; ff++){
+                    if ((ff % 10) == 0 & ff != 0) {
+                        fk++;
+                    }
+                    if (max_razmer[fk] < 120){
+                        max_razmer[fk] = 120;
+                    }
+                    qqty[ff].setMinHeight(max_razmer[fk]);
+                }
+
+                mainText.setText("");
+            }
+        }
+        catch (Exception ignored){ // Если недели нет в базе то ...
+            mainText.setText("Вы слишком быстро листаете недели с расписанием...\n обновляю расписание...");
         }
     }
 
@@ -534,8 +537,7 @@ public class raspisanie_show extends Activity {
         if (r.getCount()==0) {// Если даной недели нет в базе
 //            mainText.setText("\uD83E\uDD7A"); // Тут типа грустный смайл
 //            addText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
-        }
-        else{
+        } else {
             String str;
             r.moveToFirst();
             mainText.setText(r.getString(10) + " " + r.getString(11));
