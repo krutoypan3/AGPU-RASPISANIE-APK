@@ -5,12 +5,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.shapes.Shape;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Xml;
+import android.view.Gravity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,9 +34,11 @@ import java.util.concurrent.TimeUnit;
 
 public class raspisanie_show extends Activity {
     ListView para_view;
-    public static TextView mainText;
+    public TextView mainText;
+    public TableLayout tableLayout;
     Context context;
     public static boolean refresh_on_off = false;
+    public static boolean week_day_on_off = false;
     public static boolean refresh_successful = true;
 
     // Вызывается перед выходом из "полноценного" состояния.
@@ -57,9 +62,9 @@ public class raspisanie_show extends Activity {
         context = getApplicationContext();
         mainText = findViewById(R.id.main_text);
         para_view = findViewById(R.id.para_view);
+        tableLayout = findViewById(R.id.table); // Инициализация таблицы
         new refresh_day_show().execute();
         CheckBox mCheckBox = (CheckBox)findViewById(R.id.checkBox);
-        week_show(context);
         Cursor sss = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
         mCheckBox.setChecked(sss.getCount() != 0);
 
@@ -101,15 +106,25 @@ public class raspisanie_show extends Activity {
                 week_day_bt1.setAnimation(MainActivity.animUehalVl);
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
-                MainActivity.week_day -= 1;
-                if (MainActivity.week_day == -1){ // Если будет воскресенье, то будет показана суббота
-                    MainActivity.week_day = 5;
+                if (!week_day_on_off){
+                    MainActivity.week_day -= 1;
+                    if (MainActivity.week_day == -1){ // Если будет воскресенье, то будет показана суббота
+                        MainActivity.week_day = 5;
+                        MainActivity.week_id -= 1;
+                        if(MainActivity.isOnline(raspisanie_show.this)){
+                            new getraspweek().execute("");
+                        }
+                    }
+                    day_show(getApplicationContext());
+
+                }
+                else{
                     MainActivity.week_id -= 1;
                     if(MainActivity.isOnline(raspisanie_show.this)){
                         new getraspweek().execute("");
                     }
+                    week_show(raspisanie_show.this);
                 }
-                day_show(getApplicationContext());
                 week_day_bt1.setClickable(true);
                 week_day_bt2.setClickable(true);
             }
@@ -123,15 +138,24 @@ public class raspisanie_show extends Activity {
                 week_day_bt2.setAnimation(MainActivity.animUehalVp);
                 week_day_bt1.setClickable(false);
                 week_day_bt2.setClickable(false);
-                MainActivity.week_day += 1;
-                if (MainActivity.week_day == 6){ // Если будет воскресенье, то будет показана суббота
-                    MainActivity.week_day = 0;
+                if (!week_day_on_off){
+                    MainActivity.week_day += 1;
+                    if (MainActivity.week_day == 6){ // Если будет воскресенье, то будет показана суббота
+                        MainActivity.week_day = 0;
+                        MainActivity.week_id += 1;
+                        if(MainActivity.isOnline(raspisanie_show.this)){
+                            new getraspweek().execute("");
+                        }
+                    }
+                    day_show(getApplicationContext());
+                }
+                else{
                     MainActivity.week_id += 1;
                     if(MainActivity.isOnline(raspisanie_show.this)){
                         new getraspweek().execute("");
                     }
+                    week_show(raspisanie_show.this);
                 }
-                day_show(getApplicationContext());
                 week_day_bt1.setClickable(true);
                 week_day_bt2.setClickable(true);
             }
@@ -148,6 +172,29 @@ public class raspisanie_show extends Activity {
                 refresh_btn.setBackgroundResource(R.drawable.refresh_1);
                 new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
                 new refresh_day_show().execute();
+            }
+        });
+
+        // Обновить расписание
+        ImageView week_day_change_btn = findViewById(R.id.week_day_change_btn);
+        week_day_change_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!week_day_on_off){
+                    week_day_change_btn.setImageResource(R.drawable.ic_baseline_today_24);
+                    week_day_change_btn.setAnimation(MainActivity.animScale);
+                    week_show(context);
+                    para_view.setVisibility(View.INVISIBLE);
+                    tableLayout.setVisibility(View.VISIBLE);
+                    week_day_on_off = true;
+                }
+                else{
+                    week_day_change_btn.setImageResource(R.drawable.ic_baseline_date_range_24);
+                    week_day_change_btn.setAnimation(MainActivity.animScale);
+                    para_view.setVisibility(View.VISIBLE);
+                    tableLayout.setVisibility(View.INVISIBLE);
+                    week_day_on_off = false;
+                }
             }
         });
 
@@ -284,10 +331,15 @@ public class raspisanie_show extends Activity {
         }
         else{
             String prev_time = "";
-            TableLayout tableLayout = findViewById(R.id.table); // Инициализация таблицы
+            tableLayout.removeAllViews();
             TableRow tableRow = new TableRow(this); // Новый столбец
             String str = "";
             TextView qty; // Новая ячейка
+            TextView[] qqty = new TextView[60];
+            TableRow[] tableRows = new TableRow[6];
+            int[] max_razmer = {0,0,0,0,0,0,0};
+            int ff = 0;
+            int fk = 0;
             r.moveToFirst();
             mainText.setText(r.getString(10) + " " + r.getString(11));
             f.moveToFirst();
@@ -295,10 +347,11 @@ public class raspisanie_show extends Activity {
             do{
                 qty = new TextView(this); // Новая ячейка
                 qty.setMaxEms(10);
+                qty.setTextSize(14);
                 qty.setPadding(5,5,5,5);
                 qty.setTextColor(ContextCompat.getColor(this, R.color.white));
                 qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
-                qty.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                qty.setGravity(Gravity.CENTER);
                 qty.setText(f.getString(0));
                 timeRow.addView(qty);
             }while(f.moveToNext());
@@ -309,13 +362,19 @@ public class raspisanie_show extends Activity {
                     tableRow.removeView(qty);
                 }
                 else{
-                    str = "";
+                    str = "123123123\n";
                     qty = new TextView(this); // Новая ячейка
                     qty.setMaxEms(10);
-                    qty.setPadding(5,5,5,5);
-                    qty.setTextColor(ContextCompat.getColor(this, R.color.white));
-                    qty.setBackgroundResource(R.drawable.table_granitsa);
-                    qty.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    qty.setTextSize(14);
+                    qty.setPadding(0,5,5,5);
+                    qty.setTextColor(ContextCompat.getColor(this, R.color.black));
+                    try {
+                        qty.setBackgroundColor(Color.parseColor(r.getString(14)));
+                    }
+                    catch (Exception e){
+                        qty.setBackgroundResource(R.drawable.table_granitsa);
+                    }
+                    qty.setGravity(Gravity.CENTER);
                 }
                 prev_time = r.getString(9);
                 if (r.getString(4) != null){
@@ -326,15 +385,70 @@ public class raspisanie_show extends Activity {
                     if (r.getString(8) != null) str += r.getString(8);
                 }
                 if (r.getString(3).equals("0")){
+                    qty.setMaxEms(14);
                     tableRow = new TableRow(this); // Новый столбец
+                    tableRow.setGravity(Gravity.CENTER_VERTICAL);
                     str = r.getString(10);
+//                    switch (str) {
+//                        case  ("Понедельник"):
+//                            str = "ПН";
+//                            break;
+//                        case ("Вторник"):
+//                            str = "ВТ";
+//                            break;
+//                        case ("Среда"):
+//                            str = "СР";
+//                            break;
+//                        case  ("Четверг"):
+//                            str = "ЧТ";
+//                            break;
+//                        case ("Пятница"):
+//                            str = "ПТ";
+//                            break;
+//                        case ("Суббота"):
+//                            str = "СБ";
+//                            break;
+//                        default:
+//                            break;
+//                    }
                     str += "\n" + (r.getString(11));
                     tableLayout.addView(tableRow); // Добавление столбца в таблицу
-                    qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
+                    tableRows[fk] = tableRow;
+                    fk++;
+                    try {
+                        qty.setBackgroundColor(Color.parseColor(r.getString(14)));
+                    }
+                    catch (Exception e){
+                        qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
+                    }
+                    qty.setTextColor(ContextCompat.getColor(this, R.color.white));
                 }
                 qty.setText(str);
                 tableRow.addView(qty); // Добавление ячейки в столбец
+                qqty[ff] = qty;
+                ff++;
             }while(r.moveToNext());
+            tableRow.removeView(qty); // Удаление последней ячейки(хз что за ячейка (мусор какой-то))
+            fk = 0;
+            for (ff = 0; ff < 60; ff++){
+                if ((ff % 10) == 0 & ff != 0) {
+                    fk++;
+                }
+                if (qqty[ff].getText().length() * 4 > max_razmer[fk]){
+                    max_razmer[fk] = (int) (qqty[ff].getText().length() * 4);
+                }
+            }
+            fk = 0;
+            for (ff = 0; ff < 60; ff++){
+                if ((ff % 10) == 0 & ff != 0) {
+                    fk++;
+                }
+                if (max_razmer[fk] < 120){
+                    max_razmer[fk] = 120;
+                }
+                qqty[ff].setMinHeight(max_razmer[fk]);
+            }
+
             mainText.setText("");
         }
     }
