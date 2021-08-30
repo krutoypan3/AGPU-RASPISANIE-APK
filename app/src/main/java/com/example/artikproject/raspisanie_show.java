@@ -3,11 +3,13 @@ package com.example.artikproject;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.shapes.Shape;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
@@ -44,6 +47,9 @@ public class raspisanie_show extends Activity {
     public static boolean refresh_on_off = false;
     public static boolean week_day_on_off = false;
     public static boolean refresh_successful = true;
+    public TextView[] qqty;
+    public TableRow[] tableRows;
+    public int table_size = 14;
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -94,18 +100,84 @@ public class raspisanie_show extends Activity {
             }
         });
 
-        // Возврат на главный экран
-        ImageView back_btn = findViewById(R.id.back_btn);
-        back_btn.setOnClickListener(new View.OnClickListener() {
+
+        ImageView week_day_change_btn_size_up = findViewById(R.id.week_day_change_btn_size_up);
+        ImageView week_day_change_btn_size_down = findViewById(R.id.week_day_change_btn_size_down);
+
+        week_day_change_btn_size_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                back_btn.startAnimation(MainActivity.animUehalVl);
-                finish();
+                table_size++;
+                for (int i = 0; i < 60; i++){
+                    qqty[i].setTextSize(table_size);
+                }
+                int fk = 0;
+                int[] max_razmer = {0,0,0,0,0,0,0};
+                for (int ff = 0; ff < 60; ff++){
+                    if ((ff % 10) == 0 & ff != 0) {
+                        fk++;
+                    }
+                    if (qqty[ff].getText().length() * table_size/4 > max_razmer[fk]){
+                        max_razmer[fk] = (int) (qqty[ff].getText().length() * table_size/4);
+                    }
+                }
+                fk = 0;
+                for (int ff = 0; ff < 60; ff++){
+                    if ((ff % 10) == 0 & ff != 0) {
+                        fk++;
+                    }
+                    if (max_razmer[fk] < 120){
+                        max_razmer[fk] = 120;
+                    }
+                    qqty[ff].setMinHeight(max_razmer[fk]);
+                }
+            }
+        });
+        week_day_change_btn_size_down.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                table_size--;
+                for (int i = 0; i < 60; i++){
+                    qqty[i].setTextSize(table_size);
+                }
+                int fk = 0;
+                int[] max_razmer = {0,0,0,0,0,0,0};
+                for (int ff = 0; ff < 60; ff++){
+                    if ((ff % 10) == 0 & ff != 0) {
+                        fk++;
+                    }
+                    if (qqty[ff].getText().length() * table_size/4 > max_razmer[fk]){
+                        max_razmer[fk] = (int) (qqty[ff].getText().length() * table_size/4);
+                    }
+                }
+                fk = 0;
+                for (int ff = 0; ff < 60; ff++){
+                    if ((ff % 10) == 0 & ff != 0) {
+                        fk++;
+                    }
+                    if (max_razmer[fk] < 120){
+                        max_razmer[fk] = 120;
+                    }
+                    qqty[ff].setMinHeight(max_razmer[fk]);
+                }
             }
         });
 
+
         Button week_day_bt1 = findViewById(R.id.week_day_bt1);
         Button week_day_bt2 = findViewById(R.id.week_day_bt2);
+
+        // Функция перехода на сайт с расписанием при нажатии на кнопку
+        Button rasp_site = findViewById(R.id.rasp_site);
+        rasp_site.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rasp_site.setAnimation(MainActivity.animRotate_ok);
+                Intent intent;
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.it-institut.ru/SearchString/Index/118"));
+                startActivity(intent);
+            }
+        });
 
         // Переход к предыдущему дню
         week_day_bt1.setOnClickListener(new View.OnClickListener() {
@@ -245,6 +317,8 @@ public class raspisanie_show extends Activity {
                     tableLayout.setVisibility(View.VISIBLE);
                     week_day_on_off = true;
                     gesture_layout.setVisibility(View.INVISIBLE);
+                    week_day_change_btn_size_up.setVisibility(View.VISIBLE);
+                    week_day_change_btn_size_down.setVisibility(View.VISIBLE);
                 }
                 else{
                     week_day_change_btn.setImageResource(R.drawable.ic_baseline_date_range_24);
@@ -254,6 +328,8 @@ public class raspisanie_show extends Activity {
                     week_day_on_off = false;
                     day_show(context);
                     gesture_layout.setVisibility(View.VISIBLE);
+                    week_day_change_btn_size_up.setVisibility(View.INVISIBLE);
+                    week_day_change_btn_size_down.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -413,8 +489,8 @@ public class raspisanie_show extends Activity {
                 String str = "";
                 TextView qty; // Новая ячейка
                 TextView empty_cell; // Новая пустая ячейка
-                TextView[] qqty = new TextView[60];
-                TableRow[] tableRows = new TableRow[6];
+                qqty = new TextView[60];
+                tableRows = new TableRow[6];
                 int[] max_razmer = {0,0,0,0,0,0,0};
                 int ff = 0;
                 int fk = 0;
@@ -425,7 +501,7 @@ public class raspisanie_show extends Activity {
                 do{
                     qty = new TextView(this); // Новая ячейка
                     qty.setMaxEms(10);
-                    qty.setTextSize(14);
+                    qty.setTextSize(table_size);
                     qty.setPadding(5,5,5,5);
                     qty.setTextColor(ContextCompat.getColor(this, R.color.white));
                     qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
@@ -448,7 +524,7 @@ public class raspisanie_show extends Activity {
                         str = "";
                         qty = new TextView(this); // Новая ячейка
                         qty.setMaxEms(10);
-                        qty.setTextSize(14);
+                        qty.setTextSize(table_size);
                         qty.setPadding(0,5,5,5);
                         qty.setTextColor(ContextCompat.getColor(this, R.color.black));
                         try {

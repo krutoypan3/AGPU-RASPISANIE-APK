@@ -102,8 +102,14 @@ public class MainActivity extends AppCompatActivity {
 
         // Получение актуального текущего времени
         Date date1 = new Date();
-        long date_ms = date1.getTime() + 10800000;
-        week_id = (int) ((date_ms - 18489514000f) / 1000f / 60f / 60f / 24f / 7f); // Номер текущей недели
+
+        int rasnitsa_v_nedelyah = 223; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
+        // недели с сайта расписания и того, что получается в week_id без "rasnitsa_v_nedelyah"
+        // КАЖДЫЙ ГОД ЭТО число изменяется!!! Для 2021 это число "223"
+
+        long date_ms = date1.getTime() + 10800000; // 1080000 это + 3 часа ко дню (чтобы в 9-10 вечера было показано расписание на завтра)
+        week_id = (int) (date_ms / 1000f / 60f / 60f / 24f / 7f + rasnitsa_v_nedelyah); // Номер текущей недели
+        System.out.println(week_id);
         Date date2 = new Date(date_ms); // дня недели и
         week_day = date2.getDay() - 1;
         if (week_day == -1){ // Если будет воскресенье, то будет показан понедельник

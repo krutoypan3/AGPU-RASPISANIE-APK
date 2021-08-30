@@ -5,7 +5,7 @@
     android:id="@+id/raspisanie_show"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="@drawable/background"
     tools:context=".raspisanie_show">
 
     <TextView
@@ -21,6 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/logow"
         android:layout_marginTop="-5dp"
+        android:textColor="@color/shelk"
+        android:textColorLink="@color/nefrit"
         android:text="Уведомлять об изменениях" />
 
     <Button
@@ -32,31 +34,41 @@
         android:layout_below="@id/logow"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="-50dp"
-        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/refresh_btn"
+        android:textColor="@color/shelk"
         android:text="Вперед" />
 
     <Button
         android:id="@+id/week_day_bt1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@id/logow"
         android:layout_alignParentStart="true"
         android:layout_marginTop="-50dp"
-        android:layout_marginEnd="10dp"
-        android:layout_toStartOf="@+id/refresh_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/week_day_change_btn"
+        android:textColor="@color/shelk"
         android:background="@drawable/small_button"
         android:text="Назад"
         android:theme="@style/Theme.MyApp.Main" />
 
+    <Button
+        android:id="@+id/rasp_site"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/raspisanie_site">
+    </Button>
 
     <ImageView
         android:id="@+id/refresh_btn"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        android:layout_below="@id/logow"
-        android:layout_marginTop="-50dp"
+        android:layout_marginEnd="17dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="-50dp"
+        android:layout_below="@id/logow"
+        android:layout_toEndOf="@id/rasp_site"
         android:background="@drawable/refresh_0"
         android:src="@drawable/refresh_ico"
         android:theme="@style/Theme.MyApp.Main" />
@@ -65,22 +77,27 @@
         android:id="@+id/refresh_btn_all"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:layout_marginEnd="17dp"
         android:layout_below="@id/logow"
+        android:layout_toEndOf="@id/rasp_site"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="-50dp"
         android:theme="@style/Theme.MyApp.Main"
         android:visibility="invisible" />
 
+
+
     <TextView
-        android:textColor="@color/white"
-        android:textAlignment="center"
         android:id="@+id/main_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox"
-        android:text="расписание обновляется..."
-        android:textSize="25sp" />
+        android:layout_marginTop="-2dp"
 
+        android:text="Для обновления расписания нажмите на кнопку выше"
+        android:textAlignment="center"
+        android:textColor="@color/shelk"
+        android:textSize="25sp" />
 
     <HorizontalScrollView
         android:layout_width="fill_parent"
@@ -124,7 +141,6 @@
     <ListView
         android:id="@+id/para_view"
         android:layout_width="match_parent"
-        android:background="@drawable/list_view"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_text"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -134,28 +150,42 @@
 
 
     <ImageView
-        android:id="@+id/back_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:background="@drawable/small_button"
-        android:src="@drawable/ic_baseline_arrow_back_24"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:theme="@style/Theme.MyApp.Main" />
-
-    <ImageView
         android:id="@+id/week_day_change_btn"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:layout_marginStart="17dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="-50dp"
+        android:layout_below="@id/logow"
+        android:layout_toStartOf="@id/rasp_site"
+        android:src="@drawable/calendar_2"
+        android:theme="@style/Theme.MyApp.Main" />
+
+    <ImageView
+        android:id="@+id/week_day_change_btn_size_up"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@drawable/refresh_1"
+        android:layout_toEndOf="@id/week_day_change_btn"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
-        android:src="@drawable/ic_baseline_date_range_24"
-        android:theme="@style/Theme.MyApp.Main" />
+        android:background="@drawable/refresh_2"
+        android:src="@drawable/ic_baseline_add_circle_24"
+        android:theme="@style/Theme.MyApp.Main"
+        android:visibility="invisible"/>
+
+    <ImageView
+        android:id="@+id/week_day_change_btn_size_down"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@id/week_day_change_btn_size_up"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/refresh_2"
+        android:src="@drawable/ic_baseline_remove_circle_outline_24"
+        android:theme="@style/Theme.MyApp.Main"
+        android:visibility="invisible"/>
 
 
 </RelativeLayout>
