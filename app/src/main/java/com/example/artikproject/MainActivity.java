@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         // Получение актуального текущего времени
         Date date1 = new Date();
 
-        int rasnitsa_v_nedelyah = 223; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
+        int rasnitsa_v_nedelyah = 222; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
         // недели с сайта расписания и того, что получается в week_id без "rasnitsa_v_nedelyah"
         // КАЖДЫЙ ГОД ЭТО число изменяется!!! Для 2021 это число "223"
 
