@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -258,6 +259,114 @@ public class MainActivity extends AppCompatActivity {
                 Error.show();
             }
         });
+
+                // Выбор режима (поиск пар\аудиторий)
+        String[] countries = {"Расписание", "Аудитории и корпуса"};
+
+        Spinner spinner = (Spinner) findViewById(R.id.vibor_rezhima);
+        // Создаем адаптер ArrayAdapter с помощью массива строк и стандартной разметки элемета spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countries);
+        // Определяем разметку для использования при выборе элемента
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Применяем адаптер к элементу spinner
+        spinner.setAdapter(adapter);
+
+        ListView listview_aud = findViewById(R.id.listview_aud);
+        // Отслеживание нажатий на элемент в списке(группа\ауд\препод)
+        listview_aud.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+            {
+                Intent intent;
+                switch (position) {
+                    case (1):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/eQo5R9LdnCprwCvs6"));
+                        break;
+                    case (2):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/KwDaKEg3w69a5xuy5"));
+                        break;
+                    case (3):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/rtrpMGCP5t3E1FDU8"));
+                        break;
+                    case (4):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/DhAqdFucRB5RgF8H6"));
+                        break;
+                    case (5):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/m1Ddk1RmebQ9CK5P9"));
+                        break;
+                    case (6):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/4fBCRhZPJbc7z4Ng6"));
+                        break;
+                    default:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/8Lv4W8uds3cFAeW36")); // 0 нулевое
+                        break;
+                }
+                startActivity(intent);
+            }
+        });
+
+        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // Получаем выбранный объект
+                String item = (String)parent.getItemAtPosition(position);
+
+                // Здесь мы изменяем на то, что нам нужно))
+                switch (item) {
+                    case  ("Расписание"):
+                        listview.setVisibility(View.VISIBLE);
+                        delete_btn.setVisibility(View.VISIBLE);
+                        main_button.setVisibility(View.VISIBLE);
+                        rasp_search_edit.setVisibility(View.VISIBLE);
+                        listview_aud.setVisibility(View.INVISIBLE);
+                        favorite.setVisibility(View.VISIBLE);
+                        favorite_card.setVisibility(View.VISIBLE);
+                        subtitle.setVisibility(View.VISIBLE);
+                        break;
+                    case ("Аудитории и корпуса"):
+                        listview.setVisibility(View.INVISIBLE);
+                        delete_btn.setVisibility(View.INVISIBLE);
+                        main_button.setVisibility(View.INVISIBLE);
+                        rasp_search_edit.setVisibility(View.INVISIBLE);
+                        listview_aud.setVisibility(View.VISIBLE);
+                        favorite.setVisibility(View.INVISIBLE);
+                        favorite_card.setVisibility(View.INVISIBLE);
+                        subtitle.setVisibility(View.INVISIBLE);
+                        List<String> group_list_aud = new ArrayList<>();
+                        group_list_aud.add("Главный корпус  по ул. Р. Люксембург, 159\n" +
+                                "Аудитории: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14а," +
+                                " 15, 15а, 16, 17, 18,  21, 22, 23\n");
+                        group_list_aud.add("Корпус по ул. Кирова 50 (Заочка)\n" +
+                                "Аудитории: 24, 25, 26, 27, 28\n");
+                        group_list_aud.add("Корпус по ул. Ленина, 79  (СПФ)\n" +
+                                "Аудитории: 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50\n");
+                        group_list_aud.add("Корпус по ул. Ефремова, 35 (ЕБД)\n" +
+                                "Аудитории: 80, 81, 82, 82а, 83, 84\n");
+                        group_list_aud.add("Корпус по ул. П. Осипенко, 83 (ФОК)\n" +
+                                "Аудитории: 85, 85а, 86\n");
+                        group_list_aud.add("Корпус по ул. П. Комсомольская, 93 (ФТЭиД\\ТЕХФАК)\n" +
+                                "Аудитории: 51, 52, 53, 57, 58 а, 58 б, 59, 60, 61, 62, 63, 64," +
+                                " 65, 66, 67, 68\n");
+                        group_list_aud.add("Корпус по ул. К. Маркса, 49 (Общежитие 1)\n" +
+                                "Аудитории: 30, 31, 32, 33, 34, 35, 36, 37, 38, ЛК-1 – ЛК-6, 101," +
+                                " 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113," +
+                                " 114, 115, 116, 117, 118, 119, 120, 121");
+                        String[] group_listed_aud;
+                        group_listed_aud = group_list_aud.toArray(new String[0]);
+                        ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed_aud);
+                        listview_aud.setAdapter(adapter);
+                        listview_aud.setVisibility(View.VISIBLE);
+                        listview_aud.setBackgroundResource(R.drawable.list_view_favorite);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        };
+        spinner.setOnItemSelectedListener(itemSelectedListener);
+
     }
     public void see_group_rasp(){ // Вывод ранее открываемых групп
         Cursor r;

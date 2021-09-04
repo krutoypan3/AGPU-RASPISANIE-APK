@@ -45,7 +45,7 @@ public class raspisanie_show extends Activity {
     public TableLayout tableLayout;
     Context context;
     public static boolean refresh_on_off = false;
-    public static boolean week_day_on_off = false;
+    private static boolean week_day_on_off = false;
     public static boolean refresh_successful = true;
     public TextView[] qqty;
     public TableRow[] tableRows;
@@ -57,6 +57,7 @@ public class raspisanie_show extends Activity {
         // Очистите все ресурсы. Это касается завершения работы
         // потоков, закрытия соединений с базой данных и т. д.
         super.onDestroy();
+        week_day_on_off = false;
     }
 
     @Override

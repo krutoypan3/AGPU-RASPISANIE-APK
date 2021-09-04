@@ -22,12 +22,23 @@
         android:textColorHint="#C89595"
         android:textColorLink="#FF6565"
         android:textSize="24sp" />
+    <Spinner
+        android:id="@+id/vibor_rezhima"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="50dp"
+        android:textSize="24sp"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="match_parent"
         android:textAlignment="center"
-        android:layout_marginTop="-40sp"
+        android:layout_marginTop="-20sp"
         android:layout_below="@id/logow"
         android:textColor="@color/arkt_iva"
         android:layout_height="wrap_content"
@@ -74,15 +85,29 @@
         android:textColorHint="#C89595"
         android:textColorLink="#FF6565"
         android:textSize="24sp" />
-
+o9
     <ListView
         android:layout_marginTop="5sp"
         android:textSize="24sp"
-        android:theme="@style/Theme.MyApp.Main"
+        android:theme="@style/Theme.Design.Light"
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </ListView>
+    <ListView
+        android:layout_marginTop="-135sp"
+        android:visibility="invisible"
+        android:textSize="24sp"
+        android:theme="@style/Theme.Design.Light"
+        android:id="@+id/listview_aud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_button"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 

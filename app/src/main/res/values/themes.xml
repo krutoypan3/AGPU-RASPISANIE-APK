@@ -17,8 +17,8 @@
         <!--Base colors-->
         <item name="colorPrimary">@color/coal</item>
         <item name="colorPrimaryVariant">@color/gray</item>
-        <item name="colorSecondary">@color/design_default_color_on_secondary</item>
-        <item name="colorOnPrimary">@color/cardview_light_background</item>
+        <item name="colorSecondary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnError">@color/gold</item>
         <item name="android:textColorPrimary">#333333</item>
         <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
