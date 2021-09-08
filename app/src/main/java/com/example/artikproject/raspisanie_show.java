@@ -79,7 +79,7 @@ public class raspisanie_show extends Activity {
         ConstraintLayout gesture_layout = findViewById(R.id.raspisanie_day); // Слой для отслеживания жестов
         RelativeLayout raspisanie_show_layout = findViewById(R.id.raspisanie_show); // Основной слой
         new refresh_day_show().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-        CheckBox mCheckBox = (CheckBox)findViewById(R.id.checkBox);
+        CheckBox mCheckBox = (CheckBox)findViewById(R.id.checkBox); // Уведомление об обновлении расписания
         Cursor sss = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
         mCheckBox.setChecked(sss.getCount() != 0);
 
@@ -105,6 +105,7 @@ public class raspisanie_show extends Activity {
         ImageView week_day_change_btn_size_up = findViewById(R.id.week_day_change_btn_size_up);
         ImageView week_day_change_btn_size_down = findViewById(R.id.week_day_change_btn_size_down);
 
+        // Кнопка увеличивающая размер текста в режиме недели
         week_day_change_btn_size_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +135,8 @@ public class raspisanie_show extends Activity {
                 }
             }
         });
+
+        // Кнопка уменьшающая размер текста в режиме недели
         week_day_change_btn_size_down.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
