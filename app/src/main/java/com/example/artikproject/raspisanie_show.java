@@ -482,11 +482,7 @@ public class raspisanie_show extends Activity {
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
 
-            if (r.getCount()==0) {// Если даной недели нет в базе
-    //            mainText.setText("\uD83E\uDD7A"); // Тут типа грустный смайл
-    //            addText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
-            }
-            else{
+            if (r.getCount()!=0) {
                 String prev_time = "";
                 tableLayout.removeAllViews();
                 TableRow tableRow = new TableRow(this); // Новый столбец
@@ -545,7 +541,8 @@ public class raspisanie_show extends Activity {
                         if (r.getString(5) != null) str += r.getString(5) + "\n";
                         if (r.getString(6) != null) str += r.getString(6) + "\n";
                         if (r.getString(7) != null) str += r.getString(7) + "\n";
-                        if (r.getString(8) != null) str += r.getString(8);
+                        if (r.getString(8) != null) str += r.getString(8) + "\n";
+                        if (r.getString(15) != null) str += r.getString(15) + "\n";
                     }
                     if (r.getString(3).equals("0")){
 
@@ -629,7 +626,8 @@ public class raspisanie_show extends Activity {
                     if (r.getString(5) != null) str += r.getString(5) + "\n";
                     if (r.getString(6) != null) str += r.getString(6) + "\n";
                     if (r.getString(7) != null) str += r.getString(7) + "\n";
-                    if (r.getString(8) != null) str += r.getString(8);
+                    if (r.getString(8) != null) str += r.getString(8) + "\n";
+                    if (r.getString(15) != null) str += r.getString(15) + "\n";
                     group_list.add(str);
                 }
             }while(r.moveToNext());

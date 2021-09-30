@@ -29,7 +29,8 @@ public class DataBase extends SQLiteOpenHelper {
                 "\t\"r_week_day_date\"\tTEXT,\n" +
                 "\t\"r_search_type\"\tTEXT,\n" +
                 "\t\"r_last_update\"\tNUMERIC,\n" +
-                "\t\"r_color\"\ttTEXT\n" +
+                "\t\"r_color\"\tTEXT,\n" +
+                "\t\"r_distant\"\tTEXT\n" +
                 ")");
         sqLiteDatabase.execSQL("CREATE TABLE \"rasp_update\" (\n" +
                 "\t\"r_group_code\"\tINTEGER,\n" +

@@ -82,6 +82,7 @@ class GetRasp extends AsyncTask<String, String, String> {
                     String predmet_aud = null;
                     String predmet_razmer = null;
                     String predmet_color = null;
+                    String predmet_distant = null;
                     try {
                         predmet_razmer = day[i][j].split("\"")[1];
                         predmet_name = day[i][j].split("<span>")[1].split("</span>")[0];
@@ -93,6 +94,11 @@ class GetRasp extends AsyncTask<String, String, String> {
                     }
                     try {
                         predmet_color = day[i][j].split("style=\"background-color:")[1].split("\">")[0];
+                    }
+                    catch (Exception ignored){
+                    }
+                    try {
+                        predmet_distant = day[i][j].split("</div>")[2].split("</td>")[0];
                     }
                     catch (Exception ignored){
                     }
@@ -136,6 +142,7 @@ class GetRasp extends AsyncTask<String, String, String> {
                         rowValues.put("r_search_type", r_selectedItem_type);
                         rowValues.put("r_last_update", new Date().getTime());
                         rowValues.put("r_color", predmet_color);
+                        rowValues.put("r_distant", predmet_distant);
                         sqLiteDatabaseS.insert("rasp_test1", null, rowValues); // Вставка строки в базу данных
                     }
                     else if (!start_activity){
@@ -146,9 +153,11 @@ class GetRasp extends AsyncTask<String, String, String> {
                         String predmet_podgroup_db = r.getString(7);
                         String predmet_aud_db = r.getString(8);
                         String predmet_time_db = r.getString(9);
+                        String predmet_distant_db = r.getString(15);
 
 
                         if (!(Objects.equals(predmet_name,predmet_name_db)) | !(Objects.equals(predmet_prepod, predmet_prepod_db)) |
+                                !(Objects.equals(predmet_distant, predmet_distant_db))|
                                 !(Objects.equals(predmet_group, predmet_group_db)) | !(Objects.equals(predmet_podgroup, predmet_podgroup_db)) |
                                 !(Objects.equals(predmet_aud, predmet_aud_db)) | !(Objects.equals(predmet_time, predmet_time_db))){
                             sqLiteDatabaseS.delete("rasp_test1", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
@@ -168,6 +177,7 @@ class GetRasp extends AsyncTask<String, String, String> {
                             rowValues.put("r_search_type", r_selectedItem_type);
                             rowValues.put("r_last_update", new Date().getTime());
                             rowValues.put("r_color", predmet_color);
+                            rowValues.put("r_distant", predmet_distant);
                             sqLiteDatabaseS.insert("rasp_test1", null, rowValues);
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 new addNotification(context, r_selectedItem + " новое расписание!", "Расписание обновилось, скорее проверьте!");
