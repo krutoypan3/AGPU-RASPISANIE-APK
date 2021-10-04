@@ -6,30 +6,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.shapes.Shape;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Xml;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
@@ -50,6 +43,10 @@ public class raspisanie_show extends Activity {
     public TextView[] qqty;
     public TableRow[] tableRows;
     public int table_size = 14;
+    Button week_day_bt1;
+    Button week_day_bt2;
+    ImageView refresh_btn;
+    ImageView refresh_btn_ficha;
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -74,8 +71,8 @@ public class raspisanie_show extends Activity {
         mainText = findViewById(R.id.main_text);
         para_view = findViewById(R.id.para_view);
         tableLayout = findViewById(R.id.table); // Инициализация таблицы
-        ImageView refresh_btn_all = findViewById(R.id.refresh_btn_all); // Кнопка перекручивания расп (фича)
-        ImageView refresh_btn = findViewById(R.id.refresh_btn); // Кнопка обновления расписания
+        refresh_btn_ficha = findViewById(R.id.refresh_btn_all); // Кнопка перекручивания расп (фича)
+        refresh_btn = findViewById(R.id.refresh_btn); // Кнопка обновления расписания
         ConstraintLayout gesture_layout = findViewById(R.id.raspisanie_day); // Слой для отслеживания жестов
         RelativeLayout raspisanie_show_layout = findViewById(R.id.raspisanie_show); // Основной слой
         new refresh_day_show().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -168,8 +165,8 @@ public class raspisanie_show extends Activity {
         });
 
 
-        Button week_day_bt1 = findViewById(R.id.week_day_bt1);
-        Button week_day_bt2 = findViewById(R.id.week_day_bt2);
+        week_day_bt1 = findViewById(R.id.week_day_bt1);
+        week_day_bt2 = findViewById(R.id.week_day_bt2);
 
         // Функция перехода на сайт с расписанием при нажатии на кнопку
         Button rasp_site = findViewById(R.id.rasp_site);
@@ -187,77 +184,15 @@ public class raspisanie_show extends Activity {
         week_day_bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                week_day_bt1.setAnimation(MainActivity.animUehalVl);
-                week_day_bt1.setClickable(false);
-                week_day_bt2.setClickable(false);
-                if (!week_day_on_off){
-                    MainActivity.week_day -= 1;
-                    if (MainActivity.week_day == -1){ // Если будет воскресенье, то будет показана суббота
-                        MainActivity.week_day = 5;
-                        MainActivity.week_id -= 1;
-                        if(MainActivity.isOnline(raspisanie_show.this)){
-                            new getraspweek().execute("");
-                        }
-                    }
-                    week_day_bt1.setClickable(true);
-                    week_day_bt2.setClickable(true);
-                    day_show(getApplicationContext());
-
-                }
-                else{
-                    MainActivity.week_id -= 1;
-                    if(MainActivity.isOnline(raspisanie_show.this)){
-                        new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
-                    }
-                    week_show(raspisanie_show.this);
-                    refresh_btn.setClickable(false);
-                    week_day_bt1.setClickable(false);
-                    week_day_bt2.setClickable(false);
-                    refresh_on_off = true;
-                    refresh_btn_all.setVisibility(View.VISIBLE);
-                    refresh_btn.startAnimation(MainActivity.animRotate);
-                    refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-                    new refresh_day_show().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                }
+                swipe_day("Left");
             }
-
         });
 
         // Переход к следующему дню
         week_day_bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                week_day_bt2.setAnimation(MainActivity.animUehalVp);
-                week_day_bt1.setClickable(false);
-                week_day_bt2.setClickable(false);
-                if (!week_day_on_off){
-                    MainActivity.week_day += 1;
-                    if (MainActivity.week_day == 6){ // Если будет воскресенье, то будет показана суббота
-                        MainActivity.week_day = 0;
-                        MainActivity.week_id += 1;
-                        if(MainActivity.isOnline(raspisanie_show.this)){
-                            new getraspweek().execute("");
-                        }
-                    }
-                    week_day_bt1.setClickable(true);
-                    week_day_bt2.setClickable(true);
-                    day_show(getApplicationContext());
-                }
-                else{
-                    MainActivity.week_id += 1;
-                    if(MainActivity.isOnline(raspisanie_show.this)){
-                        new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
-                    }
-                    refresh_btn.setClickable(false);
-                    week_day_bt1.setClickable(false);
-                    week_day_bt2.setClickable(false);
-                    refresh_on_off = true;
-                    refresh_btn_all.setVisibility(View.VISIBLE);
-                    refresh_btn.startAnimation(MainActivity.animRotate);
-                    refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-                    new refresh_day_show().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                    week_show(raspisanie_show.this);
-                }
+                swipe_day("Right");
             }
         });
 
@@ -265,44 +200,18 @@ public class raspisanie_show extends Activity {
         refresh_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!week_day_on_off){
-                    refresh_btn.setClickable(false);
-                    refresh_on_off = true;
-                    refresh_btn_all.setVisibility(View.VISIBLE);
-                    refresh_btn.startAnimation(MainActivity.animRotate);
-                    refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-                    new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
-                    new refresh_day_show().execute();
-
-                }
-                else{
-                    refresh_btn_all.setVisibility(View.VISIBLE);
-                    refresh_btn.setClickable(false);
-                    refresh_on_off = true;
-                    refresh_btn.startAnimation(MainActivity.animRotate);
-                    refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-                    new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
-                    new refresh_day_show().execute();
-                }
+                swipe_day("Bottom");
             }
         });
-        refresh_btn_all.setOnClickListener(new View.OnClickListener() {
+        refresh_btn_ficha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int random_int = new Random().nextInt(3);
                 switch (random_int){
-                    case 0:
-                        raspisanie_show_layout.startAnimation(MainActivity.animRotate_ok);
-                        break;
-                    case 1:
-                        raspisanie_show_layout.startAnimation(MainActivity.animScale);
-                        break;
-                    case 2:
-                        raspisanie_show_layout.startAnimation(MainActivity.animUehalVl);
-                        break;
-                    case 3:
-                        raspisanie_show_layout.startAnimation(MainActivity.animUehalVp);
-                        break;
+                    case 0: raspisanie_show_layout.startAnimation(MainActivity.animRotate_ok); break;
+                    case 1: raspisanie_show_layout.startAnimation(MainActivity.animScale); break;
+                    case 2: raspisanie_show_layout.startAnimation(MainActivity.animUehalVl); break;
+                    case 3: raspisanie_show_layout.startAnimation(MainActivity.animUehalVp); break;
                 }
 
             }
@@ -341,91 +250,76 @@ public class raspisanie_show extends Activity {
         // отслеживание жестов
         ListView para_view = findViewById(R.id.para_view);
         para_view.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
-            public void onSwipeRight() {
-                week_day_bt1.setAnimation(MainActivity.animUehalVl);
-                week_day_bt1.setClickable(false);
-                week_day_bt2.setClickable(false);
-                MainActivity.week_day -= 1;
-                if (MainActivity.week_day == -1){ // Если будет воскресенье, то будет показана суббота
-                    MainActivity.week_day = 5;
-                    MainActivity.week_id -= 1;
-                    if(MainActivity.isOnline(raspisanie_show.this)){
-                        new getraspweek().execute("");
-                    }
-                }
-                day_show(getApplicationContext());
-                week_day_bt1.setClickable(true);
-                week_day_bt2.setClickable(true);
-            }
-            public void onSwipeLeft() {
-                week_day_bt2.setAnimation(MainActivity.animUehalVp);
-                week_day_bt1.setClickable(false);
-                week_day_bt2.setClickable(false);
-                MainActivity.week_day += 1;
-                if (MainActivity.week_day == 6){ // Если будет воскресенье, то будет показана суббота
-                    MainActivity.week_day = 0;
-                    MainActivity.week_id += 1;
-                    if(MainActivity.isOnline(raspisanie_show.this)){
-                        new getraspweek().execute("");
-                    }
-                }
-                day_show(getApplicationContext());
-                week_day_bt1.setClickable(true);
-                week_day_bt2.setClickable(true);
-            }
+            public void onSwipeRight() { swipe_day("Left"); }
+            public void onSwipeLeft() { swipe_day("Right"); }
         });
 
 
         // отслеживание жестов
         gesture_layout.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
-            public void onSwipeRight() {
-                if (!week_day_on_off){
-                    week_day_bt1.setAnimation(MainActivity.animUehalVl);
-                    week_day_bt1.setClickable(false);
-                    week_day_bt2.setClickable(false);
-                    MainActivity.week_day -= 1;
-                    if (MainActivity.week_day == -1){ // Если будет воскресенье, то будет показана суббота
-                        MainActivity.week_day = 5;
-                        MainActivity.week_id -= 1;
-                        if(MainActivity.isOnline(raspisanie_show.this)){
-                            new getraspweek().execute("");
-                        }
-                    }
-                    day_show(getApplicationContext());
-                    week_day_bt1.setClickable(true);
-                    week_day_bt2.setClickable(true);
-                }
-            }
-            public void onSwipeLeft() {
-                if (!week_day_on_off){
-                    week_day_bt2.setAnimation(MainActivity.animUehalVp);
-                    week_day_bt1.setClickable(false);
-                    week_day_bt2.setClickable(false);
-                    MainActivity.week_day += 1;
-                    if (MainActivity.week_day == 6){ // Если будет воскресенье, то будет показана суббота
-                        MainActivity.week_day = 0;
-                        MainActivity.week_id += 1;
-                        if(MainActivity.isOnline(raspisanie_show.this)){
-                            new getraspweek().execute("");
-                        }
-                    }
-                    day_show(getApplicationContext());
-                    week_day_bt1.setClickable(true);
-                    week_day_bt2.setClickable(true);
-                }
-            }
-            public void onSwipeBottom(){
-                if (!refresh_on_off) {
-                    refresh_btn.setClickable(false);
-                    refresh_on_off = true;
-                    refresh_btn.startAnimation(MainActivity.animRotate);
-                    refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-                    new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
-                    new refresh_day_show().execute();
-                }
-            }
+            public void onSwipeRight() { swipe_day("Left"); }
+            public void onSwipeLeft() { swipe_day("Right"); }
+            public void onSwipeBottom(){ swipe_day("Bottom"); }
         });
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public void swipe_day(String direction){
+        week_day_bt1.setClickable(false);
+        week_day_bt2.setClickable(false);
+        if (!week_day_on_off) {
+            switch (direction) {
+                case "Left":
+                    week_day_bt1.setAnimation(MainActivity.animUehalVl);
+                    MainActivity.week_day -= 1;
+                    if (MainActivity.week_day == -1) { // Если будет воскресенье, то будет показана суббота
+                        MainActivity.week_day = 5;
+                        MainActivity.week_id -= 1;
+                    }
+                    break;
+                case "Right":
+                    week_day_bt2.setAnimation(MainActivity.animUehalVp);
+                    MainActivity.week_day += 1;
+                    if (MainActivity.week_day == 6) { // Если будет воскресенье, то будет показана суббота
+                        MainActivity.week_day = 0;
+                        MainActivity.week_id += 1;
+                    }
+                    break;
+                case "Bottom":
+                    if (!refresh_on_off) {
+                        refresh_btn.setClickable(false);
+                        refresh_on_off = true;
+                        refresh_btn.startAnimation(MainActivity.animRotate);
+                        refresh_btn.setBackgroundResource(R.drawable.refresh_1);
+                        new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
+                        new refresh_day_show().execute();
+                    }
+                    break;
+            }
+            if (MainActivity.isOnline(raspisanie_show.this)) {
+                new getraspweek().execute("");
+            }
+            day_show(getApplicationContext());
+            week_day_bt1.setClickable(true);
+            week_day_bt2.setClickable(true);
+        } else{
+            refresh_on_off = true;
+            refresh_btn.setClickable(false);
+            refresh_btn_ficha.setVisibility(View.VISIBLE);
+            refresh_btn.startAnimation(MainActivity.animRotate);
+            refresh_btn.setBackgroundResource(R.drawable.refresh_1);
+            switch (direction){
+                case "Left": MainActivity.week_id -= 1; break;
+                case "Right": MainActivity.week_id += 1; break;
+            }
+            if(MainActivity.isOnline(raspisanie_show.this)){
+                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
+            }
+            new refresh_day_show().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            week_show(raspisanie_show.this);
+        }
+    }
+
 
     class refresh_day_show extends AsyncTask<String, String, String> {
 
@@ -435,7 +329,7 @@ public class raspisanie_show extends Activity {
                 try {
                   TimeUnit.MILLISECONDS.sleep(500);
                 } catch (InterruptedException e) {
-                  e.printStackTrace();
+                  System.out.println("Ошибка в классе refresh_day_show (doInBackground)");
                 }
             }
             runOnUiThread(new Runnable() {
@@ -443,26 +337,13 @@ public class raspisanie_show extends Activity {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
                 public void run() {
-
-                    ImageView refresh_btn = findViewById(R.id.refresh_btn);
-                    ImageView refresh_btn_all = findViewById(R.id.refresh_btn_all);
-                    if (!week_day_on_off){
-                        day_show(context);
-                    }
-                    else{
-                        week_show(context);
-                    }
-                    if (refresh_successful) {
-                        refresh_btn.setBackgroundResource(R.drawable.refresh_2);
-                    }
-                    else{
-                        refresh_btn.setBackgroundResource(R.drawable.refresh_0);
-                    }
+                    if (!week_day_on_off) { day_show(context); }
+                    else{ week_show(context); }
+                    if (refresh_successful) { refresh_btn.setBackgroundResource(R.drawable.refresh_2); }
+                    else{ refresh_btn.setBackgroundResource(R.drawable.refresh_0); }
                     refresh_btn.setClickable(true);
-                    refresh_btn_all.setVisibility(View.INVISIBLE);
+                    refresh_btn_ficha.setVisibility(View.INVISIBLE);
                     refresh_btn.startAnimation(MainActivity.animRotate_ok);
-                    Button week_day_bt1 = findViewById(R.id.week_day_bt1);
-                    Button week_day_bt2 = findViewById(R.id.week_day_bt2);
                     week_day_bt1.setClickable(true);
                     week_day_bt2.setClickable(true);
                 }
@@ -611,10 +492,7 @@ public class raspisanie_show extends Activity {
                 "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                 "r_week_number = " + MainActivity.week_id + " AND " +
                 "r_week_day = " + MainActivity.week_day + " ORDER BY r_para_number", null);
-        if (r.getCount()==0) {// Если даной недели нет в базе
-//            mainText.setText("\uD83E\uDD7A"); // Тут типа грустный смайл
-//            addText.setText("Для просмотра текущего дня необходимо подключение к интернету...");
-        } else {
+        if (r.getCount()!=0) {
             String str;
             r.moveToFirst();
             mainText.setText(r.getString(10) + " " + r.getString(11));
@@ -635,5 +513,4 @@ public class raspisanie_show extends Activity {
         ArrayAdapter<String> adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, group_list);
         para_view.setAdapter(adapter);
     }
-
  }

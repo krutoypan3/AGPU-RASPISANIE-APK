@@ -318,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         ListView listview_aud = findViewById(R.id.listview_aud);
-        // Отслеживание нажатий на элемент в списке(группа\ауд\препод)
+        // Отслеживание нажатий на элемент в списке(ауд)
         listview_aud.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
