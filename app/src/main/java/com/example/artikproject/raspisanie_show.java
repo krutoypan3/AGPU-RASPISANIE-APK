@@ -58,9 +58,7 @@ public class raspisanie_show extends Activity {
     }
 
     @Override
-    public void finish(){
-        super.finish();
-    }
+    public void finish(){ super.finish(); }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -98,7 +96,6 @@ public class raspisanie_show extends Activity {
             }
         });
 
-
         ImageView week_day_change_btn_size_up = findViewById(R.id.week_day_change_btn_size_up);
         ImageView week_day_change_btn_size_down = findViewById(R.id.week_day_change_btn_size_down);
 
@@ -107,27 +104,19 @@ public class raspisanie_show extends Activity {
             @Override
             public void onClick(View v) {
                 table_size++;
-                for (int i = 0; i < 60; i++){
-                    qqty[i].setTextSize(table_size);
-                }
+                for (int i = 0; i < 60; i++){ qqty[i].setTextSize(table_size); }
                 int fk = 0;
                 int[] max_razmer = {0,0,0,0,0,0,0};
                 for (int ff = 0; ff < 60; ff++){
-                    if ((ff % 10) == 0 & ff != 0) {
-                        fk++;
-                    }
+                    if ((ff % 10) == 0 & ff != 0) { fk++; }
                     if (qqty[ff].getText().length() * table_size/4 > max_razmer[fk]){
                         max_razmer[fk] = (int) (qqty[ff].getText().length() * table_size/4);
                     }
                 }
                 fk = 0;
                 for (int ff = 0; ff < 60; ff++){
-                    if ((ff % 10) == 0 & ff != 0) {
-                        fk++;
-                    }
-                    if (max_razmer[fk] < 120){
-                        max_razmer[fk] = 120;
-                    }
+                    if ((ff % 10) == 0 & ff != 0) { fk++; }
+                    if (max_razmer[fk] < 120){ max_razmer[fk] = 120; }
                     qqty[ff].setMinHeight(max_razmer[fk]);
                 }
             }
@@ -138,32 +127,23 @@ public class raspisanie_show extends Activity {
             @Override
             public void onClick(View v) {
                 table_size--;
-                for (int i = 0; i < 60; i++){
-                    qqty[i].setTextSize(table_size);
-                }
+                for (int i = 0; i < 60; i++){ qqty[i].setTextSize(table_size); }
                 int fk = 0;
                 int[] max_razmer = {0,0,0,0,0,0,0};
                 for (int ff = 0; ff < 60; ff++){
-                    if ((ff % 10) == 0 & ff != 0) {
-                        fk++;
-                    }
+                    if ((ff % 10) == 0 & ff != 0) { fk++; }
                     if (qqty[ff].getText().length() * table_size/4 > max_razmer[fk]){
                         max_razmer[fk] = (int) (qqty[ff].getText().length() * table_size/4);
                     }
                 }
                 fk = 0;
                 for (int ff = 0; ff < 60; ff++){
-                    if ((ff % 10) == 0 & ff != 0) {
-                        fk++;
-                    }
-                    if (max_razmer[fk] < 120){
-                        max_razmer[fk] = 120;
-                    }
+                    if ((ff % 10) == 0 & ff != 0) { fk++; }
+                    if (max_razmer[fk] < 120){ max_razmer[fk] = 120; }
                     qqty[ff].setMinHeight(max_razmer[fk]);
                 }
             }
         });
-
 
         week_day_bt1 = findViewById(R.id.week_day_bt1);
         week_day_bt2 = findViewById(R.id.week_day_bt2);
@@ -174,34 +154,26 @@ public class raspisanie_show extends Activity {
             @Override
             public void onClick(View v) {
                 rasp_site.setAnimation(MainActivity.animRotate_ok);
-                Intent intent;
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.it-institut.ru/SearchString/Index/118"));
-                startActivity(intent);
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.it-institut.ru/SearchString/Index/118")));
             }
         });
 
         // Переход к предыдущему дню
         week_day_bt1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                swipe_day("Left");
-            }
+            public void onClick(View v) { swipe_day("Left"); }
         });
 
         // Переход к следующему дню
         week_day_bt2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                swipe_day("Right");
-            }
+            public void onClick(View v) { swipe_day("Right"); }
         });
 
         // Обновить расписание
         refresh_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                swipe_day("Bottom");
-            }
+            public void onClick(View v) { swipe_day("Bottom"); }
         });
         refresh_btn_ficha.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -297,7 +269,7 @@ public class raspisanie_show extends Activity {
                     break;
             }
             if (MainActivity.isOnline(raspisanie_show.this)) {
-                new getraspweek().execute("");
+                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
             }
             day_show(getApplicationContext());
             week_day_bt1.setClickable(true);
@@ -361,8 +333,7 @@ public class raspisanie_show extends Activity {
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
             Cursor f = MainActivity.sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM rasp_test1 WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
-                    "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
-
+                    "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number, r_razmer", null);
             if (r.getCount()!=0) {
                 String prev_time = "";
                 tableLayout.removeAllViews();
@@ -426,7 +397,6 @@ public class raspisanie_show extends Activity {
                         if (r.getString(15) != null) str += r.getString(15) + "\n";
                     }
                     if (r.getString(3).equals("0")){
-
                         tableRow = new TableRow(this); // Новый пустой столбец
                         empty_cell = new TextView(this); // Новая пустая ячейка
                         empty_cell.setHeight(1);
@@ -459,24 +429,15 @@ public class raspisanie_show extends Activity {
                 tableRow.removeView(qty); // Удаление последней ячейки(хз что за ячейка (мусор какой-то))
                 fk = 0;
                 for (ff = 0; ff < 60; ff++){
-                    if ((ff % 10) == 0 & ff != 0) {
-                        fk++;
-                    }
-                    if (qqty[ff].getText().length() * 4 > max_razmer[fk]){
-                        max_razmer[fk] = (int) (qqty[ff].getText().length() * 4);
-                    }
+                    if ((ff % 10) == 0 & ff != 0) { fk++; }
+                    if (qqty[ff].getText().length() * 4 > max_razmer[fk]){ max_razmer[fk] = (int) (qqty[ff].getText().length() * 4); }
                 }
                 fk = 0;
                 for (ff = 0; ff < 60; ff++){
-                    if ((ff % 10) == 0 & ff != 0) {
-                        fk++;
-                    }
-                    if (max_razmer[fk] < 120){
-                        max_razmer[fk] = 120;
-                    }
+                    if ((ff % 10) == 0 & ff != 0) { fk++; }
+                    if (max_razmer[fk] < 120){ max_razmer[fk] = 120; }
                     qqty[ff].setMinHeight(max_razmer[fk]);
                 }
-
                 mainText.setText("");
             }
         }

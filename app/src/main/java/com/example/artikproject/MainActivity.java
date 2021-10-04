@@ -34,6 +34,7 @@ import org.json.*;
 
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -144,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
 
-
         // Получение актуального текущего времени
         Date date1 = new Date();
 
@@ -197,9 +197,7 @@ public class MainActivity extends AppCompatActivity {
                     result.setText("");
                 }
                 else {
-                    if (!isOnline(MainActivity.this)){
-                        see_group_rasp();
-                    }
+                    if (!isOnline(MainActivity.this)){ see_group_rasp(); }
                     else {
                         String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + rasp_search_edit.getText().toString();
                         result.setText(rasp_search_edit.getText().toString());
@@ -215,9 +213,7 @@ public class MainActivity extends AppCompatActivity {
         GitHub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent;
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases"));
-                startActivity(intent);
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases")));
             }
         });
 
@@ -468,8 +464,7 @@ public class MainActivity extends AppCompatActivity {
                 URL url = new URL(strings[0]);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setConnectTimeout(5000);
-                try{
-                connection.connect();}
+                try{ connection.connect();}
                 catch (Exception e){
                     runOnUiThread(new Runnable() {
 
@@ -514,25 +509,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-
                 MainActivity.this.group_listed = group_list.toArray(new String[0]);
                 MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
                 MainActivity.this.group_listed_id =group_list_id.toArray(new String[0]);
 
             } catch (MalformedURLException e) {
-                e.printStackTrace();
+                System.out.println("Исключение MalformedURLException в классе GetURLData");
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Исключение IOException в классе GetURLData");
             } catch (JSONException e) {
-                e.printStackTrace();
+                System.out.println("Исключение JSONException в классе GetURLData");
             } finally {
-                if (connection != null)
-                    connection.disconnect();
+                if (connection != null) connection.disconnect();
                 if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    try { reader.close(); }
+                    catch (IOException e) {
+                        System.out.println("Исключение IOException в классе GetURLData");
                     }
                 }
             }
