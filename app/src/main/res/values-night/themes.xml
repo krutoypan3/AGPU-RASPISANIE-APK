@@ -13,4 +13,21 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.MyApp.Main" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!--Base colors-->
+        <item name="colorPrimary">@color/fierd</item>
+        <item name="android:textColor">@color/gold</item>
+        <item name="android:textColorPrimary">@color/gold</item>
+        <item name="android:listChoiceBackgroundIndicator">@color/coal</item> <!-- Цвет элемента выпадающего списка при нажатии -->
+        <item name="android:popupBackground">@color/redred</item>
+        <item name="colorPrimaryVariant">@color/gray</item>
+        <item name="colorSecondary">@color/fialka</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnError">@color/gold</item>
+
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.FilledBox</item>
+        <item name="android:listViewStyle">@color/sea</item>
+
+    </style>
 </resources>

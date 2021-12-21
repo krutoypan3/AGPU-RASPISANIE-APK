@@ -221,6 +221,7 @@ public class raspisanie_show extends Activity {
 
         // отслеживание жестов
         ListView para_view = findViewById(R.id.para_view);
+
         para_view.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
             public void onSwipeRight() { swipe_day("Left"); }
             public void onSwipeLeft() { swipe_day("Right"); }
@@ -471,7 +472,7 @@ public class raspisanie_show extends Activity {
                 }
             }while(r.moveToNext());
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, group_list);
+        ArrayAdapter<String> adapter = new ArrayAdapter(context, R.layout.listviewadapterbl, group_list);
         para_view.setAdapter(adapter);
     }
  }

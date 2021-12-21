@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                         result.setText("");
                         subtitle.setText("");
                     }
-                    favorite.setBackgroundResource(R.color.yellow);
+                    favorite.setBackgroundResource(R.color.fierd);
                 }
                 else{
                     see_group_rasp();
