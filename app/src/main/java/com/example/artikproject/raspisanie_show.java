@@ -23,6 +23,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
@@ -32,7 +34,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class raspisanie_show extends Activity {
+public class raspisanie_show extends AppCompatActivity {
     ListView para_view;
     public TextView mainText;
     public TableLayout tableLayout;
@@ -64,6 +66,12 @@ public class raspisanie_show extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            // Set the local night mode to some value
+            new ThemeChanger().set();
+            // Now recreate for it to take effect
+            recreate();
+        }
         setContentView(R.layout.raspisanie_layout);
         context = getApplicationContext();
         mainText = findViewById(R.id.main_text);
@@ -77,7 +85,6 @@ public class raspisanie_show extends Activity {
         CheckBox mCheckBox = (CheckBox)findViewById(R.id.checkBox); // Уведомление об обновлении расписания
         Cursor sss = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
         mCheckBox.setChecked(sss.getCount() != 0);
-
         mCheckBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -236,8 +243,8 @@ public class raspisanie_show extends Activity {
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void swipe_day(String direction){
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+        public void swipe_day(String direction){
         week_day_bt1.setClickable(false);
         week_day_bt2.setClickable(false);
         if (!week_day_on_off) {

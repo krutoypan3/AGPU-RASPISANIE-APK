@@ -8,6 +8,14 @@
     android:background="@drawable/snow"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:transitionName="actionBar" />
+
     <TextView
         android:id="@+id/logow"
         android:layout_width="match_parent"
@@ -16,24 +24,11 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
-        android:text="@string/logo"
         android:textAlignment="center"
         android:textColorHighlight="#000000"
         android:textColorHint="#C89595"
         android:textColorLink="#FF6565"
         android:textSize="24sp" />
-
-    <Spinner
-        android:id="@+id/vibor_rezhima"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp"
-        android:layout_marginEnd="50dp"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/subtitle"
@@ -106,45 +101,4 @@
 
     </ListView>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="15dp"
-        android:layout_margin="5dp">
-
-        <ImageView
-            android:id="@+id/GitHub"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@drawable/git" />
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/favorite_card"
-        android:background="@drawable/refresh_1"
-        android:layout_alignParentEnd="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="30dp"
-        android:layout_margin="5dp">
-
-        <ImageView
-            android:id="@+id/favorite"
-            android:layout_width="49dp"
-            android:layout_height="50dp"
-            android:background="@color/shelk"
-            android:src="@drawable/ic_baseline_stars_24" />
-    </androidx.cardview.widget.CardView>
-
-    <ImageView
-        android:id="@+id/delete_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/refresh_0"
-        android:src="@drawable/ic_baseline_delete_forever_24"
-        android:theme="@style/Theme.MyApp.Main" />
 </RelativeLayout>

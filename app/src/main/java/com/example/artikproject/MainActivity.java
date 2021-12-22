@@ -23,18 +23,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import org.json.*;
 
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -50,6 +50,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+
+import com.mikepenz.iconics.typeface.FontAwesome;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SectionDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView result;
     private TextView subtitle;
     private Button main_button;
-    private static boolean star_toggle = false;
     public static String selectedItem;
     public static String selectedItem_type;
     public static String selectedItem_id;
@@ -73,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animUehalVl;
     public static Animation animScale;
     public static Animation animRotate_ok;
+    private Drawer.Result drawerResult = null;
 
     public static boolean isOnline(Context context){ // Функция определяющая есть ли интернет
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -92,6 +102,15 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    public void onBackPressed(){
+        if(drawerResult.isDrawerOpen()){
+            drawerResult.closeDrawer();
+        }
+        else{
+            see_group_rasp();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +127,147 @@ public class MainActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
         listview = (ListView) findViewById(R.id.listview);
         subtitle = (TextView) findViewById(R.id.subtitle);
+
+        // Handle Toolbar
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        ListView listview_aud = findViewById(R.id.listview_aud);
+
+        // Отслеживание нажатий на элемент в списке(ауд)
+        listview_aud.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+            {
+                Intent intent;
+                switch (position) {
+                    case (1):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/eQo5R9LdnCprwCvs6"));
+                        break;
+                    case (2):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/KwDaKEg3w69a5xuy5"));
+                        break;
+                    case (3):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/rtrpMGCP5t3E1FDU8"));
+                        break;
+                    case (4):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/DhAqdFucRB5RgF8H6"));
+                        break;
+                    case (5):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/m1Ddk1RmebQ9CK5P9"));
+                        break;
+                    case (6):
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/4fBCRhZPJbc7z4Ng6"));
+                        break;
+                    default:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/8Lv4W8uds3cFAeW36")); // 0 нулевое
+                        break;
+                }
+                startActivity(intent);
+            }
+        });
+        // Создание тулбара слева
+        drawerResult = new Drawer()
+                .withActivity(this)  // В каком активити создать тулбар
+                .withToolbar(toolbar)  // Выбираем сам тулбар
+                .withActionBarDrawerToggle(true)
+                .withHeader(R.layout.drawer_header) // С заголовком
+                .addDrawerItems(  // Содержимое тулбара
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_location).withIcon(FontAwesome.Icon.faw_location_arrow).withIdentifier(2),
+                        new SectionDrawerItem().withName(R.string.drawer_item_settings),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(3),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_question).setEnabled(false),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_delete).withIcon(FontAwesome.Icon.faw_remove).withIdentifier(5),
+                        new DividerDrawerItem(),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_github).withIcon(FontAwesome.Icon.faw_github).withIdentifier(6)
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    // Обработка клика
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+                        if (drawerItem instanceof Nameable) {
+                            switch (drawerItem.getIdentifier()) {
+                                case (1):
+                                    listview.setVisibility(View.VISIBLE);
+                                    result.setVisibility(View.VISIBLE);
+                                    main_button.setVisibility(View.VISIBLE);
+                                    rasp_search_edit.setVisibility(View.VISIBLE);
+                                    listview_aud.setVisibility(View.INVISIBLE);
+                                    subtitle.setVisibility(View.VISIBLE);
+                                    break;
+                                case (2):
+                                    listview.setVisibility(View.INVISIBLE);
+                                    result.setVisibility(View.INVISIBLE);
+                                    main_button.setVisibility(View.INVISIBLE);
+                                    rasp_search_edit.setVisibility(View.INVISIBLE);
+                                    listview_aud.setVisibility(View.VISIBLE);
+                                    subtitle.setVisibility(View.INVISIBLE);
+                                    List<String> group_list_aud = new ArrayList<>();
+                                    group_list_aud.add("Главный корпус  по ул. Р. Люксембург, 159\n" +
+                                            "Аудитории: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14а," +
+                                            " 15, 15а, 16, 17, 18,  21, 22, 23\n");
+                                    group_list_aud.add("Корпус по ул. Кирова 50 (Заочка)\n" +
+                                            "Аудитории: 24, 25, 26, 27, 28\n");
+                                    group_list_aud.add("Корпус по ул. Ленина, 79  (СПФ)\n" +
+                                            "Аудитории: 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50\n");
+                                    group_list_aud.add("Корпус по ул. Ефремова, 35 (ЕБД)\n" +
+                                            "Аудитории: 80, 81, 82, 82а, 83, 84\n");
+                                    group_list_aud.add("Корпус по ул. П. Осипенко, 83 (ФОК)\n" +
+                                            "Аудитории: 85, 85а, 86\n");
+                                    group_list_aud.add("Корпус по ул. П. Комсомольская, 93 (ФТЭиД\\ТЕХФАК)\n" +
+                                            "Аудитории: 51, 52, 53, 57, 58 а, 58 б, 59, 60, 61, 62, 63, 64," +
+                                            " 65, 66, 67, 68\n");
+                                    group_list_aud.add("Корпус по ул. К. Маркса, 49 (Общежитие 1)\n" +
+                                            "Аудитории: 30, 31, 32, 33, 34, 35, 36, 37, 38, ЛК-1 – ЛК-6, 101," +
+                                            " 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113," +
+                                            " 114, 115, 116, 117, 118, 119, 120, 121");
+                                    String[] group_listed_aud;
+                                    group_listed_aud = group_list_aud.toArray(new String[0]);
+                                    ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed_aud);
+                                    listview_aud.setAdapter(adapter);
+                                    listview_aud.setVisibility(View.VISIBLE);
+                                    listview_aud.setBackgroundResource(R.drawable.list_view_favorite);
+                                    break;
+                                case (3): // Кнопка 'Настройки'
+                                    Intent intent = new Intent(MainActivity.this, settings_layout.class);
+                                    startActivity(intent);
+                                    drawerResult.setSelection(0);
+                                    break;
+                                case (5): // Если нажали на кнопку удаления
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                    builder.setTitle("Удалить все сохраненные расписания?!")
+                                            .setMessage("Подтвердите удаление!")
+                                            .setCancelable(false)
+                                            .setPositiveButton("Отмена",new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.cancel();
+                                                }
+                                            })
+                                            .setNegativeButton("Удалить все!",new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    sqLiteDatabase.execSQL("DELETE FROM rasp_test1");
+                                                    sqLiteDatabase.execSQL("DELETE FROM rasp_update");
+                                                    group_listed = null;
+                                                    see_group_rasp();
+                                                    dialog.cancel();
+                                                }
+                                            });
+                                    AlertDialog Error = builder.create();
+                                    Error.show();
+                                    listview.setAdapter(null);
+                                    drawerResult.setSelection(0);
+                                    break;
+                                case (6):
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases")));
+                                    drawerResult.setSelection(0);
+                                    break;
+                            }
+                        }
+                    }
+                })
+                .build();
 
         // Асинхронная проверка наличия обновлений
         new Thread(() -> {
@@ -184,6 +344,18 @@ public class MainActivity extends AppCompatActivity {
         sqLiteDatabase = new DataBase(MainActivity.this).getWritableDatabase(); //Подключение к базе данных
         startService(new Intent(getApplicationContext(), PlayService.class)); //ЗАПУСК СЛУЖБЫ
 
+        if (savedInstanceState == null) {
+            // Set the local night mode to some value
+            new ThemeChanger().set();
+            // Now recreate for it to take effect
+            recreate();
+        }
+        // Тема приложения из базы данных
+
+
+
+
+
         see_group_rasp(); // Вывод групп которые были открыты ранее
 
         // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
@@ -207,209 +379,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        // Функция перехода на GitHub при нажатии на кнопку
-        ImageView GitHub = findViewById(R.id.GitHub);
-        GitHub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases")));
-            }
-        });
-
-
-        // Функция показа избранных групп при нажатии на кнопку
-        ImageView favorite = findViewById(R.id.favorite);
-        CardView favorite_card = findViewById(R.id.favorite_card);
-        favorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                favorite_card.startAnimation(animScale);
-                if (!star_toggle) {
-                    group_listed = null;
-                    Cursor r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_selectedItem, r_selectedItem_type FROM rasp_update", null);
-                    if (r.moveToFirst()) {
-                        List<String> group_list = new ArrayList<>();
-                        List<String> group_list_type = new ArrayList<>();
-                        List<String> group_list_id = new ArrayList<>();
-                        do {
-                            switch (r.getString(2)) {
-                                case "Group":
-                                    group_list.add(r.getString(1).split(",")[0].replace(")", "").replace("(", ""));
-                                    break;
-                                case "Classroom":
-                                case "Teacher":
-                                    group_list.add(r.getString(1).split(",")[0]);
-                                    break;
-                            }
-                            group_list_type.add(r.getString(2));
-                            group_list_id.add(r.getString(0));
-                        } while (r.moveToNext());
-                        MainActivity.this.group_listed = group_list.toArray(new String[0]);
-                        MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
-                        MainActivity.this.group_listed_id = group_list_id.toArray(new String[0]);
-                    } // Вывод SELECT запроса
-                    if (group_listed == null) {
-                        result.setText("Вы не отслеживаете изменений в расписании...");
-                        listview.setVisibility(View.INVISIBLE);
-                    } else {
-                        ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
-                        listview.setAdapter(adapter);
-                        listview.setVisibility(View.VISIBLE);
-                        listview.setBackgroundResource(R.drawable.list_view_favorite);
-                        result.setText("");
-                        subtitle.setText("");
-                    }
-                    favorite.setBackgroundResource(R.color.fierd);
-                }
-                else{
-                    see_group_rasp();
-                    listview.setBackgroundResource(R.drawable.list_view);
-                    favorite.setBackgroundResource(R.color.gray);
-                }
-                star_toggle = !star_toggle;
-            }
-        });
-
-        // Функция удаления групп
-        ImageView delete_btn = findViewById(R.id.delete_btn);
-        delete_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                delete_btn.startAnimation(animScale);
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Удалить все сохраненные расписания?!")
-                        .setMessage("Подтвердите удаление!")
-                        .setCancelable(false)
-                        .setPositiveButton("Отмена",new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
-                        .setNegativeButton("Удалить все!",new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                sqLiteDatabase.execSQL("DELETE FROM rasp_test1");
-                                sqLiteDatabase.execSQL("DELETE FROM rasp_update");
-                                group_listed = null;
-                                see_group_rasp();
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog Error = builder.create();
-                Error.show();
-            }
-        });
-
-                // Выбор режима (поиск пар\аудиторий)
-        String[] countries = {"Расписание", "Аудитории и корпуса"};
-
-        Spinner spinner = (Spinner) findViewById(R.id.vibor_rezhima);
-        // Создаем адаптер ArrayAdapter с помощью массива строк и стандартной разметки элемета spinner
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, countries);
-        // Определяем разметку для использования при выборе элемента
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Применяем адаптер к элементу spinner
-        spinner.setAdapter(adapter);
-
-        ListView listview_aud = findViewById(R.id.listview_aud);
-        // Отслеживание нажатий на элемент в списке(ауд)
-        listview_aud.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id)
-            {
-                Intent intent;
-                switch (position) {
-                    case (1):
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/eQo5R9LdnCprwCvs6"));
-                        break;
-                    case (2):
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/KwDaKEg3w69a5xuy5"));
-                        break;
-                    case (3):
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/rtrpMGCP5t3E1FDU8"));
-                        break;
-                    case (4):
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/DhAqdFucRB5RgF8H6"));
-                        break;
-                    case (5):
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/m1Ddk1RmebQ9CK5P9"));
-                        break;
-                    case (6):
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/4fBCRhZPJbc7z4Ng6"));
-                        break;
-                    default:
-                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/8Lv4W8uds3cFAeW36")); // 0 нулевое
-                        break;
-                }
-                startActivity(intent);
-            }
-        });
-
-        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                // Получаем выбранный объект
-                String item = (String)parent.getItemAtPosition(position);
-
-                // Здесь мы изменяем на то, что нам нужно))
-                switch (item) {
-                    case  ("Расписание"):
-                        listview.setVisibility(View.VISIBLE);
-                        delete_btn.setVisibility(View.VISIBLE);
-                        main_button.setVisibility(View.VISIBLE);
-                        rasp_search_edit.setVisibility(View.VISIBLE);
-                        listview_aud.setVisibility(View.INVISIBLE);
-                        favorite.setVisibility(View.VISIBLE);
-                        favorite_card.setVisibility(View.VISIBLE);
-                        subtitle.setVisibility(View.VISIBLE);
-                        break;
-                    case ("Аудитории и корпуса"):
-                        listview.setVisibility(View.INVISIBLE);
-                        delete_btn.setVisibility(View.INVISIBLE);
-                        main_button.setVisibility(View.INVISIBLE);
-                        rasp_search_edit.setVisibility(View.INVISIBLE);
-                        listview_aud.setVisibility(View.VISIBLE);
-                        favorite.setVisibility(View.INVISIBLE);
-                        favorite_card.setVisibility(View.INVISIBLE);
-                        subtitle.setVisibility(View.INVISIBLE);
-                        List<String> group_list_aud = new ArrayList<>();
-                        group_list_aud.add("Главный корпус  по ул. Р. Люксембург, 159\n" +
-                                "Аудитории: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14а," +
-                                " 15, 15а, 16, 17, 18,  21, 22, 23\n");
-                        group_list_aud.add("Корпус по ул. Кирова 50 (Заочка)\n" +
-                                "Аудитории: 24, 25, 26, 27, 28\n");
-                        group_list_aud.add("Корпус по ул. Ленина, 79  (СПФ)\n" +
-                                "Аудитории: 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50\n");
-                        group_list_aud.add("Корпус по ул. Ефремова, 35 (ЕБД)\n" +
-                                "Аудитории: 80, 81, 82, 82а, 83, 84\n");
-                        group_list_aud.add("Корпус по ул. П. Осипенко, 83 (ФОК)\n" +
-                                "Аудитории: 85, 85а, 86\n");
-                        group_list_aud.add("Корпус по ул. П. Комсомольская, 93 (ФТЭиД\\ТЕХФАК)\n" +
-                                "Аудитории: 51, 52, 53, 57, 58 а, 58 б, 59, 60, 61, 62, 63, 64," +
-                                " 65, 66, 67, 68\n");
-                        group_list_aud.add("Корпус по ул. К. Маркса, 49 (Общежитие 1)\n" +
-                                "Аудитории: 30, 31, 32, 33, 34, 35, 36, 37, 38, ЛК-1 – ЛК-6, 101," +
-                                " 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113," +
-                                " 114, 115, 116, 117, 118, 119, 120, 121");
-                        String[] group_listed_aud;
-                        group_listed_aud = group_list_aud.toArray(new String[0]);
-                        ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed_aud);
-                        listview_aud.setAdapter(adapter);
-                        listview_aud.setVisibility(View.VISIBLE);
-                        listview_aud.setBackgroundResource(R.drawable.list_view_favorite);
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        };
-        spinner.setOnItemSelectedListener(itemSelectedListener);
-
     }
+
+
+    // Всё сохраненное расписание
     public void see_group_rasp(){ // Вывод ранее открываемых групп
         Cursor r;
         r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM rasp_test1 WHERE r_group NOT NULL AND r_prepod NOT NULL AND r_search_type NOT NULL GROUP BY r_group_code", null);

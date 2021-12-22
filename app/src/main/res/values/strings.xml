@@ -2,4 +2,12 @@
     <string name="app_name">АГПУ расписание</string>
     <string name="logo">АГПУ расписание</string>
     <string name="no_user_input">Введите текст!</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_item_home">Расписание</string>
+    <string name="drawer_item_star">Избранное</string>
+    <string name="drawer_item_location">Расположение</string>
+    <string name="drawer_item_settings">Настройки</string>
+    <string name="drawer_item_delete">Очистить</string>
+    <string name="drawer_item_open_source">Open Source</string>
+    <string name="drawer_item_github">Проверить обновления</string>
 </resources>

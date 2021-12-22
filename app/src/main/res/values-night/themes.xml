@@ -1,19 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.ArtikProject" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
-    <style name="Theme.MyApp.Main" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.MyApp.Main" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!--Base colors-->
         <item name="colorPrimary">@color/fierd</item>
         <item name="android:textColor">@color/gold</item>
@@ -24,7 +10,6 @@
         <item name="colorSecondary">@color/fialka</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorOnError">@color/gold</item>
-
         <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.FilledBox</item>
         <item name="android:listViewStyle">@color/sea</item>
