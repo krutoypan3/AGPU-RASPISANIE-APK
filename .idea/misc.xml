@@ -4,17 +4,21 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Kruto/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.203125" />
+        <entry key="..\:/Users/Kruto/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.203125" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable-v21/drawer_list_item.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/activated_background.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/button.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/drawer_list_item.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/listview_text_color.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/my_btn_toggle.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/refresh_0.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/refresh_1.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/refresh_2.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/refresh_ico.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/small_button.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout-night/listviewadapterbl.xml" value="0.203125" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout-v21/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout-v21/raspisanie_layout.xml" value="0.3491847826086957" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout/drawer_header.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout/drawer_list_item.xml" value="0.203125" />
@@ -22,9 +26,12 @@
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout/listviewadapterbl-night.xml" value="0.203125" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout/listviewadapterbl.xml" value="0.203125" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout/raspisanie_layout.xml" value="0.33" />
-        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout/settings_layout.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/layout/settings_layout.xml" value="0.25" />
       </map>
     </option>
+  </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/app/src/main/res/values-night/themes.xml" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

@@ -66,12 +66,6 @@ public class raspisanie_show extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
-            // Set the local night mode to some value
-            new ThemeChanger().set();
-            // Now recreate for it to take effect
-            recreate();
-        }
         setContentView(R.layout.raspisanie_layout);
         context = getApplicationContext();
         mainText = findViewById(R.id.main_text);
@@ -97,7 +91,7 @@ public class raspisanie_show extends AppCompatActivity {
                     MainActivity.sqLiteDatabase.insert("rasp_update", null, rowValues);
                 }
                 else{
-                    mCheckBox.setTextColor(Color.BLACK);
+                    mCheckBox.setTextColor(Color.GRAY);
                     MainActivity.sqLiteDatabase.delete("rasp_update", "r_group_code = '" + MainActivity.selectedItem_id + "'", null);
                 }
             }

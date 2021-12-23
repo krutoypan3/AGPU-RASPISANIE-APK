@@ -11,25 +11,7 @@
         android:id="@+id/theme_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Тема приложения: "
+        android:text="А что собственно ты тут ожидал увидеть? Будь как все, замкнут в этой системе без права что-либо изменить в своей жизни."
         android:textSize="24dp">
     </TextView>
-    <Spinner
-        android:layout_marginTop="70dp"
-        android:layout_toEndOf="@id/theme_text"
-        android:id="@+id/theme_spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/theme_text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/theme_text"
-        android:layout_marginTop="0dp"
-        android:text="После смены темы перезапустите приложение ;)"
-        android:textSize="20dp" />
-
 </RelativeLayout>

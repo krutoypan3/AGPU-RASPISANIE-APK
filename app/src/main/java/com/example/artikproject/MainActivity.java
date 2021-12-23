@@ -30,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import org.json.*;
 
@@ -268,6 +269,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .build();
+        DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
+        mDrawerLayout.setBackgroundResource(R.color.black);
 
         // Асинхронная проверка наличия обновлений
         new Thread(() -> {
@@ -343,18 +346,6 @@ public class MainActivity extends AppCompatActivity {
 
         sqLiteDatabase = new DataBase(MainActivity.this).getWritableDatabase(); //Подключение к базе данных
         startService(new Intent(getApplicationContext(), PlayService.class)); //ЗАПУСК СЛУЖБЫ
-
-        if (savedInstanceState == null) {
-            // Set the local night mode to some value
-            new ThemeChanger().set();
-            // Now recreate for it to take effect
-            recreate();
-        }
-        // Тема приложения из базы данных
-
-
-
-
 
         see_group_rasp(); // Вывод групп которые были открыты ранее
 
