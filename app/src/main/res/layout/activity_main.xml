@@ -52,17 +52,8 @@
         android:inputType="textPersonName"
         android:layout_below="@id/logow"
         android:textAlignment="center"
-        android:hint="Введите название группы" />
+        android:hint="Найти расписание" />
 
-    <Button
-        android:background="@drawable/button"
-        android:id="@+id/main_button"
-        android:layout_width="match_parent"
-        android:layout_marginTop="20sp"
-        android:layout_marginHorizontal="50sp"
-        android:layout_below="@id/rasp_search_edit"
-        android:layout_height="wrap_content"
-        android:text="Найти расписание" />
 
     <TextView
         android:id="@+id/result"
@@ -72,7 +63,7 @@
         android:layout_marginTop="30dp"
         android:layout_marginEnd="50dp"
         android:layout_marginBottom="50dp"
-        android:layout_below="@id/main_button"
+        android:layout_below="@id/rasp_search_edit"
         android:textAlignment="center"
         android:textColorHighlight="#000000"
         android:textColorHint="#C89595"
@@ -84,7 +75,7 @@
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/main_button"
+        android:layout_below="@id/rasp_search_edit"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
 
@@ -94,7 +85,7 @@
         android:id="@+id/listview_aud"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/main_button"
+        android:layout_below="@id/rasp_search_edit"
         android:layout_marginTop="-135sp"
         android:textSize="24sp"
         android:visibility="invisible"

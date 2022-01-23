@@ -26,7 +26,7 @@ class GetRasp extends AsyncTask<String, String, String> {
     String r_selectedItem_type;
     int week_id_upd;
     Context context;
-    SQLiteDatabase sqLiteDatabaseS;
+    private SQLiteDatabase sqLiteDatabaseS;
     String predmet_name;
     String predmet_prepod;
     String predmet_group;
@@ -56,7 +56,7 @@ class GetRasp extends AsyncTask<String, String, String> {
             String urlq;
             urlq = "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?OwnerId=118&SearchId=" + r_selectedItem_id + "&SearchString=" + r_selectedItem + "&Type=" + r_selectedItem_type + "&WeekId=" + (week_id_upd + ff);
             try {
-                doc = Jsoup.connect(urlq).timeout(5000).get();
+                doc = Jsoup.connect(urlq).get();
             } catch (IOException e) { // Прерывание функции, если нет интернета
                 raspisanie_show.refresh_on_off = false;
                 raspisanie_show.refresh_successful = false;

@@ -1,5 +1,4 @@
 package com.example.artikproject;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,6 +12,8 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -36,6 +37,7 @@ import org.json.*;
 
 
 import java.io.BufferedReader;
+import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -71,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView listview;
     private TextView result;
     private TextView subtitle;
-    private Button main_button;
     public static String selectedItem;
     public static String selectedItem_type;
     public static String selectedItem_id;
@@ -124,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
         animUehalVl = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vlevo);
         animRotate_ok = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_ok);
         rasp_search_edit = findViewById(R.id.rasp_search_edit);
-        main_button = findViewById(R.id.main_button);
         result = findViewById(R.id.result);
         listview = (ListView) findViewById(R.id.listview);
         subtitle = (TextView) findViewById(R.id.subtitle);
@@ -191,7 +191,6 @@ public class MainActivity extends AppCompatActivity {
                                 case (1):
                                     listview.setVisibility(View.VISIBLE);
                                     result.setVisibility(View.VISIBLE);
-                                    main_button.setVisibility(View.VISIBLE);
                                     rasp_search_edit.setVisibility(View.VISIBLE);
                                     listview_aud.setVisibility(View.INVISIBLE);
                                     subtitle.setVisibility(View.VISIBLE);
@@ -199,7 +198,6 @@ public class MainActivity extends AppCompatActivity {
                                 case (2):
                                     listview.setVisibility(View.INVISIBLE);
                                     result.setVisibility(View.INVISIBLE);
-                                    main_button.setVisibility(View.INVISIBLE);
                                     rasp_search_edit.setVisibility(View.INVISIBLE);
                                     listview_aud.setVisibility(View.VISIBLE);
                                     subtitle.setVisibility(View.INVISIBLE);
@@ -278,38 +276,12 @@ public class MainActivity extends AppCompatActivity {
                 PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0); // Получение текущих значений
                 String versionName = packageInfo.versionName; // Названия версии
                 int versionCode = packageInfo.versionCode; // И ее кода
-                String connectionUrl =
-                        "jdbc:sqlserver://sql-serverartem.ddns.net:1433;"
-                                + "database=AdventureWorks;"
-                                + "user=yourusername@yourserver;"
-                                + "password=yourpassword;"
-                                + "encrypt=true;"
-                                + "trustServerCertificate=false;"
-                                + "loginTimeout=30;";  // Данные для подключения к базе данных
-
-                try (Connection connection = DriverManager.getConnection(connectionUrl);
-                     Statement statement = connection.createStatement();) {
-
-                    // Выбираем в нашей таблице строку с наибольшим значением кода версии
-                    String selectSql = "SELECT version_code, version_name, url_version, whats_new from check_update WHERE version_code = MAX(version_code)";
-                    ResultSet resultSet = statement.executeQuery(selectSql);
-                    while (resultSet.next()) {
-                        int versionCode_db = Integer.parseInt(resultSet.getString(0));
-                        String versionName_db = resultSet.getString(1);
-                        String versionUrl_db = resultSet.getString(2);
-                        String versionNew_db = resultSet.getString(3);
-                        if (versionCode != versionCode_db){
-                            System.out.println("Доступна новая версия приложения!");
-                        }
-                    }
-                }
-            } catch (PackageManager.NameNotFoundException | SQLException e) {
-                System.out.println("Ошибка при проверке наличия обновлений");
+                // DateBase_Online.main(); КАК ГОВОРИТСЯ, ОДИН ЛИШЬ БОГ ЗНАЕТ, ПОЧЕМУ ДРАЙВЕР БД ОТКАЗАЛСЯ СОЗДАВАТЬ СОЕДИНЕНИЕ
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }).start();
 
-        // Получение актуального текущего времени
-        Date date1 = new Date();
 
         float rasnitsa_v_nedelyah = 222.48f; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
         // недели с сайта расписания и того, что получается в week_id без "rasnitsa_v_nedelyah"
@@ -317,14 +289,12 @@ public class MainActivity extends AppCompatActivity {
         // число стало дробным. В прошлом году было норм, в этом - каждую среду начиналась новая
         // неделя, хз почему, пришлось так выкручиваться."
 
-        long date_ms = date1.getTime();
-        week_id = (int) (date_ms / 1000f / 60f / 60f / 24f / 7f + rasnitsa_v_nedelyah); // Номер текущей недели
-        System.out.println(week_id);
-        Date date2 = new Date(date_ms); // дня недели и
-        week_day = date2.getDay() - 1;
+        // Получение актуального текущего времени
+        long date_ms = new Date().getTime();
+        week_id = (int) (date_ms / 1000f / 60f / 60f / 24f / 7f + rasnitsa_v_nedelyah); // Номер текущей недели и
+        week_day = new Date(date_ms).getDay() - 1; // дня недели
         if (week_day == -1){ // Если будет воскресенье, то будет показан понедельник
             week_day = 0;
-            week_id += 1;
         }
 
         // Отслеживание нажатий на элемент в списке(группа\ауд\препод)
@@ -335,7 +305,6 @@ public class MainActivity extends AppCompatActivity {
                 selectedItem_type = MainActivity.this.group_listed_type[position];
                 selectedItem_id = MainActivity.this.group_listed_id[position];
                 MainActivity.this.subtitle.setText(selectedItem);
-                Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + selectedItem_id + " AND r_week_number = " + week_id, null); // SELECT запрос
                 Intent intent = new Intent(MainActivity.this, raspisanie_show.class);
                 if (isOnline(MainActivity.this)){
                     new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -344,30 +313,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        sqLiteDatabase = new DataBase(MainActivity.this).getWritableDatabase(); //Подключение к базе данных
-        startService(new Intent(getApplicationContext(), PlayService.class)); //ЗАПУСК СЛУЖБЫ
+        sqLiteDatabase = new DataBase(MainActivity.this).getWritableDatabase(); // Подключение к локальной базе данных
+        startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 
-        see_group_rasp(); // Вывод групп которые были открыты ранее
+        see_group_rasp(); // Первичный вывод групп которые были открыты ранее
 
-        // Функция поиска группы или аудитории или преподователя при нажатии на кнопку
-        main_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                main_button.setAnimation(animScale);
-                main_button.setClickable(false);
-                if (rasp_search_edit.getText().toString().trim().equals("")) {
-                    Toast.makeText(MainActivity.this, R.string.no_user_input, Toast.LENGTH_SHORT).show();
-                    result.setText("");
-                }
-                else {
-                    if (!isOnline(MainActivity.this)){ see_group_rasp(); }
+        // При изменение текстового поля делать:
+        rasp_search_edit.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {} // До изменения поля
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {} // После изменения поля
+            public void onTextChanged(CharSequence s, int start, int before, int count) { // Во время изменения поля
+                if (!(rasp_search_edit.getText().toString().trim().equals(""))) { // Если строка поиска не пустая
+                    if (!isOnline(MainActivity.this)){ see_group_rasp(); } // Если нет доступа к интернету то выводить список из бд
                     else {
                         String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + rasp_search_edit.getText().toString();
-                        result.setText(rasp_search_edit.getText().toString());
-                        new GetURLData().execute(urlq);
-                        new GetURLData().onOreExecute();
+                        new GetURLData().execute(urlq); // Отправляем запрос на сервер и выводим получившийся список
                     }
                 }
+                else{see_group_rasp();}
             }
         });
     }
@@ -415,11 +378,6 @@ public class MainActivity extends AppCompatActivity {
 
     private class GetURLData extends AsyncTask<String, String, String> { // Класс отвечающий за поиск группы \ аудитории \ преподователя
 
-        protected void onOreExecute() {
-            super.onPreExecute();
-            result.setText("Поиск группы...");
-        }
-
         @Override
         protected String doInBackground(String... strings) {
             HttpURLConnection connection = null;
@@ -434,7 +392,7 @@ public class MainActivity extends AppCompatActivity {
 
                         @Override
                         public void run() {
-                            Toast.makeText(getApplicationContext(),"Проверьте подключение к интернету", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(),"Ошибка при подключении к сайту", Toast.LENGTH_LONG).show();
                         }
                     });
                     return null;
@@ -502,7 +460,6 @@ public class MainActivity extends AppCompatActivity {
             listview.setAdapter(adapter);
             result.setText(res);
             listview.setVisibility(View.VISIBLE);
-            main_button.setClickable(true);
         }
     }
 }
