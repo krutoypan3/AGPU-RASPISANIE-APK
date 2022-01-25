@@ -8,6 +8,6 @@
     <string name="drawer_item_location">Аудитории и корпуса</string>
     <string name="drawer_item_settings">Настройки</string>
     <string name="drawer_item_delete">Очистить</string>
-    <string name="drawer_item_open_source">Open Source</string>
+    <string name="drawer_item_open_source">GitHub</string>
     <string name="drawer_item_github">Проверить обновления</string>
 </resources>

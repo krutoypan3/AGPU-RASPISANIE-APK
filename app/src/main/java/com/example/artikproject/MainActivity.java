@@ -3,8 +3,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
@@ -12,6 +10,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -19,42 +18,33 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import org.json.*;
 
 
 import java.io.BufferedReader;
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+import com.example.artikproject.background_work.CheckAppUpdate;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -118,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); // Без этих двух строк
+        StrictMode.setThreadPolicy(policy); // мы не можем подключиться к базе данных MSSQL так как потокам становится плохо
         animScale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale);
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
         animUehalVp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vpravo);
@@ -171,16 +162,16 @@ public class MainActivity extends AppCompatActivity {
                 .withActivity(this)  // В каком активити создать тулбар
                 .withToolbar(toolbar)  // Выбираем сам тулбар
                 .withActionBarDrawerToggle(true)
-                .withHeader(R.layout.drawer_header) // С заголовком
+                .withHeader(R.layout.drawer_header) // С заголовком88
                 .addDrawerItems(  // Содержимое тулбара
                         new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_location).withIcon(FontAwesome.Icon.faw_location_arrow).withIdentifier(2),
                         new SectionDrawerItem().withName(R.string.drawer_item_settings),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(3),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_question).setEnabled(false),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_delete).withIcon(FontAwesome.Icon.faw_remove).withIdentifier(5),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_github).withIcon(FontAwesome.Icon.faw_question).withIdentifier(6),
                         new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_github).withIcon(FontAwesome.Icon.faw_github).withIdentifier(6)
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withIdentifier(4)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     // Обработка клика
@@ -232,6 +223,10 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent);
                                     drawerResult.setSelection(0);
                                     break;
+                                case (4):
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases")));
+                                    drawerResult.setSelection(0);
+                                    break;
                                 case (5): // Если нажали на кнопку удаления
                                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                                     builder.setTitle("Удалить все сохраненные расписания?!")
@@ -259,8 +254,11 @@ public class MainActivity extends AppCompatActivity {
                                     drawerResult.setSelection(0);
                                     break;
                                 case (6):
-                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases")));
-                                    drawerResult.setSelection(0);
+                                    try { // Проверка обновлений
+                                        new CheckAppUpdate().CheckUpdate(MainActivity.this);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                     break;
                             }
                         }
@@ -270,17 +268,12 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerLayout.setBackgroundResource(R.color.black);
 
-        // Асинхронная проверка наличия обновлений
-        new Thread(() -> {
-            try {
-                PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0); // Получение текущих значений
-                String versionName = packageInfo.versionName; // Названия версии
-                int versionCode = packageInfo.versionCode; // И ее кода
-                // DateBase_Online.main(); КАК ГОВОРИТСЯ, ОДИН ЛИШЬ БОГ ЗНАЕТ, ПОЧЕМУ ДРАЙВЕР БД ОТКАЗАЛСЯ СОЗДАВАТЬ СОЕДИНЕНИЕ
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }).start();
+
+        try { // Проверка обновлений
+            new CheckAppUpdate().CheckUpdate(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         float rasnitsa_v_nedelyah = 222.48f; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
