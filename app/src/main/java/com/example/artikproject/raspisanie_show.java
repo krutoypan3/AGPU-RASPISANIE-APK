@@ -263,13 +263,13 @@ public class raspisanie_show extends AppCompatActivity {
                         refresh_on_off = true;
                         refresh_btn.startAnimation(MainActivity.animRotate);
                         refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-                        new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
+                        new GetRaspOnline(MainActivity.selectedItem_id, MainActivity.week_id, getApplicationContext()).execute();
                         new refresh_day_show().execute();
                     }
                     break;
             }
             if (MainActivity.isOnline(raspisanie_show.this)) {
-                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
+                new GetRaspOnline(MainActivity.selectedItem_id, MainActivity.week_id, getApplicationContext()).execute();
             }
             day_show(getApplicationContext());
             week_day_bt1.setClickable(true);
@@ -285,7 +285,7 @@ public class raspisanie_show extends AppCompatActivity {
                 case "Right": MainActivity.week_id += 1; break;
             }
             if(MainActivity.isOnline(raspisanie_show.this)){
-                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
+                new GetRaspOnline(MainActivity.selectedItem_id, MainActivity.week_id, getApplicationContext()).execute();
             }
             new refresh_day_show().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             week_show(raspisanie_show.this);

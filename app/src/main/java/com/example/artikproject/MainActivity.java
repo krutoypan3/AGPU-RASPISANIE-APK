@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
@@ -22,25 +21,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import org.json.*;
 
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -294,19 +282,19 @@ public class MainActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
-                selectedItem = MainActivity.this.group_listed[position];
-                selectedItem_type = MainActivity.this.group_listed_type[position];
-                selectedItem_id = MainActivity.this.group_listed_id[position];
-                MainActivity.this.subtitle.setText(selectedItem);
+                selectedItem = group_listed[position];
+                selectedItem_type = group_listed_type[position];
+                selectedItem_id = group_listed_id[position];
+                subtitle.setText(selectedItem);
                 Intent intent = new Intent(MainActivity.this, raspisanie_show.class);
                 if (isOnline(MainActivity.this)){
-                    new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    new GetRaspOnline(selectedItem_id, week_id, getApplicationContext()).execute();
                 }
                 startActivity(intent);
             }
         });
 
-        sqLiteDatabase = new DataBase(MainActivity.this).getWritableDatabase(); // Подключение к локальной базе данных
+        sqLiteDatabase = new DataBaseLocal(MainActivity.this).getWritableDatabase(); // Подключение к локальной базе данных
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 
         see_group_rasp(); // Первичный вывод групп которые были открыты ранее
@@ -319,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!(rasp_search_edit.getText().toString().trim().equals(""))) { // Если строка поиска не пустая
                     if (!isOnline(MainActivity.this)){ see_group_rasp(); } // Если нет доступа к интернету то выводить список из бд
                     else {
-                        new GetGroupList().execute(rasp_search_edit.getText().toString()); // Получение списка групп из онлайн - бд
+                        new GetGroupListOnline().execute(rasp_search_edit.getText().toString()); // Получение списка групп из онлайн - бд
                     }
                 }
                 else{see_group_rasp();}

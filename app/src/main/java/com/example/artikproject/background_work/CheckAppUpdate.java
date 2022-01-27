@@ -7,14 +7,14 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
 
-import com.example.artikproject.DateBase_Online;
+import com.example.artikproject.DateBaseOnline;
 
 
 public class CheckAppUpdate{
     public void CheckUpdate(Context context) throws Exception {
         PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
         int versionCode = packageInfo.versionCode; // И ее кода
-        DateBase_Online dateBase_online = new DateBase_Online();
+        DateBaseOnline dateBase_online = new DateBaseOnline();
         String[] version_info_db = dateBase_online.check_update();
         if(Integer.parseInt(version_info_db[0]) > versionCode){
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
