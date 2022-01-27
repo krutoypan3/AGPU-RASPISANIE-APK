@@ -57,12 +57,12 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 public class MainActivity extends AppCompatActivity {
 
     private EditText rasp_search_edit;
-    private String[] group_listed;
-    private String[] group_listed_type;
-    private String[] group_listed_id;
-    private ListView listview;
-    private TextView result;
-    private TextView subtitle;
+    public static String[] group_listed;
+    public static String[] group_listed_type;
+    public static String[] group_listed_id;
+    protected static ListView listview;
+    protected static TextView result;
+    protected static TextView subtitle;
     public static String selectedItem;
     public static String selectedItem_type;
     public static String selectedItem_id;
@@ -319,8 +319,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!(rasp_search_edit.getText().toString().trim().equals(""))) { // Если строка поиска не пустая
                     if (!isOnline(MainActivity.this)){ see_group_rasp(); } // Если нет доступа к интернету то выводить список из бд
                     else {
-                        String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + rasp_search_edit.getText().toString();
-                        new GetURLData().execute(urlq); // Отправляем запрос на сервер и выводим получившийся список
+                        new GetGroupList().execute(rasp_search_edit.getText().toString()); // Получение списка групп из онлайн - бд
                     }
                 }
                 else{see_group_rasp();}
@@ -352,9 +351,9 @@ public class MainActivity extends AppCompatActivity {
                 group_list_type.add(r.getString(2));
                 group_list_id.add(r.getString(0));
             }while(r.moveToNext());
-            MainActivity.this.group_listed = group_list.toArray(new String[0]);
-            MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
-            MainActivity.this.group_listed_id = group_list_id.toArray(new String[0]);
+            group_listed = group_list.toArray(new String[0]);
+            group_listed_type = group_list_type.toArray(new String[0]);
+            group_listed_id = group_list_id.toArray(new String[0]);
         } // Вывод SELECT запроса
         if( group_listed == null){
             result.setText("Увы, но у вас нет сохраненных групп...");
@@ -365,94 +364,6 @@ public class MainActivity extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
             listview.setAdapter(adapter);
             result.setText("");
-        }
-    }
-
-
-    private class GetURLData extends AsyncTask<String, String, String> { // Класс отвечающий за поиск группы \ аудитории \ преподователя
-
-        @Override
-        protected String doInBackground(String... strings) {
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-            try {
-                URL url = new URL(strings[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setConnectTimeout(5000);
-                try{ connection.connect();}
-                catch (Exception e){
-                    runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),"Ошибка при подключении к сайту", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    return null;
-                }
-                InputStream stream = connection.getInputStream();
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                String buffer = "";
-                buffer = reader.readLine();
-
-                String jsonString = buffer; // ЭТО JSON со списком групп
-                JSONArray obj = new JSONArray(jsonString);
-                List<String> group_list = new ArrayList<>();
-                List<String> group_list_type = new ArrayList<>();
-                List<String> group_list_id = new ArrayList<>();
-
-                for (int ii = 0; ii<obj.length(); ii++){
-                    JSONObject guysJSON = obj.getJSONObject(ii);
-                    Iterator<?> keys = guysJSON.keys();
-                    int i = 0;
-                    while(keys.hasNext()) {
-                        Object value = guysJSON.get((String)keys.next());
-                        if (value != null && i % 4 == 0) {
-                            String group_name = (String) value;
-                            group_list.add(group_name);
-                        }
-                        else if (value != null && i % 4 == 1) {
-                            String group_type = (String) value;
-                            group_list_type.add(group_type);
-                        }
-                        else if (value != null && i % 4 == 2) {
-                            String group_id = value.toString();
-                            group_list_id.add(group_id);
-                        }
-                        i++;
-                    }
-                }
-
-                MainActivity.this.group_listed = group_list.toArray(new String[0]);
-                MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
-                MainActivity.this.group_listed_id =group_list_id.toArray(new String[0]);
-
-            } catch (MalformedURLException e) {
-                System.out.println("Исключение MalformedURLException в классе GetURLData");
-            } catch (IOException e) {
-                System.out.println("Исключение IOException в классе GetURLData");
-            } catch (JSONException e) {
-                System.out.println("Исключение JSONException в классе GetURLData");
-            } finally {
-                if (connection != null) connection.disconnect();
-                if (reader != null) {
-                    try { reader.close(); }
-                    catch (IOException e) {
-                        System.out.println("Исключение IOException в классе GetURLData");
-                    }
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String res) {
-            super.onPostExecute(res);
-            ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
-            listview.setAdapter(adapter);
-            result.setText(res);
-            listview.setVisibility(View.VISIBLE);
         }
     }
 }

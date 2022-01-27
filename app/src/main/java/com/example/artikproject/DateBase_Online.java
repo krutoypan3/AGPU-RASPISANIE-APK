@@ -3,6 +3,8 @@ package com.example.artikproject;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DateBase_Online {
 
@@ -28,9 +30,27 @@ public class DateBase_Online {
             con = DriverManager.getConnection(getConnectionUrl(), userName, password);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("АШИПКА in getConnection() : " + e.getMessage());
+            System.out.println("АШИПКА in getConnection() в классе DateBase_Online : " + e.getMessage());
         }
         return con;
+    }
+
+    public List<String[]> GetGroupList(String search_request){
+        ResultSet resultSet;
+        List<String[]> group_list = new ArrayList<>();
+        try {
+            con = this.getConnection();
+            Statement statement = con.createStatement();
+            resultSet = statement.executeQuery("SELECT * FROM item_list WHERE r_item_name LIKE '%" + search_request + "%'");
+            while (resultSet.next()){
+                group_list.add(new String[]{resultSet.getString(1), resultSet.getString(2), resultSet.getString(3)});
+            }
+            closeConnection();
+        }
+        catch (Exception e){
+            System.out.println("Ошибка в методе GetGroupList в модуле DateBase_Online: " + e);
+        }
+        return group_list;
     }
 
     public String[] check_update(){

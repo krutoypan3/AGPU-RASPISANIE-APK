@@ -47,14 +47,23 @@ public class DataBase extends SQLiteOpenHelper {
             catch (Exception ignored){
             }
         try {
+            sqLiteDatabase.execSQL("CREATE TABLE \"item_list\" (\n" +
+                    "\t\"r_item_id\"\tTEXT,\n" +
+                    "\t\"r_item_name\"\tTEXT,\n" +
+                    "\t\"r_item_type\"\tTEXT\n" +
+                    ")");
+        }
+        catch (Exception ignored){
+        }
+        try {
             sqLiteDatabase.execSQL("CREATE TABLE \"settings_app\" (\n" +
                     "\t\"settings_name\"\tTEXT,\n" +
                     "\t\"value\"\tTEXT\n" +
                     ")");
-            ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
-            rowValues.put("settings_name", "theme");
-            rowValues.put("value", "-1");
-            sqLiteDatabase.insert("settings_app", null, rowValues);
+            // ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
+            // rowValues.put("settings_name", "theme");
+            // rowValues.put("value", "-1");
+            // sqLiteDatabase.insert("settings_app", null, rowValues);
         }
         catch (Exception ignored){
         }
