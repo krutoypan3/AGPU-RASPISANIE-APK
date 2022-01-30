@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
@@ -243,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                                 case (6):
                                     try { // Проверка обновлений
-                                        new CheckAppUpdate().CheckUpdate(MainActivity.this);
+                                        new CheckAppUpdate(MainActivity.this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -256,12 +257,7 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerLayout.setBackgroundResource(R.color.black);
 
-
-        try { // Проверка обновлений
-            new CheckAppUpdate().CheckUpdate(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        new CheckAppUpdate(MainActivity.this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 
         float rasnitsa_v_nedelyah = 222.48f; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
