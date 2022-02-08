@@ -155,7 +155,12 @@ public class raspisanie_show extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 rasp_site.setAnimation(MainActivity.animRotate_ok);
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.it-institut.ru/SearchString/Index/118")));
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?" +
+                                "OwnerId=118&SearchId=" + MainActivity.selectedItem_id + "&" +
+                                "SearchString=" + MainActivity.selectedItem + "&" +
+                                "Type=" + MainActivity.selectedItem_type + "&" +
+                                "WeekId=" + MainActivity.week_id)));
             }
         });
 
@@ -265,13 +270,13 @@ public class raspisanie_show extends AppCompatActivity {
                         refresh_on_off = true;
                         refresh_btn.startAnimation(MainActivity.animRotate);
                         refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-                        new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
-                        new refresh_day_show().execute();
+                        new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        new refresh_day_show().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                     }
                     break;
             }
             if (MainActivity.isOnline(raspisanie_show.this)) {
-                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
+                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
             day_show(getApplicationContext());
             week_day_bt1.setClickable(true);
@@ -287,7 +292,7 @@ public class raspisanie_show extends AppCompatActivity {
                 case "Right": MainActivity.week_id += 1; break;
             }
             if(MainActivity.isOnline(raspisanie_show.this)){
-                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).execute();
+                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
             new refresh_day_show().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             week_show(raspisanie_show.this);
@@ -335,7 +340,7 @@ public class raspisanie_show extends AppCompatActivity {
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
             Cursor f = MainActivity.sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM rasp_test1 WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
-                    "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number, r_razmer", null);
+                    "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
             if (r.getCount()!=0) {
                 String prev_time = "";
                 tableLayout.removeAllViews();

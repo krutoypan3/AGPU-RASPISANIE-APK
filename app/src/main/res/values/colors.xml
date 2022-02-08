@@ -16,7 +16,7 @@
     <color name="sea">#077b8a</color>
     <color name="nefrit">#a2d5c6</color>
     <color name="fialka">#5c3c92</color>
-    <color name="gold">#00D6D6</color>
+    <color name="gold">#00D6D6</color>  <!-- Основной цвет текста в приложении -->
     <color name="coal">#3b4d61</color>
     <color name="fierd">#0c554d</color>
     <color name="arkt_iva">#95998e</color>

@@ -85,7 +85,7 @@ public class PlayService extends Service {
             } while (r.moveToNext());
 
             for (int i = 0; i < r_group0.size(); i++) {
-                new GetRasp(false, r_group0.get(i), r_group1.get(i), r_group2.get(i), week_id_upd, context).execute("");
+                new GetRasp(false, r_group0.get(i), r_group1.get(i), r_group2.get(i), week_id_upd, context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
         }
         sqLiteDatabaseS.close();

@@ -79,10 +79,7 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isOnline(Context context){ // Функция определяющая есть ли интернет
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()){
-            return true; // Интернет есть
-        }
-        return false; // Интернета нет
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     // Вызывается перед выходом из "полноценного" состояния.
@@ -255,7 +252,7 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                                 case (6):
                                     try { // Проверка обновлений
-                                        new CheckAppUpdate(MainActivity.this).execute();
+                                        new CheckAppUpdate(MainActivity.this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -268,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerLayout.setBackgroundResource(R.color.black);
 
-        new CheckAppUpdate(MainActivity.this).execute();
+        new CheckAppUpdate(MainActivity.this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 
         float rasnitsa_v_nedelyah = 222.48f; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
@@ -315,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!isOnline(MainActivity.this)){ see_group_rasp(); } // Если нет доступа к интернету то выводить список из бд
                     else {
                         String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + rasp_search_edit.getText().toString();
-                        new GetURLData().execute(urlq); // Отправляем запрос на сервер и выводим получившийся список
+                        new GetURLData(urlq).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR); // Отправляем запрос на сервер и выводим получившийся список
                     }
                 }
                 else{see_group_rasp();}
@@ -365,13 +362,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     private class GetURLData extends AsyncTask<String, String, String> { // Класс отвечающий за поиск группы \ аудитории \ преподователя
+        private final String urlq;
+
+        public GetURLData(String urlq){
+           this.urlq = urlq;
+        }
 
         @Override
         protected String doInBackground(String... strings) {
             HttpURLConnection connection = null;
             BufferedReader reader = null;
             try {
-                URL url = new URL(strings[0]);
+                URL url = new URL(urlq);
                 connection = (HttpURLConnection) url.openConnection();
                 connection.setConnectTimeout(5000);
                 try{ connection.connect();}
