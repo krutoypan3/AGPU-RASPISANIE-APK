@@ -267,6 +267,7 @@ public class raspisanie_show extends AppCompatActivity {
                 case "Bottom":
                     if (!refresh_on_off) {
                         refresh_btn.setClickable(false);
+                        refresh_btn_ficha.setVisibility(View.VISIBLE);
                         refresh_on_off = true;
                         refresh_btn.startAnimation(MainActivity.animRotate);
                         refresh_btn.setBackgroundResource(R.drawable.refresh_1);
@@ -325,6 +326,7 @@ public class raspisanie_show extends AppCompatActivity {
                     refresh_btn.startAnimation(MainActivity.animRotate_ok);
                     week_day_bt1.setClickable(true);
                     week_day_bt2.setClickable(true);
+                    refresh_btn_ficha.setVisibility(View.INVISIBLE);
                 }
             });
             return null;
@@ -440,7 +442,7 @@ public class raspisanie_show extends AppCompatActivity {
                     if (qqty[ff].getText().length() * 4 > max_razmer[fk]){ max_razmer[fk] = (int) (qqty[ff].getText().length() * 4); }
                 }
                 fk = 0;
-                for (ff = 0; ff < 60; ff++){
+                for (ff = 0; ff < 60; ff++){ // Из-за этого при переключении недели сбрасывается размер ячеек в режиме просмотра недельного расписания !!! БАГ !!! не критично, но и не очень то и приятно
                     if ((ff % 10) == 0 & ff != 0) { fk++; }
                     if (max_razmer[fk] < 120){ max_razmer[fk] = 120; }
                     qqty[ff].setMinHeight(max_razmer[fk]);
