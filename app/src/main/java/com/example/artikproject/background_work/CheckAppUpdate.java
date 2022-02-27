@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 
 import com.example.artikproject.DateBase_Online;
 
@@ -43,8 +45,13 @@ public class CheckAppUpdate extends AsyncTask<Void, Void, Void> {
                             dialog.cancel();
                         }
                     });
-                AlertDialog UpdateDialog = builder.create();
-                UpdateDialog.show();
+                new Handler(Looper.getMainLooper()).post(new Runnable() { // Это нужно для вызова вне основного потока
+                    @Override
+                    public void run() {
+                        AlertDialog UpdateDialog = builder.create();
+                        UpdateDialog.show();
+                    }
+                });
             }
             else{
                 System.out.println("Новых версий не найдено.");
