@@ -219,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(MainActivity.this, settings_layout.class);
                                     startActivity(intent);
                                     drawerResult.setSelection(0);
+                                    new addNotification(MainActivity.this, "Вопросы?", "Напиши мне в ВК:\nАртем Оганесян\nvk.com/aom13").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                                     break;
                                 case (4):
                                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases")));

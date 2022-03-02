@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.RequiresApi;
 
@@ -128,9 +130,12 @@ class GetRasp extends AsyncTask<String, String, String> {
                                 !(Objects.equals(predmet_aud, predmet_aud_db)) | !(Objects.equals(predmet_time, predmet_time_db))){
                             sqLiteDatabaseS.delete("rasp_test1", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
                             put_db(i, j, ff);
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                new addNotification(context, r_selectedItem + " новое расписание!", "Расписание обновилось, скорее проверьте!");
-                            }
+                            new Handler(Looper.getMainLooper()).post(new Runnable() { // Это нужно для вызова вне основного потока
+                                @Override
+                                public void run() { // Выводим уведомление о наличии нового расписания
+                                    new addNotification(context, r_selectedItem + " новое расписание!", "Расписание обновилось, скорее проверьте!").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                                }
+                            });
                         }
                     }
                 }
