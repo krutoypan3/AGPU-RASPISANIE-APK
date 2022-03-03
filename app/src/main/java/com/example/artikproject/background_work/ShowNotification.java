@@ -52,7 +52,7 @@ public class ShowNotification extends AsyncTask<Void, Void, Void> {
         // Вызов уведомления на канале
 
         Intent notificationIntent = new Intent(context, MainActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
         Notification notification = new Notification.Builder(context)
                 .setContentTitle(title)
