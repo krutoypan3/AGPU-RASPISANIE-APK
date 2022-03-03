@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.MyApp.Main"
     android:background="@drawable/snow"
-    tools:context=".MainActivity">
+    tools:context=".layout.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

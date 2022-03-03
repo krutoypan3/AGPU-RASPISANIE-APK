@@ -10,7 +10,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.artikproject.DateBase_Online;
+import com.example.artikproject.background_work.datebase.DateBase_Online;
 
 
 public class CheckAppUpdate extends AsyncTask<Void, Void, Void> {

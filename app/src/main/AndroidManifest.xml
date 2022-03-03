@@ -15,18 +15,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp.Main">
         <service
-            android:name=".PlayService"
+            android:name=".background_work.service.PlayService"
             android:enabled="true"
             android:exported="true" />
 
-        <receiver android:name=".BootBroadcast"
+        <receiver android:name=".background_work.service.BootBroadcast"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".layout.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
@@ -35,8 +35,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".raspisanie_show" />
-        <activity android:name=".settings_layout" />
+        <activity android:name=".layout.raspisanie_show" />
+        <activity android:name=".layout.settings_layout" />
     </application>
 
 </manifest>
