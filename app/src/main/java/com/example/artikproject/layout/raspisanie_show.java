@@ -67,7 +67,7 @@ public class raspisanie_show extends AppCompatActivity {
         refresh_btn = findViewById(R.id.refresh_btn); // Кнопка обновления расписания
         ConstraintLayout gesture_layout = findViewById(R.id.raspisanie_day); // Слой для отслеживания жестов
         RelativeLayout raspisanie_show_layout = findViewById(R.id.raspisanie_show); // Основной слой
-        new refresh_rasp_week_or_day_starter(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new refresh_rasp_week_or_day_starter(context).start();
         CheckBox mCheckBox = (CheckBox)findViewById(R.id.checkBox); // Уведомление об обновлении расписания
         Cursor sss = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
         mCheckBox.setChecked(sss.getCount() != 0);
@@ -233,13 +233,13 @@ public class raspisanie_show extends AppCompatActivity {
                         refresh_on_off = true;
                         refresh_btn.startAnimation(MainActivity.animRotate);
                         refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-                        new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                        new refresh_rasp_week_or_day_starter(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                        new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
+                        new refresh_rasp_week_or_day_starter(context).start();
                     }
                     break;
             }
             if (MainActivity.isOnline(raspisanie_show.this)) {
-                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
             }
             new day_show(getApplicationContext());
             week_day_bt1.setClickable(true);
@@ -255,9 +255,9 @@ public class raspisanie_show extends AppCompatActivity {
                 case "Right": MainActivity.week_id += 1; break;
             }
             if(MainActivity.isOnline(raspisanie_show.this)){
-                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
             }
-            new refresh_rasp_week_or_day_starter(context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            new refresh_rasp_week_or_day_starter(context).start();
             new week_show(raspisanie_show.this);
         }
     }

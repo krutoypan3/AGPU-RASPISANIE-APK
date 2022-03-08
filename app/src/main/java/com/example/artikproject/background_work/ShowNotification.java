@@ -7,7 +7,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
@@ -15,7 +14,7 @@ import androidx.annotation.RequiresApi;
 import com.example.artikproject.R;
 import com.example.artikproject.layout.MainActivity;
 
-public class ShowNotification extends AsyncTask<Void, Void, Void> {
+public class ShowNotification extends Thread {
     Context context;
     String title;
     String subtitle;
@@ -28,7 +27,7 @@ public class ShowNotification extends AsyncTask<Void, Void, Void> {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    protected Void doInBackground(Void... voids) {
+    public void run() {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         int id = 123123; // The id of the channel. Ид канала
@@ -63,6 +62,5 @@ public class ShowNotification extends AsyncTask<Void, Void, Void> {
                 .setContentIntent(contentIntent)
                 .build();
         mNotificationManager.notify(id, notification);
-        return null;
     }
 }

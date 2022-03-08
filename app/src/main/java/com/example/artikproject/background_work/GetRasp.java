@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-public class GetRasp extends AsyncTask<String, String, String> {
+public class GetRasp extends Thread {
     boolean start_activity;
     String r_selectedItem;
     String r_selectedItem_id;
@@ -52,9 +52,10 @@ public class GetRasp extends AsyncTask<String, String, String> {
         this.week_id_upd = week_id_upd;
         this.context = context;
     }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    protected String doInBackground(String... strings) {
+    public void run() {
         this.sqLiteDatabaseS = new DataBase_Local(context).getWritableDatabase(); //Подключение к базе данных
         Document doc;
         for(int ff = -1; ff<2; ff++) {
@@ -66,7 +67,7 @@ public class GetRasp extends AsyncTask<String, String, String> {
                 raspisanie_show.refresh_on_off = false;
                 raspisanie_show.refresh_successful = false;
                 this.sqLiteDatabaseS.close();
-                return null;
+                return;
             }
             List<String[]> days = new ArrayList<>();
             for (int i = 1; i < 7; i++) {
@@ -136,7 +137,7 @@ public class GetRasp extends AsyncTask<String, String, String> {
                             new Handler(Looper.getMainLooper()).post(new Runnable() { // Это нужно для вызова вне основного потока
                                 @Override
                                 public void run() { // Выводим уведомление о наличии нового расписания
-                                    new ShowNotification(context, r_selectedItem + " новое расписание!", "Расписание обновилось, скорее проверьте!").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                                    new ShowNotification(context, r_selectedItem + " новое расписание!", "Расписание обновилось, скорее проверьте!");
                                 }
                             });
                         }
@@ -152,8 +153,8 @@ public class GetRasp extends AsyncTask<String, String, String> {
         raspisanie_show.refresh_on_off = false;
         this.sqLiteDatabaseS.close();
         raspisanie_show.refresh_successful = true;
-        return null;
     }
+
     private void put_db(int i, int j, int ff){
         ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
         rowValues.put("r_group_code", r_selectedItem_id);

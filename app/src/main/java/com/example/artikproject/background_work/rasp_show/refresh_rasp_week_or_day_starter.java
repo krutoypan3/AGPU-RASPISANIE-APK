@@ -16,7 +16,7 @@ import com.example.artikproject.layout.raspisanie_show;
 
 import java.util.concurrent.TimeUnit;
 
-public class refresh_rasp_week_or_day_starter extends AsyncTask<Void, Void, Void> {
+public class refresh_rasp_week_or_day_starter extends Thread {
     Context context;
 
     public refresh_rasp_week_or_day_starter(Context context){
@@ -25,7 +25,7 @@ public class refresh_rasp_week_or_day_starter extends AsyncTask<Void, Void, Void
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    protected Void doInBackground(Void... voids) {
+    public void run() {
         while (raspisanie_show.refresh_on_off){
             try {
                 TimeUnit.MILLISECONDS.sleep(500);
@@ -48,6 +48,5 @@ public class refresh_rasp_week_or_day_starter extends AsyncTask<Void, Void, Void
             raspisanie_show.refresh_btn_ficha.setVisibility(View.INVISIBLE);
             }
         });
-        return null;
     }
 }

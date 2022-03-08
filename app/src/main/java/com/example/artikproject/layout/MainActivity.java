@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
@@ -22,33 +21,22 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-
-import org.json.*;
-
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
+import com.example.artikproject.background_work.GetURLData;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.GetRasp;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.ShowNotification;
 import com.example.artikproject.background_work.CheckAppUpdate;
+import com.example.artikproject.background_work.debug.SendInfoToServer;
 import com.example.artikproject.background_work.service.PlayService;
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
@@ -62,12 +50,12 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 public class MainActivity extends AppCompatActivity {
 
     private EditText rasp_search_edit;
-    private String[] group_listed;
-    private String[] group_listed_type;
-    private String[] group_listed_id;
-    private ListView listview;
-    private TextView result;
-    private TextView subtitle;
+    public static String[] group_listed;
+    public static String[] group_listed_type;
+    public static String[] group_listed_id;
+    public static ListView listview;
+    public static TextView result;
+    public static TextView subtitle;
     public static String selectedItem;
     public static String selectedItem_type;
     public static String selectedItem_id;
@@ -224,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent intent = new Intent(MainActivity.this, settings_layout.class);
                                     startActivity(intent);
                                     drawerResult.setSelection(0);
-                                    new ShowNotification(MainActivity.this, "Вопросы?", "Напиши мне в ВК:\nАртем Оганесян\nvk.com/aom13").executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                                    new ShowNotification(MainActivity.this, "Вопросы?", "Напиши мне в ВК:\nАртем Оганесян\nvk.com/aom13").start();
                                     break;
                                 case (4):
                                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases")));
@@ -258,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
                                     break;
                                 case (6):
                                     try { // Проверка обновлений
-                                        new CheckAppUpdate(MainActivity.this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                                        new CheckAppUpdate(MainActivity.this);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -271,7 +259,8 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout mDrawerLayout = findViewById(R.id.drawer_layout);
         mDrawerLayout.setBackgroundResource(R.color.black);
 
-        new CheckAppUpdate(MainActivity.this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        new CheckAppUpdate(MainActivity.this).start(); // Запуск проверки обновлений при входе в приложение
+        new SendInfoToServer(MainActivity.this).start(); // Запуск отправки анонимной статистики для отадки ошибок
 
 
         float rasnitsa_v_nedelyah = 222.48f; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
@@ -292,13 +281,13 @@ public class MainActivity extends AppCompatActivity {
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             public void onItemClick(AdapterView<?> parent, View v, int position, long id)
             {
-                selectedItem = MainActivity.this.group_listed[position];
-                selectedItem_type = MainActivity.this.group_listed_type[position];
-                selectedItem_id = MainActivity.this.group_listed_id[position];
-                MainActivity.this.subtitle.setText(selectedItem);
+                selectedItem = MainActivity.group_listed[position];
+                selectedItem_type = MainActivity.group_listed_type[position];
+                selectedItem_id = MainActivity.group_listed_id[position];
+                MainActivity.subtitle.setText(selectedItem);
                 Intent intent = new Intent(MainActivity.this, raspisanie_show.class);
                 if (isOnline(MainActivity.this)){
-                    new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                    new GetRasp(false, MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
                 }
                 startActivity(intent);
             }
@@ -318,7 +307,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!isOnline(MainActivity.this)){ see_group_rasp(); } // Если нет доступа к интернету то выводить список из бд
                     else {
                         String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + rasp_search_edit.getText().toString();
-                        new GetURLData(urlq).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR); // Отправляем запрос на сервер и выводим получившийся список
+                        new GetURLData(urlq, MainActivity.this).start(); // Отправляем запрос на сервер и выводим получившийся список
                     }
                 }
                 else{see_group_rasp();}
@@ -350,9 +339,9 @@ public class MainActivity extends AppCompatActivity {
                 group_list_type.add(r.getString(2));
                 group_list_id.add(r.getString(0));
             }while(r.moveToNext());
-            MainActivity.this.group_listed = group_list.toArray(new String[0]);
-            MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
-            MainActivity.this.group_listed_id = group_list_id.toArray(new String[0]);
+            MainActivity.group_listed = group_list.toArray(new String[0]);
+            MainActivity.group_listed_type = group_list_type.toArray(new String[0]);
+            MainActivity.group_listed_id = group_list_id.toArray(new String[0]);
         } // Вывод SELECT запроса
         if( group_listed == null){
             result.setText("Увы, но у вас нет сохраненных групп...");
@@ -363,99 +352,6 @@ public class MainActivity extends AppCompatActivity {
             ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
             listview.setAdapter(adapter);
             result.setText("");
-        }
-    }
-
-
-    private class GetURLData extends AsyncTask<String, String, String> { // Класс отвечающий за поиск группы \ аудитории \ преподователя
-        private final String urlq;
-
-        public GetURLData(String urlq){
-           this.urlq = urlq;
-        }
-
-        @Override
-        protected String doInBackground(String... strings) {
-            HttpURLConnection connection = null;
-            BufferedReader reader = null;
-            try {
-                URL url = new URL(urlq);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setConnectTimeout(5000);
-                try{ connection.connect();}
-                catch (Exception e){
-                    runOnUiThread(new Runnable() {
-
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),"Ошибка при подключении к сайту", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    return null;
-                }
-                InputStream stream = connection.getInputStream();
-                reader = new BufferedReader(new InputStreamReader(stream));
-
-                String buffer = "";
-                buffer = reader.readLine();
-
-                String jsonString = buffer; // ЭТО JSON со списком групп
-                JSONArray obj = new JSONArray(jsonString);
-                List<String> group_list = new ArrayList<>();
-                List<String> group_list_type = new ArrayList<>();
-                List<String> group_list_id = new ArrayList<>();
-
-                for (int ii = 0; ii<obj.length(); ii++){
-                    JSONObject guysJSON = obj.getJSONObject(ii);
-                    Iterator<?> keys = guysJSON.keys();
-                    int i = 0;
-                    while(keys.hasNext()) {
-                        Object value = guysJSON.get((String)keys.next());
-                        if (value != null && i % 4 == 0) {
-                            String group_name = (String) value;
-                            group_list.add(group_name);
-                        }
-                        else if (value != null && i % 4 == 1) {
-                            String group_type = (String) value;
-                            group_list_type.add(group_type);
-                        }
-                        else if (value != null && i % 4 == 2) {
-                            String group_id = value.toString();
-                            group_list_id.add(group_id);
-                        }
-                        i++;
-                    }
-                }
-
-                MainActivity.this.group_listed = group_list.toArray(new String[0]);
-                MainActivity.this.group_listed_type = group_list_type.toArray(new String[0]);
-                MainActivity.this.group_listed_id =group_list_id.toArray(new String[0]);
-
-            } catch (MalformedURLException e) {
-                System.out.println("Исключение MalformedURLException в классе GetURLData");
-            } catch (IOException e) {
-                System.out.println("Исключение IOException в классе GetURLData");
-            } catch (JSONException e) {
-                System.out.println("Исключение JSONException в классе GetURLData");
-            } finally {
-                if (connection != null) connection.disconnect();
-                if (reader != null) {
-                    try { reader.close(); }
-                    catch (IOException e) {
-                        System.out.println("Исключение IOException в классе GetURLData");
-                    }
-                }
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String res) {
-            super.onPostExecute(res);
-            ArrayAdapter<String> adapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1, group_listed);
-            listview.setAdapter(adapter);
-            result.setText(res);
-            listview.setVisibility(View.VISIBLE);
         }
     }
 }

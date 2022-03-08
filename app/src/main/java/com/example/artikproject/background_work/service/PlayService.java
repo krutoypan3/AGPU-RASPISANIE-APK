@@ -51,10 +51,7 @@ public class PlayService extends Service {
     public boolean isOnline(Context context) { // Функция определяющая есть ли интернет
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnectedOrConnecting()) {
-            return true; // Интернет есть
-        }
-        return false; // Интернета нет
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -79,7 +76,7 @@ public class PlayService extends Service {
             } while (r.moveToNext());
 
             for (int i = 0; i < r_group0.size(); i++) {
-                new GetRasp(false, r_group0.get(i), r_group1.get(i), r_group2.get(i), week_id_upd, context).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                new GetRasp(false, r_group0.get(i), r_group1.get(i), r_group2.get(i), week_id_upd, context).start();
             }
         }
         sqLiteDatabaseS.close();

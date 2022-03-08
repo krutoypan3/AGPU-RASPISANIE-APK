@@ -13,15 +13,15 @@ import android.os.Looper;
 import com.example.artikproject.background_work.datebase.DateBase_Online;
 
 
-public class CheckAppUpdate extends AsyncTask<Void, Void, Void> {
-    private Context context;
+public class CheckAppUpdate extends Thread {
+    private final Context context;
 
     public CheckAppUpdate(Context context) {
         this.context = context;
     }
 
     @Override
-    protected Void doInBackground(Void... params) {
+    public void run() {
         try{
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
             int versionCode = packageInfo.versionCode; // И ее кода
@@ -60,6 +60,5 @@ public class CheckAppUpdate extends AsyncTask<Void, Void, Void> {
         catch (Exception e){
             System.out.println("Ошибка в модуле CheckAppUpdate");
         }
-    return null;
     }
 }
