@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.artikproject.background_work.datebase.DateBase_Online;
+import com.example.artikproject.background_work.debug.Device_info;
 
 
 public class CheckAppUpdate extends Thread {
@@ -23,8 +24,7 @@ public class CheckAppUpdate extends Thread {
     @Override
     public void run() {
         try{
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            int versionCode = packageInfo.versionCode; // И ее кода
+            int versionCode = Device_info.getAppVersionCode(context);
             DateBase_Online dateBase_online = new DateBase_Online();
             String[] version_info_db = dateBase_online.check_update();
             if(Integer.parseInt(version_info_db[0]) > versionCode){

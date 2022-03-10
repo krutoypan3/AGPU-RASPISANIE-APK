@@ -36,9 +36,8 @@ public class SendInfoToServer extends Thread {
             connection.setRequestMethod("POST");
 
             // Текущая версия приложения
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            String version = packageInfo.versionName; // Её название**
-            int versionCode = packageInfo.versionCode; // Её код**
+            String version = Device_info.getAppVersion(context); // Её название**
+            int versionCode = Device_info.getAppVersionCode(context); // Её код**
 
             Map<Object, Object> params = new HashMap<>();
             params.put("DeviceManufacturer", Device_info.getDeviceManufacturer());

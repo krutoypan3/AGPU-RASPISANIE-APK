@@ -1,7 +1,29 @@
 package com.example.artikproject.background_work.debug;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+
 
 public class Device_info {
+
+    /**
+     * Получить версию приложения
+     * @return Видимая версия приложения
+     */
+    public static String getAppVersion(Context context) throws PackageManager.NameNotFoundException {
+        PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        return packageInfo.versionName;
+    }
+
+    /**
+     * Получить код версии приложения
+     * @return Код версии приложения
+     */
+    public static int getAppVersionCode(Context context) throws PackageManager.NameNotFoundException {
+        PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+        return packageInfo.versionCode;
+    }
+
 
     /**
      * Получить ширину устройства (px)
@@ -79,7 +101,6 @@ public class Device_info {
     /**
      * Получить Android SDK мобильного телефона
      *
-     * @return
      */
     public static int getDeviceSDK() {
         return android.os.Build.VERSION.SDK_INT;
@@ -88,7 +109,6 @@ public class Device_info {
     /**
      * Получить версию Android для телефона
      *
-     * @return
      */
     public static String getDeviceAndroidVersion() {
         return android.os.Build.VERSION.RELEASE;
