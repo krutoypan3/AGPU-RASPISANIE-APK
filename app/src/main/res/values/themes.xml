@@ -13,6 +13,7 @@
         <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.FilledBox</item>
         <item name="android:listViewStyle">@color/sea</item>
+        <item name="android:textViewStyle">@color/gold</item>
 
     </style>
 </resources>

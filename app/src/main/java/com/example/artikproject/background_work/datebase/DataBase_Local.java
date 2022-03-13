@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.artikproject.R;
+
     public class DataBase_Local extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "raspisanie.db";
 
@@ -14,6 +16,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        // База данных с расписанием
         try {
             sqLiteDatabase.execSQL("CREATE TABLE \"rasp_test1\" (\n" +
                     "\t\"r_group_code\"\tINTEGER,\n" +
@@ -36,6 +39,7 @@ import android.database.sqlite.SQLiteOpenHelper;
         }
         catch (Exception ignored){
         }
+        // База данных с избранным расписанием
         try {
             sqLiteDatabase.execSQL("CREATE TABLE \"rasp_update\" (\n" +
                     "\t\"r_group_code\"\tINTEGER,\n" +
@@ -43,17 +47,18 @@ import android.database.sqlite.SQLiteOpenHelper;
                     "\t\"r_selectedItem\"\tTEXT\n" +
                     ")");
             }
-            catch (Exception ignored){
-            }
+        catch (Exception ignored){
+        }
+        // База данных с настройками
         try {
             sqLiteDatabase.execSQL("CREATE TABLE \"settings_app\" (\n" +
                     "\t\"settings_name\"\tTEXT,\n" +
                     "\t\"value\"\tTEXT\n" +
                     ")");
             ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
-            rowValues.put("settings_name", "theme");
-            rowValues.put("value", "-1");
-            sqLiteDatabase.insert("settings_app", null, rowValues);
+//            rowValues.put("settings_name", "theme_id");
+//            rowValues.put("value", R.style.Theme_MyApp_Main);
+//            sqLiteDatabase.insert("settings_app", null, rowValues);
         }
         catch (Exception ignored){
         }
