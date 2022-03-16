@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.IBinder;
 
@@ -18,7 +17,7 @@ import androidx.work.WorkRequest;
 
 
 import com.example.artikproject.background_work.datebase.DataBase_Local;
-import com.example.artikproject.background_work.GetRasp;
+import com.example.artikproject.background_work.rasp_show.GetRasp;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -76,7 +75,7 @@ public class PlayService extends Service {
             } while (r.moveToNext());
 
             for (int i = 0; i < r_group0.size(); i++) {
-                new GetRasp(false, r_group0.get(i), r_group1.get(i), r_group2.get(i), week_id_upd, context).start();
+                new GetRasp(r_group0.get(i), r_group1.get(i), r_group2.get(i), week_id_upd, context).start();
             }
         }
         sqLiteDatabaseS.close();

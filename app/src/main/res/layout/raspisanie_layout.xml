@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.MyApp.Main"
     android:background="@drawable/snow"
-    tools:context=".layout.raspisanie_show">
+    tools:context=".layout.Raspisanie_show">
 
     <TextView
         android:id="@+id/logow"

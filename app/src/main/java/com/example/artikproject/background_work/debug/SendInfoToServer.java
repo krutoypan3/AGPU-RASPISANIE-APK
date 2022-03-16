@@ -22,7 +22,10 @@ import java.util.Map;
 
 public class SendInfoToServer extends Thread {
     Context context;
-
+    /**
+     * Класс отвечающий за отправку информации для отладки на сервер
+     * @param context Контекст приложения
+     */
     public SendInfoToServer(Context context) {
         this.context = context;
     }

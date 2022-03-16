@@ -9,7 +9,10 @@ import com.example.artikproject.R;
 
     public class DataBase_Local extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "raspisanie.db";
-
+        /**
+         * Класс отвечающий за первичное создание \ подключение к локальной базе данных
+         * @param context Контекст приложения
+         */
     public DataBase_Local(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -55,7 +58,7 @@ import com.example.artikproject.R;
                     "\t\"settings_name\"\tTEXT,\n" +
                     "\t\"value\"\tTEXT\n" +
                     ")");
-            ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
+//            ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
 //            rowValues.put("settings_name", "theme_id");
 //            rowValues.put("value", R.style.Theme_MyApp_Main);
 //            sqLiteDatabase.insert("settings_app", null, rowValues);

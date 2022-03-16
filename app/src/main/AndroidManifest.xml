@@ -39,8 +39,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".layout.raspisanie_show" />
-        <activity android:name=".layout.settings_layout" />
+        <activity android:name=".layout.Raspisanie_show" />
+        <activity android:name=".layout.Settings_layout" />
     </application>
 
 </manifest>

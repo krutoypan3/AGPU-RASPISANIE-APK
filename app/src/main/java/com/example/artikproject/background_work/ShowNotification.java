@@ -18,7 +18,12 @@ public class ShowNotification extends Thread {
     Context context;
     String title;
     String subtitle;
-
+    /**
+     * Класс отвечающий за показ уведомлений
+     * @param context Контекст приложения
+     * @param title Заголовок уведомления
+     * @param subtitle Текст уведомления
+     */
     public ShowNotification(Context context, String title, String subtitle) {
         this.context =context;
         this.title = title;

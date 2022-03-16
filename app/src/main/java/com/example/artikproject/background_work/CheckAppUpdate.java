@@ -16,7 +16,10 @@ import com.example.artikproject.background_work.debug.Device_info;
 
 public class CheckAppUpdate extends Thread {
     private final Context context;
-
+    /**
+     * Класс отвечающий за поиск обновлений приложения
+     * @param context Контекст приложения
+     */
     public CheckAppUpdate(Context context) {
         this.context = context;
     }
@@ -32,25 +35,15 @@ public class CheckAppUpdate extends Thread {
                 builder.setTitle("Найдена новая версия приложения!")
                     .setMessage("В новой версии:\n" + version_info_db[3])
                     .setCancelable(false)
-                        .setNegativeButton("Отмена",new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        })
-                    .setPositiveButton("Обновить",new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(version_info_db[2])));
-                            dialog.cancel();
-                        }
+                        .setNegativeButton("Отмена", (dialog, which) -> dialog.cancel())
+                    .setPositiveButton("Обновить", (dialog, which) -> {
+                        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(version_info_db[2])));
+                        dialog.cancel();
                     });
-                new Handler(Looper.getMainLooper()).post(new Runnable() { // Это нужно для вызова вне основного потока
-                    @Override
-                    public void run() {
-                        AlertDialog UpdateDialog = builder.create();
-                        UpdateDialog.show();
-                    }
+                // Это нужно для вызова вне основного потока
+                new Handler(Looper.getMainLooper()).post(() -> {
+                    AlertDialog UpdateDialog = builder.create();
+                    UpdateDialog.show();
                 });
             }
             else{
