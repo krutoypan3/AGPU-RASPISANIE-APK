@@ -5,15 +5,12 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -26,6 +23,7 @@ import java.util.Objects;
 
 import com.example.artikproject.background_work.main_show.GetGroupList;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
+import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
 import com.example.artikproject.background_work.main_show.MainToolBar;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.background_work.rasp_show.GetRasp;
@@ -111,33 +109,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Отслеживание нажатий на элемент в списке(ауд)
         listview_aud = findViewById(R.id.listview_aud);
-        listview_aud.setOnItemClickListener((parent, v, position, id) -> {
-            Intent intent;
-            switch (position) {
-                case (1):
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/eQo5R9LdnCprwCvs6"));
-                    break;
-                case (2):
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/KwDaKEg3w69a5xuy5"));
-                    break;
-                case (3):
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/rtrpMGCP5t3E1FDU8"));
-                    break;
-                case (4):
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/DhAqdFucRB5RgF8H6"));
-                    break;
-                case (5):
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/m1Ddk1RmebQ9CK5P9"));
-                    break;
-                case (6):
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/4fBCRhZPJbc7z4Ng6"));
-                    break;
-                default:
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/8Lv4W8uds3cFAeW36")); // 0 нулевое
-                    break;
-            }
-            startActivity(intent);
-        });
+        listview_aud.setOnItemClickListener((parent, v, position, id) ->
+            new ListViewAud_ClickListener(position, MainActivity.this));
 
         new CheckAppUpdate(MainActivity.this).start(); // Запуск проверки обновлений при входе в приложение
         new SendInfoToServer(MainActivity.this).start(); // Запуск отправки анонимной статистики для отадки ошибок
