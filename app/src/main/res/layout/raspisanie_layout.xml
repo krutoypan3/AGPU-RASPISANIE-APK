@@ -108,7 +108,7 @@
 
 
             <TableLayout
-                android:id="@+id/table"
+                android:id="@+id/week_para_view"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:measureWithLargestChild="false"
@@ -133,7 +133,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ListView
-        android:id="@+id/para_view"
+        android:id="@+id/day_para_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_text"

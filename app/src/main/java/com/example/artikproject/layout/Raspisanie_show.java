@@ -1,14 +1,12 @@
 package com.example.artikproject.layout;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -21,7 +19,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.artikproject.background_work.rasp_show.GetRasp;
 import com.example.artikproject.background_work.rasp_show.*;
 import com.example.artikproject.background_work.OnSwipeTouchListener;
 import com.example.artikproject.R;
@@ -29,9 +26,9 @@ import com.example.artikproject.R;
 import java.util.Random;
 
 public class Raspisanie_show extends AppCompatActivity {
-    public static ListView para_view;
+    public static ListView day_para_view;
     public static TextView mainText;
-    public static TableLayout tableLayout;
+    public static TableLayout week_para_view;
     public static boolean refresh_on_off = false;
     public static boolean week_day_on_off = false;
     public static boolean refresh_successful = true;
@@ -61,16 +58,20 @@ public class Raspisanie_show extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raspisanie_layout);
-        mainText = findViewById(R.id.main_text);
-        para_view = findViewById(R.id.para_view);
-        tableLayout = findViewById(R.id.table); // Инициализация таблицы
+        mainText = findViewById(R.id.main_text); // Основной текст в центре
+        day_para_view = findViewById(R.id.day_para_view); // Инициализация списка с расписанием
+        week_para_view = findViewById(R.id.week_para_view); // Инициализация таблицы с расписанием
+        week_day_bt1 = findViewById(R.id.week_day_bt1); // Кнопка перехода к предыдущему дню
+        week_day_bt2 = findViewById(R.id.week_day_bt2); // Кнопка перехода к следующему дню
+        week_day_change_btn = findViewById(R.id.week_day_change_btn); // Кнопка смены режима просмотра расписания [День / Неделя]
         refresh_btn_ficha = findViewById(R.id.refresh_btn_all); // Кнопка перекручивания расп (фича)
         refresh_btn = findViewById(R.id.refresh_btn); // Кнопка обновления расписания
-        week_day_change_btn_size_up = findViewById(R.id.week_day_change_btn_size_up);
-        week_day_change_btn_size_down = findViewById(R.id.week_day_change_btn_size_down);
+        week_day_change_btn_size_up = findViewById(R.id.week_day_change_btn_size_up); // Кнопка увеличения размера текста в недельном режиме
+        week_day_change_btn_size_down = findViewById(R.id.week_day_change_btn_size_down); // Кнопка уменьшения размера текста в недельном режиме
         gesture_layout = findViewById(R.id.raspisanie_day); // Слой для отслеживания жестов
         RelativeLayout raspisanie_show_layout = findViewById(R.id.raspisanie_show); // Основной слой
-        new Refresh_rasp_week_or_day_starter(getApplicationContext()).start();
+
+        new Refresh_rasp_week_or_day_starter(getApplicationContext()).start(); // Обновляем расписание
         CheckBox mCheckBox = findViewById(R.id.checkBox); // Уведомление об обновлении расписания
         Cursor sss = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
         mCheckBox.setChecked(sss.getCount() != 0);
@@ -95,9 +96,6 @@ public class Raspisanie_show extends AppCompatActivity {
         // Кнопка уменьшающая размер текста в режиме недели
         week_day_change_btn_size_down.setOnClickListener(v -> new Week_show_resize().size_dec());
 
-        week_day_bt1 = findViewById(R.id.week_day_bt1);
-        week_day_bt2 = findViewById(R.id.week_day_bt2);
-
         // Функция перехода на сайт с расписанием при нажатии на кнопку
         Button rasp_site = findViewById(R.id.rasp_site);
         rasp_site.setOnClickListener(v -> {
@@ -111,13 +109,13 @@ public class Raspisanie_show extends AppCompatActivity {
         });
 
         // Переход к предыдущему дню
-        week_day_bt1.setOnClickListener(v -> swipe_day("Left"));
+        week_day_bt1.setOnClickListener(v -> new Swipe_rasp("Left", getApplicationContext()));
 
         // Переход к следующему дню
-        week_day_bt2.setOnClickListener(v -> swipe_day("Right"));
+        week_day_bt2.setOnClickListener(v -> new Swipe_rasp("Right", getApplicationContext()));
 
         // Обновить расписание
-        refresh_btn.setOnClickListener(v -> swipe_day("Bottom"));
+        refresh_btn.setOnClickListener(v -> new Swipe_rasp("Bottom", getApplicationContext()));
         refresh_btn_ficha.setOnClickListener(v -> {
             int random_int = new Random().nextInt(3);
             switch (random_int){
@@ -129,80 +127,19 @@ public class Raspisanie_show extends AppCompatActivity {
         });
 
         // Смена недельного режима и дневного
-        week_day_change_btn = findViewById(R.id.week_day_change_btn);
         week_day_change_btn.setOnClickListener(v -> new Week_day_change(getApplicationContext()));
 
-        // отслеживание жестов
-        ListView para_view = findViewById(R.id.para_view);
-
-        para_view.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
-            public void onSwipeRight() { swipe_day("Left"); }
-            public void onSwipeLeft() { swipe_day("Right"); }
+        // отслеживание жестов на дневном расписании
+        day_para_view.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
+            public void onSwipeRight() { new Swipe_rasp("Left", getApplicationContext()); }
+            public void onSwipeLeft() { new Swipe_rasp("Right", getApplicationContext()); }
         });
 
-
-        // отслеживание жестов
+        // отслеживание жестов под дневным расписанием
         gesture_layout.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
-            public void onSwipeRight() { swipe_day("Left"); }
-            public void onSwipeLeft() { swipe_day("Right"); }
-            public void onSwipeBottom(){ swipe_day("Bottom"); }
+            public void onSwipeRight() { new Swipe_rasp("Left", getApplicationContext()); }
+            public void onSwipeLeft() { new Swipe_rasp("Right", getApplicationContext()); }
+            public void onSwipeBottom(){ new Swipe_rasp("Bottom", getApplicationContext()); }
         });
-    }
-
-        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-        public void swipe_day(String direction){
-        week_day_bt1.setClickable(false);
-        week_day_bt2.setClickable(false);
-        if (!week_day_on_off) {
-            switch (direction) {
-                case "Left":
-                    week_day_bt1.setAnimation(MainActivity.animUehalVl);
-                    MainActivity.week_day -= 1;
-                    if (MainActivity.week_day == -1) { // Если будет воскресенье, то будет показана суббота
-                        MainActivity.week_day = 5;
-                        MainActivity.week_id -= 1;
-                    }
-                    break;
-                case "Right":
-                    week_day_bt2.setAnimation(MainActivity.animUehalVp);
-                    MainActivity.week_day += 1;
-                    if (MainActivity.week_day == 6) { // Если будет воскресенье, то будет показана суббота
-                        MainActivity.week_day = 0;
-                        MainActivity.week_id += 1;
-                    }
-                    break;
-                case "Bottom":
-                    if (!refresh_on_off) {
-                        refresh_btn.setClickable(false);
-                        refresh_btn_ficha.setVisibility(View.VISIBLE);
-                        refresh_on_off = true;
-                        refresh_btn.startAnimation(MainActivity.animRotate);
-                        refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-                        new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
-                        new Refresh_rasp_week_or_day_starter(getApplicationContext()).start();
-                    }
-                    break;
-            }
-            if (MainActivity.isOnline(Raspisanie_show.this)) {
-                new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
-            }
-            new Day_show(getApplicationContext());
-            week_day_bt1.setClickable(true);
-            week_day_bt2.setClickable(true);
-        } else{
-            refresh_on_off = true;
-            refresh_btn.setClickable(false);
-            refresh_btn_ficha.setVisibility(View.VISIBLE);
-            refresh_btn.startAnimation(MainActivity.animRotate);
-            refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-            switch (direction){
-                case "Left": MainActivity.week_id -= 1; break;
-                case "Right": MainActivity.week_id += 1; break;
-            }
-            if(MainActivity.isOnline(Raspisanie_show.this)){
-                new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
-            }
-            new Refresh_rasp_week_or_day_starter(getApplicationContext()).start();
-        }
     }
  }

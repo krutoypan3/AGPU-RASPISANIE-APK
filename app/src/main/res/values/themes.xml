@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <style name="Theme.MyApp.Main" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!--Base colors-->
         <item name="colorPrimary">@color/fierd</item>

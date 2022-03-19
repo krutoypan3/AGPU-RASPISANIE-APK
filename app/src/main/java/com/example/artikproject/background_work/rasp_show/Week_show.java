@@ -39,7 +39,7 @@ public class Week_show {
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
             if (r.getCount()!=0) {
                 String prev_time = "";
-                Raspisanie_show.tableLayout.removeAllViews();
+                Raspisanie_show.week_para_view.removeAllViews();
                 TableRow tableRow = new TableRow(context); // Новый столбец
                 String str = "";
                 TextView qty; // Новая ячейка
@@ -67,7 +67,7 @@ public class Week_show {
                     timeRow.addView(empty_cell); // Добавление пустой ячейки в столбец
                     timeRow.addView(qty);
                 }while(f.moveToNext());
-                Raspisanie_show.tableLayout.addView(timeRow);
+                Raspisanie_show.week_para_view.addView(timeRow);
                 do{
                     if (Objects.equals(prev_time, r.getString(9))){
                         str += "\n";
@@ -103,12 +103,12 @@ public class Week_show {
                         empty_cell = new TextView(context); // Новая пустая ячейка
                         empty_cell.setHeight(1);
                         tableRow.addView(empty_cell); // Добавление пустой ячейки в столбец
-                        Raspisanie_show.tableLayout.addView(tableRow); // Добавление столбца в таблицу
+                        Raspisanie_show.week_para_view.addView(tableRow); // Добавление столбца в таблицу
                         tableRow = new TableRow(context); // Новый столбец
                         tableRow.setGravity(Gravity.CENTER_VERTICAL);
                         str = r.getString(10);
                         str += "\n" + (r.getString(11));
-                        Raspisanie_show.tableLayout.addView(tableRow); // Добавление столбца в таблицу
+                        Raspisanie_show.week_para_view.addView(tableRow); // Добавление столбца в таблицу
                         tableRows[fk] = tableRow;
                         fk++;
                         try {

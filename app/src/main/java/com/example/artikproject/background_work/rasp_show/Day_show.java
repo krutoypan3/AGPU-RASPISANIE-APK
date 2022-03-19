@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.widget.ArrayAdapter;
 
 import com.example.artikproject.R;
+import com.example.artikproject.background_work.CheckInternetConnection;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;
 
@@ -40,7 +41,13 @@ public class Day_show {
                 }
             }while(r.moveToNext());
         }
+        else {
+            if (CheckInternetConnection.getState(context)) {
+                new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, context).start();
+
+            }
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter(context, R.layout.listviewadapterbl, group_list);
-        Raspisanie_show.para_view.setAdapter(adapter);
+        Raspisanie_show.day_para_view.setAdapter(adapter);
     }
 }

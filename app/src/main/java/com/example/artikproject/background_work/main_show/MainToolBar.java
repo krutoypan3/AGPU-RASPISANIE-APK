@@ -3,16 +3,20 @@ package com.example.artikproject.background_work.main_show;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
 import com.example.artikproject.background_work.ShowNotification;
 import com.example.artikproject.background_work.debug.Device_info;
+import com.example.artikproject.background_work.debug.SendInfoToServer;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Settings_layout;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -49,6 +53,7 @@ public class MainToolBar {
                     new DividerDrawerItem(),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withIdentifier(4),
                     new DividerDrawerItem(),
+                    new SecondaryDrawerItem().withName(R.string.feedback).withIcon(FontAwesome.Icon.faw_question_circle).withIdentifier(7),
                     new SecondaryDrawerItem().withName("Версия: " + Device_info.getAppVersion(context)).setEnabled(false)
             )
             .withOnDrawerItemClickListener((parent, view, position, id, drawerItem) -> {
@@ -127,6 +132,26 @@ public class MainToolBar {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
+                            break;
+                        case (7):
+                            MainActivity.drawerResult.setSelection(0);
+                            builder = new AlertDialog.Builder(act);
+                            final EditText input = new EditText(context);
+                            builder.setView(input);
+                            builder.setTitle("О чем вы хотите сообщить?")
+                                    .setMessage("Опишите ситуацию поподробнее")
+                                    .setCancelable(true)
+
+                                    .setNegativeButton("Отмена", (dialog, which) -> dialog.cancel())
+                                    .setPositiveButton("Отправить отзыв", (dialog, whichButton) -> {
+                                        String value = String.valueOf(input.getText());
+                                        Toast.makeText(context, value, Toast.LENGTH_SHORT).show();
+                                        new SendInfoToServer(context, value);
+                                    });
+                            Error = builder.create();
+                            Error.show();
+                            MainActivity.listview.setAdapter(null);
+                            MainActivity.drawerResult.setSelection(0);
                             break;
                     }
                 }

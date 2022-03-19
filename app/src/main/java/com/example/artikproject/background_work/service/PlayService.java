@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.IBinder;
 
@@ -16,6 +14,7 @@ import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 
 
+import com.example.artikproject.background_work.CheckInternetConnection;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.rasp_show.GetRasp;
 
@@ -47,16 +46,10 @@ public class PlayService extends Service {
     public void onDestroy() {
     }
 
-    public boolean isOnline(Context context) { // Функция определяющая есть ли интернет
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void get_group_db(Context context) {
         SQLiteDatabase sqLiteDatabaseS = new DataBase_Local(context).getWritableDatabase(); //Подключение к базе данных
-        if (isOnline(context)) {
+        if (CheckInternetConnection.getState(context)) {
             Cursor r = sqLiteDatabaseS.rawQuery("SELECT r_group_code, r_selectedItem_type, r_selectedItem FROM rasp_update", null); // SELECT запрос
             ArrayList<String> r_group0 = new ArrayList<>();
             ArrayList<String> r_group1 = new ArrayList<>();

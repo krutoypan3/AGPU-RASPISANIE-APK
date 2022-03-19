@@ -18,8 +18,8 @@ public class Week_day_change {
             Raspisanie_show.week_day_change_btn.setImageResource(R.drawable.ic_baseline_today_24);
             Raspisanie_show.week_day_change_btn.setAnimation(MainActivity.animScale);
             new Week_show(context);
-            Raspisanie_show.para_view.setVisibility(View.INVISIBLE);
-            Raspisanie_show.tableLayout.setVisibility(View.VISIBLE);
+            Raspisanie_show.day_para_view.setVisibility(View.INVISIBLE);
+            Raspisanie_show.week_para_view.setVisibility(View.VISIBLE);
             Raspisanie_show.week_day_on_off = true;
             Raspisanie_show.gesture_layout.setVisibility(View.INVISIBLE);
             Raspisanie_show.week_day_change_btn_size_up.setVisibility(View.VISIBLE);
@@ -28,8 +28,8 @@ public class Week_day_change {
         else{
             Raspisanie_show.week_day_change_btn.setImageResource(R.drawable.ic_baseline_date_range_24);
             Raspisanie_show.week_day_change_btn.setAnimation(MainActivity.animScale);
-            Raspisanie_show.para_view.setVisibility(View.VISIBLE);
-            Raspisanie_show.tableLayout.setVisibility(View.INVISIBLE);
+            Raspisanie_show.day_para_view.setVisibility(View.VISIBLE);
+            Raspisanie_show.week_para_view.setVisibility(View.INVISIBLE);
             Raspisanie_show.week_day_on_off = false;
             new Day_show(context);
             Raspisanie_show.gesture_layout.setVisibility(View.VISIBLE);

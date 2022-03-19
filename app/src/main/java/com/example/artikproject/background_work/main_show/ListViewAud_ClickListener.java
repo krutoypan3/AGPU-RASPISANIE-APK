@@ -7,9 +7,9 @@ import android.net.Uri;
 
 public class ListViewAud_ClickListener {
     /**
-     * Список аудиторий и корпусов
-     * @param position Позиция выбранного корпуса
-     * @param act Главное активити
+     * Слушатель нажатия на список аудиторий и корпусов
+     * @param position Позиция выбранного элелемента
+     * @param act Активити
      */
     public ListViewAud_ClickListener(int position, Activity act){
         Intent intent;

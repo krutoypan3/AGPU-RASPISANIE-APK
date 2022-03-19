@@ -1,10 +1,7 @@
 package com.example.artikproject.layout;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
@@ -21,12 +18,13 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.Date;
 import java.util.Objects;
 
+import com.example.artikproject.background_work.CheckInternetConnection;
 import com.example.artikproject.background_work.main_show.GetGroupList;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
+import com.example.artikproject.background_work.main_show.ListView_ClickListener;
 import com.example.artikproject.background_work.main_show.MainToolBar;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
-import com.example.artikproject.background_work.rasp_show.GetRasp;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
 import com.example.artikproject.background_work.debug.SendInfoToServer;
@@ -56,13 +54,6 @@ public class MainActivity extends AppCompatActivity {
     public static Drawer.Result drawerResult = null;
     public static Toolbar toolbar = null;
     public static ListView listview_aud = null;
-
-
-    public static boolean isOnline(Context context){ // Функция определяющая есть ли интернет
-        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        return netInfo != null && netInfo.isConnectedOrConnecting();
-    }
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -115,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
         new CheckAppUpdate(MainActivity.this).start(); // Запуск проверки обновлений при входе в приложение
         new SendInfoToServer(MainActivity.this).start(); // Запуск отправки анонимной статистики для отадки ошибок
 
-
         float rasnitsa_v_nedelyah = 222.48f; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
         // недели с сайта расписания и того, что получается в week_id без "rasnitsa_v_nedelyah"
         // КАЖДЫЙ ГОД ЭТО число изменяется!!! Для 2021 это число "222.48 | В душе не знаю как это
@@ -131,17 +121,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // Отслеживание нажатий на элемент в списке(группа\ауд\препод)
-        listview.setOnItemClickListener((parent, v, position, id) -> {
-            selectedItem = MainActivity.group_listed[position];
-            selectedItem_type = MainActivity.group_listed_type[position];
-            selectedItem_id = MainActivity.group_listed_id[position];
-            MainActivity.subtitle.setText(selectedItem);
-            Intent intent = new Intent(MainActivity.this, Raspisanie_show.class);
-            if (isOnline(MainActivity.this)){
-                new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
-            }
-            startActivity(intent);
-        });
+        listview.setOnItemClickListener((parent, v, position, id) ->
+            new ListView_ClickListener(position, MainActivity.this));
 
         sqLiteDatabase = new DataBase_Local(MainActivity.this).getWritableDatabase(); // Подключение к локальной базе данных
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
@@ -154,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {} // После изменения поля
             public void onTextChanged(CharSequence s, int start, int before, int count) { // Во время изменения поля
                 if (!(rasp_search_edit.getText().toString().trim().equals(""))) { // Если строка поиска не пустая
-                    if (!isOnline(MainActivity.this)){ new WatchSaveGroupRasp(getApplicationContext()); } // Если нет доступа к интернету то выводить список из бд
+                    if (!CheckInternetConnection.getState(getApplicationContext())){ new WatchSaveGroupRasp(getApplicationContext()); } // Если нет доступа к интернету то выводить список из бд
                     else {
                         String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + rasp_search_edit.getText().toString();
                         new GetGroupList(urlq, MainActivity.this).start(); // Отправляем запрос на сервер и выводим получившийся список

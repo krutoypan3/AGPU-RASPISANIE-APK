@@ -22,12 +22,22 @@ import java.util.Map;
 
 public class SendInfoToServer extends Thread {
     Context context;
+    String feedback;
     /**
      * Класс отвечающий за отправку информации для отладки на сервер
      * @param context Контекст приложения
      */
     public SendInfoToServer(Context context) {
         this.context = context;
+    }
+
+    /**
+     * Класс отвечающий за отправку информации для отладки на сервер + фидбэк
+     * @param context Контекст приложения
+     */
+    public SendInfoToServer(Context context, String feedback) {
+        this.context = context;
+        this.feedback = feedback;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -56,6 +66,7 @@ public class SendInfoToServer extends Thread {
             params.put("DeviceProduct", Device_info.getDeviceProduct());
             params.put("AppVersion", version);
             params.put("AppVersionCode", versionCode);
+            if (feedback != null){ params.put("Feedback", feedback); }
 
             StringBuilder postData = new StringBuilder();
             for (Map.Entry<Object, Object> param : params.entrySet()) {
