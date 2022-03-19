@@ -134,7 +134,7 @@ public class Week_show {
             }
         }
         catch (Exception ignored){ // Если недели нет в базе то ...
-            Raspisanie_show.mainText.setText("Вы слишком быстро листаете недели с расписанием...\n обновляю расписание...");
+            Raspisanie_show.mainText.setText(R.string.rasp_error);
         }
     }
 }

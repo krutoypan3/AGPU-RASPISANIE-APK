@@ -51,7 +51,7 @@
         android:inputType="textPersonName"
         android:layout_below="@id/logow"
         android:textAlignment="center"
-        android:hint="Найти расписание" />
+        android:hint="@string/rasp_find" />
 
 
     <TextView

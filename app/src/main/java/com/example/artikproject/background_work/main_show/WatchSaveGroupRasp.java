@@ -43,7 +43,7 @@ public class WatchSaveGroupRasp {
             MainActivity.group_listed_id = group_list_id.toArray(new String[0]);
         } // Вывод SELECT запроса
         if( MainActivity.group_listed == null){
-            MainActivity.result.setText("Увы, но у вас нет сохраненных групп...");
+            MainActivity.result.setText(R.string.no_saved_group);
             MainActivity.listview.setVisibility(View.INVISIBLE);
         }
         else {

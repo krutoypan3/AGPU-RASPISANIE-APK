@@ -50,7 +50,7 @@ public class GetGroupList extends Thread {
             try{ connection.connect();}
             catch (Exception e){
                 // Это нужно для вызова вне основного потока
-                new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(context, "Ошибка при подключении к сайту", Toast.LENGTH_LONG).show());
+                new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(context, R.string.Internet_error, Toast.LENGTH_LONG).show());
                 return;
             }
             InputStream stream = connection.getInputStream();
@@ -91,18 +91,14 @@ public class GetGroupList extends Thread {
             MainActivity.group_listed_type = group_list_type.toArray(new String[0]);
             MainActivity.group_listed_id =group_list_id.toArray(new String[0]);
 
-        } catch (MalformedURLException e) {
-            System.out.println("Исключение MalformedURLException в классе GetGroupList");
-        } catch (IOException e) {
-            System.out.println("Исключение IOException в классе GetGroupList");
-        } catch (JSONException e) {
-            System.out.println("Исключение JSONException в классе GetGroupList");
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
         } finally {
             if (connection != null) connection.disconnect();
             if (reader != null) {
                 try { reader.close(); }
                 catch (IOException e) {
-                    System.out.println("Исключение IOException в классе GetGroupList");
+                    e.printStackTrace();
                 }
             }
         }

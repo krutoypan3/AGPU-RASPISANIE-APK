@@ -3,7 +3,6 @@ package com.example.artikproject.background_work.main_show;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -54,7 +53,7 @@ public class MainToolBar {
                     new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withIdentifier(4),
                     new DividerDrawerItem(),
                     new SecondaryDrawerItem().withName(R.string.feedback).withIcon(FontAwesome.Icon.faw_question_circle).withIdentifier(7),
-                    new SecondaryDrawerItem().withName("Версия: " + Device_info.getAppVersion(context)).setEnabled(false)
+                    new SecondaryDrawerItem().withName(context.getResources().getString(R.string.version) + ": " + Device_info.getAppVersion(context)).setEnabled(false)
             )
             .withOnDrawerItemClickListener((parent, view, position, id, drawerItem) -> {
                 if (drawerItem instanceof Nameable) {
@@ -69,22 +68,29 @@ public class MainToolBar {
                             MainActivity.listview_aud.setVisibility(View.VISIBLE);
                             MainActivity.subtitle.setVisibility(View.INVISIBLE);
                             List<String> group_list_aud = new ArrayList<>();
-                            group_list_aud.add("Главный корпус  по ул. Р. Люксембург, 159\n" +
-                                    "Аудитории: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14а," +
+                            group_list_aud.add(context.getResources().getString(R.string.adress_main) + "\n" +
+                                    context.getResources().getString(R.string.Audiences) +
+                                    ": 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14а," +
                                     " 15, 15а, 16, 17, 18,  21, 22, 23\n");
-                            group_list_aud.add("Корпус по ул. Кирова 50 (Заочка)\n" +
-                                    "Аудитории: 24, 25, 26, 27, 28\n");
-                            group_list_aud.add("Корпус по ул. Ленина, 79  (СПФ)\n" +
-                                    "Аудитории: 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50\n");
-                            group_list_aud.add("Корпус по ул. Ефремова, 35 (ЕБД)\n" +
-                                    "Аудитории: 80, 81, 82, 82а, 83, 84\n");
-                            group_list_aud.add("Корпус по ул. П. Осипенко, 83 (ФОК)\n" +
-                                    "Аудитории: 85, 85а, 86\n");
-                            group_list_aud.add("Корпус по ул. П. Комсомольская, 93 (ФТЭиД\\ТЕХФАК)\n" +
-                                    "Аудитории: 51, 52, 53, 57, 58 а, 58 б, 59, 60, 61, 62, 63, 64," +
+                            group_list_aud.add(context.getResources().getString(R.string.adress_zaochka) + "\n" +
+                                    context.getResources().getString(R.string.Audiences) +
+                                    ": 24, 25, 26, 27, 28\n");
+                            group_list_aud.add(context.getResources().getString(R.string.adress_spf) + "\n" +
+                                    context.getResources().getString(R.string.Audiences) +
+                                    ": 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50\n");
+                            group_list_aud.add(context.getResources().getString(R.string.adress_ebd) + "\n" +
+                                    context.getResources().getString(R.string.Audiences) +
+                                    ": 80, 81, 82, 82а, 83, 84\n");
+                            group_list_aud.add(context.getResources().getString(R.string.adress_foc) + "\n" +
+                                    context.getResources().getString(R.string.Audiences) +
+                                    ": 85, 85а, 86\n");
+                            group_list_aud.add(context.getResources().getString(R.string.adress_tehfak) + "\n" +
+                                    context.getResources().getString(R.string.Audiences) +
+                                    ": 51, 52, 53, 57, 58 а, 58 б, 59, 60, 61, 62, 63, 64," +
                                     " 65, 66, 67, 68\n");
-                            group_list_aud.add("Корпус по ул. К. Маркса, 49 (Общежитие 1)\n" +
-                                    "Аудитории: 30, 31, 32, 33, 34, 35, 36, 37, 38, ЛК-1 – ЛК-6, 101," +
+                            group_list_aud.add(context.getResources().getString(R.string.adress_obshaga) + "\n" +
+                                    context.getResources().getString(R.string.Audiences) +
+                                    ": 30, 31, 32, 33, 34, 35, 36, 37, 38, ЛК-1 – ЛК-6, 101," +
                                     " 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113," +
                                     " 114, 115, 116, 117, 118, 119, 120, 121");
                             String[] group_listed_aud;
@@ -99,7 +105,7 @@ public class MainToolBar {
                             Intent intent = new Intent(context, Settings_layout.class);
                             act.startActivity(intent);
                             MainActivity.drawerResult.setSelection(0);
-                            new ShowNotification(context, "Вопросы?", "Напиши мне в ВК:\nАртем Оганесян\nvk.com/aom13").start();
+                            new ShowNotification(context, context.getResources().getString(R.string.Questions), context.getResources().getString(R.string.Questions_sub)).start();
                             break;
                         case (4):
                             MainActivity.drawerResult.setSelection(0);
@@ -109,11 +115,11 @@ public class MainToolBar {
                         case (5): // Если нажали на кнопку удаления
                             MainActivity.drawerResult.setSelection(0);
                             AlertDialog.Builder builder = new AlertDialog.Builder(act);
-                            builder.setTitle("Удалить все сохраненные расписания?!")
-                                    .setMessage("Подтвердите удаление!")
+                            builder.setTitle(R.string.delete_all_save)
+                                    .setMessage(R.string.delete_confirm)
                                     .setCancelable(false)
-                                    .setPositiveButton("Отмена", (dialog, which) -> dialog.cancel())
-                                    .setNegativeButton("Удалить все!", (dialog, which) -> {
+                                    .setPositiveButton(R.string.Cancel, (dialog, which) -> dialog.cancel())
+                                    .setNegativeButton(R.string.Delete_everything, (dialog, which) -> {
                                         MainActivity.sqLiteDatabase.execSQL("DELETE FROM rasp_test1");
                                         MainActivity.sqLiteDatabase.execSQL("DELETE FROM rasp_update");
                                         MainActivity.group_listed = null;
@@ -122,7 +128,6 @@ public class MainToolBar {
                                     });
                             AlertDialog Error = builder.create();
                             Error.show();
-                            MainActivity.listview.setAdapter(null);
                             MainActivity.drawerResult.setSelection(0);
                             break;
                         case (6):
@@ -138,12 +143,12 @@ public class MainToolBar {
                             builder = new AlertDialog.Builder(act);
                             final EditText input = new EditText(context);
                             builder.setView(input);
-                            builder.setTitle("О чем вы хотите сообщить?")
-                                    .setMessage("Опишите ситуацию поподробнее")
+                            builder.setTitle(R.string.FeedBack_title)
+                                    .setMessage(R.string.FeedBack_subtitle)
                                     .setCancelable(true)
 
-                                    .setNegativeButton("Отмена", (dialog, which) -> dialog.cancel())
-                                    .setPositiveButton("Отправить отзыв", (dialog, whichButton) -> {
+                                    .setNegativeButton(R.string.Cancel, (dialog, which) -> dialog.cancel())
+                                    .setPositiveButton(R.string.Post_review, (dialog, whichButton) -> {
                                         String value = String.valueOf(input.getText());
                                         Toast.makeText(context, value, Toast.LENGTH_SHORT).show();
                                         new SendInfoToServer(context, value);

@@ -10,6 +10,7 @@ import android.os.Looper;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.artikproject.R;
 import com.example.artikproject.background_work.ShowNotification;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.layout.Raspisanie_show;
@@ -158,7 +159,7 @@ public class GetRasp extends Thread {
                                 put_db(i, j, ff);
                                 // Это нужно для вызова вне основного потока
                                 new Handler(Looper.getMainLooper()).post(() -> { // Выводим уведомление о наличии нового расписания
-                                    new ShowNotification(context, r_selectedItem + " новое расписание!", "Расписание обновилось, скорее проверьте!");
+                                    new ShowNotification(context, r_selectedItem + " " + context.getResources().getString(R.string.new_rasp) + "!", context.getResources().getString(R.string.new_rasp_sub));
                                 });
                             }
                         }

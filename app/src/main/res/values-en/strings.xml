@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ASPU schedule</string>
+    <string name="logo">ASPU schedule</string>
+    <string name="no_user_input">Enter text!</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_item_home">Schedule</string>
+    <string name="drawer_item_star">Favorites</string>
+    <string name="drawer_item_location">Auditoriums and buildings</string>
+    <string name="drawer_item_settings">Settings</string>
+    <string name="drawer_item_delete">Clear</string>
+    <string name="drawer_item_github">Check for updates</string>
+    <string name="feedback">Leave feedback</string>
+    <string name="please_update_rasp">Click the button above to update the schedule</string>
+    <string name="rasp_find">Find a schedule</string>
+    <string name="Back">Back</string>
+    <string name="Forward">Forward</string>
+    <string name="Notify_about_changes">Notify about changes</string>
+    <string name="settings_main_text">What exactly did you expect to see here? Be like everyone else, closed in this system without the right to change anything in your life.</string>
+    <string name="Audiences">Audiences</string>
+    <string name="adress_main">Main building on st. R. Luxembourg, 159</string>
+    <string name="adress_zaochka">Building on st. Kirova 50 (Zaocka)</string>
+    <string name="adress_spf">Building on st. Lenina, 79 (SPF)</string>
+    <string name="adress_ebd">Building on st. Efremova, 35 (EBD)</string>
+    <string name="adress_foc">Building on st. P. Osipenko, 83 (FLC)</string>
+    <string name="adress_tehfak">Building on st. P. Komsomolskaya, 93 (FTEiD \\ TEHFAK)</string>
+    <string name="adress_obshaga">Building on st. K. Marx, 49 (Dormitory 1)</string>
+    <string name="delete_all_save">Delete all saved schedules?!</string>
+    <string name="delete_confirm">Confirm deletion!</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Delete_everything">Delete everything!</string>
+    <string name="FeedBack_title">What do you want to report?</string>
+    <string name="FeedBack_subtitle">Describe the situation in more detail</string>
+    <string name="Post_review">Post a review</string>
+    <string name="Questions">Questions?</string>
+    <string name="Questions_sub">Message me on VK: Artem Oganesyan vk.com/aom13</string>
+    <string name="version">version</string>
+    <string name="Internet_error">Error connecting to site</string>
+    <string name="no_saved_group">Alas, you don\'t have any saved groups...</string>
+    <string name="new_rasp">new schedule</string>
+    <string name="new_rasp_sub">The schedule has been updated, check back soon!</string>
+    <string name="rasp_error">You scroll through the weeks too fast with the schedule...</string>
+    <string name="new_version">A new version of the app has been found!</string>
+    <string name="new_version_sub">In the new version</string>
+    <string name="Update">Update</string>
+</resources>

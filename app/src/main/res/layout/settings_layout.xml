@@ -11,7 +11,7 @@
         android:id="@+id/theme_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="А что собственно ты тут ожидал увидеть? Будь как все, замкнут в этой системе без права что-либо изменить в своей жизни."
-        android:textSize="24dp">
+        android:text="@string/settings_main_text"
+        android:textSize="24sp">
     </TextView>
 </RelativeLayout>

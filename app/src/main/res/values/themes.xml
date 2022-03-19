@@ -5,7 +5,6 @@
         <item name="android:textColor">@color/gold</item>
         <item name="android:textColorPrimary">@color/gold</item>
         <item name="android:listChoiceBackgroundIndicator">@color/coal</item> <!-- Цвет элемента выпадающего списка при нажатии -->
-        <item name="android:popupBackground">@color/redred</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorSecondary">@color/fialka</item>
         <item name="colorOnPrimary">@color/white</item>

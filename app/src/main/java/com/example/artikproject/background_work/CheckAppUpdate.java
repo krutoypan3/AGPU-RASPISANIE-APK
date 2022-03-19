@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.example.artikproject.R;
 import com.example.artikproject.background_work.datebase.DateBase_Online;
 import com.example.artikproject.background_work.debug.Device_info;
 
@@ -32,11 +33,11 @@ public class CheckAppUpdate extends Thread {
             String[] version_info_db = dateBase_online.check_update();
             if(Integer.parseInt(version_info_db[0]) > versionCode){
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Найдена новая версия приложения!")
-                    .setMessage("В новой версии:\n" + version_info_db[3])
+                builder.setTitle(R.string.new_version)
+                    .setMessage(context.getResources().getString(R.string.new_version_sub) + ":\n" + version_info_db[3])
                     .setCancelable(false)
-                        .setNegativeButton("Отмена", (dialog, which) -> dialog.cancel())
-                    .setPositiveButton("Обновить", (dialog, which) -> {
+                        .setNegativeButton(R.string.Cancel, (dialog, which) -> dialog.cancel())
+                    .setPositiveButton(R.string.Update, (dialog, which) -> {
                         context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(version_info_db[2])));
                         dialog.cancel();
                     });
@@ -46,12 +47,9 @@ public class CheckAppUpdate extends Thread {
                     UpdateDialog.show();
                 });
             }
-            else{
-                System.out.println("Новых версий не найдено.");
-            }
         }
         catch (Exception e){
-            System.out.println("Ошибка в модуле CheckAppUpdate");
+            e.printStackTrace();
         }
     }
 }
