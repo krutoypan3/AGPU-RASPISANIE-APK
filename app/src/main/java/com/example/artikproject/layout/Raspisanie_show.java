@@ -97,7 +97,7 @@ public class Raspisanie_show extends AppCompatActivity {
         week_day_change_btn_size_down.setOnClickListener(v -> new Week_show_resize().size_dec());
 
         // Функция перехода на сайт с расписанием при нажатии на кнопку
-        Button rasp_site = findViewById(R.id.rasp_site);
+        ImageView rasp_site = findViewById(R.id.rasp_site);
         rasp_site.setOnClickListener(v -> {
             rasp_site.setAnimation(MainActivity.animRotate_ok);
             startActivity(new Intent(Intent.ACTION_VIEW,
@@ -128,6 +128,8 @@ public class Raspisanie_show extends AppCompatActivity {
 
         // Смена недельного режима и дневного
         week_day_change_btn.setOnClickListener(v -> new Week_day_change(getApplicationContext()));
+        day_para_view.setOnItemClickListener((parent, v, position, id) ->
+                new Para_info(position, Raspisanie_show.this));
 
         // отслеживание жестов на дневном расписании
         day_para_view.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {

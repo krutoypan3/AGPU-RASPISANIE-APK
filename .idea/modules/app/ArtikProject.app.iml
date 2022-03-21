@@ -65,6 +65,7 @@
     <orderEntry type="library" name="Gradle: ./app/libs/jsoup.jar" level="project" />
     <orderEntry type="library" name="Gradle: ./app/libs/sqlite-jdbc-3.8.11.2.jar" level="project" />
     <orderEntry type="library" name="Gradle: ./app/libs/jtds-1.3.1.jar" level="project" />
+    <orderEntry type="library" name="Gradle: ./app/libs/json-simple-1.1.1.jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.collection:collection:1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.1.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.1.0" level="project" />

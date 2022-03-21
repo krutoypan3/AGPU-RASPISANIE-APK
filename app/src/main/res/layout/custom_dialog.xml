@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/custom_dialog_main_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:textSize="20sp"
+        android:textColor="@color/gold"/>
+    <ListView
+        android:id="@+id/custom_dialog_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:dividerHeight="1dp"
+        android:divider="@color/fierd"
+        android:visibility="invisible">
+    </ListView>
+    <TextView
+        android:id="@+id/custom_dialog_body_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="18sp"
+        android:textColor="@color/gold"/>
+
+    <EditText
+        android:theme="@style/Theme.MyApp.Main"
+        android:id="@+id/custom_dialog_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:textColorHint="@color/arkt_iva"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        android:hint="@string/feedback"
+        android:importantForAutofill="no" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="15dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_alert_dialog_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/small_button"
+            android:layout_margin="5dp"
+            android:textColor="@color/gold"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_alert_dialog_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/small_button"
+            android:layout_margin="5dp"
+            android:textColor="@color/gold"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

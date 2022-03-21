@@ -43,4 +43,15 @@
     <string name="new_version">A new version of the app has been found!</string>
     <string name="new_version_sub">In the new version</string>
     <string name="Update">Update</string>
+    <string name="para_info">Information about the couple</string>
+    <string name="Prepod">Teacher</string>
+    <string name="Time">Time</string>
+    <string name="Group">Group</string>
+    <string name="CoupleName">Name of the couple</string>
+    <string name="Audience">Audience</string>
+    <string name="PodGroup">Subgroup</string>
+    <string name="map_confirm">Show audience on map?</string>
+    <string name="Go_to_map">Go</string>
+    <string name="new_app_version">A new version of the app is available!</string>
+    <string name="redirect_to_map">You will be redirected to google maps</string>
 </resources>

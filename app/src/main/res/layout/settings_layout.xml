@@ -5,7 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.MyApp.Main"
-    android:background="@drawable/snow">
+    android:background="@drawable/background">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#90000000"
+        >
     <TextView
         android:layout_marginTop="70dp"
         android:id="@+id/theme_text"
@@ -14,4 +19,5 @@
         android:text="@string/settings_main_text"
         android:textSize="24sp">
     </TextView>
+    </RelativeLayout>
 </RelativeLayout>

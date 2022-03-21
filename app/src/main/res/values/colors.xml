@@ -16,12 +16,13 @@
     <color name="sea">#077b8a</color>
     <color name="nefrit">#a2d5c6</color>
     <color name="fialka">#5c3c92</color>
-    <color name="gold">#00D6D6</color>  <!-- Основной цвет текста в приложении -->
+    <color name="gold">#FFFFFF</color>  <!-- Основной цвет текста в приложении -->
     <color name="coal">#3b4d61</color>
-    <color name="fierd">#0c554d</color>
+    <color name="fierd">#2e327b</color>
     <color name="arkt_iva">#95998e</color>
     <color name="shelk">#dcd2c8</color>
     <color name="redred">#B80000</color>
     <color name="pink">#f7e5db</color>
     <color name="blue">#077b8a</color>
+    <color name="alert_color">#DD25a0ee</color>
 </resources>
