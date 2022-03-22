@@ -18,7 +18,6 @@ public class ListView_ClickListener {
         MainActivity.selectedItem = MainActivity.group_listed[position];
         MainActivity.selectedItem_type = MainActivity.group_listed_type[position];
         MainActivity.selectedItem_id = MainActivity.group_listed_id[position];
-        MainActivity.subtitle.setText(MainActivity.selectedItem);
         Intent intent = new Intent(act.getApplicationContext(), Raspisanie_show.class);
         if (CheckInternetConnection.getState(act.getApplicationContext())){
             new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, act.getApplicationContext()).start();

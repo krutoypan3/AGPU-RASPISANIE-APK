@@ -61,4 +61,8 @@
     <string name="Go_to_map">Перейти</string>
     <string name="new_app_version">Доступна новая версия приложения!</string>
     <string name="redirect_to_map">Вы будете перенаправлены на гугл карты</string>
+    <string name="groups_list">Список групп</string>
+    <string name="weeks_list">Список недель</string>
+    <string name="delete_one_save">Удалить выбранное расписание?</string>
+    <string name="Delete">Удалить!</string>
 </resources>

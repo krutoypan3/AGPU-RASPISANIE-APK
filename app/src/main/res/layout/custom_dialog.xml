@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:dividerHeight="1dp"
-        android:divider="@color/fierd"
+        android:divider="@color/alert_dialog_divider_color"
         android:visibility="invisible">
     </ListView>
     <TextView

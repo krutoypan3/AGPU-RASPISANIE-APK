@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -19,10 +20,15 @@ import java.util.Date;
 import java.util.Objects;
 
 import com.example.artikproject.background_work.CheckInternetConnection;
-import com.example.artikproject.background_work.main_show.GetGroupList;
+import com.example.artikproject.background_work.main_show.GetFullGroupList_Button;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
+import com.example.artikproject.background_work.main_show.GetFullGroupList;
+import com.example.artikproject.background_work.main_show.GetFullWeekList;
+import com.example.artikproject.background_work.main_show.GetFullWeekList_Button;
+import com.example.artikproject.background_work.main_show.GetGroupList_Search;
 import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
 import com.example.artikproject.background_work.main_show.ListView_ClickListener;
+import com.example.artikproject.background_work.main_show.ListView_LongClickListener;
 import com.example.artikproject.background_work.main_show.MainToolBar;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.R;
@@ -54,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     public static Drawer.Result drawerResult = null;
     public static Toolbar toolbar = null;
     public static ListView listview_aud = null;
+    public static Button list_groups = null;
+    public static Button list_weeks = null;
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -90,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
         listview = findViewById(R.id.listview);
         subtitle = findViewById(R.id.subtitle);
+        list_groups = findViewById(R.id.list_groups);
+        list_weeks = findViewById(R.id.list_weeks);
 
         // Инициализируем тулбар
         toolbar = findViewById(R.id.toolbar);
@@ -105,7 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
         new CheckAppUpdate(MainActivity.this).start(); // Запуск проверки обновлений при входе в приложение
         new SendInfoToServer(MainActivity.this).start(); // Запуск отправки анонимной статистики для отадки ошибок
-
+        new GetFullGroupList_Button(getApplicationContext());
+        new GetFullWeekList_Button(getApplicationContext());
         float rasnitsa_v_nedelyah = 222.48f; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
         // недели с сайта расписания и того, что получается в week_id без "rasnitsa_v_nedelyah"
         // КАЖДЫЙ ГОД ЭТО число изменяется!!! Для 2021 это число "222.48 | В душе не знаю как это
@@ -120,9 +131,18 @@ public class MainActivity extends AppCompatActivity {
             week_day = 0;
         }
 
+        // Отслеживание нажатий на кнопку списка групп
+        list_groups.setOnClickListener((v) ->
+                new GetFullGroupList(MainActivity.this, v).start());
+        // Отслеживание нажатий на кнопку списка недель
+        list_weeks.setOnClickListener((v) ->
+                new GetFullWeekList(MainActivity.this, v).start());
+
         // Отслеживание нажатий на элемент в списке(группа\ауд\препод)
         listview.setOnItemClickListener((parent, v, position, id) ->
             new ListView_ClickListener(position, MainActivity.this));
+        listview.setOnItemLongClickListener((parent, v, position, id) ->
+            new ListView_LongClickListener().listen(position, MainActivity.this));
 
         sqLiteDatabase = new DataBase_Local(MainActivity.this).getWritableDatabase(); // Подключение к локальной базе данных
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
@@ -138,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                     if (!CheckInternetConnection.getState(getApplicationContext())){ new WatchSaveGroupRasp(getApplicationContext()); } // Если нет доступа к интернету то выводить список из бд
                     else {
                         String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + rasp_search_edit.getText().toString();
-                        new GetGroupList(urlq, MainActivity.this).start(); // Отправляем запрос на сервер и выводим получившийся список
+                        new GetGroupList_Search(urlq, MainActivity.this).start(); // Отправляем запрос на сервер и выводим получившийся список
                     }
                 }
                 else{new WatchSaveGroupRasp(getApplicationContext());}

@@ -54,4 +54,8 @@
     <string name="Go_to_map">Go</string>
     <string name="new_app_version">A new version of the app is available!</string>
     <string name="redirect_to_map">You will be redirected to google maps</string>
+    <string name="groups_list">Group list</string>
+    <string name="weeks_list">List of weeks</string>
+    <string name="delete_one_save">Delete selected schedule?</string>
+    <string name="Delete">Delete!</string>
 </resources>

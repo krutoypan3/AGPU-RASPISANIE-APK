@@ -82,22 +82,41 @@
         android:layout_marginTop="5sp"
         android:textSize="24sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    </ListView>
 
-    <ListView
-        android:id="@+id/listview_aud"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rasp_search_edit"
-        android:layout_marginTop="-115sp"
-        android:textSize="24sp"
-        android:visibility="invisible"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <ListView
+            android:id="@+id/listview_aud"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-115sp"
+            android:textSize="24sp"
+            android:visibility="invisible"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </ListView>
+        <Button
+            android:id="@+id/list_groups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:layout_above="@id/list_weeks"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/gold"
+            android:background="@drawable/small_button_50"
+            android:text="@string/groups_list" />
+        <Button
+            android:id="@+id/list_weeks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/gold"
+            android:background="@drawable/small_button_50"
+            android:text="@string/weeks_list" />
+
     </RelativeLayout>
-
 </RelativeLayout>

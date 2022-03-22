@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.debug.SendInfoToServer;
 import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
+import com.example.artikproject.background_work.main_show.ListView_LongClickListener;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.background_work.rasp_show.Para_info;
 import com.example.artikproject.layout.MainActivity;
@@ -50,7 +51,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
     }
 
     /**
-     * Диалог об удалении расписания
+     * Диалог с указанием типа
      * @param act Активити
      */
     public CustomAlertDialog(Activity act, String dialog_type) {
@@ -59,7 +60,6 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
         this.act = act;
         this.dialog_type = dialog_type;
     }
-
 
 
     @Override
@@ -71,8 +71,8 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
         body_text = findViewById(R.id.custom_dialog_body_text);
         edit_text = findViewById(R.id.custom_dialog_edit_text);
         list_view = findViewById(R.id.custom_dialog_list_view);
-        yes = (Button) findViewById(R.id.btn_alert_dialog_yes);
-        no = (Button) findViewById(R.id.btn_alert_dialog_no);
+        yes = findViewById(R.id.btn_alert_dialog_yes);
+        no = findViewById(R.id.btn_alert_dialog_no);
         switch (dialog_type) {
             case "update":
                 main_text.setText(new_main_text);
@@ -96,11 +96,27 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 yes.setVisibility(View.INVISIBLE);
                 list_view.setVisibility(View.VISIBLE);
                 break;
+            case "groups_list":
+                main_text.setText(R.string.groups_list);
+                body_text.setVisibility(View.INVISIBLE);
+                yes.setVisibility(View.INVISIBLE);
+                list_view.setVisibility(View.VISIBLE);
+                break;
+            case "weeks_list":
+                main_text.setText(R.string.weeks_list);
+                body_text.setVisibility(View.INVISIBLE);
+                yes.setVisibility(View.INVISIBLE);
+                list_view.setVisibility(View.VISIBLE);
+                break;
             case "map_confirm":
                 main_text.setText(R.string.map_confirm);
                 body_text.setText(R.string.redirect_to_map);
                 yes.setText(R.string.Go_to_map);
-
+                break;
+            case "delete_one_saved_group":
+                main_text.setText(R.string.delete_one_save);
+                body_text.setText(R.string.delete_confirm);
+                yes.setText(R.string.Delete);
         }
         no.setText(R.string.Cancel);
         yes.setOnClickListener(this);
@@ -129,6 +145,10 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                         break;
                     case "map_confirm":
                         new ListViewAud_ClickListener(Para_info.finalCorp, act);
+                        break;
+                    case "delete_one_saved_group":
+                        MainActivity.sqLiteDatabase.delete("rasp_test1", "r_group_code = '" + MainActivity.group_listed_id[ListView_LongClickListener.position] + "' AND r_search_type = '" + MainActivity.group_listed_type[ListView_LongClickListener.position] + "'", null);
+                        new WatchSaveGroupRasp(act.getApplicationContext()); // Первичный вывод групп которые были открыты ранее
                         break;
                 }
                 break;
