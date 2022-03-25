@@ -1,5 +1,7 @@
 package com.example.artikproject.background_work.site_parse;
 
+import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -26,7 +28,7 @@ public class GetFullWeekList_Online extends Thread{
 
     @Override
     public void run() {
-        try (SQLiteDatabase sqLiteDatabase = new DataBase_Local(context).getWritableDatabase()) {
+        try{
             Document doc;
             String urlq = "http://www.it-institut.ru/SearchString/ShowTestWeeks?ClientId=118"; // Отправляет запрос для получения Id текущего семестра
             try {

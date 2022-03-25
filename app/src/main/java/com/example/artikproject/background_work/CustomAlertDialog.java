@@ -1,5 +1,7 @@
 package com.example.artikproject.background_work;
 
+import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -128,40 +130,39 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
-        try(SQLiteDatabase sqLiteDatabase = new DataBase_Local(act.getApplicationContext()).getWritableDatabase()){ // Подключение к локальной базе данных
-            switch (v.getId()) {
-                case R.id.btn_alert_dialog_yes:
-                    switch (dialog_type){
-                        case "update":
-                            act.startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                            break;
-                        case "delete":
-                            sqLiteDatabase.execSQL("DELETE FROM rasp_test1");
-                            sqLiteDatabase.execSQL("DELETE FROM rasp_update");
-                            MainActivity.group_listed = null;
-                            new WatchSaveGroupRasp(act.getApplicationContext());
-                            break;
-                        case "feedback":
-                            String value = String.valueOf(edit_text.getText());
-                            Toast.makeText(act.getApplicationContext(), value, Toast.LENGTH_SHORT).show();
-                            new SendInfoToServer(act.getApplicationContext(), value);
-                            break;
-                        case "map_confirm":
-                            new ListViewAud_ClickListener(Para_info.finalCorp, act);
-                            break;
-                        case "delete_one_saved_group":
-                            sqLiteDatabase.delete("rasp_test1", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] + "' AND r_search_type = '" + MainActivity.group_listed_type[ListViewGroupListener.position] + "'", null);
-                            new WatchSaveGroupRasp(act.getApplicationContext()); // Первичный вывод групп которые были открыты ранее
-                            break;
-                    }
-                    break;
-                case R.id.btn_alert_dialog_no:
-                    dismiss();
-                    break;
-                default:
-                    break;
-            }
-            dismiss();
+        switch (v.getId()) {
+            case R.id.btn_alert_dialog_yes:
+                switch (dialog_type){
+                    case "update":
+                        act.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                        break;
+                    case "delete":
+                        sqLiteDatabase.execSQL("DELETE FROM rasp_test1");
+                        sqLiteDatabase.execSQL("DELETE FROM rasp_update");
+                        MainActivity.group_listed = null;
+                        new WatchSaveGroupRasp(act.getApplicationContext());
+                        break;
+                    case "feedback":
+                        String value = String.valueOf(edit_text.getText());
+                        Toast.makeText(act.getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+                        new SendInfoToServer(act.getApplicationContext(), value);
+                        break;
+                    case "map_confirm":
+                        new ListViewAud_ClickListener(Para_info.finalCorp, act);
+                        break;
+                    case "delete_one_saved_group":
+                        sqLiteDatabase.delete("rasp_test1", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] + "' AND r_search_type = '" + MainActivity.group_listed_type[ListViewGroupListener.position] + "'", null);
+                        new WatchSaveGroupRasp(act.getApplicationContext()); // Первичный вывод групп которые были открыты ранее
+                        break;
+                }
+                break;
+            case R.id.btn_alert_dialog_no:
+                dismiss();
+                break;
+            default:
+                break;
         }
+        dismiss();
+
     }
 }

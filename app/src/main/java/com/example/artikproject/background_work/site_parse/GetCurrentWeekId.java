@@ -1,5 +1,7 @@
 package com.example.artikproject.background_work.site_parse;
 
+import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -28,7 +30,7 @@ public class GetCurrentWeekId extends Thread {
 
     @Override
     public void run() {
-        try (SQLiteDatabase sqLiteDatabase = new DataBase_Local(act.getApplicationContext()).getWritableDatabase()) {
+        try{
             try { // Получаем последнюю сохраненную неделю из базы данных
                 Cursor r = sqLiteDatabase.rawQuery("SELECT value FROM settings_app WHERE settings_name = 'week_id'",null);
                 r.moveToFirst();
@@ -43,7 +45,7 @@ public class GetCurrentWeekId extends Thread {
                 doc = Jsoup.connect(urlq).get();
                 String today_info = doc.select("div").toString().split("today-info")[1];
                 String today = today_info.split("</h5>")[0].split("<h5>")[1]; // Сегодня **.**.****, ******
-                MainActivity.today.setText(today); // Устанавливаем текущий день на главном экране
+                act.runOnUiThread(() -> MainActivity.today.setText(today)); // Устанавливаем текущий день на главном экране
                 MainActivity.week_id = Integer.parseInt(today_info.split("value=\"")[1].split("\"")[0]); // Получаем текущую неделю с интернета
                 try { // и удаляем старое значение из базы данных
                     sqLiteDatabase.delete("settings_app", "settings_name = 'week_id'", null);

@@ -1,4 +1,6 @@
 package com.example.artikproject.background_work.service;
+import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -48,29 +50,28 @@ public class PlayService extends Service {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void get_group_db(Context context) {
-        try(SQLiteDatabase sqLiteDatabaseS = new DataBase_Local(context).getWritableDatabase()){
-            if (CheckInternetConnection.getState(context)) {
-                Cursor r = sqLiteDatabaseS.rawQuery("SELECT r_group_code, r_selectedItem_type, r_selectedItem FROM rasp_update", null); // SELECT запрос
-                ArrayList<String> r_group0 = new ArrayList<>();
-                ArrayList<String> r_group1 = new ArrayList<>();
-                ArrayList<String> r_group2 = new ArrayList<>();
+        if (CheckInternetConnection.getState(context)) {
+            Cursor r = sqLiteDatabase.rawQuery("SELECT r_group_code, r_selectedItem_type, r_selectedItem FROM rasp_update", null); // SELECT запрос
+            ArrayList<String> r_group0 = new ArrayList<>();
+            ArrayList<String> r_group1 = new ArrayList<>();
+            ArrayList<String> r_group2 = new ArrayList<>();
 
-                Date date1 = new Date();
-                long date_ms = date1.getTime() + 10800000;
-                int week_id_upd = (int) ((date_ms - 18489514000f) / 1000f / 60f / 60f / 24f / 7f); // Номер текущей недели
-                r.moveToFirst();
-                do {
-                    if (r.getCount() != 0) {
-                        r_group0.add(r.getString(0));
-                        r_group1.add(r.getString(1));
-                        r_group2.add(r.getString(2));
-                    }
-                } while (r.moveToNext());
-                
-                for (int i = 0; i < r_group0.size(); i++) {
-                    new GetRasp(r_group0.get(i), r_group1.get(i), r_group2.get(i), week_id_upd, context).start();
+            Date date1 = new Date();
+            long date_ms = date1.getTime() + 10800000;
+            int week_id_upd = (int) ((date_ms - 18489514000f) / 1000f / 60f / 60f / 24f / 7f); // Номер текущей недели
+            r.moveToFirst();
+            do {
+                if (r.getCount() != 0) {
+                    r_group0.add(r.getString(0));
+                    r_group1.add(r.getString(1));
+                    r_group2.add(r.getString(2));
                 }
+            } while (r.moveToNext());
+
+            for (int i = 0; i < r_group0.size(); i++) {
+                new GetRasp(r_group0.get(i), r_group1.get(i), r_group2.get(i), week_id_upd, context).start();
             }
         }
+
     }
 }

@@ -1,5 +1,7 @@
 package com.example.artikproject.background_work.site_parse;
 
+import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -64,7 +66,7 @@ public class GetRasp extends Thread {
         if (!Raspisanie_show.refresh_on_off) {
             Raspisanie_show.refresh_on_off = true;
             System.out.println("Был сделан запрос на обновление расписания");
-            try(SQLiteDatabase sqLiteDatabaseS = new DataBase_Local(context).getWritableDatabase()) {
+            try{
                 Document doc;
                 for (int ff = -1; ff < 2; ff++) {
                     String urlq;
@@ -138,7 +140,7 @@ public class GetRasp extends Thread {
                                 }
                             }
 
-                            Cursor r = sqLiteDatabaseS.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + r_selectedItem_id + " AND r_week_number = " + (week_id_upd + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j + " AND " + " r_search_type = '" + r_selectedItem_type + "'", null); // SELECT запрос
+                            Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + r_selectedItem_id + " AND r_week_number = " + (week_id_upd + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j + " AND " + " r_search_type = '" + r_selectedItem_type + "'", null); // SELECT запрос
                             if (r.getCount() == 0) {
                                 put_db(i, j, ff);
                             } // Если даной недели нет в базе
@@ -155,7 +157,7 @@ public class GetRasp extends Thread {
                                         !(Objects.equals(predmet_distant, predmet_distant_db)) |
                                         !(Objects.equals(predmet_group, predmet_group_db)) | !(Objects.equals(predmet_podgroup, predmet_podgroup_db)) |
                                         !(Objects.equals(predmet_aud, predmet_aud_db)) | !(Objects.equals(predmet_time, predmet_time_db))) {
-                                    sqLiteDatabaseS.delete("rasp_test1", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
+                                    sqLiteDatabase.delete("rasp_test1", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
                                     put_db(i, j, ff);
                                     // Это нужно для вызова вне основного потока
                                     new Handler(Looper.getMainLooper()).post(() -> { // Выводим уведомление о наличии нового расписания

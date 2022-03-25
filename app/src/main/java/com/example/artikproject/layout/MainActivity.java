@@ -1,6 +1,7 @@
 package com.example.artikproject.layout;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
@@ -15,11 +16,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import java.util.Date;
 import java.util.Objects;
 
 import com.example.artikproject.background_work.CheckInternetConnection;
-import com.example.artikproject.background_work.datebase.InitializeDateBase_Local;
 import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.site_parse.GetCurrentWeekId;
 import com.example.artikproject.background_work.site_parse.GetFullGroupList_Online;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     public static ListView listview_aud = null;
     public static Button list_groups = null;
     public static Button list_weeks = null;
+    public static SQLiteDatabase sqLiteDatabase;
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -100,9 +102,7 @@ public class MainActivity extends AppCompatActivity {
         list_groups = findViewById(R.id.list_groups);
         listview_aud = findViewById(R.id.listview_aud);
         list_weeks = findViewById(R.id.list_weeks);
-
-        // Сперва мы инициализируем базу данных и создаем отсутствующие таблицы в случае необходимости
-        new InitializeDateBase_Local(new DataBase_Local(MainActivity.this).getWritableDatabase());
+        sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
 
         // Инициализируем тулбар
         toolbar = findViewById(R.id.toolbar);

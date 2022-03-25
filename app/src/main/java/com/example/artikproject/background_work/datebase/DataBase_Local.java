@@ -12,7 +12,7 @@ public class DataBase_Local extends SQLiteOpenHelper {
      * @param context Контекст приложения
      */
     public DataBase_Local(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+        super(context, DATABASE_NAME, null, 2);
     }
 
     @Override
@@ -77,5 +77,15 @@ public class DataBase_Local extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // Таблица с неделями
+        try {
+            db.execSQL("CREATE TABLE IF NOT EXISTS \"weeks_list\" (\n" +
+                    "\t\"week_id\"\tTEXT,\n" +
+                    "\t\"week_s\"\tTEXT,\n" +
+                    "\t\"week_po\"\tTEXT\n" +
+                    ")");
+        }
+        catch (Exception ignored){
+        }
     }
 }
