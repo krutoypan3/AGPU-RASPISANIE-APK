@@ -1,18 +1,16 @@
     package com.example.artikproject.background_work.datebase;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.artikproject.R;
 
-    public class DataBase_Local extends SQLiteOpenHelper {
+public class DataBase_Local extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "raspisanie.db";
-        /**
-         * Класс отвечающий за первичное создание \ подключение к локальной базе данных
-         * @param context Контекст приложения
-         */
+    /**
+     * Класс отвечающий за первичное создание \ подключение к локальной базе данных
+     * @param context Контекст приложения
+     */
     public DataBase_Local(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -62,6 +60,16 @@ import com.example.artikproject.R;
 //            rowValues.put("settings_name", "theme_id");
 //            rowValues.put("value", R.style.Theme_MyApp_Main);
 //            sqLiteDatabase.insert("settings_app", null, rowValues);
+        }
+        catch (Exception ignored){
+        }
+        // Таблица с неделями
+        try {
+            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS \"weeks_list\" (\n" +
+                    "\t\"week_id\"\tTEXT,\n" +
+                    "\t\"week_s\"\tTEXT,\n" +
+                    "\t\"week_po\"\tTEXT\n" +
+                    ")");
         }
         catch (Exception ignored){
         }

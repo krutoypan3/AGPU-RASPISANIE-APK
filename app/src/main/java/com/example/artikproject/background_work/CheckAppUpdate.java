@@ -46,7 +46,6 @@ public class CheckAppUpdate extends Thread {
             }
             in.close();
             String ass = response.toString();
-            System.out.println(ass);
             // Считываем json
             Object obj = new JSONParser().parse(ass);
             JSONObject jo = (JSONObject) obj;

@@ -2,6 +2,7 @@ package com.example.artikproject.background_work.rasp_show;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Build;
 import android.view.Gravity;
@@ -12,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import com.example.artikproject.R;
+import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;
 
@@ -30,11 +32,11 @@ public class Week_show {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public Week_show(Context context){
         this.context = context;
-        try{
-            Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
+        try(SQLiteDatabase sqLiteDatabase = new DataBase_Local(context).getWritableDatabase()){
+            Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
-            Cursor f = MainActivity.sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM rasp_test1 WHERE " +
+            Cursor f = sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM rasp_test1 WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
             if (r.getCount()!=0) {
@@ -133,7 +135,8 @@ public class Week_show {
                 Raspisanie_show.mainText.setText("");
             }
         }
-        catch (Exception ignored){ // Если недели нет в базе то ...
+        catch (Exception e){ // Если недели нет в базе то ...
+            e.printStackTrace();
             Raspisanie_show.mainText.setText(R.string.rasp_error);
         }
     }

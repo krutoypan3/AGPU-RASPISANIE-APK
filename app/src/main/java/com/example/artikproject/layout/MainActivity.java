@@ -1,7 +1,6 @@
 package com.example.artikproject.layout;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
@@ -20,20 +19,20 @@ import java.util.Date;
 import java.util.Objects;
 
 import com.example.artikproject.background_work.CheckInternetConnection;
-import com.example.artikproject.background_work.main_show.GetFullGroupList_Button;
+import com.example.artikproject.background_work.datebase.InitializeDateBase_Local;
+import com.example.artikproject.background_work.main_show.ListViewGroupListener;
+import com.example.artikproject.background_work.site_parse.GetCurrentWeekId;
+import com.example.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
-import com.example.artikproject.background_work.main_show.GetFullGroupList;
-import com.example.artikproject.background_work.main_show.GetFullWeekList;
-import com.example.artikproject.background_work.main_show.GetFullWeekList_Button;
-import com.example.artikproject.background_work.main_show.GetGroupList_Search;
+import com.example.artikproject.background_work.main_show.ShowFullGroupList;
+import com.example.artikproject.background_work.main_show.ShowFullWeekList;
+import com.example.artikproject.background_work.site_parse.GetGroupList_Search;
 import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
-import com.example.artikproject.background_work.main_show.ListView_ClickListener;
-import com.example.artikproject.background_work.main_show.ListView_LongClickListener;
 import com.example.artikproject.background_work.main_show.MainToolBar;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
-import com.example.artikproject.background_work.debug.SendInfoToServer;
+import com.example.artikproject.background_work.server.SendInfoToServer;
 import com.example.artikproject.background_work.service.PlayService;
 import com.mikepenz.materialdrawer.Drawer;
 
@@ -45,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
     public static String[] group_listed_id;
     public static ListView listview;
     public static TextView result;
-    public static TextView subtitle;
+    public static TextView today;
+    public static TextView current_week;
     public static String selectedItem;
     public static String selectedItem_type;
     public static String selectedItem_id;
     public static int week_id;
     public static int week_day;
-    public static SQLiteDatabase sqLiteDatabase;
     public static Animation animRotate;
     public static Animation animUehalVp;
     public static Animation animUehalVl;
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy(){
         // Очистите все ресурсы. Это касается завершения работы
         // потоков, закрытия соединений с базой данных и т. д.
-        sqLiteDatabase.close();
         super.onDestroy();
     }
 
@@ -97,9 +95,14 @@ public class MainActivity extends AppCompatActivity {
         rasp_search_edit = findViewById(R.id.rasp_search_edit);
         result = findViewById(R.id.result);
         listview = findViewById(R.id.listview);
-        subtitle = findViewById(R.id.subtitle);
+        today = findViewById(R.id.main_activity_text);
+        current_week = findViewById(R.id.subtitle);
         list_groups = findViewById(R.id.list_groups);
+        listview_aud = findViewById(R.id.listview_aud);
         list_weeks = findViewById(R.id.list_weeks);
+
+        // Сперва мы инициализируем базу данных и создаем отсутствующие таблицы в случае необходимости
+        new InitializeDateBase_Local(new DataBase_Local(MainActivity.this).getWritableDatabase());
 
         // Инициализируем тулбар
         toolbar = findViewById(R.id.toolbar);
@@ -108,48 +111,36 @@ public class MainActivity extends AppCompatActivity {
         try { new MainToolBar(MainActivity.this); } // Заполняем тулбар и вызываем его
         catch (PackageManager.NameNotFoundException e) { e.printStackTrace(); }
 
-        // Отслеживание нажатий на элемент в списке(ауд)
-        listview_aud = findViewById(R.id.listview_aud);
-        listview_aud.setOnItemClickListener((parent, v, position, id) ->
-            new ListViewAud_ClickListener(position, MainActivity.this));
-
         new CheckAppUpdate(MainActivity.this).start(); // Запуск проверки обновлений при входе в приложение
         new SendInfoToServer(MainActivity.this).start(); // Запуск отправки анонимной статистики для отадки ошибок
-        new GetFullGroupList_Button(getApplicationContext());
-        new GetFullWeekList_Button(getApplicationContext());
-        float rasnitsa_v_nedelyah = 222.48f; // ВАЖНО!!! ЭТО ЧИСЛО МЫ получаем путем вычитания номера
-        // недели с сайта расписания и того, что получается в week_id без "rasnitsa_v_nedelyah"
-        // КАЖДЫЙ ГОД ЭТО число изменяется!!! Для 2021 это число "222.48 | В душе не знаю как это
-        // число стало дробным. В прошлом году было норм, в этом - каждую среду начиналась новая
-        // неделя, хз почему, пришлось так выкручиваться."
+        new GetCurrentWeekId(MainActivity.this).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
+        new GetFullGroupList_Online(getApplicationContext()).start(); // Получение полного списка групп
 
         // Получение актуального текущего времени
-        long date_ms = new Date().getTime();
-        week_id = (int) (date_ms / 1000f / 60f / 60f / 24f / 7f + rasnitsa_v_nedelyah); // Номер текущей недели и
+        long date_ms = new Date().getTime();// Нужно ли це переменная?
         week_day = new Date(date_ms).getDay() - 1; // дня недели
         if (week_day == -1){ // Если будет воскресенье, то будет показан понедельник
             week_day = 0;
         }
 
+        // Отслеживание нажатий на элемент в списке(ауд)
+        listview_aud.setOnItemClickListener((parent, v, position, id) ->
+                new ListViewAud_ClickListener(position, MainActivity.this));
         // Отслеживание нажатий на кнопку списка групп
         list_groups.setOnClickListener((v) ->
-                new GetFullGroupList(MainActivity.this, v).start());
+                new ShowFullGroupList(MainActivity.this, v).start());
         // Отслеживание нажатий на кнопку списка недель
         list_weeks.setOnClickListener((v) ->
-                new GetFullWeekList(MainActivity.this, v).start());
+                new ShowFullWeekList(MainActivity.this, v).start());
 
-        // Отслеживание нажатий на элемент в списке(группа\ауд\препод)
-        listview.setOnItemClickListener((parent, v, position, id) ->
-            new ListView_ClickListener(position, MainActivity.this));
-        listview.setOnItemLongClickListener((parent, v, position, id) ->
-            new ListView_LongClickListener().listen(position, MainActivity.this));
+        // Отслеживание нажатий и зажатий на список групп и аудиторий
+        new ListViewGroupListener(MainActivity.this, listview);
 
-        sqLiteDatabase = new DataBase_Local(MainActivity.this).getWritableDatabase(); // Подключение к локальной базе данных
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 
         new WatchSaveGroupRasp(getApplicationContext()); // Первичный вывод групп которые были открыты ранее
 
-        // При изменение текстового поля делать:
+        // Отслеживание изменений текстового поля
         rasp_search_edit.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {} // До изменения поля
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {} // После изменения поля

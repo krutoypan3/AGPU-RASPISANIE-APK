@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckInternetConnection;
+import com.example.artikproject.background_work.site_parse.GetRasp;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;
 
@@ -34,7 +35,6 @@ public class Swipe_rasp {
                     if (!Raspisanie_show.refresh_on_off) {
                         Raspisanie_show.refresh_btn.setClickable(false);
                         Raspisanie_show.refresh_btn_ficha.setVisibility(View.VISIBLE);
-                        Raspisanie_show.refresh_on_off = true;
                         Raspisanie_show.refresh_btn.startAnimation(MainActivity.animRotate);
                         Raspisanie_show.refresh_btn.setBackgroundResource(R.drawable.refresh_1);
                         new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, context).start();
@@ -42,14 +42,10 @@ public class Swipe_rasp {
                     }
                     break;
             }
-            if (CheckInternetConnection.getState(context)) {
-                new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, context).start();
-            }
             new Day_show(context);
             Raspisanie_show.week_day_bt1.setClickable(true);
             Raspisanie_show.week_day_bt2.setClickable(true);
         } else {
-            Raspisanie_show.refresh_on_off = true;
             Raspisanie_show.refresh_btn.setClickable(false);
             Raspisanie_show.refresh_btn_ficha.setVisibility(View.VISIBLE);
             Raspisanie_show.refresh_btn.startAnimation(MainActivity.animRotate);

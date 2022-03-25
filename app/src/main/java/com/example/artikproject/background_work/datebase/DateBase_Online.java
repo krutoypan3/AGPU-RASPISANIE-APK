@@ -1,8 +1,6 @@
 package com.example.artikproject.background_work.datebase;
 
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class DateBase_Online {
 
@@ -33,31 +31,6 @@ public class DateBase_Online {
         return con;
     }
 
-    public String[] check_update(){
-        ResultSet resultSet;
-        String[] version_info_db = {"","","",""};
-        try {
-            con = this.getConnection();
-            Statement statement = con.createStatement();
-            resultSet = statement.executeQuery("SELECT" +
-                    " version_code\n" +
-                    ",version_name\n" +
-                    ",url_version\n" +
-                    ",whats_new\n" +
-                    " FROM check_update WHERE version_code=(SELECT MAX(version_code) FROM check_update)");
-            while (resultSet.next()){
-                version_info_db[0] = resultSet.getString(1);
-                version_info_db[1] = resultSet.getString(2);
-                version_info_db[2] = resultSet.getString(3);
-                version_info_db[3] = resultSet.getString(4);
-            }
-            closeConnection();
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return version_info_db;
-    }
 
     private void closeConnection() {
         try {

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -15,9 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.debug.SendInfoToServer;
+import com.example.artikproject.background_work.datebase.DataBase_Local;
+import com.example.artikproject.background_work.main_show.ListViewGroupListener;
+import com.example.artikproject.background_work.server.SendInfoToServer;
 import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
-import com.example.artikproject.background_work.main_show.ListView_LongClickListener;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.background_work.rasp_show.Para_info;
 import com.example.artikproject.layout.MainActivity;
@@ -126,38 +128,40 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_alert_dialog_yes:
-                switch (dialog_type){
-                    case "update":
-                        act.startActivity(new Intent(Intent.ACTION_VIEW, uri));
-                        break;
-                    case "delete":
-                        MainActivity.sqLiteDatabase.execSQL("DELETE FROM rasp_test1");
-                        MainActivity.sqLiteDatabase.execSQL("DELETE FROM rasp_update");
-                        MainActivity.group_listed = null;
-                        new WatchSaveGroupRasp(act.getApplicationContext());
-                        break;
-                    case "feedback":
-                        String value = String.valueOf(edit_text.getText());
-                        Toast.makeText(act.getApplicationContext(), value, Toast.LENGTH_SHORT).show();
-                        new SendInfoToServer(act.getApplicationContext(), value);
-                        break;
-                    case "map_confirm":
-                        new ListViewAud_ClickListener(Para_info.finalCorp, act);
-                        break;
-                    case "delete_one_saved_group":
-                        MainActivity.sqLiteDatabase.delete("rasp_test1", "r_group_code = '" + MainActivity.group_listed_id[ListView_LongClickListener.position] + "' AND r_search_type = '" + MainActivity.group_listed_type[ListView_LongClickListener.position] + "'", null);
-                        new WatchSaveGroupRasp(act.getApplicationContext()); // Первичный вывод групп которые были открыты ранее
-                        break;
-                }
-                break;
-            case R.id.btn_alert_dialog_no:
-                dismiss();
-                break;
-            default:
-                break;
+        try(SQLiteDatabase sqLiteDatabase = new DataBase_Local(act.getApplicationContext()).getWritableDatabase()){ // Подключение к локальной базе данных
+            switch (v.getId()) {
+                case R.id.btn_alert_dialog_yes:
+                    switch (dialog_type){
+                        case "update":
+                            act.startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                            break;
+                        case "delete":
+                            sqLiteDatabase.execSQL("DELETE FROM rasp_test1");
+                            sqLiteDatabase.execSQL("DELETE FROM rasp_update");
+                            MainActivity.group_listed = null;
+                            new WatchSaveGroupRasp(act.getApplicationContext());
+                            break;
+                        case "feedback":
+                            String value = String.valueOf(edit_text.getText());
+                            Toast.makeText(act.getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+                            new SendInfoToServer(act.getApplicationContext(), value);
+                            break;
+                        case "map_confirm":
+                            new ListViewAud_ClickListener(Para_info.finalCorp, act);
+                            break;
+                        case "delete_one_saved_group":
+                            sqLiteDatabase.delete("rasp_test1", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] + "' AND r_search_type = '" + MainActivity.group_listed_type[ListViewGroupListener.position] + "'", null);
+                            new WatchSaveGroupRasp(act.getApplicationContext()); // Первичный вывод групп которые были открыты ранее
+                            break;
+                    }
+                    break;
+                case R.id.btn_alert_dialog_no:
+                    dismiss();
+                    break;
+                default:
+                    break;
+            }
+            dismiss();
         }
-        dismiss();
     }
 }

@@ -3,6 +3,7 @@ package com.example.artikproject.layout;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -19,6 +20,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.rasp_show.*;
 import com.example.artikproject.background_work.OnSwipeTouchListener;
 import com.example.artikproject.R;
@@ -70,26 +72,25 @@ public class Raspisanie_show extends AppCompatActivity {
         week_day_change_btn_size_down = findViewById(R.id.week_day_change_btn_size_down); // Кнопка уменьшения размера текста в недельном режиме
         gesture_layout = findViewById(R.id.raspisanie_day); // Слой для отслеживания жестов
         RelativeLayout raspisanie_show_layout = findViewById(R.id.raspisanie_show); // Основной слой
-
         new Refresh_rasp_week_or_day_starter(getApplicationContext()).start(); // Обновляем расписание
         CheckBox mCheckBox = findViewById(R.id.checkBox); // Уведомление об обновлении расписания
-        Cursor sss = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
-        mCheckBox.setChecked(sss.getCount() != 0);
-        mCheckBox.setOnClickListener(v -> {
-            if(mCheckBox.isChecked()) {
-                mCheckBox.setTextColor(Color.GREEN);
-                ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
-                rowValues.put("r_group_code", MainActivity.selectedItem_id);
-                rowValues.put("r_selectedItem_type", MainActivity.selectedItem_type);
-                rowValues.put("r_selectedItem", MainActivity.selectedItem);
-                MainActivity.sqLiteDatabase.insert("rasp_update", null, rowValues);
-            }
-            else{
-                mCheckBox.setTextColor(Color.GRAY);
-                MainActivity.sqLiteDatabase.delete("rasp_update", "r_group_code = '" + MainActivity.selectedItem_id + "'", null);
-            }
-        });
-
+        try(SQLiteDatabase sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase()) {
+            Cursor sss = sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
+            mCheckBox.setChecked(sss.getCount() != 0);
+            mCheckBox.setOnClickListener(v -> {
+                if (mCheckBox.isChecked()) {
+                    mCheckBox.setTextColor(Color.GREEN);
+                    ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
+                    rowValues.put("r_group_code", MainActivity.selectedItem_id);
+                    rowValues.put("r_selectedItem_type", MainActivity.selectedItem_type);
+                    rowValues.put("r_selectedItem", MainActivity.selectedItem);
+                    sqLiteDatabase.insert("rasp_update", null, rowValues);
+                } else {
+                    mCheckBox.setTextColor(Color.GRAY);
+                    sqLiteDatabase.delete("rasp_update", "r_group_code = '" + MainActivity.selectedItem_id + "'", null);
+                }
+            });
+        }
         // Кнопка увеличивающая размер текста в режиме недели
         week_day_change_btn_size_up.setOnClickListener(v -> new Week_show_resize().size_add());
 

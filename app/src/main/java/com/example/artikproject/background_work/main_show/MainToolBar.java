@@ -63,7 +63,8 @@ public class MainToolBar {
                             MainActivity.result.setVisibility(View.INVISIBLE);
                             MainActivity.rasp_search_edit.setVisibility(View.INVISIBLE);
                             MainActivity.listview_aud.setVisibility(View.VISIBLE);
-                            MainActivity.subtitle.setVisibility(View.INVISIBLE);
+                            MainActivity.today.setVisibility(View.INVISIBLE);
+                            MainActivity.current_week.setVisibility(View.INVISIBLE);
                             List<String> group_list_aud = new ArrayList<>();
                             group_list_aud.add(context.getResources().getString(R.string.adress_main) + "\n" +
                                     context.getResources().getString(R.string.Audiences) +
@@ -137,6 +138,7 @@ public class MainToolBar {
         MainActivity.result.setVisibility(View.VISIBLE);
         MainActivity.rasp_search_edit.setVisibility(View.VISIBLE);
         MainActivity.listview_aud.setVisibility(View.INVISIBLE);
-        MainActivity.subtitle.setVisibility(View.VISIBLE);
+        MainActivity.today.setVisibility(View.VISIBLE);
+        MainActivity.current_week.setVisibility(View.VISIBLE);
     }
 }

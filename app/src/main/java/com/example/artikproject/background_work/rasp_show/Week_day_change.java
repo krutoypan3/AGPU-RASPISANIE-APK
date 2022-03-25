@@ -17,10 +17,10 @@ public class Week_day_change {
         if (!Raspisanie_show.week_day_on_off){
             Raspisanie_show.week_day_change_btn.setImageResource(R.drawable.ic_baseline_today_24);
             Raspisanie_show.week_day_change_btn.setAnimation(MainActivity.animScale);
+            Raspisanie_show.week_day_on_off = true;
             new Week_show(context);
             Raspisanie_show.day_para_view.setVisibility(View.INVISIBLE);
             Raspisanie_show.week_para_view.setVisibility(View.VISIBLE);
-            Raspisanie_show.week_day_on_off = true;
             Raspisanie_show.gesture_layout.setVisibility(View.INVISIBLE);
             Raspisanie_show.week_day_change_btn_size_up.setVisibility(View.VISIBLE);
             Raspisanie_show.week_day_change_btn_size_down.setVisibility(View.VISIBLE);

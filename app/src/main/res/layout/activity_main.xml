@@ -23,27 +23,29 @@
         android:transitionName="actionBar" />
 
     <TextView
-        android:id="@+id/logow"
+        android:id="@+id/main_activity_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="50dp"
+        android:text="@string/dusha"
         android:layout_marginBottom="50dp"
         android:textAlignment="center"
         android:textColorHighlight="#000000"
         android:textColorHint="#C89595"
         android:textColorLink="#FF6565"
-        android:textSize="24sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="match_parent"
         android:textAlignment="center"
-        android:layout_marginTop="-20sp"
-        android:layout_below="@id/logow"
+        android:layout_marginTop="-50sp"
+        android:layout_below="@id/main_activity_text"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:textColor="@color/nefrit"
+        android:textSize="18sp"/>
 
     <EditText
         android:theme="@style/Theme.MyApp.Main"
@@ -54,7 +56,7 @@
         android:ems="10"
         android:textColorHint="@color/arkt_iva"
         android:inputType="textPersonName"
-        android:layout_below="@id/logow"
+        android:layout_below="@id/main_activity_text"
         android:textAlignment="center"
         android:hint="@string/rasp_find" />
 
@@ -89,7 +91,7 @@
             android:id="@+id/listview_aud"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="-115sp"
+            android:layout_marginTop="60sp"
             android:textSize="24sp"
             android:visibility="invisible"
             app:layout_constraintLeft_toLeftOf="parent"
