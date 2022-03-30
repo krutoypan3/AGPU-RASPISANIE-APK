@@ -4,16 +4,16 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.widget.ArrayAdapter;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomAlertDialog;
 import com.example.artikproject.background_work.GetCorpFromAudNumber;
-import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;
 
@@ -26,7 +26,7 @@ public class Para_info {
     public Para_info(int position, Activity act){
         Object para_time = Raspisanie_show.day_para_view.getItemAtPosition(position).toString().split("\n")[0];
         Object prepod_aud = Raspisanie_show.day_para_view.getItemAtPosition(position).toString().split("\n")[2];
-        Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
+        Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                 "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                 "r_week_number = " + MainActivity.week_id + " AND " +
                 "r_week_day = " + MainActivity.week_day + " AND " +
@@ -75,6 +75,9 @@ public class Para_info {
                             break;
                         case (2):
                             String sss = cdd.list_view.getItemAtPosition(pos).toString().split(",")[0].split(": ")[1];
+
+
+                            // Этот блок кода созда исключительно в развлекательных целях и не несет в себе цель кого-то задеть или обидеть
                             if (sss.equals("Козлов В.А.")) {
                                 if (pashalka == 3) {
                                     AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
@@ -86,7 +89,22 @@ public class Para_info {
                                     pashalka += 1;
                                 }
                             }
+                            else if (sss.equals("Лапшин Н.А.")) {
+                                if (pashalka == 3) {
+                                    AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
+                                    MediaPlayer mp = MediaPlayer.create(act, R.raw.povezlo_povezlo);
+                                    mp.start();
+                                    pashalka = 0;
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://i.ibb.co/4S8DrHk/r-x-Ka-UHKnzw.jpg"));
+                                    act.startActivity(intent);
+                                } else {
+                                    pashalka += 1;
+                                }
+                            }
                             break;
+                            // Конец блока развлекательного кода
+
                     }
                 });
             } catch (Exception e) {

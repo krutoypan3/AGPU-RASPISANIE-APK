@@ -29,11 +29,10 @@ public class ShowFullGroupList extends Thread {
 
     @Override
     public void run() {
-        ArrayAdapter<String> adapter = new ArrayAdapter(act.getApplicationContext(), R.layout.listviewadapterbl, GetFullGroupList_Online.faculties_name);
         try{
             act.runOnUiThread(() -> {
-
-                CustomAlertDialog cdd = new CustomAlertDialog(act, "groups_list");
+                ArrayAdapter<String> adapter = new ArrayAdapter(act.getApplicationContext(), R.layout.listviewadapterbl, GetFullGroupList_Online.faculties_name);
+                CustomAlertDialog cdd = new CustomAlertDialog(act, "faculties_list");
                 cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
                 cdd.show();
                 cdd.list_view.setAdapter(adapter);

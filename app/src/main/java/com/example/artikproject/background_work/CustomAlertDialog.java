@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.server.SendInfoToServer;
 import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
@@ -106,6 +104,12 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 yes.setVisibility(View.INVISIBLE);
                 list_view.setVisibility(View.VISIBLE);
                 break;
+            case "faculties_list":
+                main_text.setText(R.string.faculties_list);
+                body_text.setVisibility(View.INVISIBLE);
+                yes.setVisibility(View.INVISIBLE);
+                list_view.setVisibility(View.VISIBLE);
+                break;
             case "weeks_list":
                 main_text.setText(R.string.weeks_list);
                 body_text.setVisibility(View.INVISIBLE);
@@ -137,7 +141,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                         act.startActivity(new Intent(Intent.ACTION_VIEW, uri));
                         break;
                     case "delete":
-                        sqLiteDatabase.execSQL("DELETE FROM rasp_test1");
+                        sqLiteDatabase.execSQL("DELETE FROM raspisanie");
                         sqLiteDatabase.execSQL("DELETE FROM rasp_update");
                         MainActivity.group_listed = null;
                         new WatchSaveGroupRasp(act.getApplicationContext());
@@ -151,7 +155,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                         new ListViewAud_ClickListener(Para_info.finalCorp, act);
                         break;
                     case "delete_one_saved_group":
-                        sqLiteDatabase.delete("rasp_test1", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] + "' AND r_search_type = '" + MainActivity.group_listed_type[ListViewGroupListener.position] + "'", null);
+                        sqLiteDatabase.delete("raspisanie", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] + "' AND r_search_type = '" + MainActivity.group_listed_type[ListViewGroupListener.position] + "'", null);
                         new WatchSaveGroupRasp(act.getApplicationContext()); // Первичный вывод групп которые были открыты ранее
                         break;
                 }

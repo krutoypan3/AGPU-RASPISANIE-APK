@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/checkBox"
         android:layout_marginTop="-2dp"
-        android:text="@string/please_update_rasp"
+        android:text="@string/please_wait_update_rasp"
         android:textAlignment="center"
         android:textSize="25sp" />
 

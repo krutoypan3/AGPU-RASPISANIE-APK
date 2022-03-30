@@ -23,7 +23,7 @@ public class Day_show {
      */
     public Day_show(Context context) {
         List<String> group_list = new ArrayList<>();
-        Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
+        Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                 "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                 "r_week_number = " + MainActivity.week_id + " AND " +
                 "r_week_day = " + MainActivity.week_day + " ORDER BY r_para_number", null);

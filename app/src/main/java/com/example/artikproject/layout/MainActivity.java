@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         new CheckAppUpdate(MainActivity.this).start(); // Запуск проверки обновлений при входе в приложение
         new SendInfoToServer(MainActivity.this).start(); // Запуск отправки анонимной статистики для отадки ошибок
         new GetCurrentWeekId(MainActivity.this).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
-        new GetFullGroupList_Online(getApplicationContext()).start(); // Получение полного списка групп
+        new GetFullGroupList_Online(getApplicationContext()).start(); // Получение полного списка групп и закидывание их в адаптер
 
         // Получение актуального текущего времени
         long date_ms = new Date().getTime();// Нужно ли це переменная?

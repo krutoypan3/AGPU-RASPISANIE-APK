@@ -140,7 +140,7 @@ public class GetRasp extends Thread {
                                 }
                             }
 
-                            Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE r_group_code = " + r_selectedItem_id + " AND r_week_number = " + (week_id_upd + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j + " AND " + " r_search_type = '" + r_selectedItem_type + "'", null); // SELECT запрос
+                            Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE r_group_code = " + r_selectedItem_id + " AND r_week_number = " + (week_id_upd + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j + " AND " + " r_search_type = '" + r_selectedItem_type + "'", null); // SELECT запрос
                             if (r.getCount() == 0) {
                                 put_db(i, j, ff);
                             } // Если даной недели нет в базе
@@ -157,7 +157,7 @@ public class GetRasp extends Thread {
                                         !(Objects.equals(predmet_distant, predmet_distant_db)) |
                                         !(Objects.equals(predmet_group, predmet_group_db)) | !(Objects.equals(predmet_podgroup, predmet_podgroup_db)) |
                                         !(Objects.equals(predmet_aud, predmet_aud_db)) | !(Objects.equals(predmet_time, predmet_time_db))) {
-                                    sqLiteDatabase.delete("rasp_test1", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
+                                    sqLiteDatabase.delete("raspisanie", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
                                     put_db(i, j, ff);
                                     // Это нужно для вызова вне основного потока
                                     new Handler(Looper.getMainLooper()).post(() -> { // Выводим уведомление о наличии нового расписания
@@ -199,7 +199,7 @@ public class GetRasp extends Thread {
             rowValues.put("r_last_update", new Date().getTime());
             rowValues.put("r_color", predmet_color);
             rowValues.put("r_distant", predmet_distant);
-            sqLiteDatabaseS.insert("rasp_test1", null, rowValues);
+            sqLiteDatabaseS.insert("raspisanie", null, rowValues);
         }
     }
 }

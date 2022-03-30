@@ -77,6 +77,11 @@ public class Raspisanie_show extends AppCompatActivity {
         // Кнопка уменьшающая размер текста в режиме недели
         week_day_change_btn_size_down.setOnClickListener(v -> new Week_show_resize().size_dec());
 
+        Raspisanie_show.refresh_btn.startAnimation(MainActivity.animRotate);
+        Raspisanie_show.refresh_btn.setBackgroundResource(R.drawable.refresh_1);
+        // Первичный вывод расписания
+        new Swipe_rasp("Bottom", getApplicationContext());
+
         // Функция перехода на сайт с расписанием при нажатии на кнопку
         ImageView rasp_site = findViewById(R.id.rasp_site);
         rasp_site.setOnClickListener(v -> {

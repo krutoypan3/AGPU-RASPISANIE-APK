@@ -35,10 +35,10 @@ public class Week_show {
     public Week_show(Context context){
         this.context = context;
         try{
-            Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM rasp_test1 WHERE " +
+            Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
-            Cursor f = sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM rasp_test1 WHERE " +
+            Cursor f = sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM raspisanie WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
             if (r.getCount()!=0) {

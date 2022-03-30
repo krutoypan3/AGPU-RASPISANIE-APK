@@ -12,14 +12,22 @@ public class DataBase_Local extends SQLiteOpenHelper {
      * @param context Контекст приложения
      */
     public DataBase_Local(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 4);
     }
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        // База данных с расписанием
+        createDB(sqLiteDatabase);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        createDB(db);
+    }
+
+    private void createDB(SQLiteDatabase db){
         try {
-            sqLiteDatabase.execSQL("CREATE TABLE \"rasp_test1\" (\n" +
+            db.execSQL("CREATE TABLE IF NOT EXISTS \"raspisanie\" (\n" +
                     "\t\"r_group_code\"\tINTEGER,\n" +
                     "\t\"r_week_day\"\tINTEGER,\n" +
                     "\t\"r_week_number\"\tINTEGER,\n" +
@@ -42,17 +50,17 @@ public class DataBase_Local extends SQLiteOpenHelper {
         }
         // База данных с избранным расписанием
         try {
-            sqLiteDatabase.execSQL("CREATE TABLE \"rasp_update\" (\n" +
+            db.execSQL("CREATE TABLE IF NOT EXISTS \"rasp_update\" (\n" +
                     "\t\"r_group_code\"\tINTEGER,\n" +
                     "\t\"r_selectedItem_type\"\tTEXT,\n" +
                     "\t\"r_selectedItem\"\tTEXT\n" +
                     ")");
-            }
+        }
         catch (Exception ignored){
         }
         // База данных с настройками
         try {
-            sqLiteDatabase.execSQL("CREATE TABLE \"settings_app\" (\n" +
+            db.execSQL("CREATE TABLE IF NOT EXISTS \"settings_app\" (\n" +
                     "\t\"settings_name\"\tTEXT,\n" +
                     "\t\"value\"\tTEXT\n" +
                     ")");
@@ -65,20 +73,6 @@ public class DataBase_Local extends SQLiteOpenHelper {
         }
         // Таблица с неделями
         try {
-            sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS \"weeks_list\" (\n" +
-                    "\t\"week_id\"\tTEXT,\n" +
-                    "\t\"week_s\"\tTEXT,\n" +
-                    "\t\"week_po\"\tTEXT\n" +
-                    ")");
-        }
-        catch (Exception ignored){
-        }
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Таблица с неделями
-        try {
             db.execSQL("CREATE TABLE IF NOT EXISTS \"weeks_list\" (\n" +
                     "\t\"week_id\"\tTEXT,\n" +
                     "\t\"week_s\"\tTEXT,\n" +
@@ -87,5 +81,13 @@ public class DataBase_Local extends SQLiteOpenHelper {
         }
         catch (Exception ignored){
         }
+        try{
+            db.execSQL("CREATE TABLE IF NOT EXISTS \"groups_list\" (\n" +
+                    "\t\"faculties_name\"\tTEXT,\n" +
+                    "\t\"faculties_group_name\"\tTEXT,\n" +
+                    "\t\"faculties_group_id\"\tTEXT\n" +
+                    ")");
+        }
+        catch (Exception ignored){}
     }
 }
