@@ -11,7 +11,7 @@
     <string name="drawer_item_open_source" translatable="false">GitHub</string>
     <string name="drawer_item_github">Проверить обновления</string>
     <string name="feedback">Оставить отзыв</string>
-    <string name="please_wait_update_rasp">We are looking for your schedule on ASPU servers, but for now look at the cute bunny🐰</string>
+    <string name="please_wait_update_rasp">Ищем ваше расписание на серверах АГПУ, а пока посмотрите на милого зайчика🐰</string>
     <string name="rasp_find">Найти расписание</string>
     <string name="Back">Назад</string>
     <string name="Forward">Вперед</string>
@@ -66,5 +66,5 @@
     <string name="delete_one_save">Удалить выбранное расписание?</string>
     <string name="Delete">Удалить!</string>
     <string name="dusha">Сделано с душой</string>
-    <string name="faculties_list">Ищем ваше расписание на серверах АГПУ, а пока посмотри на мило зайчика🐰</string>
+    <string name="faculties_list">Список факультетов</string>
 </resources>
