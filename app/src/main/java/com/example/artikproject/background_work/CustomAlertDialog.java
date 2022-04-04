@@ -155,7 +155,8 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                         new ListViewAud_ClickListener(Para_info.finalCorp, act);
                         break;
                     case "delete_one_saved_group":
-                        sqLiteDatabase.delete("raspisanie", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] + "' AND r_search_type = '" + MainActivity.group_listed_type[ListViewGroupListener.position] + "'", null);
+                        sqLiteDatabase.delete("raspisanie", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] +
+                                "' AND r_search_type = '" + MainActivity.group_listed_type[ListViewGroupListener.position] + "'", null);
                         new WatchSaveGroupRasp(act.getApplicationContext()); // Первичный вывод групп которые были открыты ранее
                         break;
                 }

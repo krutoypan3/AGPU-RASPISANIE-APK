@@ -23,7 +23,7 @@
     <string name="adress_spf">Корпус по ул. Ленина, 79  (СПФ)</string>
     <string name="adress_ebd">Корпус по ул. Ефремова, 35 (ЕБД)</string>
     <string name="adress_foc">Корпус по ул. П. Осипенко, 83 (ФОК)</string>
-    <string name="adress_tehfak">Корпус по ул. П. Комсомольская, 93 (ФТЭиД \\ ТЕХФАК)</string>
+    <string name="adress_tehfak">Корпус по ул. Комсомольская, 93 (ФТЭиД \\ ТЕХФАК)</string>
     <string name="adress_obshaga">Корпус по ул. К. Маркса, 49 (Общежитие 1)</string>
     <string name="delete_all_save">Удалить все сохраненные расписания?!</string>
     <string name="delete_confirm">Подтвердите удаление!</string>

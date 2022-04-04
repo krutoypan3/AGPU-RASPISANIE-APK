@@ -23,7 +23,7 @@
     <string name="adress_spf">Building on st. Lenina, 79 (SPF)</string>
     <string name="adress_ebd">Building on st. Efremova, 35 (EBD)</string>
     <string name="adress_foc">Building on st. P. Osipenko, 83 (FLC)</string>
-    <string name="adress_tehfak">Building on st. P. Komsomolskaya, 93 (FTEiD \\ TEHFAK)</string>
+    <string name="adress_tehfak">Building on st. Komsomolskaya, 93 (FTEiD \\ TEHFAK)</string>
     <string name="adress_obshaga">Building on st. K. Marx, 49 (Dormitory 1)</string>
     <string name="delete_all_save">Delete all saved schedules?!</string>
     <string name="delete_confirm">Confirm deletion!</string>

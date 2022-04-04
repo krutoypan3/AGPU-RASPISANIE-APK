@@ -101,24 +101,25 @@
             android:id="@+id/list_groups"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@id/list_weeks"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
-            android:layout_above="@id/list_weeks"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/gold"
             android:background="@drawable/small_button_50"
-            android:text="@string/groups_list" />
+            android:text="@string/groups_list"
+            android:textColor="@color/gold" />
+
         <Button
             android:id="@+id/list_weeks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="10dp"
-            android:layout_alignParentEnd="true"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/gold"
             android:background="@drawable/small_button_50"
-            android:text="@string/weeks_list" />
+            android:text="@string/weeks_list"
+            android:textColor="@color/gold" />
 
     </RelativeLayout>
 </RelativeLayout>
