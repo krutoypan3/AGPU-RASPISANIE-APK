@@ -47,14 +47,13 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     void setUpdateTV(RemoteViews rv, Context context, int appWidgetId) {
-        @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         rv.setTextViewText(R.id.tvUpdate, context.getResources().getString(R.string.Click_me)); // Да, это костыль
         Intent updIntent = new Intent(context, WidgetProvider.class);
         updIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         updIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,
                 new int[] { appWidgetId });
         PendingIntent updPIntent = PendingIntent.getBroadcast(context,
-                appWidgetId, updIntent, 0);
+                appWidgetId, updIntent, PendingIntent.FLAG_IMMUTABLE);
         rv.setOnClickPendingIntent(R.id.tvUpdate, updPIntent);
 
         sqLiteDatabase = new DataBase_Local(context).getWritableDatabase();
@@ -112,7 +111,7 @@ public class WidgetProvider extends AppWidgetProvider {
         for (int widgetId : widgetIds) {
             Intent intentBtnPwr = new Intent(context, WidgetConfig.class);
             intentBtnPwr.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
-            PendingIntent pi = PendingIntent.getActivity(context, widgetId, intentBtnPwr, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent pi = PendingIntent.getActivity(context, widgetId, intentBtnPwr, PendingIntent.FLAG_IMMUTABLE);
             remoteViews.setOnClickPendingIntent(R.id.tvUpdate, pi);
             awm.updateAppWidget(widgetId, remoteViews);
         }

@@ -36,7 +36,7 @@
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
             <meta-data android:name="android.appwidget.provider"
-                android:resource="@xml/example_info" />
+                android:resource="@xml/widget_info" />
         </receiver>
         <activity android:name=".background_work.widget.WidgetConfig"
             android:exported="true">
