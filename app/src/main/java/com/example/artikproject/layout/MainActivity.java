@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.Objects;
 
 import com.example.artikproject.background_work.CheckInternetConnection;
+import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.site_parse.GetCurrentWeekId;
 import com.example.artikproject.background_work.site_parse.GetFullGroupList_Online;
@@ -116,12 +117,7 @@ public class MainActivity extends AppCompatActivity {
         new GetCurrentWeekId(MainActivity.this).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
         new GetFullGroupList_Online(getApplicationContext()).start(); // Получение полного списка групп и закидывание их в адаптер
 
-        // Получение актуального текущего времени
-        long date_ms = new Date().getTime();// Нужно ли це переменная?
-        week_day = new Date(date_ms).getDay() - 1; // дня недели
-        if (week_day == -1){ // Если будет воскресенье, то будет показан понедельник
-            week_day = 0;
-        }
+        week_day = GetCurrentWeekDay.get();
 
         // Отслеживание нажатий на элемент в списке(ауд)
         listview_aud.setOnItemClickListener((parent, v, position, id) ->

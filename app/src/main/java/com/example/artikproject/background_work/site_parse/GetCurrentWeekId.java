@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.main_show.GetWeekFromId;
 import com.example.artikproject.layout.MainActivity;
@@ -31,14 +32,9 @@ public class GetCurrentWeekId extends Thread {
     @Override
     public void run() {
         try{
-            try { // Получаем последнюю сохраненную неделю из базы данных
-                Cursor r = sqLiteDatabase.rawQuery("SELECT value FROM settings_app WHERE settings_name = 'week_id'",null);
-                r.moveToFirst();
-                MainActivity.week_id = Integer.parseInt(r.getString(0));
-            }
-            catch (Exception e){
-                e.printStackTrace();
-            } // Затем пробуем получить текущую неделю через интернет
+            // Получаем последнюю сохраненную неделю из базы данных
+            MainActivity.week_id = GetCurrentWeekId_Local.get();
+            // Затем пробуем получить текущую неделю через интернет
             Document doc;
             try {
                 String urlq = "http://www.it-institut.ru/SearchString/Index/118";

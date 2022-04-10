@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/coal"
+    android:padding="5dp">
+    <TextView
+        android:id="@+id/tvUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/fierd"
+        android:textColor="@color/gold"
+        android:textSize="22sp"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge">
+    </TextView>
+    <TextView
+        android:id="@+id/tvUpdate_time"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUpdate"
+        android:background="@color/fierd50"
+        android:textColor="@color/arkt_iva"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge">
+    </TextView>
+    <ListView
+        android:id="@+id/lvList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvUpdate_time">
+    </ListView>
+</RelativeLayout>

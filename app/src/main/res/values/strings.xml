@@ -67,4 +67,9 @@
     <string name="Delete">Удалить!</string>
     <string name="dusha">Сделано с душой</string>
     <string name="faculties_list">Список факультетов</string>
+    <string name="widget_name">АГПУ расписание</string>
+    <string name="widget_text">Текст виджета</string>
+    <string name="last_update">Обновлено</string>
+    <string name="Click_me">Нажми на меня!</string>
+    <string name="choose_rasp">Выберите расписание:</string>
 </resources>

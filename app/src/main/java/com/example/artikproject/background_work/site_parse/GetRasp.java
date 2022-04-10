@@ -43,6 +43,7 @@ public class GetRasp extends Thread {
     String predmet_time;
     String predmet_data_ned;
     String predmet_data_chi;
+    boolean widget = false;
 
     /**
      * Класс отвечающий за обновление расписание и поика изменений в старом
@@ -58,6 +59,15 @@ public class GetRasp extends Thread {
         this.r_selectedItem = r_selectedItem;
         this.week_id_upd = week_id_upd;
         this.context = context;
+    }
+
+    public GetRasp(String r_selectedItem_id, String r_selectedItem_type, String r_selectedItem, int week_id_upd, Context context, boolean widget) {
+        this.r_selectedItem_id = r_selectedItem_id;
+        this.r_selectedItem_type = r_selectedItem_type;
+        this.r_selectedItem = r_selectedItem;
+        this.week_id_upd = week_id_upd;
+        this.context = context;
+        this.widget = widget;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -163,6 +173,10 @@ public class GetRasp extends Thread {
                                     new Handler(Looper.getMainLooper()).post(() -> { // Выводим уведомление о наличии нового расписания
                                         new ShowNotification(context, r_selectedItem + " " + context.getResources().getString(R.string.new_rasp) + "!", context.getResources().getString(R.string.new_rasp_sub));
                                     });
+                                }
+                                if (widget){
+                                    sqLiteDatabase.delete("raspisanie", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
+                                    put_db(i, j, ff);
                                 }
                             }
                         }

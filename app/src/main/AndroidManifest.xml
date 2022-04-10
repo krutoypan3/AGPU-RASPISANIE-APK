@@ -30,6 +30,24 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".background_work.widget.MyWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/example_info" />
+        </receiver>
+        <activity android:name=".background_work.widget.MyWidgetConfig"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name=".background_work.widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS">
+        </service>
         <activity android:name=".layout.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">

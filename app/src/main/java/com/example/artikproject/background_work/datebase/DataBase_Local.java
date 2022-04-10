@@ -12,7 +12,7 @@ public class DataBase_Local extends SQLiteOpenHelper {
      * @param context Контекст приложения
      */
     public DataBase_Local(Context context) {
-        super(context, DATABASE_NAME, null, 4);
+        super(context, DATABASE_NAME, null, 6);
     }
 
     @Override
@@ -86,6 +86,15 @@ public class DataBase_Local extends SQLiteOpenHelper {
                     "\t\"faculties_name\"\tTEXT,\n" +
                     "\t\"faculties_group_name\"\tTEXT,\n" +
                     "\t\"faculties_group_id\"\tTEXT\n" +
+                    ")");
+        }
+        catch (Exception ignored){}
+        try{
+            db.execSQL("CREATE TABLE IF NOT EXISTS \"widgets\" (\n" +
+                    "\t\"widget_id\"\tTEXT,\n" +
+                    "\t\"selected_item_id\"\tTEXT,\n" +
+                    "\t\"selected_item_type\"\tTEXT,\n" +
+                    "\t\"selected_item_name\"\tTEXT\n" +
                     ")");
         }
         catch (Exception ignored){}

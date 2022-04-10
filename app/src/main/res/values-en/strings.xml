@@ -60,4 +60,9 @@
     <string name="Delete">Delete!</string>
     <string name="dusha">Made with soul</string>
     <string name="faculties_list">List of faculties</string>
+    <string name="widget_name">ASPU schedule</string>
+    <string name="last_update">Updated</string>
+    <string name="Click_me">Click on me!</string>
+    <string name="widget_text" translatable="false">Widget Text</string>
+    <string name="choose_rasp">Choose a schedule:</string>
 </resources>
