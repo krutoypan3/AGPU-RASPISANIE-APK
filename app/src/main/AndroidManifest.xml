@@ -30,7 +30,7 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".background_work.widget.MyWidgetProvider"
+        <receiver android:name=".background_work.widget.WidgetProvider"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -38,7 +38,7 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/example_info" />
         </receiver>
-        <activity android:name=".background_work.widget.MyWidgetConfig"
+        <activity android:name=".background_work.widget.WidgetConfig"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />

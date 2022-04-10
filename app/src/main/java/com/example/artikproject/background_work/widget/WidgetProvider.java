@@ -11,8 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Handler;
-import android.os.Looper;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -21,19 +19,13 @@ import com.example.artikproject.background_work.CheckInternetConnection;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
-import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.site_parse.GetRasp;
-import com.example.artikproject.layout.MainActivity;
-import com.example.artikproject.layout.Raspisanie_show;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
-import java.util.Locale;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
-public class MyWidgetProvider extends AppWidgetProvider {
+public class WidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
@@ -57,7 +49,7 @@ public class MyWidgetProvider extends AppWidgetProvider {
     void setUpdateTV(RemoteViews rv, Context context, int appWidgetId) {
         @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         rv.setTextViewText(R.id.tvUpdate, context.getResources().getString(R.string.Click_me)); // Да, это костыль
-        Intent updIntent = new Intent(context, MyWidgetProvider.class);
+        Intent updIntent = new Intent(context, WidgetProvider.class);
         updIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         updIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,
                 new int[] { appWidgetId });
@@ -115,10 +107,10 @@ public class MyWidgetProvider extends AppWidgetProvider {
     public void onEnabled(Context context) {
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
         AppWidgetManager awm = AppWidgetManager.getInstance(context);
-        ComponentName compName = new ComponentName(context, MyWidgetProvider.class);
+        ComponentName compName = new ComponentName(context, WidgetProvider.class);
         int[] widgetIds = awm.getAppWidgetIds(compName);
         for (int widgetId : widgetIds) {
-            Intent intentBtnPwr = new Intent(context, MyWidgetConfig.class);
+            Intent intentBtnPwr = new Intent(context, WidgetConfig.class);
             intentBtnPwr.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
             PendingIntent pi = PendingIntent.getActivity(context, widgetId, intentBtnPwr, PendingIntent.FLAG_UPDATE_CURRENT);
             remoteViews.setOnClickPendingIntent(R.id.tvUpdate, pi);

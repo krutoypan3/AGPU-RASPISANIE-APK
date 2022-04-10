@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
-import com.example.artikproject.background_work.widget.MyWidgetConfig;
 import com.example.artikproject.layout.MainActivity;
 
 import java.util.ArrayList;

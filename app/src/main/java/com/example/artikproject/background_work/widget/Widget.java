@@ -18,7 +18,7 @@ import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 
-public class MyWidget implements RemoteViewsFactory {
+public class Widget implements RemoteViewsFactory {
 
     private ArrayList<String> data; // Список с парами
 
@@ -29,7 +29,7 @@ public class MyWidget implements RemoteViewsFactory {
      * Получение списка пар
      */
     @SuppressLint("SimpleDateFormat")
-    public MyWidget(Context ctx, Intent intent) {
+    public Widget(Context ctx, Intent intent) {
         context = ctx; // Заполняем переменные данными из конструктора
         widgetID = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
@@ -42,7 +42,6 @@ public class MyWidget implements RemoteViewsFactory {
     @Override
     public void onCreate() {
         data = new ArrayList<>();
-
     }
 
     /**

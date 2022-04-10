@@ -6,23 +6,19 @@ import android.app.Activity;
 import android.appwidget.AppWidgetManager;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.CheckInternetConnection;
 
-import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.background_work.site_parse.GetCurrentWeekId;
-import com.example.artikproject.background_work.site_parse.GetRasp;
 
 
-public class MyWidgetConfig extends Activity {
+public class WidgetConfig extends Activity {
 
     public static ListView ConfigWidgetListView;
     int awID;
@@ -40,7 +36,7 @@ public class MyWidgetConfig extends Activity {
         try{
         if(!(sap.group_list.size() == 0)){
             ArrayAdapter<String> adapter = new ArrayAdapter(getApplicationContext(), R.layout.listviewadapterbl, sap.group_list.toArray(new String[0]));
-            MyWidgetConfig.ConfigWidgetListView.setAdapter(adapter);
+            WidgetConfig.ConfigWidgetListView.setAdapter(adapter);
         }}
         catch (Exception e){e.printStackTrace();}
         ConfigWidgetListView.setOnItemClickListener((parent, view, position, id) ->
