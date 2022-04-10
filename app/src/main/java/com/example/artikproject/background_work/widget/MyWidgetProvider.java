@@ -79,12 +79,10 @@ public class MyWidgetProvider extends AppWidgetProvider {
                     new GetRasp(selectedItem_id, selectedItem_type, selectedItem_name, GetCurrentWeekId_Local.get(), context, true).start();
                 }
                 rv.setTextViewText(R.id.tvUpdate, selectedItem_name);
-
-                Toast.makeText(context, "Обновляем расписание для " + selectedItem_name,Toast.LENGTH_SHORT).show();
-                    Cursor fr = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
-                            "r_group_code = " + selectedItem_id + " AND " +
-                            "r_week_number = " + week_id + " AND " +
-                            "r_week_day = " + week_day + " ORDER BY r_para_number", null);
+                Cursor fr = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
+                        "r_group_code = " + selectedItem_id + " AND " +
+                        "r_week_number = " + week_id + " AND " +
+                        "r_week_day = " + week_day + " ORDER BY r_para_number", null);
                 if (fr.moveToFirst()) {
                     long last_update = fr.getLong(13);
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
@@ -108,7 +106,7 @@ public class MyWidgetProvider extends AppWidgetProvider {
     @Override
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
-        Toast.makeText(context, "Был рад помочь вам!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "Были рады помочь вам!", Toast.LENGTH_SHORT).show();
         sqLiteDatabase = new DataBase_Local(context).getWritableDatabase();
         sqLiteDatabase.delete("widgets", "widget_id = '" + appWidgetIds[0] + "'", null);
     }
