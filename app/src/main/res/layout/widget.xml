@@ -3,15 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/coal"
+    android:background="@drawable/widget_shape"
     android:padding="5dp">
     <TextView
         android:id="@+id/tvUpdate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@color/fierd"
+        android:background="@drawable/widget_text_up_shape"
         android:textColor="@color/gold"
+        android:text="@string/dusha"
         android:textSize="22sp"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge">
@@ -19,10 +20,11 @@
     <TextView
         android:id="@+id/tvUpdate_time"
         android:textSize="18sp"
+        android:text="@string/widget_loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUpdate"
-        android:background="@color/fierd50"
+        android:background="@drawable/widget_text_down_shape"
         android:textColor="@color/arkt_iva"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge">

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:configure="com.example.artikproject.background_work.widget.WidgetConfig"
-    android:minHeight="180dp"
-    android:minWidth="250dp"
+    android:minHeight="110dp"
+    android:minWidth="180dp"
     android:initialLayout="@layout/widget"
     android:updatePeriodMillis="1800000"
     android:resizeMode="horizontal|vertical"

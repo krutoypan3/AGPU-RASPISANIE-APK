@@ -1,8 +1,6 @@
 package com.example.artikproject.background_work.widget;
 import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import android.annotation.SuppressLint;

@@ -18,6 +18,7 @@
     <color name="fialka">#5c3c92</color>
     <color name="gold">#FFFFFF</color>  <!-- Основной цвет текста в приложении -->
     <color name="coal">#3b4d61</color>
+    <color name="coal90">#EE3b4d61</color>
     <color name="alert_dialog_color">#EE3b4d61</color>
     <color name="alert_dialog_divider_color">#77000000</color>
     <color name="fierd">#2e327b</color>
