@@ -15,7 +15,6 @@ import com.example.artikproject.R;
 
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
-import com.example.artikproject.background_work.site_parse.GetCurrentWeekId;
 
 
 public class WidgetConfig extends Activity {

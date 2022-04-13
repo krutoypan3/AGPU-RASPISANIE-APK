@@ -43,7 +43,7 @@ public class GetRasp extends Thread {
     String predmet_time;
     String predmet_data_ned;
     String predmet_data_chi;
-    boolean widget = false;
+    String type = "";
 
     /**
      * Класс отвечающий за обновление расписание и поика изменений в старом
@@ -61,21 +61,22 @@ public class GetRasp extends Thread {
         this.context = context;
     }
 
-    public GetRasp(String r_selectedItem_id, String r_selectedItem_type, String r_selectedItem, int week_id_upd, Context context, boolean widget) {
+    public GetRasp(String r_selectedItem_id, String r_selectedItem_type, String r_selectedItem, int week_id_upd, Context context, String type) {
         this.r_selectedItem_id = r_selectedItem_id;
         this.r_selectedItem_type = r_selectedItem_type;
         this.r_selectedItem = r_selectedItem;
         this.week_id_upd = week_id_upd;
         this.context = context;
-        this.widget = widget;
+        this.type = type;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void run() {
+        //if (type.equals("CheckRaspChanges")){Raspisanie_show.refresh_on_off = false;}
         if (!Raspisanie_show.refresh_on_off) {
             Raspisanie_show.refresh_on_off = true;
-            System.out.println("Был сделан запрос на обновление расписания");
+            System.out.println("Был сделан запрос на обновление расписания для " + r_selectedItem);
             try{
                 Document doc;
                 for (int ff = -1; ff < 2; ff++) {
@@ -169,12 +170,13 @@ public class GetRasp extends Thread {
                                         !(Objects.equals(predmet_aud, predmet_aud_db)) | !(Objects.equals(predmet_time, predmet_time_db))) {
                                     sqLiteDatabase.delete("raspisanie", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
                                     put_db(i, j, ff);
+                                    System.out.println((r_selectedItem + " " + context.getResources().getString(R.string.new_rasp) + "!" + context.getResources().getString(R.string.new_rasp_sub)));
                                     // Это нужно для вызова вне основного потока
                                     new Handler(Looper.getMainLooper()).post(() -> { // Выводим уведомление о наличии нового расписания
-                                        new ShowNotification(context, r_selectedItem + " " + context.getResources().getString(R.string.new_rasp) + "!", context.getResources().getString(R.string.new_rasp_sub));
+                                        new ShowNotification(context, r_selectedItem + " " + context.getResources().getString(R.string.new_rasp) + "!", predmet_data_ned + " " + predmet_data_chi + ". " + context.getResources().getString(R.string.new_rasp_sub), Integer.parseInt(r_selectedItem_id)).start();
                                     });
                                 }
-                                if (widget){
+                                if (type.equals("widget")){
                                     sqLiteDatabase.delete("raspisanie", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
                                     put_db(i, j, ff);
                                 }
@@ -188,7 +190,7 @@ public class GetRasp extends Thread {
                 e.printStackTrace();
             }
             finally {
-                System.out.println("Расписание было обновлено");
+                System.out.println("Расписание для " + r_selectedItem + " было обновлено");
                 Raspisanie_show.refresh_on_off = false;
             }
         }

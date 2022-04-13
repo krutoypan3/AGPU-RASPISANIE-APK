@@ -35,7 +35,6 @@ import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
 import com.example.artikproject.background_work.server.SendInfoToServer;
-import com.example.artikproject.background_work.service.PlayService;
 import com.mikepenz.materialdrawer.Drawer;
 
 public class MainActivity extends AppCompatActivity {
@@ -131,8 +130,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Отслеживание нажатий и зажатий на список групп и аудиторий
         new ListViewGroupListener(MainActivity.this, listview);
-
-        startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 
         new WatchSaveGroupRasp(getApplicationContext()); // Первичный вывод групп которые были открыты ранее
 

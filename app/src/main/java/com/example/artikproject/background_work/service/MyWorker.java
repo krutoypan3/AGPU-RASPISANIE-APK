@@ -20,7 +20,7 @@ public class MyWorker extends Worker {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public Result doWork() {
-        new PlayService().get_group_db(getApplicationContext());
+        new CheckRaspChanges(getApplicationContext());
         return Result.success();
     }
 }

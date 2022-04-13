@@ -73,7 +73,7 @@ public class WidgetProvider extends AppWidgetProvider {
                 String selectedItem_id = r.getString(1);
                 String selectedItem_type = r.getString(2);
                 if (CheckInternetConnection.getState(context)){ // Обновляем расписание для этой группы
-                    new GetRasp(selectedItem_id, selectedItem_type, selectedItem_name, GetCurrentWeekId_Local.get(), context, true).start();
+                    new GetRasp(selectedItem_id, selectedItem_type, selectedItem_name, GetCurrentWeekId_Local.get(), context, "widget").start();
                 }
                 rv.setTextViewText(R.id.tvUpdate, selectedItem_name); // Устанавливаем название группы на кнопку
                 Cursor fr = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +

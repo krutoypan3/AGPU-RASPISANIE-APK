@@ -14,10 +14,13 @@ import androidx.annotation.RequiresApi;
 import com.example.artikproject.R;
 import com.example.artikproject.layout.MainActivity;
 
+import java.util.Random;
+
 public class ShowNotification extends Thread {
     Context context;
     String title;
     String subtitle;
+    int chanel_id = 12315;
     /**
      * Класс отвечающий за показ уведомлений
      * @param context Контекст приложения
@@ -29,30 +32,34 @@ public class ShowNotification extends Thread {
         this.title = title;
         this.subtitle = subtitle;
     }
+    public ShowNotification(Context context, String title, String subtitle, int chanel_id) {
+        this.context =context;
+        this.title = title;
+        this.subtitle = subtitle;
+        this.chanel_id = chanel_id;
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void run() {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-        int id = 123123; // The id of the channel. Ид канала
+System.out.println(chanel_id + " ID КАНАЛА");
         CharSequence name = "agpu_chanel"; // Название канала которое будет видеть пользователь
         String description = "agpu_raspisanie"; // Описание канала (для пользователя)
 
         int importance = NotificationManager.IMPORTANCE_LOW;
 
-        NotificationChannel mChannel = new NotificationChannel(id + "", name,importance);
+        NotificationChannel mChannel = new NotificationChannel(chanel_id + "", name,importance);
 
         mChannel.setDescription(description);
         mChannel.enableLights(true);
-        mChannel.setLightColor(Color.RED);
+        mChannel.setLightColor(Color.BLUE);
         mChannel.enableVibration(true);
-        mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+        mChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
 
         mNotificationManager.createNotificationChannel(mChannel);
         mNotificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        String CHANNEL_ID = "123123"; // Тот же id канала только стринг
         // Вызов уведомления на канале
 
         Intent notificationIntent = new Intent(context, MainActivity.class);
@@ -62,10 +69,10 @@ public class ShowNotification extends Thread {
                 .setContentTitle(title)
                 .setContentText(subtitle)
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setChannelId(CHANNEL_ID)
+                .setChannelId(String.valueOf(chanel_id))
                 .setAutoCancel(true) // автоматически закрыть уведомление после нажатия
                 .setContentIntent(contentIntent)
                 .build();
-        mNotificationManager.notify(id, notification);
+        mNotificationManager.notify(chanel_id, notification);
     }
 }
