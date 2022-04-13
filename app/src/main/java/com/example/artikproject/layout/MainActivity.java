@@ -23,6 +23,7 @@ import java.util.Objects;
 import com.example.artikproject.background_work.CheckInternetConnection;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.main_show.ListViewGroupListener;
+import com.example.artikproject.background_work.service.PlayService;
 import com.example.artikproject.background_work.site_parse.GetCurrentWeekId;
 import com.example.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
@@ -130,6 +131,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Отслеживание нажатий и зажатий на список групп и аудиторий
         new ListViewGroupListener(MainActivity.this, listview);
+
+        startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 
         new WatchSaveGroupRasp(getApplicationContext()); // Первичный вывод групп которые были открыты ранее
 
