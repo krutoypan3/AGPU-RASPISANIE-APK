@@ -30,17 +30,17 @@ public class WidgetConfig extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.widget_config);
-        new GetCurrentWeekId(this);
-        ConfigWidgetListView = findViewById(R.id.configWidgetListView);
-        WatchSaveGroupRasp sap = new WatchSaveGroupRasp(getApplicationContext(), true);
+        ConfigWidgetListView = findViewById(R.id.configWidgetListView); // Список с ранее открытыми группами при создании виджета
+        WatchSaveGroupRasp sap = new WatchSaveGroupRasp(getApplicationContext(), true); // Получаем список сохраненных групп из базы данных
         try{
-        if(!(sap.group_list.size() == 0)){
-            ArrayAdapter<String> adapter = new ArrayAdapter(getApplicationContext(), R.layout.listviewadapterbl, sap.group_list.toArray(new String[0]));
-            WidgetConfig.ConfigWidgetListView.setAdapter(adapter);
+        if(!(sap.group_list.size() == 0)){ // Если в списке есть группы \ аудитории \ преподаватели
+            ArrayAdapter<String> adapter = new ArrayAdapter(getApplicationContext(), R.layout.listviewadapterbl, sap.group_list.toArray(new String[0])); // Заполняем ими адаптер
+            WidgetConfig.ConfigWidgetListView.setAdapter(adapter); // Применяем адаптер к списку конфигурационного активити
         }}
         catch (Exception e){e.printStackTrace();}
-        ConfigWidgetListView.setOnItemClickListener((parent, view, position, id) ->
+        ConfigWidgetListView.setOnItemClickListener((parent, view, position, id) -> // Обрабатываем нажатие на элементы списка
             {
+                // Добавляем информацию о выбранном элементе в таблицу базы данных с id виджета
                 selectedItem = sap.group_list.toArray(new String[0])[position];
                 selectedItem_type = sap.group_list_type.toArray(new String[0])[position];
                 selectedItem_id = sap.group_list_id.toArray(new String[0])[position];
@@ -59,11 +59,12 @@ public class WidgetConfig extends Activity {
             }
         );
 
-        Intent intent = getIntent();
-        Bundle bundleExtras = intent.getExtras();
-        if (bundleExtras != null){
-            awID = bundleExtras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
-        }else
-            finish();
+        // Получение ID создаваемого виджета
+        Intent intent = getIntent(); // Получаем текущее намерение
+        Bundle bundleExtras = intent.getExtras(); // Получаем внутренние значения намерения
+        if (bundleExtras != null){ // Если намерение не пустое
+            awID = bundleExtras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID); // Получаем ID виджета
+        }else // Иначе
+            finish(); // Закрываем все к чертям
     }
 }

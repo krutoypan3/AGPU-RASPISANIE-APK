@@ -23,9 +23,7 @@ public class Widget implements RemoteViewsFactory {
     Context context;
     int widgetID; // Номер виджета
 
-    /**
-     * Получение списка пар
-     */
+
     @SuppressLint("SimpleDateFormat")
     public Widget(Context ctx, Intent intent) {
         context = ctx; // Заполняем переменные данными из конструктора
