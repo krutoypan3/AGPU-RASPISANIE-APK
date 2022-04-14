@@ -88,9 +88,9 @@ public class Widget implements RemoteViewsFactory {
     public void onDataSetChanged() {
         try{
             data.clear(); // Обнуляем список
+            sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключение к базе данных должно быть выше функций получения дня недели и недели
             int week_day = GetCurrentWeekDay.get();
             int week_id = GetCurrentWeekId_Local.get();
-            sqLiteDatabase = new DataBase_Local(context).getWritableDatabase();
             Cursor r = sqLiteDatabase.rawQuery("SELECT selected_item_id FROM widgets WHERE widget_id = " + widgetID, null);
             if (r.moveToFirst()){
                 String selectedItem_id = r.getString(0);

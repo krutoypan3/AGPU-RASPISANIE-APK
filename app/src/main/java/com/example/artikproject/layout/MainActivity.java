@@ -17,7 +17,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.util.Date;
 import java.util.Objects;
 
 import com.example.artikproject.background_work.CheckInternetConnection;

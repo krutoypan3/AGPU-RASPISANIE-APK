@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Build;
 
@@ -13,8 +14,6 @@ import androidx.annotation.RequiresApi;
 
 import com.example.artikproject.R;
 import com.example.artikproject.layout.MainActivity;
-
-import java.util.Random;
 
 public class ShowNotification extends Thread {
     Context context;
@@ -55,6 +54,7 @@ System.out.println(chanel_id + " ID КАНАЛА");
         mChannel.enableLights(true);
         mChannel.setLightColor(Color.BLUE);
         mChannel.enableVibration(true);
+        mChannel.setVibrationPattern(new long[] { 1000, 1000, 1000, 1000, 1000 });
         mChannel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
 
         mNotificationManager.createNotificationChannel(mChannel);
@@ -67,11 +67,15 @@ System.out.println(chanel_id + " ID КАНАЛА");
 
         Notification notification = new Notification.Builder(context)
                 .setContentTitle(title)
+                .setPriority(Notification.PRIORITY_HIGH)
                 .setContentText(subtitle)
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setSmallIcon(R.drawable.agpu_ico)
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(),
+                        R.drawable.agpu_ico)) // большая картинка
                 .setChannelId(String.valueOf(chanel_id))
                 .setAutoCancel(true) // автоматически закрыть уведомление после нажатия
                 .setContentIntent(contentIntent)
+                .setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
                 .build();
         mNotificationManager.notify(chanel_id, notification);
     }
