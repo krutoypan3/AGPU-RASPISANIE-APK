@@ -73,4 +73,5 @@
     <string name="Click_me">Нажми на меня!</string>
     <string name="choose_rasp">Выберите расписание:</string>
     <string name="widget_loading">Загружаем ваше расписание…</string>
+    <string name="no_new_version">Новых версий не обнаружено</string>
 </resources>

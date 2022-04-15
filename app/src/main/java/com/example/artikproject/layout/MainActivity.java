@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -21,6 +23,8 @@ import java.util.Objects;
 
 import com.example.artikproject.background_work.CheckInternetConnection;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
+import com.example.artikproject.background_work.OnSwipeTouchListener;
+import com.example.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
 import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.service.PlayService;
 import com.example.artikproject.background_work.site_parse.GetCurrentWeekId;
@@ -111,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         try { new MainToolBar(MainActivity.this); } // Заполняем тулбар и вызываем его
         catch (PackageManager.NameNotFoundException e) { e.printStackTrace(); }
 
-        new CheckAppUpdate(MainActivity.this).start(); // Запуск проверки обновлений при входе в приложение
+        new CheckAppUpdate(MainActivity.this, false).start(); // Запуск проверки обновлений при входе в приложение
         new SendInfoToServer(MainActivity.this).start(); // Запуск отправки анонимной статистики для отадки ошибок
         new GetCurrentWeekId(MainActivity.this).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
         new GetFullGroupList_Online(getApplicationContext()).start(); // Получение полного списка групп и закидывание их в адаптер
@@ -136,19 +140,6 @@ public class MainActivity extends AppCompatActivity {
         new WatchSaveGroupRasp(getApplicationContext()); // Первичный вывод групп которые были открыты ранее
 
         // Отслеживание изменений текстового поля
-        rasp_search_edit.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {} // До изменения поля
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {} // После изменения поля
-            public void onTextChanged(CharSequence s, int start, int before, int count) { // Во время изменения поля
-                if (!(rasp_search_edit.getText().toString().trim().equals(""))) { // Если строка поиска не пустая
-                    if (!CheckInternetConnection.getState(getApplicationContext())){ new WatchSaveGroupRasp(getApplicationContext()); } // Если нет доступа к интернету то выводить список из бд
-                    else {
-                        String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + rasp_search_edit.getText().toString();
-                        new GetGroupList_Search(urlq, MainActivity.this).start(); // Отправляем запрос на сервер и выводим получившийся список
-                    }
-                }
-                else{new WatchSaveGroupRasp(getApplicationContext());}
-            }
-        });
+        new EditTextRaspSearch_Listener(this, rasp_search_edit);
     }
 }

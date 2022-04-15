@@ -1,5 +1,6 @@
 package com.example.artikproject.layout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -16,6 +17,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.rasp_show.*;
 import com.example.artikproject.background_work.OnSwipeTouchListener;
 import com.example.artikproject.R;
@@ -50,6 +52,7 @@ public class Raspisanie_show extends AppCompatActivity {
     @Override
     public void finish(){ super.finish(); }
 
+    @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +106,7 @@ public class Raspisanie_show extends AppCompatActivity {
         // Обновить расписание
         refresh_btn.setOnClickListener(v -> new Swipe_rasp("Bottom", getApplicationContext()));
         refresh_btn_ficha.setOnClickListener(v -> {
-            int random_int = new Random().nextInt(3);
+            int random_int = new Random().nextInt(4);
             switch (random_int){
                 case 0: raspisanie_show_layout.startAnimation(MainActivity.animRotate_ok); break;
                 case 1: raspisanie_show_layout.startAnimation(MainActivity.animScale); break;
@@ -114,16 +117,11 @@ public class Raspisanie_show extends AppCompatActivity {
 
         // Смена недельного режима и дневного
         week_day_change_btn.setOnClickListener(v -> new Week_day_change(getApplicationContext()));
-        day_para_view.setOnItemClickListener((parent, v, position, id) ->
-                new Para_info(position, Raspisanie_show.this));
 
-        // отслеживание жестов на дневном расписании
-        day_para_view.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
-            public void onSwipeRight() { new Swipe_rasp("Left", getApplicationContext()); }
-            public void onSwipeLeft() { new Swipe_rasp("Right", getApplicationContext()); }
-        });
+        // Отслеживание нажатий на список пар
+        new ListViewDayPara_Listener(this, day_para_view);
 
-        // отслеживание жестов под дневным расписанием
+        // Отслеживание жестов под дневным расписанием
         gesture_layout.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
             public void onSwipeRight() { new Swipe_rasp("Left", getApplicationContext()); }
             public void onSwipeLeft() { new Swipe_rasp("Right", getApplicationContext()); }

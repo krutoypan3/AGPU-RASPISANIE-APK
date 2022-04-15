@@ -44,7 +44,6 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
      */
     public CustomAlertDialog(Activity act, String new_main_text, String new_body_text, Uri uri) {
         super(act);
-        // TODO Auto-generated constructor stub
         this.act = act;
         this.new_main_text = new_main_text;
         this.uri = uri;
@@ -58,7 +57,6 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
      */
     public CustomAlertDialog(Activity act, String dialog_type) {
         super(act);
-        // TODO Auto-generated constructor stub
         this.act = act;
         this.dialog_type = dialog_type;
     }

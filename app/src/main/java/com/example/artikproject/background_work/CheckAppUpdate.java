@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.widget.Toast;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.debug.Device_info;
@@ -22,12 +23,15 @@ import java.util.Objects;
 
 public class CheckAppUpdate extends Thread {
     private final Activity act;
+    private final boolean show_no_update_message;
     /**
      * Класс отвечающий за поиск обновлений приложения
      * @param act Контекст приложения
+     * @param show_no_update Показать уведомление об отсутствии обновлений (True / False)
      */
-    public CheckAppUpdate(Activity act) {
+    public CheckAppUpdate(Activity act, boolean show_no_update) {
         this.act = act;
+        this.show_no_update_message = show_no_update;
     }
 
     @SuppressLint("InflateParams")
@@ -51,7 +55,7 @@ public class CheckAppUpdate extends Thread {
             JSONObject jo = (JSONObject) obj;
             String newVersion = (String) Objects.requireNonNull(jo.get("tag_name"));
             String currentVersion = Device_info.getAppVersion(act.getApplicationContext());
-            if(!newVersion.equals(currentVersion)){
+            if(!newVersion.equals(currentVersion)){ // Если версия приложения отличается от версии приложения на сервере
                 String whats_new = (String) jo.get("body");
                 JSONArray assets = (JSONArray) jo.get("assets");
                 assert assets != null;
@@ -64,6 +68,9 @@ public class CheckAppUpdate extends Thread {
                     cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
                     cdd.show();
                 });
+            }
+            else if(show_no_update_message){ // Если версии одинаковые
+                new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(act, R.string.no_new_version, Toast.LENGTH_SHORT).show());
             }
         }
         catch (Exception e){

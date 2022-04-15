@@ -74,6 +74,7 @@
         android:layout_below="@id/main_activity_text"
         android:layout_toEndOf="@id/rasp_site"
         android:background="@drawable/refresh_0"
+        android:padding="2dp"
         android:src="@drawable/refresh_ico"/>
 
         <ImageView
@@ -136,17 +137,18 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/week_day_change_btn"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_below="@id/main_activity_text"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="-50dp"
-        android:layout_toStartOf="@id/rasp_site"
-        android:background="@drawable/refresh_2"
-        android:src="@drawable/ic_baseline_date_range_24" />
+        <ImageView
+            android:id="@+id/week_day_change_btn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/main_activity_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="-50dp"
+            android:layout_toStartOf="@id/rasp_site"
+            android:padding="4dp"
+            android:background="@drawable/refresh_2"
+            android:src="@drawable/ic_baseline_date_range_24" />
 
     <ImageView
         android:id="@+id/week_day_change_btn_size_up"
