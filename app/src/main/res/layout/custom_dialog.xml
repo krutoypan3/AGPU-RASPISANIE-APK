@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:layout_margin="10dp"
         android:textSize="20sp"
-        android:textColor="@color/gold"/>
+        android:textColor="?android:attr/textColorPrimary"/>
     <ListView
         android:id="@+id/custom_dialog_list_view"
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:textSize="18sp"
-        android:textColor="@color/gold"/>
+        android:textColor="?android:attr/textColorPrimary"/>
 
     <EditText
         android:theme="@style/Theme.MyApp.Main"
@@ -36,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        android:textColorHint="@color/arkt_iva"
+        android:textColorHint="?android:textColorSecondary"
         android:inputType="textPersonName"
         android:textAlignment="center"
         android:hint="@string/feedback"
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/small_button"
             android:layout_margin="5dp"
-            android:textColor="@color/gold"
+            android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold" />
 
         <Button
@@ -65,7 +65,7 @@
             android:layout_marginStart="5dp"
             android:background="@drawable/small_button"
             android:layout_margin="5dp"
-            android:textColor="@color/gold"
+            android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold" />
     </LinearLayout>
 

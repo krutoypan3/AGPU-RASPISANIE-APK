@@ -4,9 +4,8 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
-import com.example.artikproject.background_work.datebase.DataBase_Local;
+import com.example.artikproject.background_work.adapters.ListViewItems;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,7 +16,7 @@ import java.util.List;
 
 public class GetFullWeekList_Online extends Thread{
     static public List<String> weeks_id = new ArrayList<>();
-    static public List<String> weeks_s_po = new ArrayList<>();
+    static public ArrayList<ListViewItems> weeks_s_po = new ArrayList<>();
     Context context;
     /**
      * Получает список недель семестра и заносит их в базу данных
@@ -55,7 +54,7 @@ public class GetFullWeekList_Online extends Thread{
                     if (!weeks_s_po.contains(spo)) {
                         String id = cards[i].split("WeekId=")[1].split("\"")[0]; // Id недели
                         weeks_id.add(id);
-                        weeks_s_po.add(spo);
+                        weeks_s_po.add(new ListViewItems(spo));
                         ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
                         rowValues.put("week_id", id);
                         rowValues.put("week_s", s);

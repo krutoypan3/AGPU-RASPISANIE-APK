@@ -6,6 +6,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import com.example.artikproject.background_work.adapters.ListViewItems;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -14,9 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetFullGroupList_Online extends Thread {
-    static public List<String> faculties_name = new ArrayList<>();
-    static public List<List<String>> faculties_group_name = new ArrayList<>();
-    static public List<List<String>> faculties_group_id = new ArrayList<>();
+    static public ArrayList<ListViewItems> faculties_name = new ArrayList<>();
+    static public List<ArrayList<ListViewItems>> faculties_group_name = new ArrayList<>();
+    static public List<ArrayList<ListViewItems>> faculties_group_id = new ArrayList<>();
     Context context;
 
     public GetFullGroupList_Online(Context context) {
@@ -28,16 +30,16 @@ public class GetFullGroupList_Online extends Thread {
         Cursor r = sqLiteDatabase.rawQuery("SELECT DISTINCT faculties_name FROM groups_list",null);
         if (!(r.getCount() == 0)){ // При отсутствии недели в базе данных обновляем список недель в базе данных
             while (r.moveToNext()) {
-                faculties_name.add(r.getString(0));
+                faculties_name.add(new ListViewItems(r.getString(0)));
             }
             for(int i=0; i<faculties_name.size(); i++){
-                String cur_faculties = faculties_name.get(i);
+                String cur_faculties = faculties_name.get(i).item;
                 r = sqLiteDatabase.rawQuery("SELECT faculties_group_name, faculties_group_id FROM groups_list WHERE faculties_name = '" + cur_faculties + "'", null);
-                List<String> faculties_group_name_cur = new ArrayList<>(); // Инициализируем список с названием групп для текущего факультета
-                List<String> faculties_group_id_cur = new ArrayList<>(); // Инициализируем список с id групп для текущего факультета
+                ArrayList<ListViewItems> faculties_group_name_cur = new ArrayList<>(); // Инициализируем список с названием групп для текущего факультета
+                ArrayList<ListViewItems> faculties_group_id_cur = new ArrayList<>(); // Инициализируем список с id групп для текущего факультета
                 while (r.moveToNext()){
-                    faculties_group_name_cur.add(r.getString(0));
-                    faculties_group_id_cur.add(r.getString(1));
+                    faculties_group_name_cur.add(new ListViewItems(r.getString(0)));
+                    faculties_group_id_cur.add(new ListViewItems(r.getString(1)));
                 }
                 faculties_group_name.add(faculties_group_name_cur);
                 faculties_group_id.add(faculties_group_id_cur);
@@ -57,18 +59,18 @@ public class GetFullGroupList_Online extends Thread {
             for (int i = 1; i < count; i++) {
                 String[] faculties_name_buttons = cards[i].split("</button>")[0].split(">");
                 String fac_name = faculties_name_buttons[faculties_name_buttons.length - 1]; // Извлекаем названия факультетов
-                faculties_name.add(fac_name); // Добавляем в общий список
+                faculties_name.add(new ListViewItems(fac_name)); // Добавляем в общий список
                 String[] faculties_name_class_p_2 = cards[i].split("<div class=\"p-2\">");
                 int fac_leght = faculties_name_class_p_2.length;
-                List<String> faculties_group_name_cur = new ArrayList<>(); // Инициализируем список с названием групп для текущего факультета
-                List<String> faculties_group_id_cur = new ArrayList<>(); // Инициализируем список с id групп для текущего факультета
+                ArrayList<ListViewItems> faculties_group_name_cur = new ArrayList<>(); // Инициализируем список с названием групп для текущего факультета
+                ArrayList<ListViewItems> faculties_group_id_cur = new ArrayList<>(); // Инициализируем список с id групп для текущего факультета
                 for (int j = 1; j < fac_leght; j++) {
                     String[] faculties_name_class_p_2_a = faculties_name_class_p_2[j].split("</a>")[0].split(">");
                     int fac_name_leght = faculties_name_class_p_2_a.length;
                     String faculties_group_name_cur_group = faculties_name_class_p_2_a[fac_name_leght - 1];
-                    faculties_group_name_cur.add(faculties_group_name_cur_group);
+                    faculties_group_name_cur.add(new ListViewItems(faculties_group_name_cur_group));
                     String faculties_group_id_cur_group = faculties_name_class_p_2[j].split("SearchId=")[1].split("&")[0];
-                    faculties_group_id_cur.add(faculties_group_id_cur_group);
+                    faculties_group_id_cur.add(new ListViewItems(faculties_group_id_cur_group));
                     ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
                     rowValues.put("faculties_name", fac_name);
                     rowValues.put("faculties_group_name", faculties_group_name_cur_group);

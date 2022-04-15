@@ -30,7 +30,7 @@ public class ListViewGroupListener {
      * @param act Активити
      */
     private void short_click(Activity act, int position){
-        MainActivity.selectedItem = MainActivity.group_listed[position];
+        MainActivity.selectedItem = MainActivity.group_listed.get(position).item;
         MainActivity.selectedItem_type = MainActivity.group_listed_type[position];
         MainActivity.selectedItem_id = MainActivity.group_listed_id[position];
         Intent intent = new Intent(act.getApplicationContext(), Raspisanie_show.class);

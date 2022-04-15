@@ -9,23 +9,24 @@ import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.widget.ArrayAdapter;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomAlertDialog;
 import com.example.artikproject.background_work.GetCorpFromAudNumber;
+import com.example.artikproject.background_work.adapters.ListViewAdapter;
+import com.example.artikproject.background_work.adapters.ListViewItems;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Para_info {
     private int pashalka = 0;
     public static int finalCorp;
     public Para_info(int position, Activity act){
-        Object para_time = Raspisanie_show.day_para_view.getItemAtPosition(position).toString().split("\n")[0];
-        Object prepod_aud = Raspisanie_show.day_para_view.getItemAtPosition(position).toString().split("\n")[2];
+        ListViewItems para_adap = (ListViewItems) Raspisanie_show.day_para_view.getItemAtPosition(position);
+        String para_time = para_adap.item.split("\n")[0];
+        String prepod_aud = para_adap.item.split("\n")[2];
         Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                 "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                 "r_week_number = " + MainActivity.week_id + " AND " +
@@ -34,30 +35,30 @@ public class Para_info {
                 "r_prepod = '" + prepod_aud + "'", null);
         if (r.getCount() != 0) {
             r.moveToFirst();
-            List<String> group_list = new ArrayList<>();
+            ArrayList<ListViewItems> group_list = new ArrayList<>();
             if (r.getString(4) != null) {
                 if (r.getString(9) != null)
-                    group_list.add(act.getApplicationContext().getResources().getString(R.string.Time) +
-                            " : " + r.getString(9));
+                    group_list.add(new ListViewItems(act.getApplicationContext().getResources().getString(R.string.Time) +
+                            " : " + r.getString(9)));
                 if (r.getString(4) != null)
-                    group_list.add(act.getApplicationContext().getResources().getString(R.string.CoupleName) +
-                            " : " + r.getString(4));
+                    group_list.add(new ListViewItems(act.getApplicationContext().getResources().getString(R.string.CoupleName) +
+                            " : " + r.getString(4)));
                 if (r.getString(5) != null)
-                    group_list.add(act.getApplicationContext().getResources().getString(R.string.Prepod) +
-                            " : " + r.getString(5).split(",")[0]);
+                    group_list.add(new ListViewItems(act.getApplicationContext().getResources().getString(R.string.Prepod) +
+                            " : " + r.getString(5).split(",")[0]));
                 if (r.getString(5) != null)
-                    group_list.add(act.getApplicationContext().getResources().getString(R.string.Audience) +
-                            " : " + r.getString(5).split(",")[r.getString(5).split(",").length - 1]);
+                    group_list.add(new ListViewItems(act.getApplicationContext().getResources().getString(R.string.Audience) +
+                            " : " + r.getString(5).split(",")[r.getString(5).split(",").length - 1]));
                 if (r.getString(6) != null)
-                    group_list.add(act.getApplicationContext().getResources().getString(R.string.Group) +
-                            " : " + r.getString(6).replace("(", "").replace(")", ""));
+                    group_list.add(new ListViewItems(act.getApplicationContext().getResources().getString(R.string.Group) +
+                            " : " + r.getString(6).replace("(", "").replace(")", "")));
                 if (r.getString(7) != null)
-                    group_list.add(act.getApplicationContext().getResources().getString(R.string.PodGroup) +
-                            " : " + r.getString(7).replace("(", "").replace(")", ""));
-                if (r.getString(8) != null) group_list.add(r.getString(8));
-                if (r.getString(15) != null) group_list.add(r.getString(15));
+                    group_list.add(new ListViewItems(act.getApplicationContext().getResources().getString(R.string.PodGroup) +
+                            " : " + r.getString(7).replace("(", "").replace(")", "")));
+                if (r.getString(8) != null) group_list.add(new ListViewItems(r.getString(8)));
+                if (r.getString(15) != null) group_list.add(new ListViewItems(r.getString(15)));
             }
-            ArrayAdapter<String> adapter = new ArrayAdapter(act.getApplicationContext(), R.layout.listviewadapterbl, group_list);
+            ListViewAdapter adapter = new ListViewAdapter(act.getApplicationContext(), group_list);
             try {
                 CustomAlertDialog cdd = new CustomAlertDialog(act, "para_info");
                 cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
@@ -66,7 +67,7 @@ public class Para_info {
                 cdd.list_view.setOnItemClickListener((parent, v, pos, id) -> {
                     switch (pos) {
                         case (3): // Клик по аудитории
-                            String aud = (String) cdd.list_view.getItemAtPosition(pos);
+                            String aud = ((ListViewItems) cdd.list_view.getItemAtPosition(pos)).item;
                             aud = aud.split(": ")[1];
                             finalCorp = new GetCorpFromAudNumber().getCorp(act, aud);
                             CustomAlertDialog dialog_confirm = new CustomAlertDialog(act, "map_confirm");
@@ -74,7 +75,7 @@ public class Para_info {
                             dialog_confirm.show();
                             break;
                         case (2):
-                            String sss = cdd.list_view.getItemAtPosition(pos).toString().split(",")[0].split(": ")[1];
+                            String sss = ((ListViewItems)cdd.list_view.getItemAtPosition(pos)).item.split(",")[0].split(": ")[1];
 
 
                             // Этот блок кода созда исключительно в развлекательных целях и не несет в себе цель кого-то задеть или обидеть

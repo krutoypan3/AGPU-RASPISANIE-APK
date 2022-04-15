@@ -1,0 +1,21 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="Theme.MyApp.Main" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!--Base colors-->
+        <item name="colorPrimary">@color/fierd75</item>
+        <item name="colorError">@color/error</item>
+        <item name="android:textColor">@color/gold</item>
+        <item name="itemTextColor">@color/gold</item>
+        <item name="android:textColorPrimary">@color/gold</item> <!-- Основной цвет текста приложения -->
+        <item name="android:textColorSecondary">@color/arkt_iva</item>
+        <item name="android:listChoiceBackgroundIndicator">@color/gold</item> <!-- Цвет элемента выпадающего списка при нажатии -->
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorSecondary">@color/coal</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnError">@color/gold</item>
+        <item name="chipStyle">@style/Widget.MaterialComponents.Chip.Action</item>
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.FilledBox</item>
+        <item name="android:listViewStyle">@color/sea</item>
+        <item name="android:textViewStyle">@color/gold</item>
+        <item name="textColorAlertDialogListItem">@color/gold</item>
+    </style>
+</resources>

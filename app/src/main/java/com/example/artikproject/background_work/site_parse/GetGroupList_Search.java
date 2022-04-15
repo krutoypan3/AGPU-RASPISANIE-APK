@@ -4,10 +4,11 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.artikproject.R;
+import com.example.artikproject.background_work.adapters.ListViewAdapter;
+import com.example.artikproject.background_work.adapters.ListViewItems;
 import com.example.artikproject.layout.MainActivity;
 
 import org.json.JSONArray;
@@ -60,7 +61,7 @@ public class GetGroupList_Search extends Thread {
 
             String jsonString = buffer; // ЭТО JSON со списком групп
             JSONArray obj = new JSONArray(jsonString);
-            List<String> group_list = new ArrayList<>();
+            ArrayList<ListViewItems> group_list = new ArrayList<>();
             List<String> group_list_type = new ArrayList<>();
             List<String> group_list_id = new ArrayList<>();
 
@@ -72,7 +73,7 @@ public class GetGroupList_Search extends Thread {
                     Object value = guysJSON.get((String)keys.next());
                     if (i % 4 == 0) {
                         String group_name = (String) value;
-                        group_list.add(group_name);
+                        group_list.add(new ListViewItems(group_name));
                     }
                     else if (i % 4 == 1) {
                         String group_type = (String) value;
@@ -86,7 +87,7 @@ public class GetGroupList_Search extends Thread {
                 }
             }
 
-            MainActivity.group_listed = group_list.toArray(new String[0]);
+            MainActivity.group_listed = group_list;
             MainActivity.group_listed_type = group_list_type.toArray(new String[0]);
             MainActivity.group_listed_id =group_list_id.toArray(new String[0]);
 
@@ -103,7 +104,7 @@ public class GetGroupList_Search extends Thread {
         }
         // Это нужно для вызова вне основного потока
         new Handler(Looper.getMainLooper()).post(() -> {
-            ArrayAdapter<String> adapter = new ArrayAdapter(context, R.layout.listviewadapterbl, MainActivity.group_listed);
+            ListViewAdapter adapter = new ListViewAdapter(context, MainActivity.group_listed);
             MainActivity.listview.setAdapter(adapter);
             MainActivity.result.setText("");
             MainActivity.listview.setVisibility(View.VISIBLE);

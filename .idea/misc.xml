@@ -6,29 +6,48 @@
         <entry key="..\:/Users/Kruto/.gradle/caches/transforms-3/4fb9ff8aa2e027b535076da59126152d/transformed/jetified-library-0.9.5/res/layout/drawer.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/Kruto/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.203125" />
         <entry key="..\:/Users/Kruto/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.203125" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable-night/table_granitsa_legenda.xml" value="0.20925925925925926" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable-v24/widget_config.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/activated_background.xml" value="0.20625" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/background.xml" value="0.1" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/background_darker.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/custom_dialog_background.xml" value="0.1953125" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/ic_baseline_date_range_24.xml" value="0.20625" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/ic_baseline_remove_circle_outline_24.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/ic_baseline_today_24.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/list_view_favorite.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/refresh_0.xml" value="0.1953125" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/refresh_1.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/refresh_2.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/refresh_ico.xml" value="0.20625" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/small_button.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/small_button_50.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/table_granitsa_legenda.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_background_light.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_maintext_background.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_maintext_dark.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_maintext_light.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_shape.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_shape_white.xml" value="0.20625" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_subtext_background.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_subtext_dark.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_subtext_light.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_text_down_shape.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_text_up_shape.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/activity_main.xml" value="0.3365036231884058" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/custom_dialog.xml" value="0.1762917933130699" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/drawer_header.xml" value="0.3591485507246377" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/item.xml" value="0.33106884057971014" />
-        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/raspisanie_layout.xml" value="0.5117565698478561" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/listviewadapterbl.xml" value="0.3625" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/raspisanie_layout.xml" value="0.33" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/settings_layout.xml" value="0.3625" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget.xml" value="0.33106884057971014" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_config.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.10520833333333333" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/xml/example_info.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/xml/widget_info_white.xml" value="0.19010416666666666" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/xml/widget_metadata.xml" value="0.33106884057971014" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable-v21/drawer_list_item.xml" value="0.21927083333333333" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/Artik/app/src/main/res/drawable/activated_background.xml" value="0.21927083333333333" />

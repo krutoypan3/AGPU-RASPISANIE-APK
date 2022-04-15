@@ -5,10 +5,9 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
-import com.example.artikproject.background_work.datebase.DataBase_Local;
+import com.example.artikproject.background_work.adapters.ListViewItems;
 import com.example.artikproject.background_work.main_show.GetWeekFromId;
 import com.example.artikproject.layout.MainActivity;
 
@@ -65,7 +64,7 @@ public class GetCurrentWeekId extends Thread {
                 else{ // Если неделя есть в базе данных, то заполняем списки информацией из базы данных
                     Cursor f = sqLiteDatabase.rawQuery("SELECT * FROM weeks_list ORDER BY week_id", null);
                     while (f.moveToNext()){
-                        GetFullWeekList_Online.weeks_s_po.add(f.getString(1) + " " + f.getString(2));
+                        GetFullWeekList_Online.weeks_s_po.add(new ListViewItems(f.getString(1) + " " + f.getString(2)));
                         GetFullWeekList_Online.weeks_id.add(f.getString(0));
                     }
                 }

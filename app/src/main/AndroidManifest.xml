@@ -40,16 +40,22 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
+
+        <!-- Активити виджета -->
         <activity android:name=".background_work.widget.WidgetConfig"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+
+        <!-- Служба виджета -->
         <service
             android:name=".background_work.widget.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS">
         </service>
+
+        <!-- Основное активити -->
         <activity android:name=".layout.MainActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">

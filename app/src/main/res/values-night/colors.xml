@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="darker">#90000000</color>
+    <color name="alert_dialog_color">#FE0B2A4C</color>
+    <color name="alert_dialog_color2">#CC111111</color>
+</resources>

@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#90000000">
+        android:background="@drawable/background_darker">
 
     <TextView
         android:id="@+id/main_activity_text"
@@ -27,7 +27,7 @@
         android:layout_below="@id/main_activity_text"
         android:layout_marginTop="-5dp"
         android:text="@string/Notify_about_changes"
-        android:textColor="@color/fierd" />
+        android:textColor="?android:textColorPrimary" />
 
     <Button
         android:id="@+id/week_day_bt2"
@@ -37,7 +37,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="-50dp"
         android:layout_toEndOf="@+id/refresh_btn"
-        android:textColor="@color/gold"
+        android:textColor="?android:attr/textColorPrimary"
         android:background="@drawable/small_button"
         android:text="@string/Forward" />
 
@@ -51,7 +51,7 @@
         android:layout_toStartOf="@+id/week_day_change_btn"
         android:background="@drawable/small_button"
         android:text="@string/Back"
-        android:textColor="@color/gold" />
+        android:textColor="?android:attr/textColorPrimary" />
 
     <ImageView
         android:id="@+id/rasp_site"

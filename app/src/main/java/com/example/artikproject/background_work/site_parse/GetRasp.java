@@ -170,7 +170,6 @@ public class GetRasp extends Thread {
                                         !(Objects.equals(predmet_aud, predmet_aud_db)) | !(Objects.equals(predmet_time, predmet_time_db))) {
                                     sqLiteDatabase.delete("raspisanie", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
                                     put_db(i, j, ff);
-                                    System.out.println((r_selectedItem + " " + context.getResources().getString(R.string.new_rasp) + "!" + context.getResources().getString(R.string.new_rasp_sub)));
                                     // Это нужно для вызова вне основного потока
                                     new Handler(Looper.getMainLooper()).post(() -> { // Выводим уведомление о наличии нового расписания
                                         new ShowNotification(context, r_selectedItem + " " + context.getResources().getString(R.string.new_rasp) + "!", predmet_data_ned + " " + predmet_data_chi + ". " + context.getResources().getString(R.string.new_rasp_sub), Integer.parseInt(r_selectedItem_id)).start();

@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#90000000"
+        android:background="@drawable/background_darker"
         >
     <TextView
         android:layout_marginTop="70dp"

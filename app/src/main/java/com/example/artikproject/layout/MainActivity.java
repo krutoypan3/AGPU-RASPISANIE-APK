@@ -4,9 +4,6 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -17,13 +14,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
-import com.example.artikproject.background_work.CheckInternetConnection;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
-import com.example.artikproject.background_work.OnSwipeTouchListener;
+import com.example.artikproject.background_work.adapters.ListViewItems;
 import com.example.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
 import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.service.PlayService;
@@ -32,7 +30,6 @@ import com.example.artikproject.background_work.site_parse.GetFullGroupList_Onli
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.main_show.ShowFullGroupList;
 import com.example.artikproject.background_work.main_show.ShowFullWeekList;
-import com.example.artikproject.background_work.site_parse.GetGroupList_Search;
 import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
 import com.example.artikproject.background_work.main_show.MainToolBar;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
@@ -44,7 +41,7 @@ import com.mikepenz.materialdrawer.Drawer;
 public class MainActivity extends AppCompatActivity {
 
     public static EditText rasp_search_edit;
-    public static String[] group_listed;
+    public static ArrayList<ListViewItems> group_listed;
     public static String[] group_listed_type;
     public static String[] group_listed_id;
     public static ListView listview;
@@ -67,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     public static Button list_groups = null;
     public static Button list_weeks = null;
     public static SQLiteDatabase sqLiteDatabase;
+    Boolean change = true;
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -107,6 +105,16 @@ public class MainActivity extends AppCompatActivity {
         listview_aud = findViewById(R.id.listview_aud);
         list_weeks = findViewById(R.id.list_weeks);
         sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
+        Button change_theme = findViewById(R.id.change_theme);
+        change_theme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (change){
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);}
+                else {AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);}
+                change = !change;
+            }
+        });
 
         // Инициализируем тулбар
         toolbar = findViewById(R.id.toolbar);

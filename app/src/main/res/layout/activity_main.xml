@@ -9,18 +9,17 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#90000000"
+        android:background="@drawable/background_darker"
         >
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:elevation="4dp"
-        app:titleTextColor="@color/gold"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:minHeight="?attr/actionBarSize"
-        android:transitionName="actionBar" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:elevation="4dp"
+            android:minHeight="?attr/actionBarSize"
+            android:transitionName="actionBar"
+            app:titleTextColor="?android:textColorPrimary" />
 
     <TextView
         android:id="@+id/main_activity_text"
@@ -32,9 +31,6 @@
         android:text="@string/dusha"
         android:layout_marginBottom="50dp"
         android:textAlignment="center"
-        android:textColorHighlight="#000000"
-        android:textColorHint="#C89595"
-        android:textColorLink="#FF6565"
         android:textSize="20sp" />
 
     <TextView
@@ -44,7 +40,7 @@
         android:layout_marginTop="-50sp"
         android:layout_below="@id/main_activity_text"
         android:layout_height="wrap_content"
-        android:textColor="@color/nefrit"
+        android:textColor="?android:textColorSecondary"
         android:textSize="18sp"/>
 
     <EditText
@@ -54,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10sp"
         android:ems="10"
-        android:textColorHint="@color/arkt_iva"
+        android:textColorHint="?android:textColorSecondary"
         android:inputType="textPersonName"
         android:layout_below="@id/main_activity_text"
         android:textAlignment="center"
@@ -71,9 +67,6 @@
         android:layout_marginBottom="50dp"
         android:layout_below="@id/rasp_search_edit"
         android:textAlignment="center"
-        android:textColorHighlight="#000000"
-        android:textColorHint="#C89595"
-        android:textColorLink="#FF6565"
         android:textSize="24sp" />
 
     <ListView
@@ -106,8 +99,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/small_button_50"
-            android:text="@string/groups_list"
-            android:textColor="@color/gold" />
+            android:text="@string/groups_list"/>
 
         <Button
             android:id="@+id/list_weeks"
@@ -118,8 +110,17 @@
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/small_button_50"
-            android:text="@string/weeks_list"
-            android:textColor="@color/gold" />
+            android:text="@string/weeks_list" />
+
+        <Button
+            android:id="@+id/change_theme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@id/list_groups"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/small_button_50"
+            android:text="Сменить тему"/>
 
     </RelativeLayout>
 </RelativeLayout>

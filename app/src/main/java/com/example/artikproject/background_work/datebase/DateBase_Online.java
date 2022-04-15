@@ -26,7 +26,6 @@ public class DateBase_Online {
             con = DriverManager.getConnection(getConnectionUrl(), userName, password);
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("АШИПКА in getConnection() : " + e.getMessage());
         }
         return con;
     }

@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
+import com.example.artikproject.background_work.adapters.ListViewAdapter;
+import com.example.artikproject.background_work.adapters.ListViewItems;
 import com.example.artikproject.background_work.ShowNotification;
 import com.example.artikproject.background_work.CustomAlertDialog;
 import com.example.artikproject.background_work.debug.Device_info;
@@ -24,7 +25,6 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainToolBar {
@@ -67,31 +67,29 @@ public class MainToolBar {
                             MainActivity.list_weeks.setVisibility(View.INVISIBLE);
                             MainActivity.today.setVisibility(View.INVISIBLE);
                             MainActivity.current_week.setVisibility(View.INVISIBLE);
-                            List<String> group_list_aud = new ArrayList<>();
-                            group_list_aud.add(context.getResources().getString(R.string.adress_main) + "\n" +
+                            ArrayList<ListViewItems> group_list_aud = new ArrayList<>();
+                            group_list_aud.add(new ListViewItems(context.getResources().getString(R.string.adress_main) + "\n" +
                                     context.getResources().getString(R.string.Audiences) +
-                                    ": " + context.getResources().getString(R.string.adress_main_aud) + "\n");
-                            group_list_aud.add(context.getResources().getString(R.string.adress_zaochka) + "\n" +
+                                    ": " + context.getResources().getString(R.string.adress_main_aud) + "\n"));
+                            group_list_aud.add(new ListViewItems(context.getResources().getString(R.string.adress_zaochka) + "\n" +
                                     context.getResources().getString(R.string.Audiences) +
-                                    ": " + context.getResources().getString(R.string.adress_zaochka_aud) + "\n");
-                            group_list_aud.add(context.getResources().getString(R.string.adress_spf) + "\n" +
+                                    ": " + context.getResources().getString(R.string.adress_zaochka_aud) + "\n"));
+                            group_list_aud.add(new ListViewItems(context.getResources().getString(R.string.adress_spf) + "\n" +
                                     context.getResources().getString(R.string.Audiences) +
-                                    ": " + context.getResources().getString(R.string.adress_spf_aud) +"\n");
-                            group_list_aud.add(context.getResources().getString(R.string.adress_ebd) + "\n" +
+                                    ": " + context.getResources().getString(R.string.adress_spf_aud) +"\n"));
+                            group_list_aud.add(new ListViewItems(context.getResources().getString(R.string.adress_ebd) + "\n" +
                                     context.getResources().getString(R.string.Audiences) +
-                                    ": " + context.getResources().getString(R.string.adress_ebd_aud) +"\n");
-                            group_list_aud.add(context.getResources().getString(R.string.adress_foc) + "\n" +
+                                    ": " + context.getResources().getString(R.string.adress_ebd_aud) +"\n"));
+                            group_list_aud.add(new ListViewItems(context.getResources().getString(R.string.adress_foc) + "\n" +
                                     context.getResources().getString(R.string.Audiences) +
-                                    ": " + context.getResources().getString(R.string.adress_foc_aud) +"\n");
-                            group_list_aud.add(context.getResources().getString(R.string.adress_tehfak) + "\n" +
+                                    ": " + context.getResources().getString(R.string.adress_foc_aud) +"\n"));
+                            group_list_aud.add(new ListViewItems(context.getResources().getString(R.string.adress_tehfak) + "\n" +
                                     context.getResources().getString(R.string.Audiences) +
-                                    ": " + context.getResources().getString(R.string.adress_tehfak_aud) +"\n");
-                            group_list_aud.add(context.getResources().getString(R.string.adress_obshaga) + "\n" +
+                                    ": " + context.getResources().getString(R.string.adress_tehfak_aud) +"\n"));
+                            group_list_aud.add(new ListViewItems(context.getResources().getString(R.string.adress_obshaga) + "\n" +
                                     context.getResources().getString(R.string.Audiences) +
-                                    ": " + context.getResources().getString(R.string.adress_obshaga_aud));
-                            String[] group_listed_aud;
-                            group_listed_aud = group_list_aud.toArray(new String[0]);
-                            ArrayAdapter<String> adapter = new ArrayAdapter(context, R.layout.listviewadapterbl, group_listed_aud);
+                                    ": " + context.getResources().getString(R.string.adress_obshaga_aud)));
+                            ListViewAdapter adapter = new ListViewAdapter(context, group_list_aud);
                             MainActivity.listview_aud.setAdapter(adapter);
                             MainActivity.listview_aud.setVisibility(View.VISIBLE);
                             MainActivity.listview_aud.setBackgroundResource(R.drawable.list_view_favorite);

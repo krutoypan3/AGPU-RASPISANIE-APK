@@ -3,36 +3,39 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/widget_shape"
-    android:padding="5dp">
+    android:theme="@style/Theme.MyApp.Main"
+    android:background="@drawable/custom_dialog_background"
+    android:padding="5dp"> <!--theme я хз зачем указывать, но без него ОНО НЕ ХОЧЕТ-->
     <TextView
         android:id="@+id/tvUpdate"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:background="@drawable/widget_text_up_shape"
-        android:textColor="@color/gold"
+        android:background="@drawable/widget_maintext_background"
         android:text="@string/dusha"
         android:textSize="22sp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_centerHorizontal="true">
     </TextView>
     <TextView
         android:id="@+id/tvUpdate_time"
         android:textSize="18sp"
         android:text="@string/widget_loading"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUpdate"
-        android:background="@drawable/widget_text_down_shape"
-        android:textColor="@color/arkt_iva"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceLarge">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/widget_subtext_background"
+        android:textColor="?android:textColorSecondary"
+        android:layout_centerHorizontal="true">
     </TextView>
     <ListView
         android:id="@+id/lvList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="4dp"
         android:layout_below="@id/tvUpdate_time">
     </ListView>
 </RelativeLayout>

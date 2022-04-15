@@ -2,10 +2,10 @@ package com.example.artikproject.background_work.main_show;
 
 import android.app.Activity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomAlertDialog;
+import com.example.artikproject.background_work.adapters.ListViewAdapter;
 import com.example.artikproject.background_work.site_parse.GetFullWeekList_Online;
 import com.example.artikproject.layout.MainActivity;
 
@@ -26,7 +26,7 @@ public class ShowFullWeekList extends Thread {
     public void run() {
         try{
             act.runOnUiThread(() -> {
-                ArrayAdapter<String> adapter = new ArrayAdapter(act.getApplicationContext(), R.layout.listviewadapterbl, GetFullWeekList_Online.weeks_s_po);
+                ListViewAdapter adapter = new ListViewAdapter(act.getApplicationContext(), GetFullWeekList_Online.weeks_s_po);
                 CustomAlertDialog cdd = new CustomAlertDialog(act, "weeks_list");
                 cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
                 cdd.show();

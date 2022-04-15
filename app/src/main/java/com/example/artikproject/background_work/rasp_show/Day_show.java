@@ -4,16 +4,15 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.widget.ArrayAdapter;
 
-import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckInternetConnection;
+import com.example.artikproject.background_work.adapters.ListViewAdapter;
+import com.example.artikproject.background_work.adapters.ListViewItems;
 import com.example.artikproject.background_work.site_parse.GetRasp;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Day_show {
     /**
@@ -22,7 +21,7 @@ public class Day_show {
      * @param context Контекст приложения
      */
     public Day_show(Context context) {
-        List<String> group_list = new ArrayList<>();
+        ArrayList<ListViewItems> group_list = new ArrayList<>();
         Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                 "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                 "r_week_number = " + MainActivity.week_id + " AND " +
@@ -41,7 +40,7 @@ public class Day_show {
                     if (r.getString(7) != null) str += r.getString(7) + "\n";
                     if (r.getString(8) != null) str += r.getString(8) + "\n";
                     if (r.getString(15) != null) str += r.getString(15) + "\n";
-                    group_list.add(str);
+                    group_list.add(new ListViewItems(str));
                 }
             } while (r.moveToNext());
         } else {
@@ -49,7 +48,7 @@ public class Day_show {
                 new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, context).start();
             }
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter(context, R.layout.listviewadapterbl, group_list);
+        ListViewAdapter adapter = new ListViewAdapter(context, group_list);
         Raspisanie_show.day_para_view.setAdapter(adapter);
     }
 }
