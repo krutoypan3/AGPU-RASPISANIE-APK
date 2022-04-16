@@ -1,10 +1,6 @@
 <resources>
     <string name="app_name">АГПУ расписание</string>
-    <string name="logo">АГПУ расписание</string>
-    <string name="no_user_input">Введите текст!</string>
-    <string name="action_settings">Настройки</string>
     <string name="drawer_item_home">Расписание</string>
-    <string name="drawer_item_star">Избранное</string>
     <string name="drawer_item_location">Аудитории и корпуса</string>
     <string name="drawer_item_settings">Настройки</string>
     <string name="drawer_item_delete">Очистить</string>
@@ -36,12 +32,10 @@
     <string name="Questions_sub">Напиши мне в ВК: Артем Оганесян vk.com/aom13</string>
     <string name="version">версия</string>
     <string name="Internet_error">Ошибка при подключении к сайту</string>
-    <string name="no_saved_group">Увы, но у вас нет сохраненных групп...</string>
+    <string name="no_saved_group">Увы, но у вас нет сохраненных групп…</string>
     <string name="new_rasp">новое расписание</string>
     <string name="new_rasp_sub">Расписание обновилось, скорее проверьте!</string>
-    <string name="rasp_error">Вы слишком быстро листаете недели с расписанием...  обновляю расписание...</string>
-    <string name="new_version">Найдена новая версия приложения!</string>
-    <string name="new_version_sub">В новой версии</string>
+    <string name="rasp_error">Вы слишком быстро листаете недели с расписанием…  обновляю расписание...</string>
     <string name="Update">Обновить</string>
     <string name="para_info">Информация о паре</string>
     <string name="Prepod">Преподаватель</string>
@@ -67,8 +61,6 @@
     <string name="Delete">Удалить!</string>
     <string name="dusha">Сделано с душой</string>
     <string name="faculties_list">Список факультетов</string>
-    <string name="widget_name">АГПУ расписание</string>
-    <string name="widget_text">Текст виджета</string>
     <string name="last_update">Обновлено</string>
     <string name="Click_me">Нажми на меня!</string>
     <string name="choose_rasp">Выберите расписание:</string>
