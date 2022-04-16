@@ -14,14 +14,13 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.adapters.GetColorTextView;
+import com.example.artikproject.background_work.theme.GetColorTextView;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;
 
 import java.util.Objects;
 
 public class Week_show {
-    Context context;
     public TableRow[] tableRows;
     public static TextView[] qqty;
     public static int table_size = 14;
@@ -32,7 +31,6 @@ public class Week_show {
      */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public Week_show(Context context){
-        this.context = context;
         try{
             Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
@@ -60,7 +58,7 @@ public class Week_show {
                     qty.setMaxEms(10);
                     qty.setTextSize(table_size);
                     qty.setPadding(5,5,5,5);
-                    qty.setTextColor(context.getColor(GetColorTextView.get()));
+                    qty.setTextColor(context.getColor(GetColorTextView.get(context)));
                     qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
                     qty.setGravity(Gravity.CENTER);
                     qty.setText(f.getString(0));
@@ -120,7 +118,7 @@ public class Week_show {
                         catch (Exception e){
                             qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
                         }
-                        qty.setTextColor(context.getColor(GetColorTextView.get()));
+                        qty.setTextColor(context.getColor(GetColorTextView.get(context)));
                     }
                     qty.setText(str);
                     empty_cell = new TextView(context); // Новая пустая ячейка

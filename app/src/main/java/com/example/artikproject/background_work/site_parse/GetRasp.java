@@ -27,11 +27,11 @@ import java.util.List;
 import java.util.Objects;
 
 public class GetRasp extends Thread {
-    String r_selectedItem;
-    String r_selectedItem_id;
-    String r_selectedItem_type;
-    int week_id_upd;
-    Context context;
+    final String r_selectedItem;
+    final String r_selectedItem_id;
+    final String r_selectedItem_type;
+    final int week_id_upd;
+    final Context context;
     String predmet_name;
     String predmet_prepod;
     String predmet_group;
@@ -164,11 +164,12 @@ public class GetRasp extends Thread {
                                 String predmet_aud_db = r.getString(8);
                                 String predmet_time_db = r.getString(9);
                                 String predmet_distant_db = r.getString(15);
+                                String whereClause = "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'";
                                 if (!(Objects.equals(predmet_name, predmet_name_db)) | !(Objects.equals(predmet_prepod, predmet_prepod_db)) |
                                         !(Objects.equals(predmet_distant, predmet_distant_db)) |
                                         !(Objects.equals(predmet_group, predmet_group_db)) | !(Objects.equals(predmet_podgroup, predmet_podgroup_db)) |
                                         !(Objects.equals(predmet_aud, predmet_aud_db)) | !(Objects.equals(predmet_time, predmet_time_db))) {
-                                    sqLiteDatabase.delete("raspisanie", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
+                                    sqLiteDatabase.delete("raspisanie", whereClause, null);
                                     put_db(i, j, ff);
                                     // Это нужно для вызова вне основного потока
                                     new Handler(Looper.getMainLooper()).post(() -> { // Выводим уведомление о наличии нового расписания
@@ -176,7 +177,7 @@ public class GetRasp extends Thread {
                                     });
                                 }
                                 if (type.equals("widget")){
-                                    sqLiteDatabase.delete("raspisanie", "r_group_code = '" + r_selectedItem_id + "' AND r_week_number = '" + (week_id_upd + ff) + "' AND r_week_day = '" + i + "' AND r_para_number = '" + j + "' AND r_search_type = '" + r_selectedItem_type + "'", null);
+                                    sqLiteDatabase.delete("raspisanie", whereClause, null);
                                     put_db(i, j, ff);
                                 }
                             }

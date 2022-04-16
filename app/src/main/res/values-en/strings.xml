@@ -16,7 +16,7 @@
     <string name="Back">Back</string>
     <string name="Forward">Forward</string>
     <string name="Notify_about_changes">Notify about changes</string>
-    <string name="settings_main_text">What exactly did you expect to see here? Be like everyone else, closed in this system without the right to change anything in your life.</string>
+    <string name="settings_main_text">Choose an app theme:</string>
     <string name="Audiences">Audiences</string>
     <string name="adress_main">Main building on st. R. Luxembourg, 159</string>
     <string name="adress_zaochka">Building on st. Kirova 50 (Zaocka)</string>
@@ -67,4 +67,7 @@
     <string name="choose_rasp">Choose a schedule:</string>
     <string name="widget_loading">Loading your schedule...</string>
     <string name="no_new_version">No new versions found</string>
+    <string name="Theme_dark">Dark</string>
+    <string name="Theme_system">System</string>
+    <string name="Theme_light">Light</string>
 </resources>

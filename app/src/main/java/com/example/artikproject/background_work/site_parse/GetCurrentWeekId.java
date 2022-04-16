@@ -19,7 +19,7 @@ import org.jsoup.nodes.Document;
  * при отсутствии интернета последний сохраненный результат в БД
  */
 public class GetCurrentWeekId extends Thread {
-    Activity act;
+    final Activity act;
     /**
      * Получаем тукущую неделю
      * @param act Активити
@@ -59,7 +59,7 @@ public class GetCurrentWeekId extends Thread {
                 String current_week = String.valueOf(MainActivity.week_id);
                 Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM weeks_list WHERE week_id = '" + current_week + "'",null);
                 if (r.getCount() == 0){ // При отсутствии недели в базе данных обновляем список недель в базе данных
-                    new GetFullWeekList_Online(act.getApplicationContext()).start(); // Если неделя отсутствует в БД, то обновляем список недель
+                    new GetFullWeekList_Online().start(); // Если неделя отсутствует в БД, то обновляем список недель
                 }
                 else{ // Если неделя есть в базе данных, то заполняем списки информацией из базы данных
                     Cursor f = sqLiteDatabase.rawQuery("SELECT * FROM weeks_list ORDER BY week_id", null);
@@ -70,7 +70,7 @@ public class GetCurrentWeekId extends Thread {
                 }
             }
             catch (Exception e){
-                new GetFullWeekList_Online(act.getApplicationContext()).start();; // Если неделя отсутствует в БД, то обновляем список недель
+                new GetFullWeekList_Online().start(); // Если неделя отсутствует в БД, то обновляем список недель
                 e.printStackTrace();
             }
         }

@@ -4,7 +4,6 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -14,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
@@ -36,6 +34,7 @@ import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
 import com.example.artikproject.background_work.server.SendInfoToServer;
+import com.example.artikproject.background_work.theme.Theme;
 import com.mikepenz.materialdrawer.Drawer;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     public static Button list_groups = null;
     public static Button list_weeks = null;
     public static SQLiteDatabase sqLiteDatabase;
-    Boolean change = true;
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -89,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
+        Theme.setting();
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); // Без этих двух строк
         StrictMode.setThreadPolicy(policy); // мы не можем подключиться к базе данных MSSQL так как потокам становится плохо
         animScale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale);
@@ -104,17 +104,6 @@ public class MainActivity extends AppCompatActivity {
         list_groups = findViewById(R.id.list_groups);
         listview_aud = findViewById(R.id.listview_aud);
         list_weeks = findViewById(R.id.list_weeks);
-        sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
-        Button change_theme = findViewById(R.id.change_theme);
-        change_theme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (change){
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);}
-                else {AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);}
-                change = !change;
-            }
-        });
 
         // Инициализируем тулбар
         toolbar = findViewById(R.id.toolbar);
@@ -126,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         new CheckAppUpdate(MainActivity.this, false).start(); // Запуск проверки обновлений при входе в приложение
         new SendInfoToServer(MainActivity.this).start(); // Запуск отправки анонимной статистики для отадки ошибок
         new GetCurrentWeekId(MainActivity.this).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
-        new GetFullGroupList_Online(getApplicationContext()).start(); // Получение полного списка групп и закидывание их в адаптер
+        new GetFullGroupList_Online().start(); // Получение полного списка групп и закидывание их в адаптер
 
         week_day = GetCurrentWeekDay.get();
 

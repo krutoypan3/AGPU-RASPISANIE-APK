@@ -7,8 +7,6 @@ import com.example.artikproject.R;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;
 
-import java.sql.SQLException;
-
 public class Week_day_change {
     /**
      * Изменяет свойства видимости объектов при переключении режимов просмотра расписания

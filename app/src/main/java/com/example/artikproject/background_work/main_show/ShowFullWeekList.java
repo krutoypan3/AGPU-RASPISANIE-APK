@@ -10,7 +10,7 @@ import com.example.artikproject.background_work.site_parse.GetFullWeekList_Onlin
 import com.example.artikproject.layout.MainActivity;
 
 public class ShowFullWeekList extends Thread {
-    Activity act;
+    final Activity act;
 
     /**
      * Показывает полный список недель и обрабатывает нажатия на недели, устанавливая главную неделю

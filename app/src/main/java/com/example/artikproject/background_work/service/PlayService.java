@@ -21,11 +21,6 @@ public class PlayService extends Service {
         return null;
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -33,11 +28,6 @@ public class PlayService extends Service {
         WorkManager.getInstance(getApplicationContext()).enqueue(uploadWorkRequest);
         System.out.println("Сервис номер " + startId + " был запущен");
         return super.onStartCommand(intent, flags, startId);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
     }
 
 }

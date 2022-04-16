@@ -11,13 +11,34 @@
         android:layout_height="match_parent"
         android:background="@drawable/background_darker"
         >
-    <TextView
-        android:layout_marginTop="70dp"
-        android:id="@+id/theme_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_main_text"
-        android:textSize="24sp">
-    </TextView>
+        <TextView
+            android:layout_marginTop="70dp"
+            android:id="@+id/theme_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_main_text"
+            android:textSize="24sp">
+        </TextView>
+        <RadioGroup
+            android:id="@+id/theme_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/theme_system"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Theme_system"/>
+            <RadioButton
+                android:id="@+id/theme_dark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Theme_dark"/>
+            <RadioButton
+                android:id="@+id/theme_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Theme_light"/>
+        </RadioGroup>
     </RelativeLayout>
 </RelativeLayout>

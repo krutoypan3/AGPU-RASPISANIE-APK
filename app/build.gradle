@@ -10,8 +10,8 @@ android {
         applicationId "com.example.artikproject"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 53
-        versionName "1.22.6"
+        versionCode 54
+        versionName "1.23"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

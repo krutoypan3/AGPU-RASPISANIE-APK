@@ -69,7 +69,7 @@ public class WatchSaveGroupRasp {
                     group_list.add(new ListViewItems(r.getString(1).split(",")[0].replace(")","").replace("(", "")));
                     break;
                 case "Classroom":
-                    group_list.add(new ListViewItems(r.getString(3).split(",")[2]));
+                    group_list.add(new ListViewItems(r.getString(3).split(",")[r.getString(3).split(",").length - 1]));
                     break;
                 case "Teacher":
                     group_list.add(new ListViewItems(r.getString(3).split(",")[0]));

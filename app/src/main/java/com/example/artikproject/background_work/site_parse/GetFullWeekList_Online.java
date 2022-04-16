@@ -3,7 +3,6 @@ package com.example.artikproject.background_work.site_parse;
 import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.content.ContentValues;
-import android.content.Context;
 
 import com.example.artikproject.background_work.adapters.ListViewItems;
 
@@ -15,14 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetFullWeekList_Online extends Thread{
-    static public List<String> weeks_id = new ArrayList<>();
-    static public ArrayList<ListViewItems> weeks_s_po = new ArrayList<>();
-    Context context;
+    static public final List<String> weeks_id = new ArrayList<>();
+    static public final ArrayList<ListViewItems> weeks_s_po = new ArrayList<>();
     /**
      * Получает список недель семестра и заносит их в базу данных
      */
-    public GetFullWeekList_Online(Context context) {
-        this.context = context;
+    public GetFullWeekList_Online() {
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.site_parse.GetRasp;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
@@ -81,7 +82,8 @@ public class WidgetProvider extends AppWidgetProvider {
                         "r_week_number = " + week_id + " AND " +
                         "r_week_day = " + week_day + " ORDER BY r_para_number", null); // Делаем выборку пар
                 if (fr.moveToFirst()) {
-                    long last_update = fr.getLong(13); // И получаем дату последнего обновления
+                    Date date1 = new Date();
+                    long last_update = date1.getTime();
                     @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss");
 
                     GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("US/Central"));

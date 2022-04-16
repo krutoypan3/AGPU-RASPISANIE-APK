@@ -3,7 +3,6 @@ package com.example.artikproject.background_work.site_parse;
 import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 
 import com.example.artikproject.background_work.adapters.ListViewItems;
@@ -16,13 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GetFullGroupList_Online extends Thread {
-    static public ArrayList<ListViewItems> faculties_name = new ArrayList<>();
-    static public List<ArrayList<ListViewItems>> faculties_group_name = new ArrayList<>();
-    static public List<ArrayList<ListViewItems>> faculties_group_id = new ArrayList<>();
-    Context context;
+    static public final ArrayList<ListViewItems> faculties_name = new ArrayList<>();
+    static public final List<ArrayList<ListViewItems>> faculties_group_name = new ArrayList<>();
+    static public final List<ArrayList<ListViewItems>> faculties_group_id = new ArrayList<>();
 
-    public GetFullGroupList_Online(Context context) {
-        this.context = context;
+    public GetFullGroupList_Online() {
     }
 
     @Override

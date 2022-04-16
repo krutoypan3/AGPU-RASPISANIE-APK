@@ -13,14 +13,14 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/widget_maintext_background"
         android:text="@string/dusha"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_centerHorizontal="true">
     </TextView>
     <TextView
         android:id="@+id/tvUpdate_time"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:text="@string/widget_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -4,9 +4,7 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
-import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.layout.MainActivity;
 
 public class GetWeekFromId {

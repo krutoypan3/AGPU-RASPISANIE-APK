@@ -16,9 +16,9 @@ import com.example.artikproject.R;
 import com.example.artikproject.layout.MainActivity;
 
 public class ShowNotification extends Thread {
-    Context context;
-    String title;
-    String subtitle;
+    final Context context;
+    final String title;
+    final String subtitle;
     int chanel_id = 12315;
     /**
      * Класс отвечающий за показ уведомлений

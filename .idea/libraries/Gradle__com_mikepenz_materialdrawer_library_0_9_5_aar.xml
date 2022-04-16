@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.mikepenz.materialdrawer:library:0.9.5@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4fb9ff8aa2e027b535076da59126152d/transformed/jetified-library-0.9.5/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4fb9ff8aa2e027b535076da59126152d/transformed/jetified-library-0.9.5/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4fb9ff8aa2e027b535076da59126152d/transformed/jetified-library-0.9.5/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d8c025ffed7f513d0ecf92a35709fc2d/transformed/jetified-library-0.9.5/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/d8c025ffed7f513d0ecf92a35709fc2d/transformed/jetified-library-0.9.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/d8c025ffed7f513d0ecf92a35709fc2d/transformed/jetified-library-0.9.5/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.mikepenz.materialdrawer/library/0.9.5/e442f665c0ecfc9b468bbdca041272ff45500635/library-0.9.5-javadoc.jar!/" />

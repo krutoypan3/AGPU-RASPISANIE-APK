@@ -3,20 +3,15 @@ package com.example.artikproject.background_work.rasp_show;
 import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.widget.CheckBox;
 
-import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.layout.MainActivity;
 
 public class CheckGroupRaspUpdate extends Thread{
-    Context context;
-    CheckBox checkBox;
-    public CheckGroupRaspUpdate(Context context, CheckBox checkBox){
-        this.context = context;
+    final CheckBox checkBox;
+    public CheckGroupRaspUpdate(CheckBox checkBox){
         this.checkBox = checkBox;
     }
 

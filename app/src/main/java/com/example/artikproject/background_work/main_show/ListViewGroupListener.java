@@ -44,6 +44,7 @@ public class ListViewGroupListener {
      * @param position Позиция зажатого элемента
      * @param act Активити
      */
+    @SuppressWarnings("SameReturnValue")
     private boolean long_click(Activity act, int position){
         ListViewGroupListener.position = position;
         CustomAlertDialog cdd = new CustomAlertDialog(act,"delete_one_saved_group");

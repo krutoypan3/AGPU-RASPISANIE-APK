@@ -17,7 +17,6 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.rasp_show.*;
 import com.example.artikproject.background_work.OnSwipeTouchListener;
 import com.example.artikproject.R;
@@ -49,9 +48,6 @@ public class Raspisanie_show extends AppCompatActivity {
         week_day_on_off = false;
     }
 
-    @Override
-    public void finish(){ super.finish(); }
-
     @SuppressLint("ClickableViewAccessibility")
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -73,7 +69,7 @@ public class Raspisanie_show extends AppCompatActivity {
         new Refresh_rasp_week_or_day_starter(getApplicationContext()).start(); // Обновляем расписание
         CheckBox mCheckBox = findViewById(R.id.checkBox); // Уведомление об обновлении расписания
 
-        new CheckGroupRaspUpdate(getApplicationContext(), mCheckBox).start();
+        new CheckGroupRaspUpdate(mCheckBox).start();
         // Кнопка увеличивающая размер текста в режиме недели
         week_day_change_btn_size_up.setOnClickListener(v -> new Week_show_resize().size_add());
 

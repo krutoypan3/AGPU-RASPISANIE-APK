@@ -112,15 +112,6 @@
             android:background="@drawable/small_button_50"
             android:text="@string/weeks_list" />
 
-        <Button
-            android:id="@+id/change_theme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_above="@id/list_groups"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/small_button_50"
-            android:text="Сменить тему"/>
 
     </RelativeLayout>
 </RelativeLayout>

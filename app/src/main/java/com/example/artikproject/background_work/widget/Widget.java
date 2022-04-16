@@ -20,8 +20,8 @@ public class Widget implements RemoteViewsFactory {
 
     private ArrayList<String> data; // Список с парами
 
-    Context context;
-    int widgetID; // Номер виджета
+    final Context context;
+    final int widgetID; // Номер виджета
 
 
     @SuppressLint("SimpleDateFormat")

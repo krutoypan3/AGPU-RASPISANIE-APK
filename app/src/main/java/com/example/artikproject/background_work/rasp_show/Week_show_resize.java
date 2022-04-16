@@ -26,7 +26,7 @@ public class Week_show_resize {
         for (int ff = 0; ff < 60; ff++){
             if ((ff % 10) == 0 & ff != 0) { fk++; }
             if (Week_show.qqty[ff].getText().length() * Week_show.table_size/4 > max_razmer[fk]){
-                max_razmer[fk] = (int) (Week_show.qqty[ff].getText().length() * Week_show.table_size/4);
+                max_razmer[fk] = Week_show.qqty[ff].getText().length() * Week_show.table_size/4;
             }
         }
         fk = 0;

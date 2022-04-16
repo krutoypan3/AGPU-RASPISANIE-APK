@@ -26,13 +26,13 @@ import com.example.artikproject.layout.MainActivity;
 
 public class CustomAlertDialog extends Dialog implements android.view.View.OnClickListener {
 
-    public Activity act;
+    public final Activity act;
     public Button yes, no;
     public TextView main_text, body_text;
     public EditText edit_text;
     public String new_main_text, new_body_text;
     public Uri uri;
-    public String dialog_type;
+    public final String dialog_type;
     public ListView list_view;
 
     /**

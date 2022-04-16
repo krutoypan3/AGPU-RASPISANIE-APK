@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SendInfoToServer extends Thread {
-    Context context;
+    final Context context;
     String feedback;
     /**
      * Класс отвечающий за отправку информации для отладки на сервер

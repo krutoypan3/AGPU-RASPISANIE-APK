@@ -64,10 +64,6 @@ public class DataBase_Local extends SQLiteOpenHelper {
                     "\t\"settings_name\"\tTEXT,\n" +
                     "\t\"value\"\tTEXT\n" +
                     ")");
-//            ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
-//            rowValues.put("settings_name", "theme_id");
-//            rowValues.put("value", R.style.Theme_MyApp_Main);
-//            sqLiteDatabase.insert("settings_app", null, rowValues);
         }
         catch (Exception ignored){
         }

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 /**
  * Класс отвечающий за получение информации об устройстве
  */
+@SuppressWarnings("SameReturnValue")
 public class Device_info {
     /**
      * @param context Контекст приложения

@@ -13,7 +13,6 @@ import android.widget.ListView;
 import com.example.artikproject.R;
 
 import com.example.artikproject.background_work.adapters.ListViewAdapter;
-import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 
 
@@ -33,7 +32,7 @@ public class WidgetConfig extends Activity {
         WatchSaveGroupRasp sap = new WatchSaveGroupRasp(getApplicationContext(), true); // Получаем список сохраненных групп из базы данных
         try{
         if(!(sap.group_list.size() == 0)){ // Если в списке есть группы \ аудитории \ преподаватели
-            ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(), sap.group_list);
+            ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(), sap.group_list, true);
             WidgetConfig.ConfigWidgetListView.setAdapter(adapter); // Применяем адаптер к списку конфигурационного активити
         }}
         catch (Exception e){e.printStackTrace();}
@@ -43,7 +42,6 @@ public class WidgetConfig extends Activity {
                 selectedItem = sap.group_list.get(position).item;
                 selectedItem_type = sap.group_list_type.toArray(new String[0])[position];
                 selectedItem_id = sap.group_list_id.toArray(new String[0])[position];
-                sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
                 ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
                 rowValues.put("widget_id", awID);
                 rowValues.put("selected_item_id", selectedItem_id);

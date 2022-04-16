@@ -15,7 +15,7 @@ import com.example.artikproject.layout.Raspisanie_show;
 
 
 public class ShowFullGroupList extends Thread {
-    Activity act;
+    final Activity act;
 
     /**
      * Показывает список всех факультетов и их групп

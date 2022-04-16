@@ -16,7 +16,7 @@ import com.example.artikproject.layout.Raspisanie_show;
 import java.util.concurrent.TimeUnit;
 
 public class Refresh_rasp_week_or_day_starter extends Thread {
-    Context context;
+    final Context context;
 
     /**
      * Класс отвечающий за запуск обновления расписания в недельном или днемном режиме

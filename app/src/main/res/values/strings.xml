@@ -16,7 +16,7 @@
     <string name="Back">Назад</string>
     <string name="Forward">Вперед</string>
     <string name="Notify_about_changes">Уведомлять об изменениях</string>
-    <string name="settings_main_text">А что собственно ты тут ожидал увидеть? Будь как все, замкнут в этой системе без права что-либо изменить в своей жизни.</string>
+    <string name="settings_main_text">Выберите тему приложения:</string>
     <string name="Audiences">Аудитории</string>
     <string name="adress_main">Главный корпус  по ул. Р. Люксембург, 159</string>
     <string name="adress_zaochka">Корпус по ул. Кирова 50 (Заочка)</string>
@@ -74,4 +74,7 @@
     <string name="choose_rasp">Выберите расписание:</string>
     <string name="widget_loading">Загружаем ваше расписание…</string>
     <string name="no_new_version">Новых версий не обнаружено</string>
+    <string name="Theme_dark">Тёмная</string>
+    <string name="Theme_system">Системная</string>
+    <string name="Theme_light">Светлая</string>
 </resources>

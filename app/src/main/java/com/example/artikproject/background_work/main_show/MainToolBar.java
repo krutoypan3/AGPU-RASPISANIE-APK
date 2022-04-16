@@ -115,7 +115,7 @@ public class MainToolBar {
                         case (6):
                             MainActivity.drawerResult.setSelection(0);
                             try { // Проверка обновлений
-                                new CheckAppUpdate(act, true).start();
+                                new CheckAppUpdate(act, true, true).start();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

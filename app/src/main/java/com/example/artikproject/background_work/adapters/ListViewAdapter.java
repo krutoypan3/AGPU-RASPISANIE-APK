@@ -8,20 +8,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatDelegate;
-
 import com.example.artikproject.R;
+import com.example.artikproject.background_work.theme.GetColorTextView;
 
 public class ListViewAdapter extends BaseAdapter {
-    Context ctx;
-    LayoutInflater lInflater;
-    ArrayList<ListViewItems> objects;
+    final Context ctx;
+    final LayoutInflater lInflater;
+    final ArrayList<ListViewItems> objects;
+    boolean widget = false;
 
     public ListViewAdapter(Context context, ArrayList<ListViewItems> items) {
         ctx = context;
         objects = items;
-        lInflater = (LayoutInflater) ctx
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    public ListViewAdapter(Context context, ArrayList<ListViewItems> items, boolean widget) {
+        ctx = context;
+        objects = items;
+        lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.widget = widget;
     }
 
     // кол-во элементов
@@ -52,9 +58,9 @@ public class ListViewAdapter extends BaseAdapter {
         }
         TextView textView = view.findViewById(R.id.tvItemText);
         textView.setPadding(30,30,30,30);
-        textView.setTextSize(18);
-        textView.setTextColor(ctx.getColor(GetColorTextView.get()));
-
+        textView.setTextSize(15);
+        if (!widget) textView.setTextColor(ctx.getColor(GetColorTextView.get(ctx)));
+        else textView.setTextColor(ctx.getColor(R.color.textColorPrimary));
         ListViewItems p = getProduct(position);
         textView.setText(p.item);
         return view;
