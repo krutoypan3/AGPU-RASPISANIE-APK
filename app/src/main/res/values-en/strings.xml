@@ -62,4 +62,5 @@
     <string name="Theme_dark">Dark</string>
     <string name="Theme_system">System</string>
     <string name="Theme_light">Light</string>
+    <string name="theme_apply">Restart the app to apply the theme</string>
 </resources>

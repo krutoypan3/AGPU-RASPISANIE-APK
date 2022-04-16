@@ -69,4 +69,5 @@
     <string name="Theme_dark">Тёмная</string>
     <string name="Theme_system">Системная</string>
     <string name="Theme_light">Светлая</string>
+    <string name="theme_apply">Для применения темы перезапустите приложение</string>
 </resources>

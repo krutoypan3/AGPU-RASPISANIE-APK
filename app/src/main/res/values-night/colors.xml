@@ -4,6 +4,8 @@
     <color name="darker">#90000000</color>
     <color name="alert_dialog_color">#FE0B2A4C</color>
     <color name="alert_dialog_color2">#CC111111</color>
+    <color name="widget_color">#FE0B2A4C</color>
+    <color name="widget_color2">#CC111111</color>
     <color name="widget_maintext">@color/fierd75</color>
     <color name="widget_subtext">#662e327b</color>
 </resources>

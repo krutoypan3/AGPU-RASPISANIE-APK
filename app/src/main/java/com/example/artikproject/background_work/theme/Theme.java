@@ -2,10 +2,15 @@ package com.example.artikproject.background_work.theme;
 
 import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
+
+import com.example.artikproject.R;
 
 
 public class Theme {
@@ -29,12 +34,9 @@ public class Theme {
         rowValues.put("settings_name", "theme_id");
         rowValues.put("value", new_theme);
         sqLiteDatabase.insert("settings_app", null, rowValues);
-
-        // Применение темы
-        AppCompatDelegate.setDefaultNightMode(new_theme);
     }
 
-     static int get(){ // Получить тему и установить ее в системе
+     public static int get(){ // Получить тему и установить ее в системе
         try{
             Cursor r = sqLiteDatabase.rawQuery("SELECT value FROM settings_app WHERE settings_name = 'theme_id'",null);
             r.moveToFirst();

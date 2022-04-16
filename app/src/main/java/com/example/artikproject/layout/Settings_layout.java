@@ -3,6 +3,7 @@ package com.example.artikproject.layout;
 import android.os.Bundle;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -21,7 +22,7 @@ public class Settings_layout extends AppCompatActivity {
         RadioButton radioButton_dark = findViewById(R.id.theme_dark);
         RadioButton radioButton_light = findViewById(R.id.theme_light);
 
-        switch (Theme.current_theme){
+        switch (Theme.get()){
             case(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM):
                 radioButton_system.setChecked(true);
                 break;
@@ -45,6 +46,7 @@ public class Settings_layout extends AppCompatActivity {
                     Theme.set(AppCompatDelegate.MODE_NIGHT_NO);
                     break;
             }
+            Toast.makeText(getApplicationContext(), R.string.theme_apply, Toast.LENGTH_SHORT).show();
         });
 
 

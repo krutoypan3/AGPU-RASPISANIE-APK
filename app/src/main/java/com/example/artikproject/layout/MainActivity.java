@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     public static Button list_groups = null;
     public static Button list_weeks = null;
     public static SQLiteDatabase sqLiteDatabase;
+    private static boolean first_start = true;
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -85,10 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
         Theme.setting();
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); // Без этих двух строк
         StrictMode.setThreadPolicy(policy); // мы не можем подключиться к базе данных MSSQL так как потокам становится плохо
         animScale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale);

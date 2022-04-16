@@ -99,7 +99,6 @@ public class MainToolBar {
                             Intent intent = new Intent(context, Settings_layout.class);
                             act.startActivity(intent);
                             MainActivity.drawerResult.setSelection(0);
-                            new ShowNotification(context, context.getResources().getString(R.string.Questions), context.getResources().getString(R.string.Questions_sub)).start();
                             break;
                         case (4):
                             MainActivity.drawerResult.setSelection(0);

@@ -11,8 +11,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckInternetConnection;
@@ -20,6 +23,7 @@ import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.site_parse.GetRasp;
+import com.example.artikproject.background_work.theme.Theme;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

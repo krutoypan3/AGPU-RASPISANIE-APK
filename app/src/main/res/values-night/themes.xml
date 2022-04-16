@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <style name="Theme.MyApp.Main" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!--Base colors-->
         <item name="colorPrimary">@color/fierd75</item>
@@ -17,5 +17,6 @@
         <item name="android:listViewStyle">@color/sea</item>
         <item name="android:textViewStyle">@color/gold</item>
         <item name="textColorAlertDialogListItem">@color/gold</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 </resources>
