@@ -2,6 +2,8 @@ package com.example.artikproject.background_work;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
