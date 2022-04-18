@@ -12,14 +12,15 @@
         </deviceKey>
       </Target>
     </runningDeviceTargetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-04-18T15:21:52.772453900Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-04-18T19:28:47.255522Z" />
+    <multipleDevicesSelectedInDropDown value="true" />
     <runningDeviceTargetsSelectedWithDialog>
       <Target>
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
-            <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\Kruto\.android\avd\Pixel_2_API_26.avd" />
+            <type value="SERIAL_NUMBER" />
+            <value value="3a0505bb" />
           </Key>
         </deviceKey>
       </Target>
@@ -27,8 +28,8 @@
         <type value="RUNNING_DEVICE_TARGET" />
         <deviceKey>
           <Key>
-            <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\Kruto\.android\avd\Pixel_2_API_25.avd" />
+            <type value="SERIAL_NUMBER" />
+            <value value="UQFNW20304004451" />
           </Key>
         </deviceKey>
       </Target>

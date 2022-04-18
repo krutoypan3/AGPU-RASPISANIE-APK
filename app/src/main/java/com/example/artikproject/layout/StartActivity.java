@@ -14,7 +14,7 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         MainActivity.sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
-        Theme.setting();
+        Theme.setting(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
         ImageView loading_ico = findViewById(R.id.loading_ico);

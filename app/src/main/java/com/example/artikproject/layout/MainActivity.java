@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     public static Button list_groups = null;
     public static Button list_weeks = null;
     public static SQLiteDatabase sqLiteDatabase;
-    private static boolean first_start = true;
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -86,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); // Без этих двух строк
