@@ -54,16 +54,17 @@
             android:permission="android.permission.BIND_REMOTEVIEWS">
         </service>
 
-        <!-- Основное активити -->
-        <activity android:name=".layout.MainActivity"
+        <activity android:name=".layout.StartActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Основное активити -->
+        <activity android:name=".layout.MainActivity"/>
         <activity android:name=".layout.Raspisanie_show" />
         <activity android:name=".layout.Settings_layout" />
     </application>
