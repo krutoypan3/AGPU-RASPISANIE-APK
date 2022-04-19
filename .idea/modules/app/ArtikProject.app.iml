@@ -4,8 +4,8 @@
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
         <option name="GRADLE_PROJECT_PATH" value=":app" />
-        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" value="7.0.4" />
-        <option name="LAST_KNOWN_AGP_VERSION" value="7.0.4" />
+        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" value="7.1.3" />
+        <option name="LAST_KNOWN_AGP_VERSION" value="7.1.3" />
       </configuration>
     </facet>
     <facet type="android" name="Android">
@@ -60,11 +60,11 @@
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test:monitor:1.4.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.3.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.test.espresso:espresso-idling-resource:3.4.0@aar" level="project" />
-    <orderEntry type="library" name="Gradle: ./app/libs/json.jar" level="project" />
-    <orderEntry type="library" name="Gradle: ./app/libs/json-simple-1.1.1.jar" level="project" />
-    <orderEntry type="library" name="Gradle: ./app/libs/jsoup.jar" level="project" />
-    <orderEntry type="library" name="Gradle: ./app/libs/jtds-1.3.1.jar" level="project" />
-    <orderEntry type="library" name="Gradle: ./app/libs/sqlite-jdbc-3.8.11.2.jar" level="project" />
+    <orderEntry type="library" name="Gradle: C./Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/libs/json.jar" level="project" />
+    <orderEntry type="library" name="Gradle: C./Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/libs/json-simple-1.1.1.jar" level="project" />
+    <orderEntry type="library" name="Gradle: C./Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/libs/jsoup.jar" level="project" />
+    <orderEntry type="library" name="Gradle: C./Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/libs/jtds-1.3.1.jar" level="project" />
+    <orderEntry type="library" name="Gradle: C./Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/libs/sqlite-jdbc-3.8.11.2.jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.collection:collection:1.1.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.4.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.arch.core:core-common:2.1.0" level="project" />

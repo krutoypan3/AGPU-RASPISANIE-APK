@@ -4,11 +4,14 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.artikproject.R;
+import com.example.artikproject.layout.MainActivity;
+import com.example.artikproject.layout.StartActivity;
 
 
 public class Theme {
@@ -17,7 +20,6 @@ public class Theme {
     public static void setting(Activity act){
         current_theme = get();
         AppCompatDelegate.setDefaultNightMode(current_theme);
-        act.setTheme(R.style.Theme_MyApp_Main);
     }
 
     public static void set(int new_theme){ // Установить тему

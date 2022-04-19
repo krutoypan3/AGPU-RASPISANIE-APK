@@ -1,7 +1,10 @@
 package com.example.artikproject.background_work;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.ViewAnimationUtils;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -37,7 +40,9 @@ public class Starter_MainActivity extends Thread {
                 e.printStackTrace();
             }
             Intent intent = new Intent(act.getApplicationContext(), MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
             act.startActivity(intent);
+            act.finishAffinity();
         }
         catch (Exception e){
             e.printStackTrace();

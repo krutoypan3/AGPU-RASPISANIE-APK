@@ -44,17 +44,18 @@
         android:textSize="18sp"/>
 
     <EditText
-        android:theme="@style/Theme.MyApp.Main"
         android:id="@+id/rasp_search_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/main_activity_text"
         android:layout_marginTop="10sp"
         android:ems="10"
-        android:textColorHint="?android:textColorSecondary"
+        android:hint="@string/rasp_find"
         android:inputType="textPersonName"
-        android:layout_below="@id/main_activity_text"
+        android:minHeight="48dp"
         android:textAlignment="center"
-        android:hint="@string/rasp_find" />
+        android:textColorHint="?android:textColorSecondary"
+        android:theme="@style/Theme.MyApp.Main" />
 
 
     <TextView
@@ -98,7 +99,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/small_button_50"
+            android:background="@drawable/small_button"
             android:text="@string/groups_list"/>
 
         <Button
@@ -109,7 +110,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/small_button_50"
+            android:background="@drawable/small_button"
             android:text="@string/weeks_list" />
 
 

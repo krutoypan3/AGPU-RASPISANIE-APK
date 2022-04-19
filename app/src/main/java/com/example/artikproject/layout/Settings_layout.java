@@ -1,6 +1,10 @@
 package com.example.artikproject.layout;
 
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -13,6 +17,11 @@ import com.example.artikproject.background_work.theme.Theme;
 
 public class Settings_layout extends AppCompatActivity {
 
+    private void saveTheme(int theme) {
+        getSharedPreferences("theme", 0);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +30,10 @@ public class Settings_layout extends AppCompatActivity {
         RadioButton radioButton_system = findViewById(R.id.theme_system);
         RadioButton radioButton_dark = findViewById(R.id.theme_dark);
         RadioButton radioButton_light = findViewById(R.id.theme_light);
+
+
+
+
 
         switch (Theme.get()){
             case(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM):
