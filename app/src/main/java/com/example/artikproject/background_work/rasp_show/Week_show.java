@@ -58,7 +58,7 @@ public class Week_show {
                     qty.setMaxEms(10);
                     qty.setTextSize(table_size);
                     qty.setPadding(5,5,5,5);
-                    qty.setTextColor(context.getColor(GetColorTextView.get(context)));
+                    qty.setTextColor(GetColorTextView.getAppColor(context));
                     qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
                     qty.setGravity(Gravity.CENTER);
                     qty.setText(f.getString(0));
@@ -118,7 +118,7 @@ public class Week_show {
                         catch (Exception e){
                             qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
                         }
-                        qty.setTextColor(context.getColor(GetColorTextView.get(context)));
+                        qty.setTextColor(GetColorTextView.getAppColor(context));
                     }
                     qty.setText(str);
                     empty_cell = new TextView(context); // Новая пустая ячейка

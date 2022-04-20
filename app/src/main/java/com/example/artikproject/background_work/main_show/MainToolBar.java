@@ -4,8 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
@@ -25,6 +28,7 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class MainToolBar {
@@ -38,7 +42,7 @@ public class MainToolBar {
             .withActivity(act)  // В каком активити создать тулбар
             .withToolbar(MainActivity.toolbar)  // Выбираем сам тулбар
             .withActionBarDrawerToggle(true)
-            .withHeader(R.layout.drawer_header) // С заголовком88
+            .withHeader(R.layout.drawer_header) // С фото университета
             .addDrawerItems(  // Содержимое тулбара
                     new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
                     new PrimaryDrawerItem().withName(R.string.drawer_item_location).withIcon(FontAwesome.Icon.faw_location_arrow).withIdentifier(2),
@@ -129,6 +133,20 @@ public class MainToolBar {
                 }
             })
             .build();
+        ImageView agpu_secret_btn_toolbar = act.findViewById(R.id.agpu_secret_btn_toolbar);
+        // Отслеживание нажатий на иконку университета в тулбаре (фича)
+        agpu_secret_btn_toolbar.setOnClickListener(v -> {
+            agpu_secret_btn_toolbar.startAnimation(MainActivity.animScale);
+            int random_int = new Random().nextInt(10);
+            if (random_int == 0){
+                AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
+                MediaPlayer mp = MediaPlayer.create(act, R.raw.povezlo_povezlo);
+                mp.start();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.meme-arsenal.com/memes/995d4522ce4f35fd83cf5cd57dcb32ce.jpg"));
+                act.startActivity(intent);
+            }
+        });
     }
 
     public static void show_group_list(){

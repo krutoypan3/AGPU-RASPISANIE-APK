@@ -31,11 +31,7 @@ public class Settings_layout extends AppCompatActivity {
         RadioButton radioButton_dark = findViewById(R.id.theme_dark);
         RadioButton radioButton_light = findViewById(R.id.theme_light);
 
-
-
-
-
-        switch (Theme.get()){
+        switch (Theme.get(getApplicationContext())){
             case(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM):
                 radioButton_system.setChecked(true);
                 break;
@@ -50,18 +46,16 @@ public class Settings_layout extends AppCompatActivity {
         radioGroup_theme.setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId){
                 case(R.id.theme_system):
-                    Theme.set(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                    Theme.set(getApplicationContext(), AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
                     break;
                 case(R.id.theme_dark):
-                    Theme.set(AppCompatDelegate.MODE_NIGHT_YES);
+                    Theme.set(getApplicationContext(), AppCompatDelegate.MODE_NIGHT_YES);
                     break;
                 case(R.id.theme_light):
-                    Theme.set(AppCompatDelegate.MODE_NIGHT_NO);
+                    Theme.set(getApplicationContext(), AppCompatDelegate.MODE_NIGHT_NO);
                     break;
             }
             Toast.makeText(getApplicationContext(), R.string.theme_apply, Toast.LENGTH_SHORT).show();
         });
-
-
     }
 }

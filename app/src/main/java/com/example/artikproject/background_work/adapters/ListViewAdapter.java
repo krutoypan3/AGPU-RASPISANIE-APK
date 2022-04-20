@@ -59,7 +59,7 @@ public class ListViewAdapter extends BaseAdapter {
         TextView textView = view.findViewById(R.id.tvItemText);
         textView.setPadding(30,30,30,30);
         textView.setTextSize(15);
-        if (!widget) textView.setTextColor(ctx.getColor(GetColorTextView.get(ctx)));
+        if (!widget) textView.setTextColor(GetColorTextView.getAppColor(ctx));
         else textView.setTextColor(ctx.getColor(R.color.textColorPrimary));
         ListViewItems p = getProduct(position);
         textView.setText(p.item);

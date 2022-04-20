@@ -10,27 +10,34 @@ import com.example.artikproject.R;
 
 public class GetColorTextView {
     /**
-     * Получаем основной цвет текста для текущей темы
+     * Возвращает цвет текста для текущей темы приложения
+     * @param context Контекст приложения
      * @return R.color.(цвет)
      */
-    public static int get(Context context){
+    public static int getAppColor(Context context){
         if (Theme.current_theme == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM){
-            int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-            switch (currentNightMode) {
-                case Configuration.UI_MODE_NIGHT_NO:
-                    return R.color.black;
-                case Configuration.UI_MODE_NIGHT_YES:
-                    return R.color.gold;
-            }
+            return getSystemColor(context); // Если тема в приложении стоит как в системе
         }
-        else{
+        else{ // Если тема в приложении отличается от системной
             if (Theme.current_theme == AppCompatDelegate.MODE_NIGHT_YES){
-                return R.color.gold;
+                return context.getColor(R.color.gold); // Включена темная тема
             }
             else{
-                return R.color.black;
+                return context.getColor(R.color.black); // Включена светлая тема
             }
         }
-        return R.color.black; // TODO заглушка
+    }
+
+    /**
+     * Возвращает цвет текста для текущей темы системы
+     * @param context Контекст приложения
+     * @return R.color.(цвет)
+     */
+    public static int getSystemColor(Context context){
+        int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (currentNightMode == Configuration.UI_MODE_NIGHT_NO) // Если текущая тема системы
+            return context.getColor(R.color.black); // светлая
+        else
+            return context.getColor(R.color.gold); // темная
     }
 }

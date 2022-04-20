@@ -15,6 +15,7 @@ import com.example.artikproject.R;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
+import com.example.artikproject.background_work.theme.GetColorTextView;
 
 public class Widget implements RemoteViewsFactory {
 
@@ -68,6 +69,7 @@ public class Widget implements RemoteViewsFactory {
         RemoteViews rView = new RemoteViews(context.getPackageName(),
                 R.layout.item);
         rView.setTextViewText(R.id.tvItemText, data.get(position));
+        rView.setTextColor(R.id.tvItemText, GetColorTextView.getSystemColor(context));
         return rView;
     }
 

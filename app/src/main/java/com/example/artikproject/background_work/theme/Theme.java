@@ -1,50 +1,40 @@
 package com.example.artikproject.background_work.theme;
 
-import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
-
 import android.app.Activity;
-import android.content.ContentValues;
-import android.content.Intent;
-import android.database.Cursor;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.AppCompatDelegate;
-
-import com.example.artikproject.R;
-import com.example.artikproject.layout.MainActivity;
-import com.example.artikproject.layout.StartActivity;
 
 
 public class Theme {
     public static int current_theme;
 
     public static void setting(Activity act){
-        current_theme = get();
+        current_theme = get(act.getApplicationContext());
         AppCompatDelegate.setDefaultNightMode(current_theme);
     }
 
-    public static void set(int new_theme){ // Установить тему
-
-        // Удаление старой темы из базы данных, если она там есть
-        try{ sqLiteDatabase.delete("settings_app", "settings_name = 'theme_id'", null);}
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        // Установка новой темы в базу данных
-        ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
-        rowValues.put("settings_name", "theme_id");
-        rowValues.put("value", new_theme);
-        sqLiteDatabase.insert("settings_app", null, rowValues);
+    /**
+     * Получить изменить тему приложения
+     * @param context Контекст приложения
+     * @param new_theme Id новой темы
+     */
+    public static void set(Context context, int new_theme){ // Установить тему
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putInt("currentTheme", new_theme);
+        edit.apply(); //apply
     }
 
-     public static int get(){ // Получить тему и установить ее в системе
-        try{
-            Cursor r = sqLiteDatabase.rawQuery("SELECT value FROM settings_app WHERE settings_name = 'theme_id'",null);
-            r.moveToFirst();
-            return Integer.parseInt(r.getString(0)); // Если тема есть в базе данных, то берем ее
-        }
-        catch (Exception e){
-            return AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM; // Иначе ставим как в системе
-        }
+    /**
+     * Получить текущую тему приложения
+     * @param context Контекст приложения
+     * @return Id сохраненной темы
+     */
+     public static int get(Context context){ // Получить тему и установить ее в системе
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getInt("currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
 }
