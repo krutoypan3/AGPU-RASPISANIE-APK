@@ -1,10 +1,7 @@
 package com.example.artikproject.background_work.widget;
 
-import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
-
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -13,6 +10,7 @@ import android.widget.ListView;
 import com.example.artikproject.R;
 
 import com.example.artikproject.background_work.adapters.ListViewAdapter;
+import com.example.artikproject.background_work.datebase.MySharedPreferences;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 
 
@@ -42,12 +40,10 @@ public class WidgetConfig extends Activity {
                 selectedItem = sap.group_list.get(position).item;
                 selectedItem_type = sap.group_list_type.toArray(new String[0])[position];
                 selectedItem_id = sap.group_list_id.toArray(new String[0])[position];
-                ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
-                rowValues.put("widget_id", awID);
-                rowValues.put("selected_item_id", selectedItem_id);
-                rowValues.put("selected_item_type", selectedItem_type);
-                rowValues.put("selected_item_name", selectedItem);
-                sqLiteDatabase.insert("widgets", null, rowValues);
+
+                MySharedPreferences.put(getApplicationContext(), awID + "_selected_item_id", selectedItem_id);
+                MySharedPreferences.put(getApplicationContext(), awID + "_selected_item_type", selectedItem_type);
+                MySharedPreferences.put(getApplicationContext(), awID + "_selected_item_name", selectedItem);
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, awID);

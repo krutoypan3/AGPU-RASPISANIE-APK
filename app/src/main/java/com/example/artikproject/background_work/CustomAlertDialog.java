@@ -9,9 +9,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
 
     public final Activity act;
     public Button yes, no;
+    public ImageView para_info_photo;
     public TextView main_text, body_text;
     public EditText edit_text;
     public String new_main_text, new_body_text;
@@ -71,6 +74,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
         body_text = findViewById(R.id.custom_dialog_body_text);
         edit_text = findViewById(R.id.custom_dialog_edit_text);
         list_view = findViewById(R.id.custom_dialog_list_view);
+        para_info_photo = findViewById(R.id.para_info_photo);
         yes = findViewById(R.id.btn_alert_dialog_yes);
         no = findViewById(R.id.btn_alert_dialog_no);
         switch (dialog_type) {
@@ -89,6 +93,17 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 body_text.setText(R.string.FeedBack_subtitle);
                 yes.setText(R.string.Post_review);
                 edit_text.setVisibility(View.VISIBLE);
+                break;
+            case "para_pasha":
+                main_text.setText(R.string.pasha_god);
+                body_text.setVisibility(View.INVISIBLE);
+                yes.setVisibility(View.INVISIBLE);
+                list_view.setVisibility(View.VISIBLE);
+                para_info_photo.setVisibility(View.VISIBLE);
+                ViewGroup.LayoutParams params = para_info_photo.getLayoutParams(); // получаем параметры
+                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                para_info_photo.setLayoutParams(params);
                 break;
             case "para_info":
                 main_text.setText(R.string.para_info);

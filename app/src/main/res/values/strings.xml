@@ -70,4 +70,6 @@
     <string name="Theme_system">Системная</string>
     <string name="Theme_light">Светлая</string>
     <string name="theme_apply">Для применения темы перезапустите приложение</string>
+    <string name="day_off">ВЫХОДНОЙ ДЕНЬ.\n\nПохоже, что у кого-то сегодня выходной…\nСамое время подумать  об отдыхе и насладиться красотами мира сего…</string>
+    <string name="pasha_god">Боже, дай мне закрыть эту сессию!</string>
 </resources>

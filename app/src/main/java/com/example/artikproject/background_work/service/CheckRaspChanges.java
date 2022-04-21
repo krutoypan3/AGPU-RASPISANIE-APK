@@ -4,9 +4,7 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.os.Build;
 
-import androidx.annotation.RequiresApi;
 
 import com.example.artikproject.background_work.CheckInternetConnection;
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
@@ -16,7 +14,6 @@ import com.example.artikproject.background_work.site_parse.GetRasp;
 import java.util.ArrayList;
 
 public class CheckRaspChanges {
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public CheckRaspChanges(Context context) {
         if (CheckInternetConnection.getState(context)) {
             sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключаемся к базе данных
@@ -25,7 +22,7 @@ public class CheckRaspChanges {
             ArrayList<String> r_group1 = new ArrayList<>();
             ArrayList<String> r_group2 = new ArrayList<>();
 
-            int week_id_upd = GetCurrentWeekId_Local.get(); // Номер текущей недели
+            int week_id_upd = GetCurrentWeekId_Local.get(context); // Номер текущей недели
             r.moveToFirst();
             do {
                 if (r.getCount() != 0) {

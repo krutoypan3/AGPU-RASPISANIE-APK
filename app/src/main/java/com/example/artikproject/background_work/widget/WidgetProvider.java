@@ -11,19 +11,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckInternetConnection;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
+import com.example.artikproject.background_work.datebase.MySharedPreferences;
 import com.example.artikproject.background_work.site_parse.GetRasp;
-import com.example.artikproject.background_work.theme.Theme;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -69,16 +66,15 @@ public class WidgetProvider extends AppWidgetProvider {
 
         sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключаемся к базе данных
         int week_day = GetCurrentWeekDay.get(); // Получаем текущий день
-        int week_id = GetCurrentWeekId_Local.get(); // Получаем текущую неделю
+        int week_id = GetCurrentWeekId_Local.get(context); // Получаем текущую неделю
 
         try{ // Получаем группу, по номеру виджета из базы данных
-            Cursor r = sqLiteDatabase.rawQuery("SELECT selected_item_name, selected_item_id, selected_item_type FROM widgets WHERE widget_id = " + appWidgetId, null);
-            if (r.moveToFirst()) {
-                String selectedItem_name = r.getString(0);
-                String selectedItem_id = r.getString(1);
-                String selectedItem_type = r.getString(2);
+            String selectedItem_name = MySharedPreferences.get(context, appWidgetId + "_selected_item_name", "");
+            String selectedItem_id = MySharedPreferences.get(context, appWidgetId + "_selected_item_id", "");
+            String selectedItem_type = MySharedPreferences.get(context, appWidgetId + "_selected_item_type", "");
+            if (!selectedItem_id.equals("")) {
                 if (CheckInternetConnection.getState(context)){ // Обновляем расписание для этой группы
-                    new GetRasp(selectedItem_id, selectedItem_type, selectedItem_name, GetCurrentWeekId_Local.get(), context, "widget").start();
+                    new GetRasp(selectedItem_id, selectedItem_type, selectedItem_name, GetCurrentWeekId_Local.get(context), context, "widget").start();
                 }
                 rv.setTextViewText(R.id.tvUpdate, selectedItem_name); // Устанавливаем название группы на кнопку
                 Cursor fr = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
@@ -112,9 +108,12 @@ public class WidgetProvider extends AppWidgetProvider {
     @Override // При удалении виджета
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
+
+        MySharedPreferences.remove(context, appWidgetIds[0] + "_selected_item_id");
+        MySharedPreferences.remove(context, appWidgetIds[0] + "_selected_item_name");
+        MySharedPreferences.remove(context, appWidgetIds[0] + "_selected_item_type");
+
         Toast.makeText(context, "Были рады помочь вам!", Toast.LENGTH_SHORT).show();
-        sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключаемся к базе данных
-        sqLiteDatabase.delete("widgets", "widget_id = '" + appWidgetIds[0] + "'", null); // Удаляем привязку виджета к элементам расписания
     }
 
     @Override // При создании виджета

@@ -58,15 +58,6 @@ public class DataBase_Local extends SQLiteOpenHelper {
         }
         catch (Exception ignored){
         }
-        // База данных с настройками
-        try {
-            db.execSQL("CREATE TABLE IF NOT EXISTS \"settings_app\" (\n" +
-                    "\t\"settings_name\"\tTEXT,\n" +
-                    "\t\"value\"\tTEXT\n" +
-                    ")");
-        }
-        catch (Exception ignored){
-        }
         // Таблица с неделями
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS \"weeks_list\" (\n" +
@@ -82,15 +73,6 @@ public class DataBase_Local extends SQLiteOpenHelper {
                     "\t\"faculties_name\"\tTEXT,\n" +
                     "\t\"faculties_group_name\"\tTEXT,\n" +
                     "\t\"faculties_group_id\"\tTEXT\n" +
-                    ")");
-        }
-        catch (Exception ignored){}
-        try{
-            db.execSQL("CREATE TABLE IF NOT EXISTS \"widgets\" (\n" +
-                    "\t\"widget_id\"\tTEXT,\n" +
-                    "\t\"selected_item_id\"\tTEXT,\n" +
-                    "\t\"selected_item_type\"\tTEXT,\n" +
-                    "\t\"selected_item_name\"\tTEXT\n" +
                     ")");
         }
         catch (Exception ignored){}

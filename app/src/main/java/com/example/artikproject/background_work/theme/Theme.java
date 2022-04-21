@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.example.artikproject.background_work.datebase.MySharedPreferences;
+
 
 public class Theme {
     public static int current_theme;
@@ -22,10 +24,7 @@ public class Theme {
      * @param new_theme Id новой темы
      */
     public static void set(Context context, int new_theme){ // Установить тему
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SharedPreferences.Editor edit = sharedPreferences.edit();
-        edit.putInt("currentTheme", new_theme);
-        edit.apply(); //apply
+        MySharedPreferences.put(context, "currentTheme", new_theme);
     }
 
     /**
@@ -34,7 +33,6 @@ public class Theme {
      * @return Id сохраненной темы
      */
      public static int get(Context context){ // Получить тему и установить ее в системе
-        return PreferenceManager.getDefaultSharedPreferences(context)
-                .getInt("currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+         return MySharedPreferences.get(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
 }

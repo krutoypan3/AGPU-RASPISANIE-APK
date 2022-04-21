@@ -7,39 +7,49 @@
     android:background="@drawable/background">
     <RelativeLayout
         android:layout_width="match_parent"
+        android:id="@+id/darker"
         android:layout_height="match_parent"
-        android:background="@drawable/background_darker"
-        >
+        android:background="@drawable/background_darker">
+
         <TextView
             android:id="@+id/settings_theme_text"
-            android:layout_marginTop="70dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
             android:text="@string/settings_main_text"
-            android:textSize="24sp">
-        </TextView>
+            android:textSize="24sp" />
+
         <RadioGroup
             android:id="@+id/theme_radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/settings_theme_text"
+            android:layout_centerHorizontal="true"
             android:orientation="horizontal">
+
             <RadioButton
                 android:id="@+id/theme_system"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Theme_system"/>
+                android:text="@string/Theme_system" />
+
             <RadioButton
                 android:id="@+id/theme_dark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Theme_dark"/>
+                android:text="@string/Theme_dark" />
+
             <RadioButton
                 android:id="@+id/theme_light"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/Theme_light"/>
+                android:text="@string/Theme_light" />
         </RadioGroup>
+        <ImageView
+            android:id="@+id/animImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="invisible"
+            android:src="@drawable/agpu_ico" />
     </RelativeLayout>
 </RelativeLayout>

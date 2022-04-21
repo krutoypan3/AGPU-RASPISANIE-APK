@@ -9,6 +9,8 @@ import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomAlertDialog;
@@ -19,9 +21,9 @@ import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Para_info {
-    private int pashalka = 0;
     public static int finalCorp;
     public Para_info(int position, Activity act){
         ListViewItems para_adap = (ListViewItems) Raspisanie_show.day_para_view.getItemAtPosition(position);
@@ -66,6 +68,25 @@ public class Para_info {
                 cdd.list_view.setAdapter(adapter);
                 cdd.list_view.setOnItemClickListener((parent, v, pos, id) -> {
                     switch (pos) {
+                        case (1):
+                            String sss = ((ListViewItems)cdd.list_view.getItemAtPosition(pos)).item;
+                            if (sss.contains("практика") || sss.contains("экз.") || sss.contains("зач.") ||
+                                    sss.contains("экзамен") || sss.contains("зачет")  || sss.contains("зачёт")){
+                                CustomAlertDialog cdd2 = new CustomAlertDialog(act, "para_pasha");
+                                cdd2.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
+                                cdd2.show();
+                                ArrayList<ListViewItems> molitva = new ArrayList<>();
+                                molitva.add(new ListViewItems("Да восвятится имя твое"));
+                                molitva.add(new ListViewItems("Да покаешься ты в грехах своих"));
+                                molitva.add(new ListViewItems("Да закроешь ты сессию эту"));
+                                ListViewAdapter adapter2 = new ListViewAdapter(act.getApplicationContext(), molitva);
+                                cdd2.list_view.setAdapter(adapter2);
+                                AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
+                                MediaPlayer mp = MediaPlayer.create(act, R.raw.ficha_god);
+                                mp.start();
+                            }
+                            break;
                         case (3): // Клик по аудитории
                             String aud = ((ListViewItems) cdd.list_view.getItemAtPosition(pos)).item;
                             aud = aud.split(": ")[1];
@@ -75,37 +96,29 @@ public class Para_info {
                             dialog_confirm.show();
                             break;
                         case (2):
-                            String sss = ((ListViewItems)cdd.list_view.getItemAtPosition(pos)).item.split(",")[0].split(": ")[1];
-
+                            sss = ((ListViewItems)cdd.list_view.getItemAtPosition(pos)).item.split(",")[0].split(": ")[1];
 
                             // Этот блок кода созда исключительно в развлекательных целях и не несет в себе цель кого-то задеть или обидеть
                             if (sss.equals("Козлов В.А.")) {
-                                if (pashalka == 3) {
+                                if (new Random().nextInt(5) == 0) {
                                     AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
                                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
                                     MediaPlayer mp = MediaPlayer.create(act, R.raw.povezlo_povezlo);
                                     mp.start();
-                                    pashalka = 0;
-                                } else {
-                                    pashalka += 1;
                                 }
                             }
                             else if (sss.equals("Лапшин Н.А.")) {
-                                if (pashalka == 3) {
+                                if (new Random().nextInt(5) == 0) {
                                     AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
                                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
                                     MediaPlayer mp = MediaPlayer.create(act, R.raw.povezlo_povezlo);
                                     mp.start();
-                                    pashalka = 0;
                                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://i.ibb.co/4S8DrHk/r-x-Ka-UHKnzw.jpg"));
                                     act.startActivity(intent);
-                                } else {
-                                    pashalka += 1;
                                 }
                             }
                             break;
                             // Конец блока развлекательного кода
-
                     }
                 });
             } catch (Exception e) {

@@ -8,6 +8,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 
@@ -15,6 +16,7 @@ import com.example.artikproject.R;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
+import com.example.artikproject.background_work.datebase.MySharedPreferences;
 import com.example.artikproject.background_work.theme.GetColorTextView;
 
 public class Widget implements RemoteViewsFactory {
@@ -92,11 +94,12 @@ public class Widget implements RemoteViewsFactory {
             data.clear(); // Обнуляем список
             sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключение к базе данных должно быть выше функций получения дня недели и недели
             int week_day = GetCurrentWeekDay.get();
-            int week_id = GetCurrentWeekId_Local.get();
-            Cursor r = sqLiteDatabase.rawQuery("SELECT selected_item_id FROM widgets WHERE widget_id = " + widgetID, null);
-            if (r.moveToFirst()){
-                String selectedItem_id = r.getString(0);
-                r = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
+            int week_id = GetCurrentWeekId_Local.get(context);
+
+            String selectedItem_id = MySharedPreferences.get(context, widgetID + "_selected_item_id", "");
+
+            if (!selectedItem_id.equals("")){
+                Cursor r = sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                     "r_group_code = " + selectedItem_id + " AND " +
                     "r_week_number = " + week_id + " AND " +
                     "r_week_day = " + week_day + " ORDER BY r_para_number", null);
@@ -116,6 +119,9 @@ public class Widget implements RemoteViewsFactory {
                             data.add(str);
                         }
                     } while (r.moveToNext());
+                    if (data.isEmpty()){
+                        data.add(context.getString(R.string.day_off));
+                    }
                 }
             }
         }

@@ -3,11 +3,11 @@ package com.example.artikproject.background_work.site_parse;
 import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.adapters.ListViewItems;
+import com.example.artikproject.background_work.datebase.MySharedPreferences;
 import com.example.artikproject.background_work.main_show.GetWeekFromId;
 import com.example.artikproject.layout.MainActivity;
 
@@ -32,7 +32,7 @@ public class GetCurrentWeekId extends Thread {
     public void run() {
         try{
             // Получаем последнюю сохраненную неделю из базы данных
-            MainActivity.week_id = GetCurrentWeekId_Local.get();
+            MainActivity.week_id = GetCurrentWeekId_Local.get(act.getApplicationContext());
             // Затем пробуем получить текущую неделю через интернет
             Document doc;
             try {
@@ -42,15 +42,8 @@ public class GetCurrentWeekId extends Thread {
                 String today = today_info.split("</h5>")[0].split("<h5>")[1]; // Сегодня **.**.****, ******
                 act.runOnUiThread(() -> MainActivity.today.setText(today)); // Устанавливаем текущий день на главном экране
                 MainActivity.week_id = Integer.parseInt(today_info.split("value=\"")[1].split("\"")[0]); // Получаем текущую неделю с интернета
-                try { // и удаляем старое значение из базы данных
-                    sqLiteDatabase.delete("settings_app", "settings_name = 'week_id'", null);
-                } // чтобы добавить новое
-                catch (Exception ignored) {
-                }
-                ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
-                rowValues.put("settings_name", "week_id");
-                rowValues.put("value", MainActivity.week_id);
-                sqLiteDatabase.insert("settings_app", null, rowValues);
+
+                MySharedPreferences.put(act.getApplicationContext(), "week_id", MainActivity.week_id);
             }
             catch (Exception e){
                 e.printStackTrace();

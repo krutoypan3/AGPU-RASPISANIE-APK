@@ -44,7 +44,7 @@ public class Day_show {
                 }
             } while (r.moveToNext());
         } else {
-            if (CheckInternetConnection.getState(context) && !Raspisanie_show.refresh_on_off) {
+            if (CheckInternetConnection.getState(context)) {
                 new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, context).start();
             }
         }

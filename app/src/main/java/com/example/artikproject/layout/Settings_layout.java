@@ -1,12 +1,13 @@
 package com.example.artikproject.layout;
 
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.os.Build;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +16,12 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.theme.Theme;
 
+import java.util.Random;
+
 public class Settings_layout extends AppCompatActivity {
 
-    private void saveTheme(int theme) {
-        getSharedPreferences("theme", 0);
-    }
 
-
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +56,29 @@ public class Settings_layout extends AppCompatActivity {
                     break;
             }
             Toast.makeText(getApplicationContext(), R.string.theme_apply, Toast.LENGTH_SHORT).show();
+        });
+
+        final RelativeLayout darker = findViewById(R.id.darker);
+        // Отслеживание нажати на фон в настройках (пасхалочки)
+        ImageView animImage = findViewById(R.id.animImage);
+        darker.setOnTouchListener((v, event) -> {
+            animImage.setX(event.getX()-100);
+            animImage.setY(event.getY()-100);
+            switch (event.getAction()){
+                case MotionEvent.ACTION_DOWN:{
+                    animImage.setVisibility(View.VISIBLE);
+                    if (new Random().nextInt(20) == 0){
+                        animImage.setImageResource(R.drawable.ficha_leonardo);
+                    }
+                    break;
+                }
+                case MotionEvent.ACTION_UP:{
+                    animImage.setVisibility(View.INVISIBLE);
+                    animImage.setImageResource(R.drawable.agpu_ico);
+                    break;
+                }
+            }
+            return true;
         });
     }
 }
