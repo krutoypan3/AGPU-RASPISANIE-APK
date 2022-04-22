@@ -65,4 +65,6 @@
     <string name="theme_apply">Restart the app to apply the theme</string>
     <string name="day_off">DAY OFF.\n\nLooks like someone has a day off today…\nIt\'s time to think about rest and enjoy the beauties of this world...</string>
     <string name="pasha_god">God, let me close this session!</string>
+    <string name="ficha_count">Easter eggs found:</string>
+    <string name="go_to_settings">You got an easter egg! Go to settings!</string>
 </resources>

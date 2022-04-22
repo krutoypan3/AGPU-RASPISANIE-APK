@@ -43,4 +43,9 @@ public class MySharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt(name, default_value);
     }
+
+    public static boolean get(Context context, String name, boolean default_value){
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getBoolean(name, default_value);
+    }
 }

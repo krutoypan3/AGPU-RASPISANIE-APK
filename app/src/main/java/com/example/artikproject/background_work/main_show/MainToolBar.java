@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
+import com.example.artikproject.background_work.Ficha_achievements;
 import com.example.artikproject.background_work.adapters.ListViewAdapter;
 import com.example.artikproject.background_work.adapters.ListViewItems;
 import com.example.artikproject.background_work.ShowNotification;
@@ -137,8 +138,10 @@ public class MainToolBar {
         // Отслеживание нажатий на иконку университета в тулбаре (фича)
         agpu_secret_btn_toolbar.setOnClickListener(v -> {
             agpu_secret_btn_toolbar.startAnimation(MainActivity.animScale);
+            Ficha_achievements.put(context, "ficha_toolbar1");
             int random_int = new Random().nextInt(10);
             if (random_int == 0){
+                Ficha_achievements.put(context, "ficha_toolbar2");
                 AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
                 MediaPlayer mp = MediaPlayer.create(act, R.raw.povezlo_povezlo);

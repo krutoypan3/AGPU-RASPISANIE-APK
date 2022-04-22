@@ -72,4 +72,6 @@
     <string name="theme_apply">Для применения темы перезапустите приложение</string>
     <string name="day_off">ВЫХОДНОЙ ДЕНЬ.\n\nПохоже, что у кого-то сегодня выходной…\nСамое время подумать  об отдыхе и насладиться красотами мира сего…</string>
     <string name="pasha_god">Боже, дай мне закрыть эту сессию!</string>
+    <string name="ficha_count">Найдено пасхолок:</string>
+    <string name="go_to_settings">Вы обнаружили пасхалку! Перейдите в настройки!</string>
 </resources>

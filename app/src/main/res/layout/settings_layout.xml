@@ -51,5 +51,30 @@
             android:layout_height="100dp"
             android:visibility="invisible"
             android:src="@drawable/agpu_ico" />
+
+        <TextView
+            android:id="@+id/ficha_count_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ficha_count"
+            android:textSize="24sp"
+            android:layout_below="@id/theme_radio_group"
+            android:visibility="invisible"/>
+        <TextView
+            android:id="@+id/ficha_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:layout_toEndOf="@id/ficha_count_text"
+            android:layout_below="@id/theme_radio_group"
+            android:visibility="invisible"/>
+
+        <ImageView
+            android:id="@+id/ficha_nyan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ficha_count_text"
+            android:visibility="invisible"
+            />
     </RelativeLayout>
 </RelativeLayout>

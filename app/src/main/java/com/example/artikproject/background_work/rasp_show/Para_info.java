@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomAlertDialog;
+import com.example.artikproject.background_work.Ficha_achievements;
 import com.example.artikproject.background_work.GetCorpFromAudNumber;
 import com.example.artikproject.background_work.adapters.ListViewAdapter;
 import com.example.artikproject.background_work.adapters.ListViewItems;
@@ -72,6 +73,7 @@ public class Para_info {
                             String sss = ((ListViewItems)cdd.list_view.getItemAtPosition(pos)).item;
                             if (sss.contains("практика") || sss.contains("экз.") || sss.contains("зач.") ||
                                     sss.contains("экзамен") || sss.contains("зачет")  || sss.contains("зачёт")){
+                                Ficha_achievements.put(act.getApplicationContext(), "ficha_god");
                                 CustomAlertDialog cdd2 = new CustomAlertDialog(act, "para_pasha");
                                 cdd2.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
                                 cdd2.show();
@@ -101,6 +103,7 @@ public class Para_info {
                             // Этот блок кода созда исключительно в развлекательных целях и не несет в себе цель кого-то задеть или обидеть
                             if (sss.equals("Козлов В.А.")) {
                                 if (new Random().nextInt(5) == 0) {
+                                    Ficha_achievements.put(act.getApplicationContext(), "ficha_para_kozlov");
                                     AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
                                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
                                     MediaPlayer mp = MediaPlayer.create(act, R.raw.povezlo_povezlo);
@@ -109,6 +112,7 @@ public class Para_info {
                             }
                             else if (sss.equals("Лапшин Н.А.")) {
                                 if (new Random().nextInt(5) == 0) {
+                                    Ficha_achievements.put(act.getApplicationContext(), "ficha_para_lapshin");
                                     AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
                                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
                                     MediaPlayer mp = MediaPlayer.create(act, R.raw.povezlo_povezlo);

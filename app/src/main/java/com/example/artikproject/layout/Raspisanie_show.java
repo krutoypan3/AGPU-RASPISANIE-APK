@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.artikproject.background_work.Ficha_achievements;
 import com.example.artikproject.background_work.rasp_show.*;
 import com.example.artikproject.background_work.OnSwipeTouchListener;
 import com.example.artikproject.R;
@@ -104,7 +105,10 @@ public class Raspisanie_show extends AppCompatActivity {
         refresh_btn_ficha.setOnClickListener(v -> {
             int random_int = new Random().nextInt(4);
             switch (random_int){
-                case 0: raspisanie_show_layout.startAnimation(MainActivity.animRotate_ok); break;
+                case 0:
+                    raspisanie_show_layout.startAnimation(MainActivity.animRotate_ok);
+                    Ficha_achievements.put(getApplicationContext(), "ficha_refresh");
+                    break;
                 case 1: raspisanie_show_layout.startAnimation(MainActivity.animScale); break;
                 case 2: raspisanie_show_layout.startAnimation(MainActivity.animUehalVl); break;
                 case 3: raspisanie_show_layout.startAnimation(MainActivity.animUehalVp); break;
