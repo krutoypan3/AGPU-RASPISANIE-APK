@@ -67,4 +67,5 @@
     <string name="pasha_god">God, let me close this session!</string>
     <string name="ficha_count">Easter eggs found:</string>
     <string name="go_to_settings">You got an easter egg! Go to settings!</string>
+    <string name="Enable_pasha">Enable Easter theme?</string>
 </resources>

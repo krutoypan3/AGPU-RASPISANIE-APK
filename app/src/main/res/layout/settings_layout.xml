@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/settings_relative_layout"
     android:theme="@style/Theme.MyApp.Main"
     android:background="@drawable/background">
     <RelativeLayout
@@ -68,6 +69,17 @@
             android:layout_toEndOf="@id/ficha_count_text"
             android:layout_below="@id/theme_radio_group"
             android:visibility="invisible"/>
+
+        <CheckBox
+            android:id="@+id/pasha_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/theme_radio_group"
+            android:layout_marginTop="80dp"
+            android:text="@string/Enable_pasha"
+            android:textSize="24sp"
+            android:visibility="visible" />
+
 
         <ImageView
             android:id="@+id/ficha_nyan"

@@ -10,7 +10,7 @@
     <color name="button_color">#96446EAE</color>
     <color name="gold">#FFFFFF</color>  <!-- Основной цвет текста в приложении -->
     <color name="coal">#3b4d61</color>
-    <color name="darker">#96FFFFFF</color>
+    <color name="darker">#4DFFFFFF</color>
     <color name="alert_dialog_color">#CCFFFFFF</color>
     <color name="alert_dialog_color2">#FE587CA6</color>
     <color name="alert_dialog_divider_color">#77000000</color>

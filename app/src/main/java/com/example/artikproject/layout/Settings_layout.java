@@ -1,10 +1,15 @@
 package com.example.artikproject.layout;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.transition.Transition;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -12,13 +17,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.Ficha_achievements;
+import com.example.artikproject.background_work.SetNewBackground;
+import com.example.artikproject.background_work.datebase.MySharedPreferences;
+import com.example.artikproject.background_work.settings_layout.EventBackground_CheckListener;
 import com.example.artikproject.background_work.theme.Theme;
 
 import java.util.Random;
@@ -56,6 +68,7 @@ public class Settings_layout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_layout);
+        SetNewBackground.setting(findViewById(R.id.settings_relative_layout)); // Установка нового фона | Должно быть после setContentView
         mp = MediaPlayer.create(getApplicationContext(), R.raw.nyan_cat);
         RadioGroup radioGroup_theme = findViewById(R.id.theme_radio_group);
         RadioButton radioButton_system = findViewById(R.id.theme_system);
@@ -113,5 +126,8 @@ public class Settings_layout extends AppCompatActivity {
             }
             return true;
         });
+
+        // Отслеживание нажатий на чекбокс со сменой фона
+        new EventBackground_CheckListener(this, findViewById(R.id.pasha_check));
     }
 }

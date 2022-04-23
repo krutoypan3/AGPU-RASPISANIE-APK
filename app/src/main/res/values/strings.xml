@@ -74,4 +74,5 @@
     <string name="pasha_god">Боже, дай мне закрыть эту сессию!</string>
     <string name="ficha_count">Найдено пасхолок:</string>
     <string name="go_to_settings">Вы обнаружили пасхалку! Перейдите в настройки!</string>
+    <string name="Enable_pasha">Включить пасхальную тему?</string>
 </resources>

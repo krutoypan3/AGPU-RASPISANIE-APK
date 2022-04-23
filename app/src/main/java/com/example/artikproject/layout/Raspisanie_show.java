@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.artikproject.background_work.Ficha_achievements;
+import com.example.artikproject.background_work.SetNewBackground;
 import com.example.artikproject.background_work.rasp_show.*;
 import com.example.artikproject.background_work.OnSwipeTouchListener;
 import com.example.artikproject.R;
@@ -55,6 +56,7 @@ public class Raspisanie_show extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raspisanie_layout);
+        SetNewBackground.setting(findViewById(R.id.raspisanie_show)); // Установка нового фона | Должно быть после setContentView
         mainText = findViewById(R.id.main_text); // Основной текст в центре
         day_para_view = findViewById(R.id.day_para_view); // Инициализация списка с расписанием
         week_para_view = findViewById(R.id.week_para_view); // Инициализация таблицы с расписанием
