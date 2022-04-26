@@ -70,4 +70,5 @@
     <string name="Enable_pasha">Enable Easter theme?</string>
     <string name="Operation_canceled">Operation canceled by user</string>
     <string name="Permission_denied">You must grant permissions to access this feature.</string>
+    <string name="Error_image_selection">Image selection error</string>
 </resources>

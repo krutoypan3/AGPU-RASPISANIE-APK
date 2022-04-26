@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -32,6 +33,8 @@ public class ImageSelecter extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String type = getIntent().getStringExtra("background");
+        System.out.println(type);
         if (!(ActivityCompat.checkSelfPermission(this, // Если разрешение не предоставлено
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
             // Вызываем диалог с запросом разрешения
@@ -82,15 +85,21 @@ public class ImageSelecter extends Activity {
                     // Извлекаем изображение по полученному пути
                     Bitmap image = BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.fromFile(new File(path))));
 
+                    // Получаем тип картинки (светлая \ темная)
+                    String type = getIntent().getStringExtra("background");
+
                     // Сохраняем изображение в памяти приложения
-                    storeImage(image, "background_user.jpg");
+                    storeImage(image, type + ".jpg");
 
                     // Подключаемся к новосозданному файлу
-                    File file = new File(getFilesDir(), "background_user.jpg");
+                    File file = new File(getFilesDir(), type + ".jpg");
 
                     // И сохраняем путь к картинке в приложении
-                    MySharedPreferences.put(getApplicationContext(), "background_user", file.getPath());
-                } catch (FileNotFoundException e) {
+                    MySharedPreferences.put(getApplicationContext(), type, file.getPath());
+
+                    Toast.makeText(getApplicationContext(), R.string.theme_apply, Toast.LENGTH_SHORT).show();
+                } catch (Exception e) {
+                    Toast.makeText(getApplicationContext(), R.string.Error_image_selection, Toast.LENGTH_SHORT).show();
                     e.printStackTrace();
                 }
             }

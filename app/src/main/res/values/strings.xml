@@ -77,4 +77,5 @@
     <string name="Enable_pasha">Включить пасхальную тему?</string>
     <string name="Operation_canceled">Операция отменена пользователем</string>
     <string name="Permission_denied">Для доступа к этой функции необходимо предоставить разрешения.</string>
+    <string name="Error_image_selection">Ошибка при выборе изображения</string>
 </resources>

@@ -3,6 +3,7 @@ package com.example.artikproject.background_work.theme;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -34,5 +35,18 @@ public class Theme {
      */
      public static int get(Context context){ // Получить тему и установить ее в системе
          return MySharedPreferences.get(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+    }
+
+    public static int getCurrentSystemTheme(Context context){
+        int currentNightMode = context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        switch (currentNightMode) {
+            case Configuration.UI_MODE_NIGHT_NO:
+                return AppCompatDelegate.MODE_NIGHT_NO;
+            case Configuration.UI_MODE_NIGHT_YES:
+                return AppCompatDelegate.MODE_NIGHT_YES;
+            case Configuration.UI_MODE_NIGHT_UNDEFINED:
+                return AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
+        }
+        return AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
     }
 }
