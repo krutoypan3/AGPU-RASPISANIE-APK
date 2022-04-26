@@ -78,4 +78,5 @@
     <string name="Operation_canceled">Операция отменена пользователем</string>
     <string name="Permission_denied">Для доступа к этой функции необходимо предоставить разрешения.</string>
     <string name="Error_image_selection">Ошибка при выборе изображения</string>
+    <string name="MyBackground">Свой фон приложения</string>
 </resources>

@@ -71,4 +71,5 @@
     <string name="Operation_canceled">Operation canceled by user</string>
     <string name="Permission_denied">You must grant permissions to access this feature.</string>
     <string name="Error_image_selection">Image selection error</string>
+    <string name="MyBackground">Your app background</string>
 </resources>

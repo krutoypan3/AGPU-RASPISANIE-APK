@@ -44,5 +44,4 @@ public class FichaShow extends Thread{
             Glide.with(act.getApplicationContext()).load("https://www.nyan.cat/cats/original.gif").into(new DrawableImageViewTarget(ficha_nyan));
         }
     }
-
 }
