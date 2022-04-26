@@ -12,10 +12,9 @@ import android.widget.ImageView;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
-import com.example.artikproject.background_work.Ficha_achievements;
+import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
 import com.example.artikproject.background_work.adapters.ListViewAdapter;
 import com.example.artikproject.background_work.adapters.ListViewItems;
-import com.example.artikproject.background_work.ShowNotification;
 import com.example.artikproject.background_work.CustomAlertDialog;
 import com.example.artikproject.background_work.debug.Device_info;
 import com.example.artikproject.layout.MainActivity;

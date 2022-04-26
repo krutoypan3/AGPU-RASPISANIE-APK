@@ -9,11 +9,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.Ficha_achievements;
 
 public class FichaShow extends Thread{
     Activity act;
     static MediaPlayer mp;
+
+    /**
+     * Класс отвечающий за вывод информации о пасхалках на экран настроек
+     * @param act Активити
+     */
     public FichaShow(Activity act){
         this.act = act;
     }

@@ -17,7 +17,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.artikproject.background_work.Ficha_achievements;
+import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
 import com.example.artikproject.background_work.SetNewBackground;
 import com.example.artikproject.background_work.rasp_show.*;
 import com.example.artikproject.background_work.OnSwipeTouchListener;

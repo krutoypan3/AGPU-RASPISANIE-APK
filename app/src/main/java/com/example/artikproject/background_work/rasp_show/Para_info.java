@@ -9,12 +9,10 @@ import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomAlertDialog;
-import com.example.artikproject.background_work.Ficha_achievements;
+import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
 import com.example.artikproject.background_work.GetCorpFromAudNumber;
 import com.example.artikproject.background_work.adapters.ListViewAdapter;
 import com.example.artikproject.background_work.adapters.ListViewItems;
