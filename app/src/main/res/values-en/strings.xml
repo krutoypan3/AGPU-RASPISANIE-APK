@@ -68,4 +68,6 @@
     <string name="ficha_count">Easter eggs found:</string>
     <string name="go_to_settings">You got an easter egg! Go to settings!</string>
     <string name="Enable_pasha">Enable Easter theme?</string>
+    <string name="Operation_canceled">Operation canceled by user</string>
+    <string name="Permission_denied">You must grant permissions to access this feature.</string>
 </resources>

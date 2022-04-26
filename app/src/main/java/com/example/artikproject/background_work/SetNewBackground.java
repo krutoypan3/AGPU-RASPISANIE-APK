@@ -1,25 +1,30 @@
 package com.example.artikproject.background_work;
 
-import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.widget.RelativeLayout;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.datebase.MySharedPreferences;
 
-public class SetNewBackground {
-    public static void set(Context context, int resource_id){
-        MySharedPreferences.put(context, "background_id", resource_id);
-    }
+import java.io.File;
 
+public class SetNewBackground {
+
+    /**
+     * Установка фона активити
+     * @param layout RelativeLayout на который устанавливается картинка
+     */
     public static void setting(RelativeLayout layout){
-        try { // Устанавливаем новый фон
-            layout.setBackgroundResource(MySharedPreferences.get(
-                    layout.getContext(), "background_id", R.drawable.background));
+        // Получаем путь к файлу
+        File file = new File(MySharedPreferences.get(layout.getContext(), "background_user", ""));
+        if (!file.getAbsolutePath().equals("")) { // Если путь к файлу не пустой
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath()); // Получаем картинку
+            layout.setBackground(new BitmapDrawable(layout.getResources(), bitmap)); // Устанавливаем на фон
         }
-        catch (Exception e){ // Если фон был поменян на новый(новая картинка),
-            layout.setBackgroundResource(R.drawable.background); // то ставим стандартный фон
-            set(layout.getContext(), R.drawable.background);
-            MySharedPreferences.remove(layout.getContext(), "is_event_background"); // удаляем галочку с checkbox
+        else{ // Если путь пустой, то ставим стандартный фон
+            layout.setBackgroundResource(R.drawable.background);
         }
     }
 }

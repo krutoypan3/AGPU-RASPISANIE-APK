@@ -1,15 +1,21 @@
 package com.example.artikproject.layout;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
-import android.graphics.drawable.Drawable;
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
-import android.transition.Transition;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -17,26 +23,40 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
-import com.bumptech.glide.request.target.SimpleTarget;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.Ficha_achievements;
+import com.example.artikproject.background_work.GalleryUtil;
+import com.example.artikproject.background_work.ImageSelecter;
 import com.example.artikproject.background_work.SetNewBackground;
 import com.example.artikproject.background_work.datebase.MySharedPreferences;
-import com.example.artikproject.background_work.settings_layout.EventBackground_CheckListener;
 import com.example.artikproject.background_work.theme.Theme;
+import com.mikepenz.iconics.utils.Utils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.Random;
 
 public class Settings_layout extends AppCompatActivity {
     MediaPlayer mp;
+    ImageView background_image_selector;
+    private Uri selected_pic_uri;
 
     @Override
     public void onBackPressed(){
@@ -68,6 +88,7 @@ public class Settings_layout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_layout);
+        background_image_selector = findViewById(R.id.background_image_selector);
         SetNewBackground.setting(findViewById(R.id.settings_relative_layout)); // Установка нового фона | Должно быть после setContentView
         mp = MediaPlayer.create(getApplicationContext(), R.raw.nyan_cat);
         RadioGroup radioGroup_theme = findViewById(R.id.theme_radio_group);
@@ -104,7 +125,7 @@ public class Settings_layout extends AppCompatActivity {
         });
 
         final RelativeLayout darker = findViewById(R.id.darker);
-        // Отслеживание нажати на фон в настройках (пасхалочки)
+        // Отслеживание нажатия на фон в настройках (пасхалочки)
         ImageView animImage = findViewById(R.id.animImage);
         darker.setOnTouchListener((v, event) -> {
             animImage.setX(event.getX()-100);
@@ -127,7 +148,12 @@ public class Settings_layout extends AppCompatActivity {
             return true;
         });
 
-        // Отслеживание нажатий на чекбокс со сменой фона
-        new EventBackground_CheckListener(this, findViewById(R.id.pasha_check));
+        // Обработчик нажатия на картинку с выбором фонового изображения
+        findViewById(R.id.background_image_selector).setOnClickListener(v -> {
+
+            Intent ImageSelecter = new Intent(getApplicationContext(), ImageSelecter.class);
+            startActivity(ImageSelecter);
+        });
+
     }
 }

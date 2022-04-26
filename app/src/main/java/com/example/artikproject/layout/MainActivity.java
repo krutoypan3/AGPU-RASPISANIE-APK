@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
         SetNewBackground.setting(findViewById(R.id.main_activity_layout)); // Установка нового фона | Должно быть после setContentView
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); // Без этих двух строк
         StrictMode.setThreadPolicy(policy); // мы не можем подключиться к базе данных MSSQL так как потокам становится плохо
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
         animScale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale);
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
         animUehalVp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vpravo);

@@ -70,15 +70,6 @@
             android:layout_below="@id/theme_radio_group"
             android:visibility="invisible"/>
 
-        <CheckBox
-            android:id="@+id/pasha_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/theme_radio_group"
-            android:layout_marginTop="80dp"
-            android:text="@string/Enable_pasha"
-            android:textSize="24sp"
-            android:visibility="visible" />
 
 
         <ImageView
@@ -88,5 +79,14 @@
             android:layout_below="@id/ficha_count_text"
             android:visibility="invisible"
             />
+        <ImageView
+            android:id="@+id/background_image_selector"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/background"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/ficha_nyan"
+            />
+
     </RelativeLayout>
 </RelativeLayout>
