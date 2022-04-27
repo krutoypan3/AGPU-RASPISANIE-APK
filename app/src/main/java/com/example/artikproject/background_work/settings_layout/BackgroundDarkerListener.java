@@ -26,7 +26,7 @@ public class BackgroundDarkerListener {
             switch (event.getAction()){
                 case MotionEvent.ACTION_DOWN:
                     Ficha_achievements.put(act.getApplicationContext(), "ficha_setting_logo");
-                    new FichaShow(act).start();
+                    new FichaShow(act);
                     animImage.setVisibility(View.VISIBLE);
                     if (new Random().nextInt(20) == 0){
                         animImage.setImageResource(R.drawable.ficha_leonardo);

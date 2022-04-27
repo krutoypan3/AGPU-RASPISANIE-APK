@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckInternetConnection;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
@@ -21,6 +23,7 @@ import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.datebase.MySharedPreferences;
 import com.example.artikproject.background_work.site_parse.GetRasp;
+import com.example.artikproject.background_work.theme.Theme;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,10 +44,23 @@ public class WidgetProvider extends AppWidgetProvider {
      */
     void updateWidget(Context context, AppWidgetManager appWidgetManager,
                       int appWidgetId) {
-        RemoteViews rv = new RemoteViews(context.getPackageName(),
-                R.layout.widget); // Делаем привязку виджета к его графической реализации
+
+        int current_theme = Theme.getCurrentSystemTheme(context);
+        int text_color;
+        RemoteViews rv;
+        // Если в системе тема темная, то ставим темный фон
+        if (current_theme == AppCompatDelegate.MODE_NIGHT_YES) {
+            rv = new RemoteViews(context.getPackageName(),
+                    R.layout.widget_dark);
+            text_color = context.getColor(R.color.white);
+        } else {
+            rv = new RemoteViews(context.getPackageName(),
+                    R.layout.widget_light);
+            text_color = context.getColor(R.color.black);
+        }
+
         setUpdateTV(rv, context, appWidgetId); // Обновляем заголовок
-        setList(rv, context, appWidgetId); // Обновляем внутренний список
+        setList(rv, context, appWidgetId, text_color); // Обновляем внутренний список
 
         appWidgetManager.updateAppWidget(appWidgetId, rv); // Обновляем виджет
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId,
@@ -97,9 +113,10 @@ public class WidgetProvider extends AppWidgetProvider {
     /**
      * Обновление списка виджета
      */
-    void setList(RemoteViews rv, Context context, int appWidgetId) {
+    void setList(RemoteViews rv, Context context, int appWidgetId, int text_color) {
         Intent adapter = new Intent(context, WidgetService.class); // Создаем намерение на запуск класса WidgetService
         adapter.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId); // Помещаем id виджета как параметр
+        adapter.putExtra("text_color", text_color);
         Uri data = Uri.parse(adapter.toUri(Intent.URI_INTENT_SCHEME)); // Получаем отработанный результат намерения
         adapter.setData(data); // Устанавливаем данные в адаптер
         rv.setRemoteAdapter(R.id.lvList, adapter); // Устанавливаем адаптер на список виджета с парами
@@ -118,7 +135,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
     @Override // При создании виджета
     public void onEnabled(Context context) {
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget);
+        RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_light);
         AppWidgetManager awm = AppWidgetManager.getInstance(context);
         ComponentName compName = new ComponentName(context, WidgetProvider.class);
         int[] widgetIds = awm.getAppWidgetIds(compName);

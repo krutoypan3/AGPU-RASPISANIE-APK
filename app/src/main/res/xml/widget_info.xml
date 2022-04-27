@@ -3,7 +3,7 @@
     android:configure="com.example.artikproject.background_work.widget.WidgetConfig"
     android:minHeight="110dp"
     android:minWidth="180dp"
-    android:initialLayout="@layout/widget"
+    android:initialLayout="@layout/widget_light"
     android:updatePeriodMillis="1800000"
     android:resizeMode="horizontal|vertical"
     />

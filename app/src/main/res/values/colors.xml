@@ -17,8 +17,18 @@
     <color name="fierd75">#AA2e327b</color>
     <color name="fierd50">#662e327b</color>
     <color name="arkt_iva">#95998e</color>
-    <color name="widget_color">#FFFFFF</color>
-    <color name="widget_color2">#FECED5DC</color>
-    <color name="widget_maintext">#66446EAE</color>
-    <color name="widget_subtext">#3395998e</color>
+    <color name="custom_dialog_color">#FFFFFF</color>
+    <color name="custom_dialog_color2">#FECED5DC</color>
+    <color name="widget_color_light">#FFFFFF</color>
+    <color name="widget_color2_light">#FECED5DC</color>
+    <color name="widget_color_dark">#FE0B2A4C</color>
+    <color name="widget_color2_dark">#CC111111</color>
+    <color name="widget_maintext_light">#66446EAE</color>
+    <color name="widget_maintext_dark">@color/fierd75</color>
+    <color name="widget_subtext_light">#3395998e</color>
+    <color name="widget_subtext_dark">#662e327b</color>
+    <color name="widget_text_color_light">@color/black</color>
+    <color name="widget_text_color_dark">@color/white</color>
+    <color name="widget_secondary_text_color_light">@color/coal</color>
+    <color name="widget_secondary_text_color_dark">@color/arkt_iva</color>
 </resources>

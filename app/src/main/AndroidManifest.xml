@@ -69,8 +69,8 @@
         <activity android:name=".layout.MainActivity"/>
         <activity android:name=".layout.Raspisanie_show" />
         <activity android:name=".layout.Settings_layout" />
-        <activity android:name=".background_work.ImageSelecter"/>
-        <activity android:name=".background_work.GalleryUtil"/>
+        <activity android:name=".background_work.image_select_from_gallery.ImageSelector"/>
+        <activity android:name=".background_work.image_select_from_gallery.GalleryUtil"/>
     </application>
 
 </manifest>

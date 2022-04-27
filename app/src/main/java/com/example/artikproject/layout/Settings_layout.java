@@ -37,7 +37,7 @@ public class Settings_layout extends Activity {
         new ImageBackgroundPictureSetting(this, userBackgroundLightSelector, userBackgroundDarkSelector);
 
         // Проверка количества собранных пасхалок
-        new FichaShow(this).start();
+        new FichaShow(this);
 
         // Установка позиции themeRadioButton
         new ThemeRadioButtonSetting(this);

@@ -3,12 +3,10 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import java.util.ArrayList;
 
-import android.annotation.SuppressLint;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 
@@ -17,7 +15,6 @@ import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.datebase.MySharedPreferences;
-import com.example.artikproject.background_work.theme.GetColorTextView;
 
 public class Widget implements RemoteViewsFactory {
 
@@ -25,13 +22,14 @@ public class Widget implements RemoteViewsFactory {
 
     final Context context;
     final int widgetID; // Номер виджета
+    final int text_color;
 
 
-    @SuppressLint("SimpleDateFormat")
     public Widget(Context ctx, Intent intent) {
         context = ctx; // Заполняем переменные данными из конструктора
         widgetID = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
+        text_color = intent.getIntExtra("text_color", R.color.black);
     }
 
 
@@ -71,7 +69,7 @@ public class Widget implements RemoteViewsFactory {
         RemoteViews rView = new RemoteViews(context.getPackageName(),
                 R.layout.item);
         rView.setTextViewText(R.id.tvItemText, data.get(position));
-        rView.setTextColor(R.id.tvItemText, GetColorTextView.getSystemColor(context));
+        rView.setTextColor(R.id.tvItemText, text_color);
         return rView;
     }
 
