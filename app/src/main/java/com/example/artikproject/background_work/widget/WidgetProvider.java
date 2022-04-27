@@ -25,6 +25,7 @@ import com.example.artikproject.background_work.datebase.MySharedPreferences;
 import com.example.artikproject.background_work.site_parse.GetRasp;
 import com.example.artikproject.background_work.theme.Theme;
 
+import java.lang.reflect.GenericDeclaration;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -35,31 +36,41 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         super.onUpdate(context, appWidgetManager, appWidgetIds);
         for (int appWidgetId : appWidgetIds) { // Пробегаемся по всем виджетам, которые необходимо обновить
-            updateWidget(context, appWidgetManager, appWidgetId); // и запускаем фукнцию обновления
+            updateWidget(context, appWidgetManager, appWidgetId, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM); // и запускаем фукнцию обновления
         }
     }
 
     /**
      * Функция обновления виджета. Обновляет виджет.
      */
-    void updateWidget(Context context, AppWidgetManager appWidgetManager,
-                      int appWidgetId) {
-
-        int current_theme = Theme.getCurrentSystemTheme(context);
+    public static void updateWidget(Context context, AppWidgetManager appWidgetManager,
+                      int appWidgetId, int widget_color) {
         int text_color;
         RemoteViews rv;
-        // Если в системе тема темная, то ставим темный фон
-        if (current_theme == AppCompatDelegate.MODE_NIGHT_YES) {
+        if (widget_color == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM){
+            int current_theme = Theme.getCurrentSystemTheme(context);
+            if (current_theme == AppCompatDelegate.MODE_NIGHT_YES) {
+                rv = new RemoteViews(context.getPackageName(),
+                        R.layout.widget_dark);
+                text_color = context.getColor(R.color.white);
+            } else {
+                rv = new RemoteViews(context.getPackageName(),
+                        R.layout.widget_light);
+                text_color = context.getColor(R.color.black);
+            }
+        }
+        else if(widget_color == AppCompatDelegate.MODE_NIGHT_YES){
             rv = new RemoteViews(context.getPackageName(),
                     R.layout.widget_dark);
             text_color = context.getColor(R.color.white);
-        } else {
+        }
+        else{
             rv = new RemoteViews(context.getPackageName(),
                     R.layout.widget_light);
             text_color = context.getColor(R.color.black);
         }
 
-        setUpdateTV(rv, context, appWidgetId); // Обновляем заголовок
+        setUpdateTV(rv, context, appWidgetId, widget_color); // Обновляем заголовок
         setList(rv, context, appWidgetId, text_color); // Обновляем внутренний список
 
         appWidgetManager.updateAppWidget(appWidgetId, rv); // Обновляем виджет
@@ -70,9 +81,10 @@ public class WidgetProvider extends AppWidgetProvider {
     /**
      * Обновление заголовка виджета
      */
-    void setUpdateTV(RemoteViews rv, Context context, int appWidgetId) {
+    public static void setUpdateTV(RemoteViews rv, Context context, int appWidgetId, int widget_color) {
         rv.setTextViewText(R.id.tvUpdate, context.getResources().getString(R.string.Click_me)); // Да, это костыль (Установка текста на кнопку)
-        Intent updIntent = new Intent(context, WidgetProvider.class); // При обновлении вызываем класс WidgetProvider
+        Intent updIntent = new Intent(context, getWidgetProvider(widget_color));
+
         updIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE); // В этом классе мы запускаем процедуру onUpdate
         updIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,
                 new int[] { appWidgetId }); // В параметры добавляем ID обновляемых виджетов (в нашем случае 1шт)
@@ -113,7 +125,7 @@ public class WidgetProvider extends AppWidgetProvider {
     /**
      * Обновление списка виджета
      */
-    void setList(RemoteViews rv, Context context, int appWidgetId, int text_color) {
+    public static void setList(RemoteViews rv, Context context, int appWidgetId, int text_color) {
         Intent adapter = new Intent(context, WidgetService.class); // Создаем намерение на запуск класса WidgetService
         adapter.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId); // Помещаем id виджета как параметр
         adapter.putExtra("text_color", text_color);
@@ -122,22 +134,32 @@ public class WidgetProvider extends AppWidgetProvider {
         rv.setRemoteAdapter(R.id.lvList, adapter); // Устанавливаем адаптер на список виджета с парами
     }
 
+    private static Class<?> getWidgetProvider(int widget_color){
+        if (widget_color == AppCompatDelegate.MODE_NIGHT_NO) // Для светлого виджета вызываем класс WidgetProviderLight
+            return WidgetProviderLight.class;
+        else if (widget_color == AppCompatDelegate.MODE_NIGHT_YES)// Для темного виджета вызываем класс WidgetProviderDark
+            return WidgetProviderDark.class;
+        else // Для динамического виджета вызываем класс WidgetProvider
+            return WidgetProvider.class;
+    }
+
     @Override // При удалении виджета
     public void onDeleted(Context context, int[] appWidgetIds) {
         super.onDeleted(context, appWidgetIds);
+        deleteWidget(context, appWidgetIds);
+    }
 
+    public static void deleteWidget(Context context, int[] appWidgetIds){
         MySharedPreferences.remove(context, appWidgetIds[0] + "_selected_item_id");
         MySharedPreferences.remove(context, appWidgetIds[0] + "_selected_item_name");
         MySharedPreferences.remove(context, appWidgetIds[0] + "_selected_item_type");
-
         Toast.makeText(context, "Были рады помочь вам!", Toast.LENGTH_SHORT).show();
     }
 
-    @Override // При создании виджета
-    public void onEnabled(Context context) {
+    public static void enableWidget(Context context, int widget_color){
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.widget_light);
         AppWidgetManager awm = AppWidgetManager.getInstance(context);
-        ComponentName compName = new ComponentName(context, WidgetProvider.class);
+        ComponentName compName = new ComponentName(context, getWidgetProvider(widget_color));
         int[] widgetIds = awm.getAppWidgetIds(compName);
         for (int widgetId : widgetIds) {
             Intent intentBtnPwr = new Intent(context, WidgetConfig.class);
@@ -146,5 +168,10 @@ public class WidgetProvider extends AppWidgetProvider {
             remoteViews.setOnClickPendingIntent(R.id.tvUpdate, pi);
             awm.updateAppWidget(widgetId, remoteViews);
         }
+    }
+
+    @Override // При создании виджета
+    public void onEnabled(Context context) {
+        enableWidget(context, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
 }

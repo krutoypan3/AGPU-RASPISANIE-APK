@@ -79,4 +79,10 @@
     <string name="Permission_denied">Для доступа к этой функции необходимо предоставить разрешения.</string>
     <string name="Error_image_selection">Ошибка при выборе изображения</string>
     <string name="MyBackground">Свой фон приложения</string>
+    <string name="widget_preview_text">Тут будет ваше расписание. Пример:\n\n8:00–9:30\nМатематический анализ, лаб. \nПлюшкин К. Я., 8 \n(ВМ–ИВТ–4–1)</string>
+    <string name="Widget_light">Светлый виджет</string>
+    <string name="Widget_dark">Темный виджет</string>
+    <string name="Widget_system">Динамический виджет</string>
+    <string name="day">День</string>
+    <string name="night">Ночь</string>
 </resources>

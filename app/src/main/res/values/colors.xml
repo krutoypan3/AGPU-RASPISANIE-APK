@@ -9,6 +9,7 @@
     <color name="sea50">#CC446EAE</color>
     <color name="button_color">#96446EAE</color>
     <color name="gold">#FFFFFF</color>  <!-- Основной цвет текста в приложении -->
+    <color name="widget_maintext_color">#E61581</color>  <!-- Основной цвет текста в приложении -->
     <color name="coal">#3b4d61</color>
     <color name="darker">#4DFFFFFF</color>
     <color name="alert_dialog_color">#CCFFFFFF</color>

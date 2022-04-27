@@ -63,7 +63,7 @@
     <string name="Theme_system">System</string>
     <string name="Theme_light">Light</string>
     <string name="theme_apply">Restart the app to apply the theme</string>
-    <string name="day_off">DAY OFF.\n\nLooks like someone has a day off today…\nIt\'s time to think about rest and enjoy the beauties of this world...</string>
+    <string name="day_off">DAY OFF.\n\nLooks like someone has a day off today…\nIt\'s time to think about rest and enjoy the beauties of this world…</string>
     <string name="pasha_god">God, let me close this session!</string>
     <string name="ficha_count">Easter eggs found:</string>
     <string name="go_to_settings">You got an easter egg! Go to settings!</string>
@@ -72,4 +72,10 @@
     <string name="Permission_denied">You must grant permissions to access this feature.</string>
     <string name="Error_image_selection">Image selection error</string>
     <string name="MyBackground">Your app background</string>
+    <string name="widget_preview_text">This is where your schedule will be. Example:\n\n8:00–9:30\nMathematical analysis, lab.\nPlyushkin K. Ya., 8\n(VM–IVT–4–1)</string>
+    <string name="Widget_light">Light widget</string>
+    <string name="Widget_dark">Dark widget</string>
+    <string name="Widget_system">Dynamic Widget</string>
+    <string name="day">Day</string>
+    <string name="night">Night</string>
 </resources>
