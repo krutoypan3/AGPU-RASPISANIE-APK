@@ -10,7 +10,11 @@ import com.example.artikproject.background_work.datebase.MySharedPreferences;
  * Класс отвечающий за подсчет и добавление собранных пасхалок
  */
 public class Ficha_achievements {
-    public static final int MAX_FICHA_COUNT = 8;
+    public static final int MAX_FICHA_COUNT = 9;
+    private static final String[] FICHA_LIST = new String[]{
+            "ficha_toolbar1", "ficha_toolbar2", "ficha_setting_logo", "ficha_setting_leonardo",
+            "ficha_para_lapshin", "ficha_para_kozlov", "ficha_refresh", "ficha_god",
+            "ficha_today"};
 
     /**
      * Получить количество собранных пасхалок
@@ -18,14 +22,11 @@ public class Ficha_achievements {
      */
     public static int get(Context context){
         int ficha_count = 0;
-        if (MySharedPreferences.get(context, "ficha_toolbar1", false)) ficha_count++;
-        if (MySharedPreferences.get(context, "ficha_toolbar2", false)) ficha_count++;
-        if (MySharedPreferences.get(context, "ficha_setting_logo", false)) ficha_count++;
-        if (MySharedPreferences.get(context, "ficha_setting_leonardo", false)) ficha_count++;
-        if (MySharedPreferences.get(context, "ficha_para_lapshin", false)) ficha_count++;
-        if (MySharedPreferences.get(context, "ficha_para_kozlov", false)) ficha_count++;
-        if (MySharedPreferences.get(context, "ficha_refresh", false)) ficha_count++;
-        if (MySharedPreferences.get(context, "ficha_god", false)) ficha_count++;
+        for (String current_ficha : FICHA_LIST){
+            if (MySharedPreferences.get(context, current_ficha, false)){
+                ficha_count++;
+            }
+        }
         return ficha_count;
     }
 

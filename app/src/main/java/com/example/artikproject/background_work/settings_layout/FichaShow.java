@@ -28,7 +28,7 @@ public class FichaShow{
             String newText = fic_count + " / " + Ficha_achievements.MAX_FICHA_COUNT;
             ficha_count.setText(newText);
         }
-        if (fic_count == 8){
+        if (fic_count == Ficha_achievements.MAX_FICHA_COUNT){
             ficha_count_text.setText("Пасхалки?.Ты собрал их все: ");
             if (mp == null) mp = MediaPlayer.create(act.getApplicationContext(), R.raw.nyan_cat);
             else if (!mp.isPlaying()){

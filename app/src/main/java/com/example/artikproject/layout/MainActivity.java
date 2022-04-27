@@ -1,10 +1,15 @@
 package com.example.artikproject.layout;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -21,13 +26,16 @@ import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
 
 import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.SetNewBackground;
 import com.example.artikproject.background_work.adapters.ListViewItems;
 import com.example.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
 import com.example.artikproject.background_work.main_show.ListViewGroupListener;
+import com.example.artikproject.background_work.main_show.TodayClickListener;
 import com.example.artikproject.background_work.service.PlayService;
+import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
 import com.example.artikproject.background_work.site_parse.GetCurrentWeekId;
 import com.example.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
@@ -125,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         new SendInfoToServer(MainActivity.this).start(); // Запуск отправки анонимной статистики для отадки ошибок
         new GetCurrentWeekId(MainActivity.this).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
         new GetFullGroupList_Online().start(); // Получение полного списка групп и закидывание их в адаптер
+        new TodayClickListener(this, today); // Прослушка нажатий на текущую дату
 
         week_day = GetCurrentWeekDay.get();
 
