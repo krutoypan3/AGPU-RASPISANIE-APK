@@ -10,6 +10,10 @@ import com.example.artikproject.R;
 import com.example.artikproject.background_work.theme.Theme;
 
 public class ThemeRadioGroupListener {
+    /**
+     * Прослушивает нажатия на элементы ThemeRadioGroup
+     * @param act Активити
+     */
     public ThemeRadioGroupListener(Activity act){
         RadioGroup themeRadioGroup = act.findViewById(R.id.theme_radio_group);
         themeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {

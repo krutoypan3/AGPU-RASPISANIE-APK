@@ -85,4 +85,6 @@
     <string name="Widget_system">Динамический виджет</string>
     <string name="day">День</string>
     <string name="night">Ночь</string>
+    <string name="dark_theme">Темная тема</string>
+    <string name="light_theme">Светлая тема</string>
 </resources>

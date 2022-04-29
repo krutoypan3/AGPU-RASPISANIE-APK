@@ -9,7 +9,7 @@
     android:background="@drawable/background">
 
     <RelativeLayout
-        android:id="@+id/darker"
+        android:id="@+id/background_darker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background_darker">
@@ -91,11 +91,12 @@
             android:text="@string/MyBackground"
             android:textSize="20sp" />
 
+        <!-- Данный GridLayout содержит в себе элементы смены фона и затемнения  -->
         <GridLayout
             android:id="@+id/layout_change_background"
             android:visibility="invisible"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_below="@id/my_app_background_checkbox"
             android:layout_centerHorizontal="true"
             android:columnCount="2"
@@ -108,7 +109,7 @@
                 android:layout_row="0"
                 android:layout_column="0"
                 android:padding="10dp"
-                android:text="Светлая тема"
+                android:text="@string/light_theme"
                 android:textSize="20sp" />
 
             <ImageView
@@ -120,6 +121,24 @@
                 android:src="@drawable/background"
                 tools:ignore="ContentDescription" />
 
+            <ImageView
+                android:id="@+id/background_light_image_selector_darker"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:src="@drawable/background_mini_pic_stroke"
+                tools:ignore="ContentDescription" />
+
+
+            <SeekBar
+                android:id="@+id/seekBarLight"
+                android:layout_row="2"
+                android:layout_column="0"
+                android:layout_width="200dp"
+                android:progressDrawable="@drawable/seek_bg"
+                android:layout_height="30sp" />
+
             <TextView
                 android:id="@+id/text_dark_theme"
                 android:layout_width="wrap_content"
@@ -127,7 +146,7 @@
                 android:layout_row="0"
                 android:layout_column="1"
                 android:padding="10dp"
-                android:text="Темная тема"
+                android:text="@string/dark_theme"
                 android:textSize="20sp" />
 
             <ImageView
@@ -138,6 +157,23 @@
                 android:layout_column="1"
                 android:src="@drawable/background"
                 tools:ignore="ContentDescription" />
+
+            <ImageView
+                android:id="@+id/background_dark_image_selector_darker"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:src="@drawable/background_mini_pic_stroke"
+                tools:ignore="ContentDescription" />
+            <SeekBar
+                android:id="@+id/seekBarDark"
+                android:layout_row="2"
+                android:layout_column="1"
+                android:layout_width="200dp"
+                android:progressDrawable="@drawable/seek_bg"
+                android:layout_height="30sp" />
+
         </GridLayout>
 
     </RelativeLayout>

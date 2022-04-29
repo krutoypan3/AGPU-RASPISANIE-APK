@@ -78,4 +78,6 @@
     <string name="Widget_system">Dynamic Widget</string>
     <string name="day">Day</string>
     <string name="night">Night</string>
+    <string name="dark_theme">Dark theme</string>
+    <string name="light_theme">Light theme</string>
 </resources>

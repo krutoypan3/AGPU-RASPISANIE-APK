@@ -7,12 +7,17 @@ import android.widget.ImageView;
 import com.example.artikproject.background_work.image_select_from_gallery.ImageSelector;
 
 public class UserBackgroundSelectorListener {
+    /**
+     * Прослушивает нажатия на картинку с выбором фонового изображения
+     * @param act Активити
+     * @param userBackgroundLightSelector Изменяемый ImageView
+     * @param dark_ot_light Светлый фон(background_light) или темный(background_dark)
+     */
     public UserBackgroundSelectorListener(Activity act, ImageView userBackgroundLightSelector, String dark_ot_light){
-        // Обработчик нажатия на картинку с выбором светлого фонового изображения
         userBackgroundLightSelector.setOnClickListener(v -> {
-            Intent ImageSelecter = new Intent(act.getApplicationContext(), ImageSelector.class);
-            ImageSelecter.putExtra("background", dark_ot_light);
-            act.startActivityForResult(ImageSelecter, 1);
+            Intent ImageSelector = new Intent(act.getApplicationContext(), ImageSelector.class);
+            ImageSelector.putExtra("background", dark_ot_light);
+            act.startActivityForResult(ImageSelector, 1);
         });
     }
 }

@@ -1,11 +1,12 @@
 package com.example.artikproject.layout;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.SetNewBackground;
@@ -17,9 +18,11 @@ import com.example.artikproject.background_work.settings_layout.ThemeRadioGroupL
 import com.example.artikproject.background_work.settings_layout.UserBackgroundCheckBoxListener;
 import com.example.artikproject.background_work.settings_layout.UserBackgroundCheckBoxSetting;
 import com.example.artikproject.background_work.settings_layout.UserBackgroundSelectorListener;
+import com.example.artikproject.background_work.settings_layout.UserSeekBarListener;
+import com.example.artikproject.background_work.settings_layout.UserSeekBarSetting;
 
 
-public class Settings_layout extends Activity {
+public class Settings_layout extends AppCompatActivity {
     ImageView userBackgroundLightSelector;
     ImageView userBackgroundDarkSelector;
 
@@ -51,6 +54,18 @@ public class Settings_layout extends Activity {
         // Прослушка нажатий на userBackgroundCheckBox
         new UserBackgroundCheckBoxListener(this, userBackgroundCheckBox);
 
+        // Установка ползунка светлого затемнителя в нужное положение
+        new UserSeekBarSetting(this, findViewById(R.id.seekBarLight), true);
+
+        // Установка ползунка темного затемнителя в нужное положение
+        new UserSeekBarSetting(this, findViewById(R.id.seekBarDark), false);
+
+        // Прослушка изменения ползунка светлого затемнителя
+        new UserSeekBarListener(this, findViewById(R.id.seekBarLight), true);
+
+        // Прослушка изменения ползунка темного затемнителя
+        new UserSeekBarListener(this, findViewById(R.id.seekBarDark), false);
+
         // Прослушка нажатий на BackgroundDarker
         new BackgroundDarkerListener(this);
 
@@ -68,5 +83,4 @@ public class Settings_layout extends Activity {
             new ImageBackgroundPictureSetting(this, userBackgroundLightSelector, userBackgroundDarkSelector);
         }
     }
-
 }

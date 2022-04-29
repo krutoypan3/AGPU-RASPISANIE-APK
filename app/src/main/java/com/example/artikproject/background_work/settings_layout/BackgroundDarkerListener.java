@@ -18,7 +18,7 @@ public class BackgroundDarkerListener {
      */
     @SuppressLint("ClickableViewAccessibility")
     public BackgroundDarkerListener(Activity act){
-        RelativeLayout backgroundDarker = act.findViewById(R.id.darker);
+        RelativeLayout backgroundDarker = act.findViewById(R.id.background_darker);
         ImageView animImage = act.findViewById(R.id.animImage);
         backgroundDarker.setOnTouchListener((v, event) -> {
             animImage.setX(event.getX()-100);
