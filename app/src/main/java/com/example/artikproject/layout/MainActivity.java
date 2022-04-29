@@ -1,54 +1,42 @@
 package com.example.artikproject.layout;
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Random;
-
+import com.example.artikproject.R;
+import com.example.artikproject.background_work.CheckAppUpdate;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.SetNewBackground;
 import com.example.artikproject.background_work.adapters.ListViewItems;
-import com.example.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
-import com.example.artikproject.background_work.main_show.ListViewGroupListener;
-import com.example.artikproject.background_work.main_show.TodayClickListener;
-import com.example.artikproject.background_work.service.PlayService;
-import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
-import com.example.artikproject.background_work.site_parse.GetCurrentWeekId;
-import com.example.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
+import com.example.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
+import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
+import com.example.artikproject.background_work.main_show.ListViewGroupListener;
+import com.example.artikproject.background_work.main_show.MainToolBar;
 import com.example.artikproject.background_work.main_show.ShowFullGroupList;
 import com.example.artikproject.background_work.main_show.ShowFullWeekList;
-import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
-import com.example.artikproject.background_work.main_show.MainToolBar;
+import com.example.artikproject.background_work.main_show.TodayClickListener;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
-import com.example.artikproject.R;
-import com.example.artikproject.background_work.CheckAppUpdate;
 import com.example.artikproject.background_work.server.SendInfoToServer;
-import com.example.artikproject.background_work.theme.Theme;
+import com.example.artikproject.background_work.service.PlayService;
+import com.example.artikproject.background_work.site_parse.GetCurrentWeekId;
+import com.example.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import com.mikepenz.materialdrawer.Drawer;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 

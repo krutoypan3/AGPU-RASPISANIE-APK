@@ -54,6 +54,7 @@ public class MainToolBar {
                     new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withIdentifier(4),
                     new DividerDrawerItem(),
                     new SecondaryDrawerItem().withName(R.string.feedback).withIcon(FontAwesome.Icon.faw_question_circle).withIdentifier(7),
+                    new SecondaryDrawerItem().withName(R.string.app_info).withIcon(FontAwesome.Icon.faw_exclamation_circle).withIdentifier(8),
                     new SecondaryDrawerItem().withName(context.getResources().getString(R.string.version) + ": " + Device_info.getAppVersion(context)).setEnabled(false)
             )
             .withOnDrawerItemClickListener((parent, view, position, id, drawerItem) -> {
@@ -125,6 +126,12 @@ public class MainToolBar {
                             break;
                         case (7):
                             cdd = new CustomAlertDialog(act, "feedback");
+                            cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
+                            cdd.show();
+                            MainActivity.drawerResult.setSelection(0);
+                            break;
+                        case (8):
+                            cdd = new CustomAlertDialog(act, "about");
                             cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
                             cdd.show();
                             MainActivity.drawerResult.setSelection(0);

@@ -115,7 +115,7 @@ public class Para_info {
                                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
                                     MediaPlayer mp = MediaPlayer.create(act, R.raw.povezlo_povezlo);
                                     mp.start();
-                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://i.ibb.co/4S8DrHk/r-x-Ka-UHKnzw.jpg"));
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://i.ibb.co/jLRpZ1B/2022-04-29-203438.png"));
                                     act.startActivity(intent);
                                 }
                             }

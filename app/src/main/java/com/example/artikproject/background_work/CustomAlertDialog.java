@@ -138,6 +138,11 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 main_text.setText(R.string.delete_one_save);
                 body_text.setText(R.string.delete_confirm);
                 yes.setText(R.string.Delete);
+            case "about":
+                main_text.setText(R.string.app_info);
+                body_text.setText(R.string.app_info_body);
+                yes.setVisibility(View.INVISIBLE);
+                no.setVisibility(View.INVISIBLE);
         }
         no.setText(R.string.Cancel);
         yes.setOnClickListener(this);
