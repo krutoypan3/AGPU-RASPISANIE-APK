@@ -167,7 +167,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                     case "feedback":
                         String value = String.valueOf(edit_text.getText());
                         Toast.makeText(act.getApplicationContext(), value, Toast.LENGTH_SHORT).show();
-                        new SendInfoToServer(act.getApplicationContext(), value);
+                        new SendInfoToServer(act.getApplicationContext(), value).start();
                         break;
                     case "map_confirm":
                         new ListViewAud_ClickListener(Para_info.finalCorp, act);
