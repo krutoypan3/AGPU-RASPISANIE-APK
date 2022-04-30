@@ -1,12 +1,17 @@
 package com.example.artikproject.background_work;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class GetCurrentWeekDay {
+    /**
+     * Получить текущий день недели
+     * @return День недели 0..5(пн-сб), -1(вс)
+     */
     public static int get(){
-        // Получение актуального текущего времени
-        long date_ms = new Date().getTime();// Нужно ли це переменная?
-        int week_day = new Date(date_ms).getDay() - 1; // дня недели
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        int week_day = cal.get(Calendar.DAY_OF_WEEK) - 2;
         if (week_day == -1){ // Если будет воскресенье, то будет показана суббота
             week_day = 5;
         }

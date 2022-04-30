@@ -57,7 +57,8 @@
         android:minHeight="48dp"
         android:textAlignment="center"
         android:textColorHint="?android:textColorSecondary"
-        android:theme="@style/Theme.MyApp.Main" />
+        android:theme="@style/Theme.MyApp.Main"
+        android:importantForAutofill="no" />
 
 
     <TextView

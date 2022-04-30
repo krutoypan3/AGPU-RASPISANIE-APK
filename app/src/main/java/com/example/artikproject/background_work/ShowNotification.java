@@ -19,18 +19,14 @@ public class ShowNotification extends Thread {
     final Context context;
     final String title;
     final String subtitle;
-    int chanel_id = 12315;
+    final int chanel_id;
+
     /**
      * Класс отвечающий за показ уведомлений
      * @param context Контекст приложения
      * @param title Заголовок уведомления
      * @param subtitle Текст уведомления
      */
-    public ShowNotification(Context context, String title, String subtitle) {
-        this.context =context;
-        this.title = title;
-        this.subtitle = subtitle;
-    }
     public ShowNotification(Context context, String title, String subtitle, int chanel_id) {
         this.context =context;
         this.title = title;
@@ -42,7 +38,6 @@ public class ShowNotification extends Thread {
     @Override
     public void run() {
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-System.out.println(chanel_id + " ID КАНАЛА");
         CharSequence name = "agpu_chanel"; // Название канала которое будет видеть пользователь
         String description = "agpu_raspisanie"; // Описание канала (для пользователя)
 

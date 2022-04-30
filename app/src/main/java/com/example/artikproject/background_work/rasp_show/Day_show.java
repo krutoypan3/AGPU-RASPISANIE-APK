@@ -29,7 +29,8 @@ public class Day_show {
         if (r.getCount() != 0) {
             String str;
             r.moveToFirst();
-            Raspisanie_show.mainText.setText((r.getString(10) + " " + r.getString(11)));
+            String mainText = r.getString(10) + " " + r.getString(11);
+            Raspisanie_show.mainText.setText(mainText);
             do {
                 str = "";
                 if (r.getString(4) != null) {

@@ -103,7 +103,6 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/text_light_theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="0"
@@ -140,7 +139,6 @@
                 android:layout_height="30sp" />
 
             <TextView
-                android:id="@+id/text_dark_theme"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_row="0"

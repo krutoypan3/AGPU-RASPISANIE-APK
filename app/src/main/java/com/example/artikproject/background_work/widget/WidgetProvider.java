@@ -25,7 +25,6 @@ import com.example.artikproject.background_work.datebase.MySharedPreferences;
 import com.example.artikproject.background_work.site_parse.GetRasp;
 import com.example.artikproject.background_work.theme.Theme;
 
-import java.lang.reflect.GenericDeclaration;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;

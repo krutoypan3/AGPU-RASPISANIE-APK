@@ -28,8 +28,6 @@
     <string name="FeedBack_title">What do you want to report?</string>
     <string name="FeedBack_subtitle">Describe the situation in more detail</string>
     <string name="Post_review">Post a review</string>
-    <string name="Questions">Questions?</string>
-    <string name="Questions_sub">Message me on VK: Artem Oganesyan vk.com/aom13</string>
     <string name="version">version</string>
     <string name="Internet_error">Error connecting to site</string>
     <string name="no_saved_group">Alas, you don\'t have any saved groups…</string>
@@ -67,17 +65,13 @@
     <string name="pasha_god">God, let me close this session!</string>
     <string name="ficha_count">Easter eggs found:</string>
     <string name="go_to_settings">You got an easter egg! Go to settings!</string>
-    <string name="Enable_pasha">Enable Easter theme?</string>
     <string name="Operation_canceled">Operation canceled by user</string>
     <string name="Permission_denied">You must grant permissions to access this feature.</string>
     <string name="Error_image_selection">Image selection error</string>
     <string name="MyBackground">Your app background</string>
-    <string name="widget_preview_text">This is where your schedule will be. Example:\n\n8:00–9:30\nMathematical analysis, lab.\nPlyushkin K. Ya., 8\n(VM–IVT–4–1)</string>
     <string name="Widget_light">Light widget</string>
     <string name="Widget_dark">Dark widget</string>
     <string name="Widget_system">Dynamic Widget</string>
-    <string name="day">Day</string>
-    <string name="night">Night</string>
     <string name="dark_theme">Dark theme</string>
     <string name="light_theme">Light theme</string>
     <string name="app_info">About the application</string>

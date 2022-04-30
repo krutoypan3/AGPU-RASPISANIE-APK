@@ -2,7 +2,6 @@ package com.example.artikproject.background_work.debug;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 
 /**
  * Класс отвечающий за получение информации об устройстве

@@ -1,7 +1,6 @@
 package com.example.artikproject.layout;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,10 +9,7 @@ import com.example.artikproject.R;
 import com.example.artikproject.background_work.SetNewBackground;
 import com.example.artikproject.background_work.Starter_MainActivity;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
-import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
 import com.example.artikproject.background_work.theme.Theme;
-
-import java.util.Random;
 
 public class StartActivity extends AppCompatActivity {
     @Override

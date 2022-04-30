@@ -2,9 +2,7 @@ package com.example.artikproject.background_work.theme;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.preference.PreferenceManager;
 
 import androidx.appcompat.app.AppCompatDelegate;
 

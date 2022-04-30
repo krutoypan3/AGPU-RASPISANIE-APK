@@ -50,7 +50,8 @@ public class Week_show {
                 int ff = 0;
                 int fk = 0;
                 r.moveToFirst();
-                Raspisanie_show.mainText.setText((r.getString(10) + " " + r.getString(11)));
+                String mainText = r.getString(10) + " " + r.getString(11);
+                Raspisanie_show.mainText.setText(mainText);
                 f.moveToFirst();
                 TableRow timeRow = new TableRow(context); // Новый столбец
                 do{

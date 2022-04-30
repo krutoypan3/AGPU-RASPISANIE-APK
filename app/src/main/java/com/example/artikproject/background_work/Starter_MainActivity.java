@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 
 public class Starter_MainActivity extends Thread {
-    Activity act;
-    ImageView loading_ico;
+    final Activity act;
+    final ImageView loading_ico;
 
     /**
      * Показывает список всех факультетов и их групп

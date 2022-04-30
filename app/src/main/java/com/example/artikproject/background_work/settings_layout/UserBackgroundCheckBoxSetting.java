@@ -1,11 +1,8 @@
 package com.example.artikproject.background_work.settings_layout;
 
 import android.app.Activity;
-import android.view.View;
 import android.widget.CheckBox;
-import android.widget.GridLayout;
 
-import com.example.artikproject.R;
 import com.example.artikproject.background_work.datebase.MySharedPreferences;
 
 public class UserBackgroundCheckBoxSetting{
