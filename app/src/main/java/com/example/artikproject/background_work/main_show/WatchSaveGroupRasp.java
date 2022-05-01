@@ -10,8 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.adapters.ListViewAdapter;
-import com.example.artikproject.background_work.adapters.ListViewItems;
+import com.example.artikproject.background_work.adapters.ListView.ListViewAdapter;
+import com.example.artikproject.background_work.adapters.ListView.ListViewItems;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.layout.MainActivity;
 

@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomAlertDialog;
-import com.example.artikproject.background_work.adapters.ListViewAdapter;
+import com.example.artikproject.background_work.adapters.ListView.ListViewAdapter;
 import com.example.artikproject.background_work.site_parse.GetFullWeekList_Online;
 import com.example.artikproject.layout.MainActivity;
 

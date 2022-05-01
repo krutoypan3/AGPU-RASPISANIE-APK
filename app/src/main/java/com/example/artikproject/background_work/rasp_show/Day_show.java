@@ -6,8 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.example.artikproject.background_work.CheckInternetConnection;
-import com.example.artikproject.background_work.adapters.ListViewAdapter;
-import com.example.artikproject.background_work.adapters.ListViewItems;
+import com.example.artikproject.background_work.adapters.ListView.ListViewAdapter;
+import com.example.artikproject.background_work.adapters.ListView.ListViewItems;
 import com.example.artikproject.background_work.site_parse.GetRasp;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;

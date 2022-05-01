@@ -9,8 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.adapters.ListViewAdapter;
-import com.example.artikproject.background_work.adapters.ListViewItems;
+import com.example.artikproject.background_work.adapters.ListView.ListViewAdapter;
+import com.example.artikproject.background_work.adapters.ListView.ListViewItems;
 import com.example.artikproject.layout.MainActivity;
 
 import org.json.JSONArray;

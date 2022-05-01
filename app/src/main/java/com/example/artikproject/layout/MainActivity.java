@@ -19,16 +19,16 @@ import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
 import com.example.artikproject.background_work.SetNewBackground;
-import com.example.artikproject.background_work.adapters.ListViewItems;
+import com.example.artikproject.background_work.adapters.ListView.ListViewItems;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
-import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
 import com.example.artikproject.background_work.main_show.ListViewGroupListener;
-import com.example.artikproject.background_work.main_show.MainToolBar;
 import com.example.artikproject.background_work.main_show.ShowFullGroupList;
 import com.example.artikproject.background_work.main_show.ShowFullWeekList;
-import com.example.artikproject.background_work.main_show.ShowRaspSearch;
 import com.example.artikproject.background_work.main_show.TodayClickListener;
+import com.example.artikproject.background_work.main_show.ToolBar.LoadBuildingsList;
+import com.example.artikproject.background_work.main_show.ToolBar.MainToolBar;
+import com.example.artikproject.background_work.main_show.ToolBar.ShowRaspSearch;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.background_work.server.SendInfoToServer;
 import com.example.artikproject.background_work.service.PlayService;
@@ -59,11 +59,9 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animRotate_ok;
     public static Drawer.Result drawerResult = null;
     public static Toolbar toolbar = null;
-    public ListView listview_aud = null;
     public Button list_groups = null;
     public Button list_weeks = null;
     public static SQLiteDatabase sqLiteDatabase;
-
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
     public void onDestroy(){
@@ -82,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
             new WatchSaveGroupRasp(this);
         }
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         listview = findViewById(R.id.listview);
         today = findViewById(R.id.main_activity_text);
         list_groups = findViewById(R.id.list_groups);
-        listview_aud = findViewById(R.id.listview_aud);
         list_weeks = findViewById(R.id.list_weeks);
 
         // Инициализируем тулбар
@@ -119,12 +118,10 @@ public class MainActivity extends AppCompatActivity {
         new GetCurrentWeekId(MainActivity.this).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
         new GetFullGroupList_Online().start(); // Получение полного списка групп и закидывание их в адаптер
         new TodayClickListener(this, today); // Прослушка нажатий на текущую дату
+        new LoadBuildingsList(this).start(); // Загрузка данных об строениях в адаптер
 
         week_day = GetCurrentWeekDay.get();
 
-        // Отслеживание нажатий на элемент в списке(ауд)
-        listview_aud.setOnItemClickListener((parent, v, position, id) ->
-                new ListViewAud_ClickListener(position, MainActivity.this));
         // Отслеживание нажатий на кнопку списка групп
         list_groups.setOnClickListener((v) ->
                 new ShowFullGroupList(MainActivity.this, v).start());

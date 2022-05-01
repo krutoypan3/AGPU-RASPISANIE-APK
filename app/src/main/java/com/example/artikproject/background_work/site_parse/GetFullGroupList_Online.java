@@ -5,7 +5,7 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.example.artikproject.background_work.adapters.ListViewItems;
+import com.example.artikproject.background_work.adapters.ListView.ListViewItems;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

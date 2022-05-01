@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
-import com.example.artikproject.background_work.adapters.ListViewItems;
+import com.example.artikproject.background_work.adapters.ListView.ListViewItems;
 import com.example.artikproject.background_work.datebase.MySharedPreferences;
 import com.example.artikproject.background_work.main_show.GetWeekFromId;
 import com.example.artikproject.layout.MainActivity;

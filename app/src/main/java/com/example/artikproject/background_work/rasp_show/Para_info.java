@@ -14,8 +14,8 @@ import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomAlertDialog;
 import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
 import com.example.artikproject.background_work.GetCorpFromAudNumber;
-import com.example.artikproject.background_work.adapters.ListViewAdapter;
-import com.example.artikproject.background_work.adapters.ListViewItems;
+import com.example.artikproject.background_work.adapters.ListView.ListViewAdapter;
+import com.example.artikproject.background_work.adapters.ListView.ListViewItems;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Raspisanie_show;
 

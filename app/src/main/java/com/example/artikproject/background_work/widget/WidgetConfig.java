@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import com.example.artikproject.R;
 
-import com.example.artikproject.background_work.adapters.ListViewAdapter;
+import com.example.artikproject.background_work.adapters.ListView.ListViewAdapter;
 import com.example.artikproject.background_work.datebase.MySharedPreferences;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 
