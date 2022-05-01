@@ -9,14 +9,15 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
-import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
+import com.example.artikproject.background_work.CustomAlertDialog;
 import com.example.artikproject.background_work.adapters.ListViewAdapter;
 import com.example.artikproject.background_work.adapters.ListViewItems;
-import com.example.artikproject.background_work.CustomAlertDialog;
 import com.example.artikproject.background_work.debug.Device_info;
+import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Settings_layout;
 import com.mikepenz.iconics.typeface.FontAwesome;
@@ -37,6 +38,7 @@ public class MainToolBar {
      * @param act Activity главного меню
      */
     public MainToolBar(Activity act) throws PackageManager.NameNotFoundException {
+        ListView listview_aud = act.findViewById(R.id.listview_aud);
         Context context = act.getApplicationContext();
         MainActivity.drawerResult = new Drawer()
             .withActivity(act)  // В каком активити создать тулбар
@@ -61,17 +63,10 @@ public class MainToolBar {
                 if (drawerItem instanceof Nameable) {
                     switch (drawerItem.getIdentifier()) {
                         case (1):
-                            show_group_list();
+                            new ShowRaspSearch(act);
                             break;
                         case (2):
-                            MainActivity.listview.setVisibility(View.INVISIBLE);
-                            MainActivity.result.setVisibility(View.INVISIBLE);
-                            MainActivity.rasp_search_edit.setVisibility(View.INVISIBLE);
-                            MainActivity.listview_aud.setVisibility(View.VISIBLE);
-                            MainActivity.list_groups.setVisibility(View.INVISIBLE);
-                            MainActivity.list_weeks.setVisibility(View.INVISIBLE);
-                            MainActivity.today.setVisibility(View.INVISIBLE);
-                            MainActivity.current_week.setVisibility(View.INVISIBLE);
+                            new ShowBuildingList(act);
                             ArrayList<ListViewItems> group_list_aud = new ArrayList<>();
                             group_list_aud.add(new ListViewItems(context.getResources().getString(R.string.adress_main) + "\n" +
                                     context.getResources().getString(R.string.Audiences) +
@@ -95,9 +90,9 @@ public class MainToolBar {
                                     context.getResources().getString(R.string.Audiences) +
                                     ": " + context.getResources().getString(R.string.adress_obshaga_aud)));
                             ListViewAdapter adapter = new ListViewAdapter(context, group_list_aud);
-                            MainActivity.listview_aud.setAdapter(adapter);
-                            MainActivity.listview_aud.setVisibility(View.VISIBLE);
-                            MainActivity.listview_aud.setBackgroundResource(R.drawable.list_view_favorite);
+                            listview_aud.setAdapter(adapter);
+                            listview_aud.setVisibility(View.VISIBLE);
+                            listview_aud.setBackgroundResource(R.drawable.list_view_favorite);
                             break;
                         case (3): // Кнопка 'Настройки'
                             MainActivity.drawerResult.setSelection(0);
@@ -156,17 +151,5 @@ public class MainToolBar {
                 act.startActivity(intent);
             }
         });
-    }
-
-    public static void show_group_list(){
-        MainActivity.drawerResult.setSelection(0);
-        MainActivity.listview.setVisibility(View.VISIBLE);
-        MainActivity.result.setVisibility(View.VISIBLE);
-        MainActivity.rasp_search_edit.setVisibility(View.VISIBLE);
-        MainActivity.listview_aud.setVisibility(View.INVISIBLE);
-        MainActivity.today.setVisibility(View.VISIBLE);
-        MainActivity.current_week.setVisibility(View.VISIBLE);
-        MainActivity.list_groups.setVisibility(View.VISIBLE);
-        MainActivity.list_weeks.setVisibility(View.VISIBLE);
     }
 }

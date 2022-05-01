@@ -27,6 +27,7 @@ import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.main_show.MainToolBar;
 import com.example.artikproject.background_work.main_show.ShowFullGroupList;
 import com.example.artikproject.background_work.main_show.ShowFullWeekList;
+import com.example.artikproject.background_work.main_show.ShowRaspSearch;
 import com.example.artikproject.background_work.main_show.TodayClickListener;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.background_work.server.SendInfoToServer;
@@ -40,14 +41,12 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static EditText rasp_search_edit;
+    public EditText rasp_search_edit;
     public static ArrayList<ListViewItems> group_listed;
     public static String[] group_listed_type;
     public static String[] group_listed_id;
-    public static ListView listview;
-    public static TextView result;
-    public static TextView today;
-    public static TextView current_week;
+    public ListView listview;
+    public TextView today;
     public static String selectedItem;
     public static String selectedItem_type;
     public static String selectedItem_id;
@@ -60,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animRotate_ok;
     public static Drawer.Result drawerResult = null;
     public static Toolbar toolbar = null;
-    public static ListView listview_aud = null;
-    public static Button list_groups = null;
-    public static Button list_weeks = null;
+    public ListView listview_aud = null;
+    public Button list_groups = null;
+    public Button list_weeks = null;
     public static SQLiteDatabase sqLiteDatabase;
 
     // Вызывается перед выходом из "полноценного" состояния.
@@ -79,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
             drawerResult.closeDrawer();
         }
         else{
-            MainToolBar.show_group_list();
-            new WatchSaveGroupRasp(getApplicationContext());
+            new ShowRaspSearch(this);
+            new WatchSaveGroupRasp(this);
         }
     }
 
@@ -102,10 +101,8 @@ public class MainActivity extends AppCompatActivity {
         animUehalVl = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vlevo);
         animRotate_ok = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_ok);
         rasp_search_edit = findViewById(R.id.rasp_search_edit);
-        result = findViewById(R.id.result);
         listview = findViewById(R.id.listview);
         today = findViewById(R.id.main_activity_text);
-        current_week = findViewById(R.id.subtitle);
         list_groups = findViewById(R.id.list_groups);
         listview_aud = findViewById(R.id.listview_aud);
         list_weeks = findViewById(R.id.list_weeks);
@@ -140,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 
-        new WatchSaveGroupRasp(getApplicationContext()); // Первичный вывод групп которые были открыты ранее
+        new WatchSaveGroupRasp(this); // Первичный вывод групп которые были открыты ранее
 
         // Отслеживание изменений текстового поля
         new EditTextRaspSearch_Listener(this, rasp_search_edit);

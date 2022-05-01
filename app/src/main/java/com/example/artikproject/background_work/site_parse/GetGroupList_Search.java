@@ -1,9 +1,11 @@
 package com.example.artikproject.background_work.site_parse;
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.artikproject.R;
@@ -28,19 +30,20 @@ import java.util.List;
 
 public class GetGroupList_Search extends Thread {
     private final String urlq;
-    private final Context context;
+    private final Activity act;
     /**
      * Класс отвечающий за поиск группы, аудитории, преподователя
-     * @param urlq ссылка на сайт
-     * @param context активное активити
+     * @param urlq Ссылка на сайт
+     * @param act Активити
      */
-    public GetGroupList_Search(String urlq, Context context){
-        this.context = context;
+    public GetGroupList_Search(String urlq, Activity act){
+        this.act = act;
         this.urlq = urlq;
     }
 
     @Override
     public void run() {
+        TextView result = act.findViewById(R.id.result);
         HttpURLConnection connection = null;
         BufferedReader reader = null;
         try {
@@ -50,7 +53,7 @@ public class GetGroupList_Search extends Thread {
             try{ connection.connect();}
             catch (Exception e){
                 // Это нужно для вызова вне основного потока
-                new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(context, R.string.Internet_error, Toast.LENGTH_LONG).show());
+                new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(act.getApplicationContext(), R.string.Internet_error, Toast.LENGTH_LONG).show());
                 return;
             }
             InputStream stream = connection.getInputStream();
@@ -104,10 +107,11 @@ public class GetGroupList_Search extends Thread {
         }
         // Это нужно для вызова вне основного потока
         new Handler(Looper.getMainLooper()).post(() -> {
-            ListViewAdapter adapter = new ListViewAdapter(context, MainActivity.group_listed);
-            MainActivity.listview.setAdapter(adapter);
-            MainActivity.result.setText("");
-            MainActivity.listview.setVisibility(View.VISIBLE);
+            ListView listview = act.findViewById(R.id.listview);
+            ListViewAdapter adapter = new ListViewAdapter(act.getApplicationContext(), MainActivity.group_listed);
+            listview.setAdapter(adapter);
+            result.setText("");
+            listview.setVisibility(View.VISIBLE);
         });
     }
 }

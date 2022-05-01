@@ -18,8 +18,8 @@ public class ListViewDayPara_Listener {
 
         // отслеживание жестов на списке с расписанием расписании
         listView.setOnTouchListener(new OnSwipeTouchListener(act.getApplicationContext()) {
-            public void onSwipeRight() { new Swipe_rasp("Left", act.getApplicationContext()); }
-            public void onSwipeLeft() { new Swipe_rasp("Right", act.getApplicationContext()); }
+            public void onSwipeRight() { new Swipe_rasp("Left", act); }
+            public void onSwipeLeft() { new Swipe_rasp("Right", act); }
         });
 
         // Отслеживание нажатий на пару в списке

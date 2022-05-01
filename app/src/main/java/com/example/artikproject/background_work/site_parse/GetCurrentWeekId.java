@@ -4,7 +4,9 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.widget.TextView;
 
+import com.example.artikproject.R;
 import com.example.artikproject.background_work.GetCurrentWeekId_Local;
 import com.example.artikproject.background_work.adapters.ListViewItems;
 import com.example.artikproject.background_work.datebase.MySharedPreferences;
@@ -31,6 +33,7 @@ public class GetCurrentWeekId extends Thread {
     @Override
     public void run() {
         try{
+            TextView todayTextView = act.findViewById(R.id.main_activity_text);
             // Получаем последнюю сохраненную неделю из базы данных
             MainActivity.week_id = GetCurrentWeekId_Local.get(act.getApplicationContext());
             // Затем пробуем получить текущую неделю через интернет
@@ -40,7 +43,7 @@ public class GetCurrentWeekId extends Thread {
                 doc = Jsoup.connect(urlq).get();
                 String today_info = doc.select("div").toString().split("today-info")[1];
                 String today = today_info.split("</h5>")[0].split("<h5>")[1]; // Сегодня **.**.****, ******
-                act.runOnUiThread(() -> MainActivity.today.setText(today)); // Устанавливаем текущий день на главном экране
+                act.runOnUiThread(() -> todayTextView.setText(today)); // Устанавливаем текущий день на главном экране
                 MainActivity.week_id = Integer.parseInt(today_info.split("value=\"")[1].split("\"")[0]); // Получаем текущую неделю с интернета
 
                 MySharedPreferences.put(act.getApplicationContext(), "week_id", MainActivity.week_id);

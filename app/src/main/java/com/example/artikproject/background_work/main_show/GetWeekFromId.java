@@ -4,7 +4,9 @@ import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.widget.TextView;
 
+import com.example.artikproject.R;
 import com.example.artikproject.layout.MainActivity;
 
 public class GetWeekFromId {
@@ -16,6 +18,7 @@ public class GetWeekFromId {
         Cursor f = sqLiteDatabase.rawQuery("SELECT week_s, week_po FROM weeks_list WHERE week_id = '" + MainActivity.week_id + "'", null);
         f.moveToFirst();
         String s_po = f.getString(0) + " " + f.getString(1);
-        act.runOnUiThread(() -> MainActivity.current_week.setText(s_po));
+        TextView current_week = act.findViewById(R.id.subtitle);
+        act.runOnUiThread(() -> current_week.setText(s_po));
     }
 }

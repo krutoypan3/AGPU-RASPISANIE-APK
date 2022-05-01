@@ -2,9 +2,12 @@ package com.example.artikproject.background_work.main_show;
 
 import static com.example.artikproject.layout.MainActivity.sqLiteDatabase;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.adapters.ListViewAdapter;
@@ -37,9 +40,12 @@ public class WatchSaveGroupRasp {
 
     /**
      * Выводит ранее открываемых групп
-     * @param context Контекст главного активити
+     * @param act Активити
      */
-    public WatchSaveGroupRasp(Context context){ // Вывод ранее открываемых групп
+    public WatchSaveGroupRasp(Activity act){ // Вывод ранее открываемых групп
+        ListView listview = act.findViewById(R.id.listview);
+        TextView result = act.findViewById(R.id.result);
+
         r = sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM raspisanie WHERE r_group NOT NULL AND r_prepod NOT NULL AND r_search_type NOT NULL GROUP BY r_group_code", null);
         if (r.moveToFirst()){
             watch();
@@ -48,14 +54,14 @@ public class WatchSaveGroupRasp {
             MainActivity.group_listed_id = group_list_id.toArray(new String[0]);
         } // Вывод SELECT запроса
         if( MainActivity.group_listed == null || r.getCount() == 0){
-            MainActivity.result.setText(R.string.no_saved_group);
-            MainActivity.listview.setVisibility(View.INVISIBLE);
+            result.setText(R.string.no_saved_group);
+            listview.setVisibility(View.INVISIBLE);
         }
         else {
-            ListViewAdapter adapter = new ListViewAdapter(context, MainActivity.group_listed);
-            MainActivity.listview.setAdapter(adapter);
-            MainActivity.result.setText("");
-            MainActivity.listview.setVisibility(View.VISIBLE);
+            ListViewAdapter adapter = new ListViewAdapter(act.getApplicationContext(), MainActivity.group_listed);
+            listview.setAdapter(adapter);
+            result.setText("");
+            listview.setVisibility(View.VISIBLE);
         }
     }
 
