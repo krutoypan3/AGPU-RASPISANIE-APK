@@ -76,7 +76,7 @@ public class SetNewBackground {
     private static void setBackgroundDarker(RelativeLayout layout_darker, boolean lightDarker){
         if (layout_darker != null){
             if (lightDarker) {
-                int level = MySharedPreferences.get(layout_darker.getContext(), "light_darker_level", 30);
+                int level = MySharedPreferences.get(layout_darker.getContext(), "light_darker_level", 60);
                 layout_darker.setBackgroundColor(Color.argb((int) (level * 2.5), 255, 255, 255));
             }
             else{

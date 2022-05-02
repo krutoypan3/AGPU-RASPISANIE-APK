@@ -18,5 +18,6 @@
         <item name="android:textViewStyle">@color/gold</item>
         <item name="textColorAlertDialogListItem">@color/gold</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:windowContentTransitions">true</item>
     </style>
 </resources>

@@ -87,6 +87,7 @@
         <activity android:name=".layout.Settings_layout" />
         <activity android:name=".background_work.image_select_from_gallery.ImageSelector"/>
         <activity android:name=".background_work.image_select_from_gallery.GalleryUtil"/>
+        <activity android:name=".layout.BuildingInfo"/>
     </application>
 
 </manifest>

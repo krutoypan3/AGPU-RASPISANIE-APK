@@ -17,6 +17,7 @@
 
         <ImageView
             android:id="@+id/cardViewAudImage"
+            android:transitionName="cardViewAudImage"
             android:layout_width="110sp"
             android:layout_height="90sp"
             android:layout_marginStart="16dp"
@@ -28,6 +29,7 @@
 
         <TextView
             android:id="@+id/cardViewAudMainText"
+            android:transitionName="cardViewAudMainText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -41,6 +43,7 @@
 
         <TextView
             android:id="@+id/cardViewAudSubText"
+            android:transitionName="cardViewAudSubText"
             android:layout_width="0dp"
             android:textSize="14sp"
             android:layout_height="wrap_content"

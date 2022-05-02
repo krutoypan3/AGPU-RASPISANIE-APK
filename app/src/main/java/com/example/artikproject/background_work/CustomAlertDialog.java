@@ -132,7 +132,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
             case "map_confirm":
                 main_text.setText(R.string.map_confirm);
                 body_text.setText(R.string.redirect_to_map);
-                yes.setText(R.string.Go_to_map);
+                yes.setText(R.string.go);
                 break;
             case "delete_one_saved_group":
                 main_text.setText(R.string.delete_one_save);
