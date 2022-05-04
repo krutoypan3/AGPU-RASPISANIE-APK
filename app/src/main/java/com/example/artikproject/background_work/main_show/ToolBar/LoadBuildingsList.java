@@ -24,8 +24,8 @@ public class LoadBuildingsList extends Thread{
         List<RecyclerViewItems> list = new ArrayList<>();
 
         list.add(new RecyclerViewItems(act.getString(R.string.adress_main), "agpu", act.getString(R.string.adress_main_aud)));
-        list.add(new RecyclerViewItems(act.getString(R.string.adress_zaochka), "agpu", act.getString(R.string.adress_zaochka_aud)));
-        list.add(new RecyclerViewItems(act.getString(R.string.adress_spf), "agpu", act.getString(R.string.adress_spf_aud)));
+        list.add(new RecyclerViewItems(act.getString(R.string.adress_zaochka), "agpu_ico", act.getString(R.string.adress_zaochka_aud)));
+        list.add(new RecyclerViewItems(act.getString(R.string.adress_spf), "background_pic", act.getString(R.string.adress_spf_aud)));
         list.add(new RecyclerViewItems(act.getString(R.string.adress_ebd), "agpu", act.getString(R.string.adress_ebd_aud)));
         list.add(new RecyclerViewItems(act.getString(R.string.adress_foc), "agpu", act.getString(R.string.adress_foc_aud)));
         list.add(new RecyclerViewItems(act.getString(R.string.adress_tehfak), "agpu", act.getString(R.string.adress_tehfak_aud)));

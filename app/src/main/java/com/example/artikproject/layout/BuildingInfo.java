@@ -2,12 +2,13 @@ package com.example.artikproject.layout;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.SetNewBackground;
+import com.example.artikproject.background_work.CustomBackground;
 import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
 
 /**
@@ -19,7 +20,13 @@ public class BuildingInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.building_info);
-        SetNewBackground.setting(findViewById(R.id.building_info_layout)); // Установка нового фона | Должно быть после setContentView
+        // Это нужно для предотвращения мерцания при анимации
+        getWindow().setEnterTransition(null);
+
+        // Установка нового фона и затемнителя | Должно быть после setContentView
+        RelativeLayout layout = findViewById(R.id.building_info_layout);
+        layout.setBackground(CustomBackground.getBackground(getApplicationContext()));
+        findViewById(R.id.background_darker).setBackgroundColor(CustomBackground.getBackgroundDarker(getApplicationContext()));
 
         // Настраиваем основной текст
         String mainText = getIntent().getStringExtra("mainText"); // Получаем переданное название корпуса
@@ -34,7 +41,9 @@ public class BuildingInfo extends AppCompatActivity {
         // Настраиваем картинку
         int imageResId = getIntent().getIntExtra("imageResId", R.drawable.agpu); // Получаем переданный id изображения
         ImageView imageView = findViewById(R.id.cardViewAudImage_second); // Находим нашу вьюшку (ImageView) на слое
-        imageView.setBackgroundResource(imageResId); // Устанавливаем картинку по полученному imageResId
+
+        imageView.setImageResource(imageResId);
+
 
         // Обработка кнопки перехода на карту
         int itemPosition = getIntent().getIntExtra("itemPosition", 0); // Получем переданный id позиции элемента

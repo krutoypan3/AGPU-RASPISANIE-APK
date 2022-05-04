@@ -13,9 +13,11 @@ import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.artikproject.R;
+import com.example.artikproject.background_work.CustomBackground;
 import com.example.artikproject.background_work.theme.GetColorTextView;
 import com.example.artikproject.layout.BuildingInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
@@ -59,6 +61,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         String newSubText = act.getString(R.string.Audiences) +  " : "+ image_name.getSubText();
         holder.subTextView.setText(newSubText);
         holder.subTextView.setTextColor(textColor);
+        holder.cardBackgroundDarker.setBackgroundColor(CustomBackground.getBackgroundDarker(act.getApplicationContext()));
+        holder.cardBackground.setBackground(CustomBackground.getBackground(act.getApplicationContext()));
     }
 
     @Override
@@ -85,14 +89,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         intent.putExtra("subText", item.getSubText()); // Дополнительный текст
         intent.putExtra("imageResId", this.getDrawableResIdByName(item.getImageName())); // Id картинки
 
-        Pair[] pairs = new Pair[3]; // Создаем список связанных элементов и связываем вьюшки (View) с их транзитивными именами
-        pairs[0] = new Pair<View, String>(itemView.findViewById(R.id.cardViewAudImage), "cardViewAudImage"); // Картинка
-        pairs[1] = new Pair<View, String>(itemView.findViewById(R.id.cardViewAudMainText), "cardViewAudMainText"); // Основной текст
-        pairs[2] = new Pair<View, String>(itemView.findViewById(R.id.cardViewAudSubText), "cardViewAudSubText"); // Дополнительный текст
+        List<Pair<View, String>> pairs = new ArrayList<>();
+        pairs.add(new Pair<>(itemView.findViewById(R.id.cardViewAudImage), "cardViewAudImage")); // Картинка
+        pairs.add(new Pair<>(itemView.findViewById(R.id.cardViewAudMainText), "cardViewAudMainText")); // Основной текст
+        pairs.add(new Pair<>(itemView.findViewById(R.id.cardViewAudSubText), "cardViewAudSubText")); // Дополнительный текст
+        pairs.add(new Pair<>(itemView.findViewById(R.id.cardBackground), "cardBackground"));
+//        pairs.add(new Pair<>(itemView.findViewById(R.id.cardBackgroundDarker), "cardBackgroundDarker"));
+
+        // Это нужно для предотвращения мерцания при анимации
+        act.getWindow().setExitTransition(null);
 
         // Настраиваем анимацию намерения
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(act, pairs);
-
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(act, pairs.toArray(new Pair[pairs.size()]));
         act.startActivity(intent, options.toBundle()); // Запускаем наше намерение
     }
 }

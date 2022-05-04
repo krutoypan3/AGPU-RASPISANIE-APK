@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.SetNewBackground;
+import com.example.artikproject.background_work.CustomBackground;
 import com.example.artikproject.background_work.settings_layout.BackgroundDarkerListener;
 import com.example.artikproject.background_work.settings_layout.FichaShow;
 import com.example.artikproject.background_work.settings_layout.ImageBackgroundPictureSetting;
@@ -31,7 +31,11 @@ public class Settings_layout extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_layout);
-        SetNewBackground.setting(findViewById(R.id.settings_relative_layout)); // Установка нового фона | Должно быть после setContentView
+
+        // Установка нового фона и затемнителя | Должно быть после setContentView
+        findViewById(R.id.settings_relative_layout).setBackground(CustomBackground.getBackground(getApplicationContext()));
+        findViewById(R.id.background_darker).setBackgroundColor(CustomBackground.getBackgroundDarker(getApplicationContext()));
+
         CheckBox userBackgroundCheckBox = findViewById(R.id.my_app_background_checkbox);
         userBackgroundLightSelector = findViewById(R.id.background_light_image_selector);
         userBackgroundDarkSelector = findViewById(R.id.background_dark_image_selector);

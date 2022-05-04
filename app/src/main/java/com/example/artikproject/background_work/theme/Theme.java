@@ -27,12 +27,25 @@ public class Theme {
     }
 
     /**
-     * Получить текущую тему приложения
+     * Получить сохраненную тему приложения
      * @param context Контекст приложения
      * @return Id сохраненной темы
      */
-     public static int get(Context context){ // Получить тему и установить ее в системе
+     public static int get(Context context){ // Получить сохраненную тему
          return MySharedPreferences.get(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+    }
+
+    /**
+     * Получает тему приложения.
+     * Если в приложении установлена тема системы, то получает системную тему.
+     * @param context Контекст приложения
+     * @return Id сохраненной темы
+     */
+    public static int getApplicationTheme(Context context){
+         int theme = MySharedPreferences.get(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+         if (theme == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+             theme= getCurrentSystemTheme(context);
+         return theme;
     }
 
     public static int getCurrentSystemTheme(Context context){

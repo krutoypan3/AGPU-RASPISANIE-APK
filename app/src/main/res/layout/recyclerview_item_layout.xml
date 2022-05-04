@@ -8,52 +8,52 @@
     android:layout_marginLeft="5sp"
     android:layout_marginTop="5sp"
     android:layout_marginRight="5sp"
-    android:layout_marginBottom="5sp"
-    app:cardBackgroundColor="@color/custom_dialog_color">
+    android:layout_marginBottom="5sp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardBackground"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:transitionName="cardBackground">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cardBackgroundDarker"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/cardViewAudImage"
+                    android:transitionName="cardViewAudImage"
+                    android:layout_width="160sp"
+                    android:layout_height="120sp"
+                    android:padding="6sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/agpu_ico"
+                    tools:ignore="ContentDescription" />
 
-        <ImageView
-            android:id="@+id/cardViewAudImage"
-            android:transitionName="cardViewAudImage"
-            android:layout_width="110sp"
-            android:layout_height="90sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/agpu_ico"
-            tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/cardViewAudMainText"
+                    android:transitionName="cardViewAudMainText"
+                    android:layout_width="0dp"
+                    android:padding="10sp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/data_is_being_loaded"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cardViewAudImage"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/cardViewAudMainText"
-            android:transitionName="cardViewAudMainText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/data_is_being_loaded"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardViewAudImage"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/cardViewAudSubText"
-            android:transitionName="cardViewAudSubText"
-            android:layout_width="0dp"
-            android:textSize="14sp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:paddingBottom="5dp"
-            android:text="@string/data_is_being_loaded"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardViewAudImage"
-            app:layout_constraintTop_toBottomOf="@+id/cardViewAudMainText" />
+                <TextView
+                    android:id="@+id/cardViewAudSubText"
+                    android:transitionName="cardViewAudSubText"
+                    android:layout_width="0dp"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:layout_marginTop="-15dp"
+                    android:text="@string/data_is_being_loaded"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/cardViewAudImage"
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewAudMainText" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

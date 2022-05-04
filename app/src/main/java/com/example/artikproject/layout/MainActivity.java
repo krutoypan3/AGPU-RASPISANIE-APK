@@ -17,8 +17,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
+import com.example.artikproject.background_work.CustomBackground;
 import com.example.artikproject.background_work.GetCurrentWeekDay;
-import com.example.artikproject.background_work.SetNewBackground;
 import com.example.artikproject.background_work.adapters.ListView.ListViewItems;
 import com.example.artikproject.background_work.datebase.DataBase_Local;
 import com.example.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
@@ -88,7 +88,11 @@ public class MainActivity extends AppCompatActivity {
         sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SetNewBackground.setting(findViewById(R.id.main_activity_layout)); // Установка нового фона | Должно быть после setContentView
+
+        // Установка нового фона и затемнителя | Должно быть после setContentView
+        findViewById(R.id.main_activity_layout).setBackground(CustomBackground.getBackground(getApplicationContext()));
+        findViewById(R.id.background_darker).setBackgroundColor(CustomBackground.getBackgroundDarker(getApplicationContext()));
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); // Без этих двух строк
         StrictMode.setThreadPolicy(policy); // мы не можем подключиться к базе данных MSSQL так как потокам становится плохо
 

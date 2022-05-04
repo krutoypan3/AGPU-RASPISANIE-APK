@@ -17,11 +17,16 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
-import com.example.artikproject.background_work.SetNewBackground;
-import com.example.artikproject.background_work.rasp_show.*;
-import com.example.artikproject.background_work.OnSwipeTouchListener;
 import com.example.artikproject.R;
+import com.example.artikproject.background_work.CustomBackground;
+import com.example.artikproject.background_work.OnSwipeTouchListener;
+import com.example.artikproject.background_work.rasp_show.CheckGroupRaspUpdate;
+import com.example.artikproject.background_work.rasp_show.ListViewDayPara_Listener;
+import com.example.artikproject.background_work.rasp_show.Refresh_rasp_week_or_day_starter;
+import com.example.artikproject.background_work.rasp_show.Swipe_rasp;
+import com.example.artikproject.background_work.rasp_show.Week_day_change;
+import com.example.artikproject.background_work.rasp_show.Week_show_resize;
+import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
 
 import java.util.Random;
 
@@ -56,7 +61,11 @@ public class Raspisanie_show extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.raspisanie_layout);
-        SetNewBackground.setting(findViewById(R.id.raspisanie_show)); // Установка нового фона | Должно быть после setContentView
+
+        // Установка нового фона и затемнителя | Должно быть после setContentView
+        findViewById(R.id.raspisanie_show).setBackground(CustomBackground.getBackground(getApplicationContext()));
+        findViewById(R.id.background_darker).setBackgroundColor(CustomBackground.getBackgroundDarker(getApplicationContext()));
+
         mainText = findViewById(R.id.main_text); // Основной текст в центре
         day_para_view = findViewById(R.id.day_para_view); // Инициализация списка с расписанием
         week_para_view = findViewById(R.id.week_para_view); // Инициализация таблицы с расписанием

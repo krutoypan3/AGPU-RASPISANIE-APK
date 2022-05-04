@@ -4,20 +4,18 @@
     android:id="@+id/building_info_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:transitionName="cardBackground">
     <RelativeLayout
         android:id="@+id/background_darker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_darker">
+        android:transitionName="cardBackgroundDarker">
 
         <ImageView
             android:id="@+id/cardViewAudImage_second"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/agpu"
             android:transitionName="cardViewAudImage"
-            android:layout_alignParentTop="true"
             tools:ignore="ContentDescription" />
 
         <TextView
