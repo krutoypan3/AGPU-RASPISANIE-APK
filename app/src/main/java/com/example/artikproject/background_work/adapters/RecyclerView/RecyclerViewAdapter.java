@@ -17,7 +17,6 @@ import com.example.artikproject.background_work.CustomBackground;
 import com.example.artikproject.background_work.theme.GetColorTextView;
 import com.example.artikproject.layout.BuildingInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
@@ -89,18 +88,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         intent.putExtra("subText", item.getSubText()); // Дополнительный текст
         intent.putExtra("imageResId", this.getDrawableResIdByName(item.getImageName())); // Id картинки
 
-        List<Pair<View, String>> pairs = new ArrayList<>();
-        pairs.add(new Pair<>(itemView.findViewById(R.id.cardViewAudImage), "cardViewAudImage")); // Картинка
-        pairs.add(new Pair<>(itemView.findViewById(R.id.cardViewAudMainText), "cardViewAudMainText")); // Основной текст
-        pairs.add(new Pair<>(itemView.findViewById(R.id.cardViewAudSubText), "cardViewAudSubText")); // Дополнительный текст
-        pairs.add(new Pair<>(itemView.findViewById(R.id.cardBackground), "cardBackground"));
-//        pairs.add(new Pair<>(itemView.findViewById(R.id.cardBackgroundDarker), "cardBackgroundDarker"));
+        Pair<View, String> pair1 = Pair.create(itemView.findViewById(R.id.cardViewAudImage), "cardViewAudImage"); // Картинка
+        Pair<View, String> pair2 = Pair.create(itemView.findViewById(R.id.cardViewAudMainText), "cardViewAudMainText"); // Основной текст
+        Pair<View, String> pair3 = Pair.create(itemView.findViewById(R.id.cardViewAudSubText), "cardViewAudSubText"); // Дополнительный текст
+        Pair<View, String> pair4 = Pair.create(itemView.findViewById(R.id.cardBackground), "cardBackground");
+        Pair<View, String> pair5 = Pair.create(itemView.findViewById(R.id.cardBackgroundDarker), "cardBackgroundDarker");
 
         // Это нужно для предотвращения мерцания при анимации
         act.getWindow().setExitTransition(null);
 
         // Настраиваем анимацию намерения
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(act, pairs.toArray(new Pair[pairs.size()]));
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(act, pair1, pair2, pair3, pair4, pair5);
         act.startActivity(intent, options.toBundle()); // Запускаем наше намерение
     }
 }

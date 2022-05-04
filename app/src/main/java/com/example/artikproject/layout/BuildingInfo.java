@@ -26,7 +26,7 @@ public class BuildingInfo extends AppCompatActivity {
         // Установка нового фона и затемнителя | Должно быть после setContentView
         RelativeLayout layout = findViewById(R.id.building_info_layout);
         layout.setBackground(CustomBackground.getBackground(getApplicationContext()));
-        findViewById(R.id.background_darker).setBackgroundColor(CustomBackground.getBackgroundDarker(getApplicationContext()));
+        findViewById(R.id.cardBackgroundDarker).setBackgroundColor(CustomBackground.getBackgroundDarker(getApplicationContext()));
 
         // Настраиваем основной текст
         String mainText = getIntent().getStringExtra("mainText"); // Получаем переданное название корпуса

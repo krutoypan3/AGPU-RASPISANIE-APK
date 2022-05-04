@@ -23,10 +23,10 @@ public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     public RecyclerViewHolder(@NonNull View itemView) {
         super(itemView);
 
-        this.image = (ImageView) itemView.findViewById(R.id.cardViewAudImage);
-        this.mainTextView = (TextView) itemView.findViewById(R.id.cardViewAudMainText);
-        this.subTextView = (TextView) itemView.findViewById(R.id.cardViewAudSubText);
-        this.cardBackgroundDarker = itemView.findViewById(R.id.cardBackgroundDarker);
+        this.image = itemView.findViewById(R.id.cardViewAudImage);
+        this.mainTextView = itemView.findViewById(R.id.cardViewAudMainText);
+        this.subTextView = itemView.findViewById(R.id.cardViewAudSubText);
         this.cardBackground = itemView.findViewById(R.id.cardBackground);
+        this.cardBackgroundDarker = itemView.findViewById(R.id.cardBackgroundDarker);
     }
 }
