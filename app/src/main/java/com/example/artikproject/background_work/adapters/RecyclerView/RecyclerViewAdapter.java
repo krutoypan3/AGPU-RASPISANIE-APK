@@ -54,7 +54,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.mainTextView.setText(image_name.getMainText());
         int textColor = GetColorTextView.getAppColor(act.getApplicationContext());
         if (textColor == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            textColor = GetColorTextView.getSystemColor(act.getApplicationContext());
+            textColor = GetColorTextView.getAppColor(act.getApplicationContext());
         holder.mainTextView.setTextColor(textColor);
         String newSubText = act.getString(R.string.Audiences) +  " : "+ image_name.getSubText();
         holder.subTextView.setText(newSubText);

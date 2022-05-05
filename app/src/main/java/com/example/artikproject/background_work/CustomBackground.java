@@ -14,7 +14,6 @@ import com.example.artikproject.background_work.datebase.MySharedPreferences;
 import com.example.artikproject.background_work.theme.Theme;
 
 import java.io.File;
-import java.util.Date;
 
 public class CustomBackground {
 
@@ -24,14 +23,15 @@ public class CustomBackground {
      * @return Drawable - изображение
      */
     public static Drawable getBackground(Context context){
+        int theme = Theme.getApplicationTheme(context);  // Получаем тему приложения
         if (MySharedPreferences.get(context, "enable_background_user", false)) { // Если включен пользовательский фон
-            if (Theme.getApplicationTheme(context) == AppCompatDelegate.MODE_NIGHT_NO)  // Получаем тему приложения
-            {
+            if (theme == AppCompatDelegate.MODE_NIGHT_NO)
                 return getBackgroundDrawable(context, "background_light"); // Если светлая, то возвращаем светлый фон
-            }
             return getBackgroundDrawable(context, "background_dark"); // Если темная, то возвращаем темный фон
         } // Если пользовательский фон отключен, то возвращаем стандартный фон
-        return AppCompatResources.getDrawable(context, R.drawable.background);
+        if (theme == AppCompatDelegate.MODE_NIGHT_NO)
+            return AppCompatResources.getDrawable(context, R.drawable.background_light);
+        return AppCompatResources.getDrawable(context, R.drawable.background_dark);
     }
 
     /**
@@ -40,12 +40,9 @@ public class CustomBackground {
      * @return Color - цвет картинки
      */
     public static int getBackgroundDarker(Context context){
-        if (MySharedPreferences.get(context, "enable_background_user", false)) { // Если включен пользовательский фон
-            if (Theme.getApplicationTheme(context) == AppCompatDelegate.MODE_NIGHT_YES) { // Получаем тему приложения в настройках
-                return getBackgroundDarkerColor(context, false); // Если темная -  затемнитель темный
-            } // Если тема светлая
-        } // Или пользовательский фон отключен, то ставим стандартный фон
-        System.out.println(new Date().getTime());
+        if (Theme.getApplicationTheme(context) == AppCompatDelegate.MODE_NIGHT_YES) { // Получаем тему приложения в настройках
+            return getBackgroundDarkerColor(context, false); // Если темная -  затемнитель темный
+        } // Если тема светлая то ставим стандартный фон
         return getBackgroundDarkerColor(context, true);
     }
 
@@ -55,7 +52,7 @@ public class CustomBackground {
         if (!file.getAbsolutePath().equals("")) { // Если путь к файлу не пустой, то возвращаем картинку
             return new BitmapDrawable(context.getResources(), BitmapFactory.decodeFile(file.getAbsolutePath()));
         } // Если файл пустой - возвращаем стандартные обои
-        return AppCompatResources.getDrawable(context, R.drawable.background);
+        return AppCompatResources.getDrawable(context, R.drawable.background_light);
     }
 
     // Микрофункция возвращающая цвет в зависимости от темы

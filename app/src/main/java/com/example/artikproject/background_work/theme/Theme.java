@@ -44,7 +44,7 @@ public class Theme {
     public static int getApplicationTheme(Context context){
          int theme = MySharedPreferences.get(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
          if (theme == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-             theme= getCurrentSystemTheme(context);
+             theme = getCurrentSystemTheme(context);
          return theme;
     }
 
