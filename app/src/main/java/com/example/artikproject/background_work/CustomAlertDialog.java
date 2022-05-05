@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.server.SendInfoToServer;
-import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
+import com.example.artikproject.background_work.main_show.buildings.ShowBuildingsOnTheMap;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import com.example.artikproject.background_work.rasp_show.Para_info;
 import com.example.artikproject.layout.MainActivity;
@@ -170,7 +170,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                         new SendInfoToServer(act.getApplicationContext(), value).start();
                         break;
                     case "map_confirm":
-                        new ListViewAud_ClickListener(Para_info.finalCorp, act);
+                        new ShowBuildingsOnTheMap(Para_info.finalCorp, act);
                         break;
                     case "delete_one_saved_group":
                         sqLiteDatabase.delete("raspisanie", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] +

@@ -9,7 +9,7 @@ import com.example.artikproject.background_work.OnSwipeTouchListener;
 
 public class ListViewDayPara_Listener {
     /**
-     * Слушатель нажатия на список групп
+     * Слушатель нажатия на список пар
      * @param listView Список с парами
      * @param act Активити
      */

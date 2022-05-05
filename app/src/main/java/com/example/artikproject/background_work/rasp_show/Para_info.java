@@ -12,7 +12,7 @@ import android.net.Uri;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomAlertDialog;
-import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
+import com.example.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import com.example.artikproject.background_work.GetCorpFromAudNumber;
 import com.example.artikproject.background_work.adapters.ListView.ListViewAdapter;
 import com.example.artikproject.background_work.adapters.ListView.ListViewItems;

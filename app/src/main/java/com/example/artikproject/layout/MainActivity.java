@@ -26,7 +26,7 @@ import com.example.artikproject.background_work.main_show.ListViewGroupListener;
 import com.example.artikproject.background_work.main_show.ShowFullGroupList;
 import com.example.artikproject.background_work.main_show.ShowFullWeekList;
 import com.example.artikproject.background_work.main_show.TodayClickListener;
-import com.example.artikproject.background_work.main_show.ToolBar.LoadBuildingsList;
+import com.example.artikproject.background_work.main_show.buildings.LoadBuildingsList;
 import com.example.artikproject.background_work.main_show.ToolBar.MainToolBar;
 import com.example.artikproject.background_work.main_show.ToolBar.ShowRaspSearch;
 import com.example.artikproject.background_work.main_show.WatchSaveGroupRasp;

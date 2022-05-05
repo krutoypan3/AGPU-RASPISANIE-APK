@@ -10,16 +10,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomBackground;
-import com.example.artikproject.background_work.settings_layout.BackgroundDarkerListener;
-import com.example.artikproject.background_work.settings_layout.FichaShow;
-import com.example.artikproject.background_work.settings_layout.ImageBackgroundPictureSetting;
-import com.example.artikproject.background_work.settings_layout.ThemeRadioButtonSetting;
-import com.example.artikproject.background_work.settings_layout.ThemeRadioGroupListener;
-import com.example.artikproject.background_work.settings_layout.UserBackgroundCheckBoxListener;
-import com.example.artikproject.background_work.settings_layout.UserBackgroundCheckBoxSetting;
-import com.example.artikproject.background_work.settings_layout.UserBackgroundSelectorListener;
-import com.example.artikproject.background_work.settings_layout.UserSeekBarListener;
-import com.example.artikproject.background_work.settings_layout.UserSeekBarSetting;
+import com.example.artikproject.background_work.settings_layout.ficha.BackgroundDarkerListener;
+import com.example.artikproject.background_work.settings_layout.ficha.FichaShow;
+import com.example.artikproject.background_work.settings_layout.user_background.ImageBackgroundPictureSetting;
+import com.example.artikproject.background_work.settings_layout.theme_radio_group.ThemeRadioButtonSetting;
+import com.example.artikproject.background_work.settings_layout.theme_radio_group.ThemeRadioGroupListener;
+import com.example.artikproject.background_work.settings_layout.user_background.UserBackgroundCheckBoxListener;
+import com.example.artikproject.background_work.settings_layout.user_background.UserBackgroundCheckBoxSetting;
+import com.example.artikproject.background_work.settings_layout.user_background.UserBackgroundSelectorListener;
+import com.example.artikproject.background_work.settings_layout.user_background.UserSeekBarListener;
+import com.example.artikproject.background_work.settings_layout.user_background.UserSeekBarSetting;
 
 
 public class Settings_layout extends AppCompatActivity {

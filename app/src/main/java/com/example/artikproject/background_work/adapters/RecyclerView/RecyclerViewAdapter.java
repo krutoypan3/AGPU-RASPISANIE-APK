@@ -66,13 +66,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         return this.datas.size();
     }
 
-    // Find Image ID corresponding to the name of the image (in the directory drawable).
-    public int getDrawableResIdByName(String resName)  {
-        String pkgName = act.getPackageName();
-        // Return 0 if not found.
-        return act.getResources().getIdentifier(resName , "drawable", pkgName);
-    }
-
     // Функция обработки нажатия на элемент списка
     private void handleRecyclerItemClick(RecyclerView recyclerView, View itemView) {
         int itemPosition = recyclerView.getChildLayoutPosition(itemView); // Получаем позицию нажатого элемента

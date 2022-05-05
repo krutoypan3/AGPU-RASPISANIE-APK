@@ -13,7 +13,7 @@ import com.example.artikproject.R;
 import com.example.artikproject.background_work.CheckAppUpdate;
 import com.example.artikproject.background_work.CustomAlertDialog;
 import com.example.artikproject.background_work.debug.Device_info;
-import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
+import com.example.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import com.example.artikproject.layout.MainActivity;
 import com.example.artikproject.layout.Settings_layout;
 import com.mikepenz.iconics.typeface.FontAwesome;

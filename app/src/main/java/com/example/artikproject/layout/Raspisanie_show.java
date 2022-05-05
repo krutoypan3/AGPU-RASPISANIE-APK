@@ -20,13 +20,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomBackground;
 import com.example.artikproject.background_work.OnSwipeTouchListener;
-import com.example.artikproject.background_work.rasp_show.CheckGroupRaspUpdate;
+import com.example.artikproject.background_work.rasp_show.RaspUpdateCheckBoxListener;
 import com.example.artikproject.background_work.rasp_show.ListViewDayPara_Listener;
 import com.example.artikproject.background_work.rasp_show.Refresh_rasp_week_or_day_starter;
 import com.example.artikproject.background_work.rasp_show.Swipe_rasp;
 import com.example.artikproject.background_work.rasp_show.Week_day_change;
 import com.example.artikproject.background_work.rasp_show.Week_show_resize;
-import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
+import com.example.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 
 import java.util.Random;
 
@@ -81,7 +81,7 @@ public class Raspisanie_show extends AppCompatActivity {
         new Refresh_rasp_week_or_day_starter(getApplicationContext()).start(); // Обновляем расписание
         CheckBox mCheckBox = findViewById(R.id.checkBox); // Уведомление об обновлении расписания
 
-        new CheckGroupRaspUpdate(mCheckBox).start();
+        new RaspUpdateCheckBoxListener(mCheckBox).start();
         // Кнопка увеличивающая размер текста в режиме недели
         week_day_change_btn_size_up.setOnClickListener(v -> new Week_show_resize().size_add());
 

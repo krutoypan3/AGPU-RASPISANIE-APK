@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.widget.TextView;
 
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.settings_layout.Ficha_achievements;
+import com.example.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import com.example.artikproject.layout.MainActivity;
 
 import java.util.Random;

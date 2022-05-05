@@ -1,5 +1,11 @@
 package com.example.artikproject.layout;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -10,7 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.CustomBackground;
-import com.example.artikproject.background_work.main_show.ListViewAud_ClickListener;
+import com.example.artikproject.background_work.OnSwipeTouchListener;
+import com.example.artikproject.background_work.main_show.buildings.ShowBuildingsOnTheMap;
+import com.example.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
+
+import java.util.Random;
 
 /**
  * Данное активити отвечает за отображение подробной информации о корпусах и аудиториях
@@ -23,6 +33,7 @@ public class BuildingInfo extends AppCompatActivity {
         findViewById(R.id.btn_building_info).setVisibility(View.INVISIBLE);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +66,36 @@ public class BuildingInfo extends AppCompatActivity {
         // Обработка кнопки перехода на карту
         int itemPosition = getIntent().getIntExtra("itemPosition", 0); // Получем переданный id позиции элемента
         findViewById(R.id.btn_building_info).setOnClickListener(v -> // И при нажатии на кнопку
-                new ListViewAud_ClickListener(itemPosition, this));  // Открываем карты
+                new ShowBuildingsOnTheMap(itemPosition, this));  // Открываем карты
+
+        // Отслеживание нажатий на иконку университета в тулбаре (фича)
+        mainTextView.setOnClickListener(v -> {
+            mainTextView.startAnimation(MainActivity.animScale);
+            int random_int = new Random().nextInt(30);
+            if (random_int == 0){
+                Ficha_achievements.put(getApplicationContext(), "ficha_building_main_text");
+                AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
+                MediaPlayer mp = MediaPlayer.create(this, R.raw.amogus);
+                mp.start();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://i.ibb.co/HFbRBrx/3.jpg"));
+                startActivity(intent);
+            }
+        });
+        imageView.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()) {
+            public void onSwipeLeft() {
+                imageView.startAnimation(MainActivity.animUehalVl);
+                int random_int = new Random().nextInt(10);
+                if (random_int == 0){
+                    Ficha_achievements.put(getApplicationContext(), "ficha_building_ico");
+                    AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
+                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
+                    MediaPlayer mp = MediaPlayer.create(getApplication(), R.raw.winx);
+                    mp.start();
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://i.ibb.co/rZvW4Mj/yao-min-65474631-orig.jpg"));
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }
