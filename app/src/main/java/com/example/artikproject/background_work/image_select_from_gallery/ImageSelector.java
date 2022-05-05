@@ -15,8 +15,10 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.artikproject.R;
 import com.example.artikproject.background_work.datebase.MySharedPreferences;
-import com.example.artikproject.background_work.image_select_from_gallery.GalleryUtil;
+import com.example.artikproject.background_work.debug.Device_info;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -82,11 +84,21 @@ public class ImageSelector extends Activity {
                     // Извлекаем изображение по полученному пути
                     Bitmap image = BitmapFactory.decodeStream(getContentResolver().openInputStream(Uri.fromFile(new File(path))));
 
+                    // Подгоняем изображение под размер экрана
+                    image = Bitmap.createScaledBitmap(image,
+                            Device_info.getDeviceWidth(getApplicationContext()),
+                            Device_info.getDeviceHeight(getApplicationContext()), false);
+
+                    // Сжимаем изображение до 30% от исходного (вес картинки / 3)
+                    ByteArrayOutputStream out = new ByteArrayOutputStream();
+                    image.compress(Bitmap.CompressFormat.JPEG, 30, out);
+                    Bitmap decoded = BitmapFactory.decodeStream(new ByteArrayInputStream(out.toByteArray()));
+                    
                     // Получаем тип картинки (светлая \ темная)
                     String type = getIntent().getStringExtra("background");
 
                     // Сохраняем изображение в памяти приложения
-                    storeImage(image, type + ".jpg");
+                    storeImage(decoded, type + ".jpg");
 
                     // Подключаемся к новосозданному файлу
                     File file = new File(getFilesDir(), type + ".jpg");

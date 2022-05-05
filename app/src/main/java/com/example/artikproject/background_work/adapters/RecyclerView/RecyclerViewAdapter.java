@@ -13,7 +13,6 @@ import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.artikproject.R;
-import com.example.artikproject.background_work.CustomBackground;
 import com.example.artikproject.background_work.theme.GetColorTextView;
 import com.example.artikproject.layout.BuildingInfo;
 
@@ -49,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         // Cet image_name in countries via position
         RecyclerViewItems image_name = this.datas.get(position);
 
-        int imageResId = this.getDrawableResIdByName(image_name.getImageName());
+        int imageResId = image_name.getImageResourceId();
         // Bind data to viewholder
         holder.image.setImageResource(imageResId);
         holder.mainTextView.setText(image_name.getMainText());
@@ -60,8 +59,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         String newSubText = act.getString(R.string.Audiences) +  " : "+ image_name.getSubText();
         holder.subTextView.setText(newSubText);
         holder.subTextView.setTextColor(textColor);
-        holder.cardBackgroundDarker.setBackgroundColor(CustomBackground.getBackgroundDarker(act.getApplicationContext()));
-        holder.cardBackground.setBackground(CustomBackground.getBackground(act.getApplicationContext()));
     }
 
     @Override
@@ -86,19 +83,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         intent.putExtra("itemPosition", itemPosition); // Позицию
         intent.putExtra("mainText", item.getMainText()); // Основной текст
         intent.putExtra("subText", item.getSubText()); // Дополнительный текст
-        intent.putExtra("imageResId", this.getDrawableResIdByName(item.getImageName())); // Id картинки
+        intent.putExtra("imageResId", item.getImageResourceId()); // Id картинки
 
         Pair<View, String> pair1 = Pair.create(itemView.findViewById(R.id.cardViewAudImage), "cardViewAudImage"); // Картинка
         Pair<View, String> pair2 = Pair.create(itemView.findViewById(R.id.cardViewAudMainText), "cardViewAudMainText"); // Основной текст
         Pair<View, String> pair3 = Pair.create(itemView.findViewById(R.id.cardViewAudSubText), "cardViewAudSubText"); // Дополнительный текст
-        Pair<View, String> pair4 = Pair.create(itemView.findViewById(R.id.cardBackground), "cardBackground");
-        Pair<View, String> pair5 = Pair.create(itemView.findViewById(R.id.cardBackgroundDarker), "cardBackgroundDarker");
 
         // Это нужно для предотвращения мерцания при анимации
         act.getWindow().setExitTransition(null);
 
         // Настраиваем анимацию намерения
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(act, pair1, pair2, pair3, pair4, pair5);
+        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(act, pair1, pair2, pair3);
         act.startActivity(intent, options.toBundle()); // Запускаем наше намерение
     }
 }

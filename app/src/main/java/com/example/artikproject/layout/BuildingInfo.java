@@ -1,6 +1,7 @@
 package com.example.artikproject.layout;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +16,12 @@ import com.example.artikproject.background_work.main_show.ListViewAud_ClickListe
  * Данное активити отвечает за отображение подробной информации о корпусах и аудиториях
  */
 public class BuildingInfo extends AppCompatActivity {
+
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        findViewById(R.id.btn_building_info).setVisibility(View.INVISIBLE);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
