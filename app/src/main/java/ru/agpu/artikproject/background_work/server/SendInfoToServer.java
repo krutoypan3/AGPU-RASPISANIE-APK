@@ -5,8 +5,6 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import ru.agpu.artikproject.background_work.debug.Device_info;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -17,6 +15,9 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+
+import ru.agpu.artikproject.background_work.debug.Device_info;
+import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 
 public class SendInfoToServer extends Thread {
     final Context context;
@@ -65,6 +66,7 @@ public class SendInfoToServer extends Thread {
             params.put("AppVersion", version);
             params.put("AppVersionCode", versionCode);
             if (feedback != null){ params.put("Feedback", feedback); }
+            params.put("Pashalka", Ficha_achievements.get(context));
 
             StringBuilder postData = new StringBuilder();
             for (Map.Entry<Object, Object> param : params.entrySet()) {
