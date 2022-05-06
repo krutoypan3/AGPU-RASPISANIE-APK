@@ -3,12 +3,10 @@ package ru.agpu.artikproject.background_work.rasp_show;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.os.Build;
 import android.view.Gravity;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import java.util.Objects;
@@ -27,7 +25,6 @@ public class Week_show {
      * Класс отвечающий за показ расписания в недельном режиме
      * @param context Контекст приложения
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public Week_show(Context context){
         try{
             Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +

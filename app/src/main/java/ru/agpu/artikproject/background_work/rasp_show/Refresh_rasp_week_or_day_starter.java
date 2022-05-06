@@ -2,12 +2,9 @@ package ru.agpu.artikproject.background_work.rasp_show;
 
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
-
-import androidx.annotation.RequiresApi;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +23,6 @@ public class Refresh_rasp_week_or_day_starter extends Thread {
         this.context = context;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void run() {
         while (Raspisanie_show.refresh_on_off){

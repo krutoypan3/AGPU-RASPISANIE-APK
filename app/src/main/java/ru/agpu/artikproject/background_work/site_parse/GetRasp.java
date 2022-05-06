@@ -4,11 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-
-import androidx.annotation.RequiresApi;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -69,7 +66,6 @@ public class GetRasp extends Thread {
         this.type = type;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void run() {
         //if (type.equals("CheckRaspChanges")){Raspisanie_show.refresh_on_off = false;}

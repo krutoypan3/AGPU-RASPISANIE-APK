@@ -1,9 +1,6 @@
 package ru.agpu.artikproject.background_work.server;
 
 import android.content.Context;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -39,7 +36,6 @@ public class SendInfoToServer extends Thread {
         this.feedback = feedback;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void run() {
         try {
