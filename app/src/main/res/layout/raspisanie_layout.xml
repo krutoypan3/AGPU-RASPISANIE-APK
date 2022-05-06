@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:theme="@style/Theme.MyApp.Main"
     android:background="@drawable/background_light"
-    tools:context=".layout.Raspisanie_show">
+    tools:context="ru.agpu.artikproject.layout.Raspisanie_show">
 
     <RelativeLayout
         android:id="@+id/background_darker"

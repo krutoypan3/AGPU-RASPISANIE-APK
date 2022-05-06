@@ -1,5 +1,5 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:configure="com.example.artikproject.background_work.widget.WidgetConfig"
+    android:configure="ru.agpu.artikproject.background_work.widget.WidgetConfig"
     android:minHeight="110dp"
     android:minWidth="180dp"
     android:description="@string/Widget_system"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main_activity_layout"
     android:background="@drawable/background_light"
-    tools:context=".layout.MainActivity">
+    tools:context="ru.agpu.artikproject.layout.MainActivity">
     <RelativeLayout
         android:id="@+id/background_darker"
         android:layout_width="match_parent"

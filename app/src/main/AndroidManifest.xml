@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.artikproject">
+    package="ru.agpu.artikproject">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -22,18 +22,18 @@
         android:fullBackupContent="@xml/backup_descriptor"
         android:dataExtractionRules="@xml/data_extraction_rules">
         <service
-            android:name=".background_work.service.PlayService"
+            android:name="ru.agpu.artikproject.background_work.service.PlayService"
             android:enabled="true"
             android:exported="false" />
 
-        <receiver android:name=".background_work.service.BootBroadcast"
+        <receiver android:name="ru.agpu.artikproject.background_work.service.BootBroadcast"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".background_work.widget.WidgetProvider"
+        <receiver android:name="ru.agpu.artikproject.background_work.widget.providers.WidgetProvider"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -41,7 +41,7 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info" />
         </receiver>
-        <receiver android:name=".background_work.widget.WidgetProviderDark"
+        <receiver android:name="ru.agpu.artikproject.background_work.widget.providers.WidgetProviderDark"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -49,7 +49,7 @@
             <meta-data android:name="android.appwidget.provider"
                 android:resource="@xml/widget_info_dark" />
         </receiver>
-        <receiver android:name=".background_work.widget.WidgetProviderLight"
+        <receiver android:name="ru.agpu.artikproject.background_work.widget.providers.WidgetProviderLight"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -59,7 +59,7 @@
         </receiver>
 
         <!-- Активити виджета -->
-        <activity android:name=".background_work.widget.WidgetConfig"
+        <activity android:name="ru.agpu.artikproject.background_work.widget.WidgetConfig"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
@@ -68,11 +68,11 @@
 
         <!-- Служба виджета -->
         <service
-            android:name=".background_work.widget.WidgetService"
+            android:name="ru.agpu.artikproject.background_work.widget.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS">
         </service>
 
-        <activity android:name=".layout.StartActivity"
+        <activity android:name="ru.agpu.artikproject.layout.StartActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
@@ -82,12 +82,12 @@
         </activity>
 
         <!-- Основное активити -->
-        <activity android:name=".layout.MainActivity"/>
-        <activity android:name=".layout.Raspisanie_show" />
-        <activity android:name=".layout.Settings_layout" />
-        <activity android:name=".background_work.image_select_from_gallery.ImageSelector"/>
-        <activity android:name=".background_work.image_select_from_gallery.GalleryUtil"/>
-        <activity android:name=".layout.BuildingInfo"/>
+        <activity android:name="ru.agpu.artikproject.layout.MainActivity"/>
+        <activity android:name="ru.agpu.artikproject.layout.Raspisanie_show" />
+        <activity android:name="ru.agpu.artikproject.layout.Settings_layout" />
+        <activity android:name="ru.agpu.artikproject.background_work.image_select_from_gallery.ImageSelector"/>
+        <activity android:name="ru.agpu.artikproject.background_work.image_select_from_gallery.GalleryUtil"/>
+        <activity android:name="ru.agpu.artikproject.layout.BuildingInfo"/>
     </application>
 
 </manifest>
