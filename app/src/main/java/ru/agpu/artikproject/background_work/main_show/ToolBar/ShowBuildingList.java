@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.layout.MainActivity;
 
 public class ShowBuildingList{
     /**
@@ -26,8 +25,6 @@ public class ShowBuildingList{
         TextView today = act.findViewById(R.id.main_activity_text);
         TextView current_week = act.findViewById(R.id.subtitle);
         EditText rasp_search_edit = act.findViewById(R.id.rasp_search_edit);
-
-        MainActivity.drawerResult.setSelection(1);
 
         listview.setVisibility(View.INVISIBLE);
         result.setVisibility(View.INVISIBLE);

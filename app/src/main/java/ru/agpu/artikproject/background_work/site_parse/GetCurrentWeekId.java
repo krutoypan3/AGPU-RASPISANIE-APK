@@ -7,12 +7,14 @@ import android.widget.TextView;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import java.util.ArrayList;
+
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.GetCurrentWeekId_Local;
 import ru.agpu.artikproject.background_work.adapters.ListView.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.main_show.GetWeekFromId;
-import ru.agpu.artikproject.background_work.main_show.ShowFullWeekList;
+import ru.agpu.artikproject.background_work.main_show.ToolBar.LoadWeeksList;
 import ru.agpu.artikproject.layout.MainActivity;
 
 /**
@@ -21,8 +23,9 @@ import ru.agpu.artikproject.layout.MainActivity;
  */
 public class GetCurrentWeekId extends Thread {
     final Activity act;
+    static public final ArrayList<ListViewItems> weeks_s_po = new ArrayList<>();
     /**
-     * Получаем тукущую неделю
+     * Получаем тукущую неделю и общий список недель
      * @param act Активити
      */
     public GetCurrentWeekId(Activity act){
@@ -59,7 +62,7 @@ public class GetCurrentWeekId extends Thread {
                 else{ // Если неделя есть в базе данных, то заполняем списки информацией из базы данных
                     Cursor f = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM weeks_list ORDER BY week_id", null);
                     while (f.moveToNext()){
-                        ShowFullWeekList.weeks_s_po.add(new ListViewItems(f.getString(1) + " " + f.getString(2)));
+                        weeks_s_po.add(new ListViewItems(f.getString(1) + " " + f.getString(2)));
                         GetFullWeekList_Online.weeks_id.add(f.getString(0));
                     }
                 }
@@ -75,6 +78,7 @@ public class GetCurrentWeekId extends Thread {
         finally {
             try{
                 new GetWeekFromId(act); // Обновляем текущую неделю на главной странице
+                new LoadWeeksList().Load(); // Загрузка данных о группах в адаптер
             }
             catch (Exception e){
                 e.printStackTrace();

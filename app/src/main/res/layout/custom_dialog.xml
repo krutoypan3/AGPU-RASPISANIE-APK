@@ -1,79 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="400dp"
+<ScrollView android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollViewCustom"
+    app:layout_constraintTop_toBottomOf="@id/custom_dialog_list_view"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/constraintScroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/custom_dialog_main_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="10dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:textSize="20sp"
         android:textColor="?android:attr/textColorPrimary"/>
     <ListView
         android:id="@+id/custom_dialog_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:dividerHeight="1dp"
         android:divider="@color/alert_dialog_divider_color"
         android:visibility="invisible">
     </ListView>
-    <TextView
-        android:id="@+id/custom_dialog_body_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textSize="18sp"
-        android:textColor="?android:attr/textColorPrimary"/>
 
-    <EditText
-        android:theme="@style/Theme.MyApp.Main"
-        android:id="@+id/custom_dialog_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:textColorHint="?android:textColorSecondary"
-        android:inputType="textPersonName"
-        android:textAlignment="center"
-        android:hint="@string/feedback"
-        android:importantForAutofill="no" />
 
-    <ImageView
-        android:id="@+id/para_info_photo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="invisible"
-        android:src="@drawable/ficha_god" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="15dp"
-        android:orientation="horizontal" >
-
-        <Button
-            android:id="@+id/btn_alert_dialog_yes"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/custom_dialog_body_text"
+            android:layout_below="@id/custom_dialog_list_view"
+            android:layout_width="match_parent"
+            android:padding="10dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/small_button"
-            android:layout_margin="5dp"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textStyle="bold" />
+            android:textSize="18sp"
+            android:textColor="?android:attr/textColorPrimary"/>
 
-        <Button
-            android:id="@+id/btn_alert_dialog_no"
-            android:layout_width="wrap_content"
+        <EditText
+            android:theme="@style/Theme.MyApp.Main"
+            android:id="@+id/custom_dialog_edit_text"
+            android:layout_below="@id/custom_dialog_body_text"
+            android:padding="10dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:background="@drawable/small_button"
-            android:layout_margin="5dp"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:visibility="invisible"
+            android:textColorHint="?android:textColorSecondary"
+            android:inputType="textPersonName"
 
-</LinearLayout>
+            android:textAlignment="center"
+            android:hint="@string/feedback"
+            android:importantForAutofill="no" />
+
+        <ImageView
+            android:id="@+id/para_info_photo"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:visibility="invisible"
+
+            android:layout_below="@id/custom_dialog_edit_text"
+
+            android:src="@drawable/ficha_god" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/para_info_photo"
+
+
+            android:layout_margin="15dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btn_alert_dialog_yes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/small_button"
+                android:layout_margin="5dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btn_alert_dialog_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/small_button"
+                android:layout_margin="5dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textStyle="bold" />
+        </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>

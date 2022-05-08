@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.agpu.artikproject.background_work.adapters.ListView.ListViewItems;
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class GetFullWeekList_Online extends Thread{
@@ -50,6 +51,7 @@ public class GetFullWeekList_Online extends Thread{
                         String id = cards[i].split("WeekId=")[1].split("\"")[0]; // Id недели
                         weeks_id.add(id);
                         weeks_s_po.add(spo);
+                        GetCurrentWeekId.weeks_s_po.add(new ListViewItems(spo));
                         ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
                         rowValues.put("week_id", id);
                         rowValues.put("week_s", s);

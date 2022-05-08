@@ -16,13 +16,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.background_work.main_show.buildings.ShowBuildingsOnTheMap;
 import ru.agpu.artikproject.background_work.rasp_show.Para_info;
 import ru.agpu.artikproject.background_work.server.SendInfoToServer;
 import ru.agpu.artikproject.layout.MainActivity;
-import ru.agpu.artikproject.R;
 
 public class CustomAlertDialog extends Dialog implements android.view.View.OnClickListener {
 

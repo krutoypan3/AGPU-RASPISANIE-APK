@@ -14,6 +14,7 @@ import ru.agpu.artikproject.background_work.adapters.RecyclerView.RecyclerViewIt
 
 public class LoadBuildingsList extends Thread{
     private final Activity act;
+    public static List<RecyclerViewItems> buildings_list;
 
     public LoadBuildingsList(Activity act){
         this.act = act;
@@ -34,8 +35,9 @@ public class LoadBuildingsList extends Thread{
         RecyclerView recyclerView = act.findViewById(R.id.recyclerView);
         // RecyclerView scroll vertical
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(act, LinearLayoutManager.VERTICAL, false);
+        buildings_list = list;
         act.runOnUiThread(() ->{
-            recyclerView.setAdapter(new RecyclerViewAdapter(act, list));
+            recyclerView.setAdapter(new RecyclerViewAdapter(act, buildings_list, RecyclerViewAdapter.IS_BUILDINGS_ADAPTER));
             recyclerView.setLayoutManager(linearLayoutManager);
         });
     }

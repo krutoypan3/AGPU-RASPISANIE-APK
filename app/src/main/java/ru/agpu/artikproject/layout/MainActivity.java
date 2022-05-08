@@ -28,8 +28,6 @@ import ru.agpu.artikproject.background_work.adapters.ListView.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
-import ru.agpu.artikproject.background_work.main_show.ShowFullGroupList;
-import ru.agpu.artikproject.background_work.main_show.ShowFullWeekList;
 import ru.agpu.artikproject.background_work.main_show.TodayClickListener;
 import ru.agpu.artikproject.background_work.main_show.ToolBar.MainToolBar;
 import ru.agpu.artikproject.background_work.main_show.ToolBar.ShowRaspSearch;
@@ -124,15 +122,7 @@ public class MainActivity extends AppCompatActivity {
         new GetFullGroupList_Online().start(); // Получение полного списка групп и закидывание их в адаптер
         new TodayClickListener(this, today); // Прослушка нажатий на текущую дату
         new LoadBuildingsList(this).start(); // Загрузка данных об строениях в адаптер
-
         week_day = GetCurrentWeekDay.get();
-
-        // Отслеживание нажатий на кнопку списка групп
-        list_groups.setOnClickListener((v) ->
-                new ShowFullGroupList(MainActivity.this, v).start());
-        // Отслеживание нажатий на кнопку списка недель
-        list_weeks.setOnClickListener((v) ->
-                new ShowFullWeekList(MainActivity.this, v).start());
 
         // Отслеживание нажатий и зажатий на список групп и аудиторий
         new ListViewGroupListener(MainActivity.this, listview);

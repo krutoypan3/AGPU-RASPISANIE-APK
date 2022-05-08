@@ -12,9 +12,9 @@ import ru.agpu.artikproject.R;
 
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
-    ImageView image;
-    TextView mainTextView;
-    TextView subTextView;
+    public ImageView image;
+    public TextView mainTextView;
+    public TextView subTextView;
 
     // @itemView: recyclerview_item_layout.xml
     public RecyclerViewHolder(@NonNull View itemView) {

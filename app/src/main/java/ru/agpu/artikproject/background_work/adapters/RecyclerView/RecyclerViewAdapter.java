@@ -1,33 +1,42 @@
 package ru.agpu.artikproject.background_work.adapters.RecyclerView;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.main_show.FacultiesItemClick;
+import ru.agpu.artikproject.background_work.main_show.GroupsItemClick;
+import ru.agpu.artikproject.background_work.main_show.WeeksItemClick;
+import ru.agpu.artikproject.background_work.main_show.buildings.BuildingsItemClick;
 import ru.agpu.artikproject.background_work.theme.GetColorTextView;
-import ru.agpu.artikproject.layout.BuildingInfo;
+import ru.agpu.artikproject.layout.MainActivity;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
 
     private final List<RecyclerViewItems> datas;
     private final Activity act;
     private final LayoutInflater mLayoutInflater;
+    private final int adapter_is;
+    public static final int IS_BUILDINGS_ADAPTER = 0;
+    public static final int IS_FACULTIES_ADAPTER = 1;
+    public static final int IS_FACULTIES_GROUPS_ADAPTER = 2;
+    public static final int IS_WEEKS_ADAPTER = 3;
+    public static int selected_faculties_position;
+    public static int selected_faculties_logos;
 
-    public RecyclerViewAdapter(Activity act, List<RecyclerViewItems> datas ) {
+    public RecyclerViewAdapter(Activity act, List<RecyclerViewItems> datas, int adapter_is) {
         this.act = act;
         this.datas = datas;
         this.mLayoutInflater = LayoutInflater.from(act.getApplicationContext());
+        this.adapter_is = adapter_is;
     }
 
     @NonNull
@@ -37,7 +46,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         View recyclerViewItem = mLayoutInflater.inflate(R.layout.recyclerview_item_layout, parent, false);
 
         // Слушатель нажатий на элемент списка
-        recyclerViewItem.setOnClickListener(v -> handleRecyclerItemClick( (RecyclerView)parent, v));
+        recyclerViewItem.setOnClickListener(v -> {
+            switch (adapter_is){
+                case IS_BUILDINGS_ADAPTER:
+                    new BuildingsItemClick((RecyclerView)parent, v, datas, act);
+                    break;
+                case IS_FACULTIES_ADAPTER:
+                    new FacultiesItemClick((RecyclerView)parent, v, datas, act);
+                    parent.startAnimation(MainActivity.animUehalVl);
+                    break;
+                case IS_FACULTIES_GROUPS_ADAPTER:
+                    new GroupsItemClick((RecyclerView)parent, v, act);
+                    parent.startAnimation(MainActivity.animUehalVl);
+                    break;
+                case IS_WEEKS_ADAPTER:
+                    new WeeksItemClick((RecyclerView)parent, v, act);
+                    parent.startAnimation(MainActivity.animUehalVl);
+                    break;
+            }
+        });
 
         return new RecyclerViewHolder(recyclerViewItem);
     }
@@ -64,29 +91,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public int getItemCount() {
         return this.datas.size();
-    }
-
-    // Функция обработки нажатия на элемент списка
-    private void handleRecyclerItemClick(RecyclerView recyclerView, View itemView) {
-        int itemPosition = recyclerView.getChildLayoutPosition(itemView); // Получаем позицию нажатого элемента
-        RecyclerViewItems item  = this.datas.get(itemPosition); // Получаем сам нажатый элемент
-
-        // Создаем намерение и передаем необходимые параметры
-        Intent intent = new Intent(act, BuildingInfo.class);
-        intent.putExtra("itemPosition", itemPosition); // Позицию
-        intent.putExtra("mainText", item.getMainText()); // Основной текст
-        intent.putExtra("subText", item.getSubText()); // Дополнительный текст
-        intent.putExtra("imageResId", item.getImageResourceId()); // Id картинки
-
-        Pair<View, String> pair1 = Pair.create(itemView.findViewById(R.id.cardViewAudImage), "cardViewAudImage"); // Картинка
-        Pair<View, String> pair2 = Pair.create(itemView.findViewById(R.id.cardViewAudMainText), "cardViewAudMainText"); // Основной текст
-        Pair<View, String> pair3 = Pair.create(itemView.findViewById(R.id.cardViewAudSubText), "cardViewAudSubText"); // Дополнительный текст
-
-        // Это нужно для предотвращения мерцания при анимации
-        act.getWindow().setExitTransition(null);
-
-        // Настраиваем анимацию намерения
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(act, pair1, pair2, pair3);
-        act.startActivity(intent, options.toBundle()); // Запускаем наше намерение
     }
 }

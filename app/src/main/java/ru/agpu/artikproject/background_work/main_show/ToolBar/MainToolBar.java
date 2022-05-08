@@ -9,6 +9,8 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.widget.ImageView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -22,7 +24,10 @@ import java.util.Random;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CustomAlertDialog;
+import ru.agpu.artikproject.background_work.adapters.RecyclerView.RecyclerViewAdapter;
 import ru.agpu.artikproject.background_work.debug.Device_info;
+import ru.agpu.artikproject.background_work.main_show.ToolBar.Faculties.LoadFacultiesList;
+import ru.agpu.artikproject.background_work.main_show.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Settings_layout;
@@ -36,6 +41,7 @@ public class MainToolBar {
      */
     public MainToolBar(Activity act) throws PackageManager.NameNotFoundException {
         this.act = act;
+        RecyclerView recyclerView = act.findViewById(R.id.recyclerView);
         Context context = act.getApplicationContext();
         MainActivity.drawerResult = new Drawer()
             .withActivity(act)  // В каком активити создать тулбар
@@ -45,6 +51,9 @@ public class MainToolBar {
             .addDrawerItems(  // Содержимое тулбара
                     new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
                     new PrimaryDrawerItem().withName(R.string.drawer_item_location).withIcon(FontAwesome.Icon.faw_location_arrow).withIdentifier(2),
+                    new DividerDrawerItem(),
+                    new PrimaryDrawerItem().withName(R.string.groups_list).withIcon(FontAwesome.Icon.faw_user_plus).withIdentifier(9),
+                    new PrimaryDrawerItem().withName(R.string.weeks_list).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(10),
                     new SectionDrawerItem().withName(R.string.drawer_item_settings),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(3),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_delete).withIcon(FontAwesome.Icon.faw_remove).withIdentifier(5),
@@ -64,6 +73,7 @@ public class MainToolBar {
                             break;
                         case (2):
                             new ShowBuildingList(act);
+                            recyclerView.setAdapter(new RecyclerViewAdapter(act, LoadBuildingsList.buildings_list, RecyclerViewAdapter.IS_BUILDINGS_ADAPTER));
                             break;
                         case (3): // Кнопка 'Настройки'
                             MainActivity.drawerResult.setSelection(0);
@@ -101,6 +111,14 @@ public class MainToolBar {
                             cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
                             cdd.show();
                             MainActivity.drawerResult.setSelection(0);
+                            break;
+                        case (9):
+                            new ShowBuildingList(act);
+                            recyclerView.setAdapter(new RecyclerViewAdapter(act, LoadFacultiesList.FACULTIES_LIST, RecyclerViewAdapter.IS_FACULTIES_ADAPTER));
+                            break;
+                        case (10):
+                            new ShowBuildingList(act);
+                            recyclerView.setAdapter(new RecyclerViewAdapter(act, LoadWeeksList.WEEKS_LIST, RecyclerViewAdapter.IS_WEEKS_ADAPTER));
                             break;
                     }
                 }
