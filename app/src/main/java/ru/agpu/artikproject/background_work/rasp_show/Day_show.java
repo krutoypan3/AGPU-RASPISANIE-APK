@@ -6,8 +6,8 @@ import android.database.Cursor;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
-import ru.agpu.artikproject.background_work.adapters.ListView.ListViewAdapter;
-import ru.agpu.artikproject.background_work.adapters.ListView.ListViewItems;
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.layout.Raspisanie_show;
 
 import java.util.ArrayList;

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,15 +23,15 @@ import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CustomBackground;
 import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
-import ru.agpu.artikproject.background_work.adapters.ListView.ListViewItems;
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.TodayClickListener;
-import ru.agpu.artikproject.background_work.main_show.ToolBar.MainToolBar;
-import ru.agpu.artikproject.background_work.main_show.ToolBar.ShowRaspSearch;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.MainToolBar;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.ShowToolBarRecyclerView;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
-import ru.agpu.artikproject.background_work.main_show.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.server.SendInfoToServer;
 import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
@@ -58,8 +57,6 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animRotate_ok;
     public static Drawer.Result drawerResult = null;
     public static Toolbar toolbar = null;
-    public Button list_groups = null;
-    public Button list_weeks = null;
     public static SQLiteDatabase sqLiteDatabase;
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
@@ -75,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             drawerResult.closeDrawer();
         }
         else{
-            new ShowRaspSearch(this);
+            new ShowToolBarRecyclerView(this, false);
             new WatchSaveGroupRasp(this);
         }
     }
@@ -106,8 +103,6 @@ public class MainActivity extends AppCompatActivity {
         rasp_search_edit = findViewById(R.id.rasp_search_edit);
         listview = findViewById(R.id.listview);
         today = findViewById(R.id.main_activity_text);
-        list_groups = findViewById(R.id.list_groups);
-        list_weeks = findViewById(R.id.list_weeks);
 
         // Инициализируем тулбар
         toolbar = findViewById(R.id.toolbar);

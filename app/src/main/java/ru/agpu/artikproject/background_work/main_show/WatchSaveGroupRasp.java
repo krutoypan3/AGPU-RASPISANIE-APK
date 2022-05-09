@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.adapters.ListView.ListViewAdapter;
-import ru.agpu.artikproject.background_work.adapters.ListView.ListViewItems;
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.layout.MainActivity;
 
@@ -21,7 +21,6 @@ public class WatchSaveGroupRasp {
     public ArrayList<ListViewItems> group_list = new ArrayList<>();
     public List<String> group_list_type = new ArrayList<>();
     public List<String> group_list_id = new ArrayList<>();
-
     /**
      * Обновляет список ранее открываемых групп
      * @param context Контекст главного активити

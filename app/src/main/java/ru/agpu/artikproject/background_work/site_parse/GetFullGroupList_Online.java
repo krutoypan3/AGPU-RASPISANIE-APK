@@ -10,8 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.agpu.artikproject.background_work.adapters.ListView.ListViewItems;
-import ru.agpu.artikproject.background_work.main_show.ToolBar.Faculties.LoadFacultiesList;
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.LoadFacultiesList;
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class GetFullGroupList_Online extends Thread {

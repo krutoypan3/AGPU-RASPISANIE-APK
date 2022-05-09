@@ -11,10 +11,10 @@ import java.util.ArrayList;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.GetCurrentWeekId_Local;
-import ru.agpu.artikproject.background_work.adapters.ListView.ListViewItems;
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.main_show.GetWeekFromId;
-import ru.agpu.artikproject.background_work.main_show.ToolBar.LoadWeeksList;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.weeks.LoadWeeksList;
 import ru.agpu.artikproject.layout.MainActivity;
 
 /**

@@ -15,6 +15,11 @@ import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievem
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class TodayClickListener {
+    /**
+     * Фича отвечающая за прослушку нажатий на текущую дату
+     * @param act Активити
+     * @param today TextView
+     */
     public TodayClickListener(Activity act, TextView today){
         today.setOnClickListener(v -> {
             today.startAnimation(MainActivity.animScale);

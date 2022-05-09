@@ -23,8 +23,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.adapters.ListView.ListViewAdapter;
-import ru.agpu.artikproject.background_work.adapters.ListView.ListViewItems;
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.layout.MainActivity;
 
 

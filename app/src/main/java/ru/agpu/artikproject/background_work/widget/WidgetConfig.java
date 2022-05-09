@@ -7,7 +7,7 @@ import android.os.Bundle;
 
 import android.widget.ListView;
 
-import ru.agpu.artikproject.background_work.adapters.ListView.ListViewAdapter;
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.R;
 

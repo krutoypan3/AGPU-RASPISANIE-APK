@@ -19,7 +19,7 @@ import android.widget.Toast;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
-import ru.agpu.artikproject.background_work.main_show.buildings.ShowBuildingsOnTheMap;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap;
 import ru.agpu.artikproject.background_work.rasp_show.Para_info;
 import ru.agpu.artikproject.background_work.server.SendInfoToServer;
 import ru.agpu.artikproject.layout.MainActivity;

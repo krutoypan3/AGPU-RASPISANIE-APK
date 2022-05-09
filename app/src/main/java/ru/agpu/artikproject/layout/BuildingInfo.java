@@ -19,7 +19,7 @@ import java.util.Random;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CustomBackground;
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener;
-import ru.agpu.artikproject.background_work.main_show.buildings.ShowBuildingsOnTheMap;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 
 /**
@@ -52,7 +52,7 @@ public class BuildingInfo extends AppCompatActivity {
         mainTextView.setText(mainText); // Устанавливаем наш mainText
 
         // Настраиваем дополнительный текст
-        String subText = getString(R.string.Audiences) + " : " + getIntent().getStringExtra("subText"); // Получаем переданный список аудиторий
+        String subText = getIntent().getStringExtra("subText"); // Получаем переданный список аудиторий
         TextView subTextView = findViewById(R.id.cardViewAudSubText_second); // Находим TextEdit на слое
         subTextView.setText(subText); // Устанавливаем наш subText
 

@@ -19,8 +19,8 @@
         <ImageView
             android:id="@+id/cardViewAudImage"
             android:transitionName="cardViewAudImage"
-            android:layout_width="160sp"
-            android:layout_height="120sp"
+            android:layout_width="160dp"
+            android:layout_height="120dp"
             android:padding="6sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
