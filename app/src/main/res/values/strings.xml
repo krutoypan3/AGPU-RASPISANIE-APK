@@ -21,6 +21,7 @@
     <string name="adress_foc">Корпус по ул. П. Осипенко, 83 (ФОК)</string>
     <string name="adress_tehfak">Корпус по ул. Комсомольская, 93 (ФТЭиД \\ ТЕХФАК)</string>
     <string name="adress_obshaga">Корпус по ул. К. Маркса, 49 (Общежитие 1)</string>
+    <string name="adress_istfak">Корпус по ул. Володарского 120б (ИСТФАК)</string>
     <string name="delete_all_save">Удалить все сохраненные расписания?!</string>
     <string name="delete_confirm">Подтвердите удаление!</string>
     <string name="Cancel">Отмена</string>

@@ -23,7 +23,7 @@ public class FacultiesItemClick {
         int itemPosition = recyclerView.getChildLayoutPosition(itemView); // Получаем позицию нажатого элемента
         RecyclerViewItems item  = datas.get(itemPosition); // Получаем сам нажатый элемент
         RecyclerViewAdapter.selected_faculties_position = itemPosition;
-        RecyclerViewAdapter.selected_faculties_logos = item.getImageResourceId();
+        RecyclerViewAdapter.selected_faculties_logos = item.getImageResourceUrl();
         recyclerView.setAdapter(new RecyclerViewAdapter(act, new LoadFacultiesGroupsList().get(itemPosition), RecyclerViewAdapter.IS_FACULTIES_GROUPS_ADAPTER));
     }
 }

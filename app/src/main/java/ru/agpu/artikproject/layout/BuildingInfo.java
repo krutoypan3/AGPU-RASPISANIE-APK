@@ -3,6 +3,10 @@ package ru.agpu.artikproject.layout;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -13,6 +17,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 
 import java.util.Random;
 
@@ -31,6 +37,8 @@ public class BuildingInfo extends AppCompatActivity {
     public void onBackPressed(){
         super.onBackPressed();
         findViewById(R.id.btn_building_info).setVisibility(View.INVISIBLE);
+        findViewById(R.id.building_info_layout).setVisibility(View.INVISIBLE);
+        findViewById(R.id.cardBackgroundDarker).setVisibility(View.INVISIBLE);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -57,10 +65,14 @@ public class BuildingInfo extends AppCompatActivity {
         subTextView.setText(subText); // Устанавливаем наш subText
 
         // Настраиваем картинку
-        int imageResId = getIntent().getIntExtra("imageResId", R.drawable.agpu); // Получаем переданный id изображения
+        Bundle extras = getIntent().getExtras();
+        byte[] b = extras.getByteArray("picture");
+        Bitmap bmp = BitmapFactory.decodeByteArray(b, 0, b.length);
+        Drawable d = new BitmapDrawable(getResources(), bmp);
+
         ImageView imageView = findViewById(R.id.cardViewAudImage_second); // Находим нашу вьюшку (ImageView) на слое
 
-        imageView.setImageResource(imageResId);
+        Glide.with(getApplicationContext()).load(getIntent().getStringExtra("picture_url")).placeholder(d).into(imageView);
 
 
         // Обработка кнопки перехода на карту

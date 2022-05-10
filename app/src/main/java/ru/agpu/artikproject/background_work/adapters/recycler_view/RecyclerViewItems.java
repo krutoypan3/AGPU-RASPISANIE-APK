@@ -7,10 +7,10 @@ public class RecyclerViewItems {
     private String mainText;
 
     // Image name (Without extension)
-    private final int imageResourceId;
+    private final String imageResourceId;
     private String subText;
 
-    public RecyclerViewItems(String subText, int imageResourceId, String subText2) {
+    public RecyclerViewItems(String subText, String imageResourceId, String subText2) {
         this.mainText = subText;
         this.imageResourceId = imageResourceId;
         this.subText = subText2;
@@ -32,7 +32,7 @@ public class RecyclerViewItems {
         this.mainText = mainText;
     }
 
-    public int getImageResourceId() {
+    public String getImageResourceUrl() {
         return imageResourceId;
     }
 

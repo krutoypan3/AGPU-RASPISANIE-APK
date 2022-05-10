@@ -2,12 +2,16 @@ package ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_li
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
+import android.widget.ImageView;
 
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import ru.agpu.artikproject.R;
@@ -31,9 +35,17 @@ public class BuildingsItemClick {
         intent.putExtra("itemPosition", itemPosition); // Позицию
         intent.putExtra("mainText", item.getMainText()); // Основной текст
         intent.putExtra("subText", item.getSubText()); // Дополнительный текст
-        intent.putExtra("imageResId", item.getImageResourceId()); // Id картинки
+        ImageView imageView = itemView.findViewById(R.id.cardViewAudImage); // Картинка
+        BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] b = baos.toByteArray();
 
-        Pair<View, String> pair1 = Pair.create(itemView.findViewById(R.id.cardViewAudImage), "cardViewAudImage"); // Картинка
+        intent.putExtra("picture", b);
+        intent.putExtra("picture_url", item.getImageResourceUrl());
+
+        Pair<View, String> pair1 = Pair.create(imageView, "cardViewAudImage"); // Картинка
         Pair<View, String> pair2 = Pair.create(itemView.findViewById(R.id.cardViewAudMainText), "cardViewAudMainText"); // Основной текст
         Pair<View, String> pair3 = Pair.create(itemView.findViewById(R.id.cardViewAudSubText), "cardViewAudSubText"); // Дополнительный текст
 

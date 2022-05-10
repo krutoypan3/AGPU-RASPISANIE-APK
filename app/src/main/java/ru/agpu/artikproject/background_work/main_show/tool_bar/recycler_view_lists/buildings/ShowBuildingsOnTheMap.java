@@ -32,6 +32,9 @@ public class ShowBuildingsOnTheMap {
             case (6):
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/4fBCRhZPJbc7z4Ng6"));
                 break;
+            case (7):
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/8SYEY7YwjHLHmtt9A"));
+                break;
             default:
                 intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://goo.gl/maps/8Lv4W8uds3cFAeW36")); // 0 нулевое
                 break;

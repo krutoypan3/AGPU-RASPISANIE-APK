@@ -9,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import ru.agpu.artikproject.R;
@@ -30,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public static final int IS_FACULTIES_GROUPS_ADAPTER = 2;
     public static final int IS_WEEKS_ADAPTER = 3;
     public static int selected_faculties_position;
-    public static int selected_faculties_logos;
+    public static String selected_faculties_logos;
 
     public RecyclerViewAdapter(Activity act, List<RecyclerViewItems> datas, int adapter_is) {
         this.act = act;
@@ -75,9 +77,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         // Cet image_name in countries via position
         RecyclerViewItems image_name = this.datas.get(position);
 
-        int imageResId = image_name.getImageResourceId();
+        String imageResUrl = image_name.getImageResourceUrl();
         // Bind data to viewholder
-        holder.image.setImageResource(imageResId);
+        Glide.with(act.getApplicationContext())
+                .load(imageResUrl)
+                .placeholder(R.drawable.agpu_ico)
+                .into(holder.image);
         holder.mainTextView.setText(image_name.getMainText());
         int textColor = GetColorTextView.getAppColor(act.getApplicationContext());
         if (textColor == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)

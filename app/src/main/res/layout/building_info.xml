@@ -1,65 +1,70 @@
 <RelativeLayout
     android:id="@+id/building_info_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@drawable/background_corners"
-    android:transitionName="cardBackground">
-
+    android:transitionName="cardBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cardBackgroundDarker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:transitionName="cardBackgroundDarker">
-
-        <ImageView
-            android:id="@+id/cardViewAudImage_second"
-            android:padding="6sp"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:transitionName="cardViewAudImage"
-            android:src="@drawable/agpu_ico"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            android:layout_height="match_parent">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/cardViewAudImage_second"
+                    android:adjustViewBounds="true"
+                    android:padding="6sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:transitionName="cardViewAudImage"
+                    android:src="@drawable/agpu_ico"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/cardViewAudMainText_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardViewAudImage_second"
-            android:text="@string/data_is_being_loaded"
-            android:textSize="18sp"
-            android:transitionName="cardViewAudMainText" />
+                <TextView
+                    android:id="@+id/cardViewAudMainText_second"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardViewAudImage_second"
+                    android:text="@string/data_is_being_loaded"
+                    android:textSize="18sp"
+                    android:transitionName="cardViewAudMainText" />
 
-        <TextView
-            android:id="@+id/cardViewAudSubText_second"
-            android:transitionName="cardViewAudSubText"
-            android:layout_width="wrap_content"
-            android:textSize="14sp"
-            android:padding="10sp"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:text="@string/data_is_being_loaded"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardViewAudMainText_second"/>
+                <TextView
+                    android:id="@+id/cardViewAudSubText_second"
+                    android:transitionName="cardViewAudSubText"
+                    android:layout_width="wrap_content"
+                    android:textSize="14sp"
+                    android:padding="10sp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5dp"
+                    android:text="@string/data_is_being_loaded"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardViewAudMainText_second"/>
 
-        <Button
-            android:id="@+id/btn_building_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Show_on_map"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardViewAudSubText_second">
-        </Button>
-
+                <Button
+                    android:id="@+id/btn_building_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Show_on_map"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cardViewAudSubText_second">
+                </Button>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </RelativeLayout>
