@@ -33,7 +33,7 @@ public class LoadBuildingsList extends Thread{
         list.add(new RecyclerViewItems(act.getString(R.string.adress_foc), "https://i.ibb.co/rmTf87S/photo-2022-05-09-17-54-44.jpg", act.getString(R.string.Audiences) +  " : " + act.getString(R.string.adress_foc_aud)));
         list.add(new RecyclerViewItems(act.getString(R.string.adress_tehfak), "https://i.ibb.co/ZSVDrLS/photo-2022-05-09-17-55-06.jpg", act.getString(R.string.Audiences) +  " : " + act.getString(R.string.adress_tehfak_aud)));
         list.add(new RecyclerViewItems(act.getString(R.string.adress_obshaga), "https://i.ibb.co/xM0mtwV/photo-2022-05-09-17-55-33.jpg", act.getString(R.string.Audiences) +  " : " + act.getString(R.string.adress_obshaga_aud)));
-        list.add(new RecyclerViewItems(act.getString(R.string.adress_istfak), "https://i.ibb.co/TKzdj75/M3i8-I-sw4-Y4-HAV0-KWJggg1-J1wns17i-S3ul-Kud9a-MVd3-Lgj-LL8y-WEFc3yn-Qx6-XVKd-BZO-BFtn-Ctq87-Vhxq8-Z.jpg", act.getString(R.string.Audiences) +  " : " + "Я не знаю, мне не говорили, да и я не спрашивал"));
+        list.add(new RecyclerViewItems(act.getString(R.string.adress_istfak), "https://i.ibb.co/TKzdj75/M3i8-I-sw4-Y4-HAV0-KWJggg1-J1wns17i-S3ul-Kud9a-MVd3-Lgj-LL8y-WEFc3yn-Qx6-XVKd-BZO-BFtn-Ctq87-Vhxq8-Z.jpg", act.getString(R.string.Audiences) +  " : " +  act.getString(R.string.adress_istfak_aud)));
 
         RecyclerView recyclerView = act.findViewById(R.id.recyclerView);
         // RecyclerView scroll vertical

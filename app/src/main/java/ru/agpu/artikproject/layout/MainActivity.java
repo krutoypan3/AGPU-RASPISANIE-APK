@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
@@ -28,10 +29,10 @@ import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.TodayClickListener;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.MainToolBar;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.ShowToolBarRecyclerView;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.MainToolBar;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.ShowToolBarRecyclerView;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.server.SendInfoToServer;
 import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
@@ -53,6 +54,10 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animRotate;
     public static Animation animUehalVp;
     public static Animation animUehalVl;
+    public static Animation animUehalVlPriehalSprava;
+    public static Animation animPriehalSprava;
+    public static Animation animUehalVpravo;
+    public static Animation animPriehalSleva;
     public static Animation animScale;
     public static Animation animRotate_ok;
     public static Drawer.Result drawerResult = null;
@@ -68,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        if (findViewById(R.id.recyclerView).getVisibility() == View.VISIBLE){
+            findViewById(R.id.recyclerView).startAnimation(animUehalVpravo);
+        }
         if(drawerResult.isDrawerOpen()){
             drawerResult.closeDrawer();
         }
@@ -99,6 +107,10 @@ public class MainActivity extends AppCompatActivity {
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
         animUehalVp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vpravo);
         animUehalVl = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vlevo);
+        animUehalVpravo = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vpravo_daleko);
+        animUehalVlPriehalSprava = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vlevo_priehal_sprava);
+        animPriehalSprava = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.priehal_sprava);
+        animPriehalSleva = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.priehal_sleva);
         animRotate_ok = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_ok);
         rasp_search_edit = findViewById(R.id.rasp_search_edit);
         listview = findViewById(R.id.listview);

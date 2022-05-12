@@ -32,7 +32,7 @@ public class Starter_MainActivity extends Thread {
             Animation animRotate = AnimationUtils.loadAnimation(act.getApplicationContext(), R.anim.scale_long);
             loading_ico.startAnimation(animRotate);
             try {
-                TimeUnit.MILLISECONDS.sleep(1000);
+                TimeUnit.MILLISECONDS.sleep(800);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

@@ -50,6 +50,7 @@
     <string name="adress_foc_aud" translatable="false">85, 85а, 86, Спортзал ФОК</string>
     <string name="adress_tehfak_aud" translatable="false">51, 52, 53, 57, 58 а, 58 б, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68</string>
     <string name="adress_obshaga_aud" translatable="false">30, 31, 32, 33, 34, 35, 36, 37, 38, ЛК-1 – ЛК-6, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121</string>
+    <string name="adress_istfak_aud" translatable="false">201, 202, 203, 204, 205, 206, 207, 208, 209, 210</string>
     <string name="map_confirm">Показать аудиторию на карте?</string>
     <string name="go">Перейти</string>
     <string name="new_app_version">Доступна новая версия приложения!</string>

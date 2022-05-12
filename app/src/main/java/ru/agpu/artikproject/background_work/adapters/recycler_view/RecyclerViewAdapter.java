@@ -14,10 +14,10 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.BuildingsItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.FacultiesItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.groups.GroupsItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.weeks.WeeksItemClick;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.BuildingsItemClick;
 import ru.agpu.artikproject.background_work.theme.GetColorTextView;
 import ru.agpu.artikproject.layout.MainActivity;
 
@@ -55,7 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
                     break;
                 case IS_FACULTIES_ADAPTER:
                     new FacultiesItemClick((RecyclerView)parent, v, datas, act);
-                    parent.startAnimation(MainActivity.animUehalVl);
+                    parent.startAnimation(MainActivity.animUehalVlPriehalSprava);
                     break;
                 case IS_FACULTIES_GROUPS_ADAPTER:
                     new GroupsItemClick((RecyclerView)parent, v, act);

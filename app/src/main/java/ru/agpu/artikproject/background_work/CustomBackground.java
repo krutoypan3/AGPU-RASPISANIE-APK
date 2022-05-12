@@ -59,11 +59,14 @@ public class CustomBackground {
 
     // Микрофункция возвращающая цвет в зависимости от темы
     private static int getBackgroundDarkerColor(Context context, boolean lightDarker){
+        int level = 30;
         if (lightDarker) { // Если тема светлая, то возвращаем светлый затемнитель
-            int level = MySharedPreferences.get(context, "light_darker_level", 60);
+            if (MySharedPreferences.get(context, "enable_background_user", false))
+                level = MySharedPreferences.get(context, "light_darker_level", 30);
             return Color.argb((int) (level * 2.5), 255, 255, 255);
         } // Если тема темная, то возвращаем темный затемнитель
-        int level = MySharedPreferences.get(context, "dark_darker_level", 30);
+        if (MySharedPreferences.get(context, "enable_background_user", false))
+            level = MySharedPreferences.get(context, "dark_darker_level", 30);
         return Color.argb((int) (level * 2.5), 0, 0, 0);
     }
 }

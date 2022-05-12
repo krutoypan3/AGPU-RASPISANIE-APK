@@ -73,6 +73,7 @@ public class MainToolBar {
                         case (2):
                             new ShowToolBarRecyclerView(act, true);
                             recyclerView.setAdapter(new RecyclerViewAdapter(act, LoadBuildingsList.buildings_list, RecyclerViewAdapter.IS_BUILDINGS_ADAPTER));
+                            recyclerView.startAnimation(MainActivity.animPriehalSprava);
                             break;
                         case (3): // Кнопка 'Настройки'
                             MainActivity.drawerResult.setSelection(0);
@@ -114,10 +115,12 @@ public class MainToolBar {
                         case (9):
                             new ShowToolBarRecyclerView(act, true);
                             recyclerView.setAdapter(new RecyclerViewAdapter(act, LoadFacultiesList.FACULTIES_LIST, RecyclerViewAdapter.IS_FACULTIES_ADAPTER));
+                            recyclerView.startAnimation(MainActivity.animPriehalSprava);
                             break;
                         case (10):
                             new ShowToolBarRecyclerView(act, true);
                             recyclerView.setAdapter(new RecyclerViewAdapter(act, LoadWeeksList.WEEKS_LIST, RecyclerViewAdapter.IS_WEEKS_ADAPTER));
+                            recyclerView.startAnimation(MainActivity.animPriehalSprava);
                             break;
                     }
                 }
