@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.widget.ImageView;
 
-import ru.agpu.artikproject.background_work.image_select_from_gallery.ImageSelector;
+import ru.agpu.artikproject.background_work.image_utils.ImageSelector;
 
 public class UserBackgroundSelectorListener {
     /**

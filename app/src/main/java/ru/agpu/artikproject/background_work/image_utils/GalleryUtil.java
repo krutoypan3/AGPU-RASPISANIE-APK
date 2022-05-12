@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.image_select_from_gallery;
+package ru.agpu.artikproject.background_work.image_utils;
 
 import android.app.Activity;
 import android.content.Intent;

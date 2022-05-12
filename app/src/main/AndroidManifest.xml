@@ -85,8 +85,8 @@
         <activity android:name="ru.agpu.artikproject.layout.MainActivity"/>
         <activity android:name="ru.agpu.artikproject.layout.Raspisanie_show" />
         <activity android:name="ru.agpu.artikproject.layout.Settings_layout" />
-        <activity android:name="ru.agpu.artikproject.background_work.image_select_from_gallery.ImageSelector"/>
-        <activity android:name="ru.agpu.artikproject.background_work.image_select_from_gallery.GalleryUtil"/>
+        <activity android:name=".background_work.image_utils.ImageSelector"/>
+        <activity android:name=".background_work.image_utils.GalleryUtil"/>
         <activity android:name="ru.agpu.artikproject.layout.BuildingInfo"/>
     </application>
 
