@@ -88,4 +88,6 @@
     <string name="data_is_being_loaded">Данные загружаются</string>
     <string name="Show_on_map">Показать на карте</string>
     <string name="Selected_week">Выбрана неделя</string>
+    <string name="rickardo_show">Узри господа-бога!</string>
+    <string name="god_of_flex">Помолиться богу флекса!</string>
 </resources>

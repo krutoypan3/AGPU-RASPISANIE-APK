@@ -99,30 +99,12 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 list_view.setVisibility(View.VISIBLE);
                 para_info_photo.setVisibility(View.VISIBLE);
                 ViewGroup.LayoutParams params = para_info_photo.getLayoutParams(); // получаем параметры
-                params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+                params.height = 700;
                 params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
                 para_info_photo.setLayoutParams(params);
                 break;
             case "para_info":
                 main_text.setText(R.string.para_info);
-                body_text.setVisibility(View.INVISIBLE);
-                yes.setVisibility(View.INVISIBLE);
-                list_view.setVisibility(View.VISIBLE);
-                break;
-            case "groups_list":
-                main_text.setText(R.string.groups_list);
-                body_text.setVisibility(View.INVISIBLE);
-                yes.setVisibility(View.INVISIBLE);
-                list_view.setVisibility(View.VISIBLE);
-                break;
-            case "faculties_list":
-                main_text.setText(R.string.faculties_list);
-                body_text.setVisibility(View.INVISIBLE);
-                yes.setVisibility(View.INVISIBLE);
-                list_view.setVisibility(View.VISIBLE);
-                break;
-            case "weeks_list":
-                main_text.setText(R.string.weeks_list);
                 body_text.setVisibility(View.INVISIBLE);
                 yes.setVisibility(View.INVISIBLE);
                 list_view.setVisibility(View.VISIBLE);
@@ -143,10 +125,37 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 yes.setVisibility(View.INVISIBLE);
                 no.setVisibility(View.INVISIBLE);
                 break;
+            case "ricardo_pasha":
+                main_text.setText(R.string.rickardo_show);
+                body_text.setVisibility(View.INVISIBLE);
+                para_info_photo.setVisibility(View.VISIBLE);
+                no.setVisibility(View.INVISIBLE);
+                yes.setText(R.string.god_of_flex);
+                params = para_info_photo.getLayoutParams(); // получаем параметры
+                params.height = 600;
+                params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+                para_info_photo.setLayoutParams(params);
+                break;
         }
-        no.setText(R.string.Cancel);
-        yes.setOnClickListener(this);
-        no.setOnClickListener(this);
+        if (body_text.getVisibility() == View.INVISIBLE)
+            body_text.getLayoutParams().height = 0;
+        if (list_view.getVisibility() == View.INVISIBLE)
+            list_view.getLayoutParams().height = 0;
+        if (edit_text.getVisibility() == View.INVISIBLE)
+            edit_text.getLayoutParams().height = 0;
+        if (no.getVisibility() == View.INVISIBLE){
+            no.getLayoutParams().height = 0;
+            no.getLayoutParams().width = 0;}
+        else{
+            no.setText(R.string.Cancel);
+            no.setOnClickListener(this);
+        }
+        if (yes.getVisibility() == View.INVISIBLE){
+            yes.getLayoutParams().height = 0;
+            yes.getLayoutParams().width = 0;
+        }
+        else
+            yes.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
