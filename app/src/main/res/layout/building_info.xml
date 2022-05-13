@@ -37,7 +37,8 @@
                 </androidx.cardview.widget.CardView>
                 <TextView
                     android:id="@+id/cardViewAudMainText_second"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:padding="10sp"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -19,12 +19,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.Random;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CustomBackground;
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener;
+import ru.agpu.artikproject.background_work.debug.Device_info;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 
@@ -72,7 +74,12 @@ public class BuildingInfo extends AppCompatActivity {
 
         ImageView imageView = findViewById(R.id.cardViewAudImage_second); // Находим нашу вьюшку (ImageView) на слое
 
-        Glide.with(getApplicationContext()).load(getIntent().getStringExtra("picture_url")).placeholder(d).into(imageView);
+        Glide.with(getApplicationContext()).load(getIntent()
+                .getStringExtra("picture_url"))
+                .apply(new RequestOptions().override(Device_info.getDeviceWidth(getApplicationContext()), 960))
+                .dontTransform()
+                .placeholder(d)
+                .into(imageView);
 
 
         // Обработка кнопки перехода на карту

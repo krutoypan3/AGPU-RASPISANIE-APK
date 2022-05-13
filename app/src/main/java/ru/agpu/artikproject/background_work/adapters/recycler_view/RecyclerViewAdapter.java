@@ -10,10 +10,12 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.debug.Device_info;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.BuildingsItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.FacultiesItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.groups.GroupsItemClick;
@@ -81,6 +83,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         // Bind data to viewholder
         Glide.with(act.getApplicationContext())
                 .load(imageResUrl)
+                .apply(new RequestOptions().override(Device_info.getDeviceWidth(act.getApplicationContext()), 360))
                 .placeholder(R.drawable.agpu_ico)
                 .into(holder.image);
         holder.mainTextView.setText(image_name.getMainText());

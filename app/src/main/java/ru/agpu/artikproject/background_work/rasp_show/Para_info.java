@@ -8,6 +8,8 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -79,6 +81,7 @@ public class Para_info {
                                 molitva.add(new ListViewItems("Да закроешь ты сессию эту"));
                                 ListViewAdapter adapter2 = new ListViewAdapter(act.getApplicationContext(), molitva);
                                 cdd2.list_view.setAdapter(adapter2);
+                                Glide.with(act).load("https://i.ibb.co/4pqtKcY/ficha-god.png").into(cdd2.para_info_photo);
                                 AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
                                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
                                 MediaPlayer mp = MediaPlayer.create(act, R.raw.ficha_god);

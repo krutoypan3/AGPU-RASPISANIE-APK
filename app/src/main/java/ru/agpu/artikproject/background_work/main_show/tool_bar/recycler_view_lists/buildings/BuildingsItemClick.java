@@ -1,14 +1,14 @@
 package ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings;
 
 import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Pair;
 import android.view.View;
 import android.widget.ImageView;
 
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.ByteArrayOutputStream;
@@ -45,15 +45,12 @@ public class BuildingsItemClick {
         intent.putExtra("picture", b);
         intent.putExtra("picture_url", item.getImageResourceUrl());
 
-        Pair<View, String> pair1 = Pair.create(imageView, "cardViewAudImage"); // Картинка
-        Pair<View, String> pair2 = Pair.create(itemView.findViewById(R.id.cardViewAudMainText), "cardViewAudMainText"); // Основной текст
-        Pair<View, String> pair3 = Pair.create(itemView.findViewById(R.id.cardViewAudSubText), "cardViewAudSubText"); // Дополнительный текст
-
         // Это нужно для предотвращения мерцания при анимации
         act.getWindow().setExitTransition(null);
 
-        // Настраиваем анимацию намерения
-        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(act, pair1, pair2, pair3);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(act,
+                Pair.create(imageView, "cardViewAudImage"),
+                Pair.create(itemView.findViewById(R.id.cardViewAudSubText), "cardViewAudSubText"));
         act.startActivity(intent, options.toBundle()); // Запускаем наше намерение
     }
 }
