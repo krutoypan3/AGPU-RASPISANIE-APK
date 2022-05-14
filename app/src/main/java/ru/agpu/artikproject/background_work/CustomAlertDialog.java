@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -70,6 +71,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
         setContentView(R.layout.custom_dialog);
         main_text = findViewById(R.id.custom_dialog_main_text);
         body_text = findViewById(R.id.custom_dialog_body_text);
+        body_text.setMovementMethod(new ScrollingMovementMethod());
         edit_text = findViewById(R.id.custom_dialog_edit_text);
         list_view = findViewById(R.id.custom_dialog_list_view);
         para_info_photo = findViewById(R.id.para_info_photo);
@@ -136,26 +138,31 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
                 para_info_photo.setLayoutParams(params);
                 break;
+        } // Объясняю почему ставим высоту и ширину скрываемых элементов 1, а не 0.
+        // Так как у некоторых View 0 воспринимается как wrap_content (например EditText),
+        // Было принято решение ставить 1 вместо 0.
+        if (para_info_photo.getVisibility() == View.INVISIBLE) // Если фотка в диалоге пустая
+            para_info_photo.getLayoutParams().height = 1; // Скрываем фото
+        if (body_text.getVisibility() == View.INVISIBLE) // Если текст в теле пустой
+            body_text.getLayoutParams().height = 1; // Скрываем текст
+            body_text.setPadding(0,0,0,0); // Убираем отступы
+        if (list_view.getVisibility() == View.INVISIBLE) // Если список пуст
+            list_view.getLayoutParams().height = 1; // Убираем список
+        if (edit_text.getVisibility() == View.INVISIBLE) // Если ввод текста пуст
+            edit_text.getLayoutParams().height = 1; // Убираем ввод текста
+        if (no.getVisibility() == View.INVISIBLE){ // Если кнопка отмены пуста
+            no.getLayoutParams().height = 1; // Убираем кнопку отмены
+            no.getLayoutParams().width = 1;
         }
-        if (body_text.getVisibility() == View.INVISIBLE)
-            body_text.getLayoutParams().height = 0;
-        if (list_view.getVisibility() == View.INVISIBLE)
-            list_view.getLayoutParams().height = 0;
-        if (edit_text.getVisibility() == View.INVISIBLE)
-            edit_text.getLayoutParams().height = 0;
-        if (no.getVisibility() == View.INVISIBLE){
-            no.getLayoutParams().height = 0;
-            no.getLayoutParams().width = 0;}
-        else{
-            no.setText(R.string.Cancel);
-            no.setOnClickListener(this);
+        else{ // Если кнопка отмены не пуста
+            no.setOnClickListener(this); // Прослушиваем нажатия на кнопку отмены
         }
-        if (yes.getVisibility() == View.INVISIBLE){
-            yes.getLayoutParams().height = 0;
-            yes.getLayoutParams().width = 0;
+        if (yes.getVisibility() == View.INVISIBLE){ // Если кнопка принятия пуста
+            yes.getLayoutParams().height = 1; // Убираем кнопку принятия
+            yes.getLayoutParams().width = 1;
         }
-        else
-            yes.setOnClickListener(this);
+        else // Если кнопка принятия не пуста
+            yes.setOnClickListener(this); // Прослушиваем кнопку принятия
     }
 
     @SuppressLint("NonConstantResourceId")
