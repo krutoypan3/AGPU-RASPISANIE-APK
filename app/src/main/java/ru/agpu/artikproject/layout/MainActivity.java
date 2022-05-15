@@ -33,7 +33,7 @@ import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.MainToolBar;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.ShowToolBarRecyclerView;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
-import ru.agpu.artikproject.background_work.server.SendInfoToServer;
+import ru.agpu.artikproject.background_work.debug.SendInfoToServer;
 import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
 import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;

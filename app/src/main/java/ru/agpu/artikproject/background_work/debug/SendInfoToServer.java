@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.server;
+package ru.agpu.artikproject.background_work.debug;
 
 import android.content.Context;
 
@@ -13,7 +13,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import ru.agpu.artikproject.background_work.debug.Device_info;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 
 public class SendInfoToServer extends Thread {
