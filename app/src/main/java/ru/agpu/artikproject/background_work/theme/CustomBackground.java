@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work;
+package ru.agpu.artikproject.background_work.theme;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -13,7 +13,6 @@ import java.io.File;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
-import ru.agpu.artikproject.background_work.theme.Theme;
 
 public class CustomBackground {
 

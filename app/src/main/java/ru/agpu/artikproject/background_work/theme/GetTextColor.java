@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import ru.agpu.artikproject.R;
 
 
-public class GetColorTextView {
+public class GetTextColor {
     /**
      * Возвращает цвет текста для текущей темы приложения
      * @param context Контекст приложения

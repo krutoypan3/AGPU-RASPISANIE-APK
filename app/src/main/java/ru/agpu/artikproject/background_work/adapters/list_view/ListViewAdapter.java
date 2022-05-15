@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.theme.GetColorTextView;
+import ru.agpu.artikproject.background_work.theme.GetTextColor;
 
 public class ListViewAdapter extends BaseAdapter {
     final Context ctx;
@@ -60,7 +60,7 @@ public class ListViewAdapter extends BaseAdapter {
         TextView textView = view.findViewById(R.id.tvItemText);
         textView.setPadding(30,30,30,30);
         textView.setTextSize(15);
-        if (!widget) textView.setTextColor(GetColorTextView.getAppColor(ctx));
+        if (!widget) textView.setTextColor(GetTextColor.getAppColor(ctx));
         else textView.setTextColor(ctx.getColor(R.color.textColorPrimary));
         ListViewItems p = getProduct(position);
         textView.setText(p.item);

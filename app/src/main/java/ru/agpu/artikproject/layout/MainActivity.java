@@ -22,7 +22,7 @@ import java.util.Objects;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckAppUpdate;
-import ru.agpu.artikproject.background_work.CustomBackground;
+import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;

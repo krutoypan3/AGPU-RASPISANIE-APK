@@ -6,14 +6,14 @@ import android.widget.ImageView;
 
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 
-public class ImageBackgroundPictureSetting {
+public class UserBackgroundPictureSetting {
     /**
      * Устанавливает картинку на задний фон в настройках фона
      * @param act Активити
      * @param userBackgroundLightSelector Светлый фон
      * @param userBackgroundDarkSelector Темный фон
      */
-    public ImageBackgroundPictureSetting(Activity act, ImageView userBackgroundLightSelector, ImageView userBackgroundDarkSelector){
+    public UserBackgroundPictureSetting(Activity act, ImageView userBackgroundLightSelector, ImageView userBackgroundDarkSelector){
         String background_light = MySharedPreferences.get(act.getApplicationContext(), "background_light", "");
         if (!background_light.equals("")){ // Если светлая картинка есть
             userBackgroundLightSelector.setImageURI(null); // Без обнуления новая картинка не встанет

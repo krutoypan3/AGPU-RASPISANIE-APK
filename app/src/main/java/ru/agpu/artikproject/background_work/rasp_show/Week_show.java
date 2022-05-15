@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat;
 import java.util.Objects;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.theme.GetColorTextView;
+import ru.agpu.artikproject.background_work.theme.GetTextColor;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Raspisanie_show;
 
@@ -54,7 +54,7 @@ public class Week_show {
                     qty.setMaxEms(10);
                     qty.setTextSize(table_size);
                     qty.setPadding(5,5,5,5);
-                    qty.setTextColor(GetColorTextView.getAppColor(context));
+                    qty.setTextColor(GetTextColor.getAppColor(context));
                     qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
                     qty.setGravity(Gravity.CENTER);
                     qty.setText(f.getString(0));
@@ -114,7 +114,7 @@ public class Week_show {
                         catch (Exception e){
                             qty.setBackgroundResource(R.drawable.table_granitsa_legenda);
                         }
-                        qty.setTextColor(GetColorTextView.getAppColor(context));
+                        qty.setTextColor(GetTextColor.getAppColor(context));
                     }
                     qty.setText(str);
                     empty_cell = new TextView(context); // Новая пустая ячейка

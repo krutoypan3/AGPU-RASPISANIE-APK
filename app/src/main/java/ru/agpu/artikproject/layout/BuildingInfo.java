@@ -24,7 +24,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.Random;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.CustomBackground;
+import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener;
 import ru.agpu.artikproject.background_work.debug.Device_info;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap;

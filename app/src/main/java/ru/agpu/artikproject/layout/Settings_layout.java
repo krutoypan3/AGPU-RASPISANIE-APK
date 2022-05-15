@@ -8,14 +8,14 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import ru.agpu.artikproject.background_work.CustomBackground;
+import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserBackgroundSelectorListener;
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserSeekBarListener;
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserSeekBarSetting;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.BackgroundDarkerListener;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaShow;
-import ru.agpu.artikproject.background_work.settings_layout.user_background.ImageBackgroundPictureSetting;
+import ru.agpu.artikproject.background_work.settings_layout.user_background.UserBackgroundPictureSetting;
 import ru.agpu.artikproject.background_work.settings_layout.theme_radio_group.ThemeRadioButtonSetting;
 import ru.agpu.artikproject.background_work.settings_layout.theme_radio_group.ThemeRadioGroupListener;
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserBackgroundCheckBoxListener;
@@ -41,7 +41,7 @@ public class Settings_layout extends AppCompatActivity {
         userBackgroundDarkSelector = findViewById(R.id.background_dark_image_selector);
 
         // Установка фона для картинок с фонами
-        new ImageBackgroundPictureSetting(this, userBackgroundLightSelector, userBackgroundDarkSelector);
+        new UserBackgroundPictureSetting(this, userBackgroundLightSelector, userBackgroundDarkSelector);
 
         // Проверка количества собранных пасхалок
         new FichaShow(this);
@@ -84,7 +84,7 @@ public class Settings_layout extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
-            new ImageBackgroundPictureSetting(this, userBackgroundLightSelector, userBackgroundDarkSelector);
+            new UserBackgroundPictureSetting(this, userBackgroundLightSelector, userBackgroundDarkSelector);
         }
     }
 }

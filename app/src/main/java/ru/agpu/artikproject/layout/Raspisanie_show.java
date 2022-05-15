@@ -18,7 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import java.util.Random;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.CustomBackground;
+import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener;
 import ru.agpu.artikproject.background_work.rasp_show.ListViewDayPara_Listener;
 import ru.agpu.artikproject.background_work.rasp_show.RaspUpdateCheckBoxListener;

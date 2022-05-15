@@ -20,7 +20,7 @@ import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lis
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.FacultiesItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.groups.GroupsItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.weeks.WeeksItemClick;
-import ru.agpu.artikproject.background_work.theme.GetColorTextView;
+import ru.agpu.artikproject.background_work.theme.GetTextColor;
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
@@ -87,9 +87,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
                 .placeholder(R.drawable.agpu_ico)
                 .into(holder.image);
         holder.mainTextView.setText(image_name.getMainText());
-        int textColor = GetColorTextView.getAppColor(act.getApplicationContext());
+        int textColor = GetTextColor.getAppColor(act.getApplicationContext());
         if (textColor == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            textColor = GetColorTextView.getAppColor(act.getApplicationContext());
+            textColor = GetTextColor.getAppColor(act.getApplicationContext());
         holder.mainTextView.setTextColor(textColor);
         String newSubText = image_name.getSubText();
         holder.subTextView.setText(newSubText);

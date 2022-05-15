@@ -6,7 +6,7 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.CustomBackground;
+import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.background_work.Starter_MainActivity;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.theme.Theme;
