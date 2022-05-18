@@ -48,6 +48,7 @@ public class ZachBook  extends Thread {
     final Activity act;
     public static boolean IS_LOADED = false;
     public String FIO;
+    public String SREDNII_BAL;
 
     /**
      * Данный класс обращается к ЭИОС посредством передачи логина и пароля и получает зачетную книжку студента
@@ -113,6 +114,9 @@ public class ZachBook  extends Thread {
                 url = new URL("http://plany.agpu.net/Ved/ZachBooks.aspx?id=" + USER_ID);
                 Document doc = Jsoup.connect(String.valueOf(url)).get(); // Парсим всю страницу
                 Elements links = doc.getElementsByClass("dxgvDataRow_MaterialCompact"); // Выбираем необходимые строки
+                Elements sred_bal = doc.getElementsByAttributeValue("id","ctl00_MainContent_txtBall"); // Затем находим средний бал
+                String[] sred_bal_split = sred_bal.get(0).toString().split("</span>")[0].split(">");
+                SREDNII_BAL = sred_bal_split[sred_bal_split.length-1].split("\\.")[1];
                 List<RecyclerViewItems> list = new ArrayList<>();
                 for (Element src : links) { // И проходим по этим строкам с оценками
                     String current_src = src.toString();
@@ -175,7 +179,7 @@ public class ZachBook  extends Thread {
                 ETPassword.setVisibility(View.INVISIBLE); // Скрываем поле ввода пароля
                 // Устанавливаем полученные данные в адаптер
                 recyclerView.setAdapter(new RecyclerViewAdapter(act, ZachBook.MARKS_LIST, RecyclerViewAdapter.IS_MARK_ADAPTER));
-                String newMainText = FIO + ", " + act.getString(R.string.your_record_book) + ":";
+                String newMainText = FIO + ".\n " + SREDNII_BAL + ".";
                 mainText.setText(newMainText); // Выводим новый основной текст
                 loginButton.setVisibility(View.INVISIBLE); // Скрываем кнопку авторизации
                 Spinner spinner = act.findViewById(R.id.spinner); // Спинер с семестрами
