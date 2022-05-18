@@ -3,6 +3,7 @@
     <domain-config cleartextTrafficPermitted="true">
     <domain includeSubdomains="true">sql-serverartem.ddns.net</domain>
     <domain includeSubdomains="true">www.it-institut.ru</domain>
+    <domain includeSubdomains="true">agpu.net</domain>
 </domain-config>
     <base-config cleartextTrafficPermitted="false">
         <trust-anchors>

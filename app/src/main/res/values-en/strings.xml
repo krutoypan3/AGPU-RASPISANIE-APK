@@ -82,4 +82,14 @@
     <string name="adress_istfak">Building on Volodarsky street 120b (ISTFAK)</string>
     <string name="rickardo_show">Behold the Lord God!</string>
     <string name="god_of_flex">Pray to the flex god!</string>
+    <string name="Semester">Semester</string>
+    <string name="Teacher">Teacher</string>
+    <string name="Login">Login</string>
+    <string name="Password">Password</string>
+    <string name="Enter">Enter</string>
+    <string name="zachetka_see">To view the record book, enter the login and password of the EIOS AGPU</string>
+    <string name="find_zach_book">We are looking for your record book...</string>
+    <string name="Record_book">Record book</string>
+    <string name="your_record_book">your record book</string>
+    <string name="Incorrect_data_entered">Incorrect data entered, please try again</string>
 </resources>

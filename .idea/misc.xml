@@ -5,6 +5,7 @@
       <map>
         <entry key="..\:/Users/Kruto/.gradle/caches/transforms-3/4fb9ff8aa2e027b535076da59126152d/transformed/jetified-library-0.9.5/res/layout/drawer.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/Kruto/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_list_item_1.xml" value="0.203125" />
+        <entry key="..\:/Users/Kruto/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.1762917933130699" />
         <entry key="..\:/Users/Kruto/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.203125" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable-night/background.xml" value="0.20625" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable-night/custom_dialog_background.xml" value="0.25416666666666665" />
@@ -70,6 +71,7 @@
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_preview.xml" value="0.21" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_preview_dark.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_preview_light.xml" value="0.1" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/zachetka_layout.xml" value="0.33" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.10520833333333333" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/xml-night/widget_info.xml" value="0.19010416666666666" />

@@ -26,12 +26,13 @@ import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CustomAlertDialog;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
 import ru.agpu.artikproject.background_work.debug.Device_info;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.LoadFacultiesList;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.weeks.LoadWeeksList;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Settings_layout;
+import ru.agpu.artikproject.layout.Zachetka_layout;
 
 
 public class MainToolBar {
@@ -53,6 +54,7 @@ public class MainToolBar {
                     new PrimaryDrawerItem().withName(R.string.drawer_item_location).withIcon(FontAwesome.Icon.faw_location_arrow).withIdentifier(2),
                     new PrimaryDrawerItem().withName(R.string.groups_list).withIcon(FontAwesome.Icon.faw_user_plus).withIdentifier(9),
                     new PrimaryDrawerItem().withName(R.string.weeks_list).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(10),
+                    new PrimaryDrawerItem().withName(R.string.Record_book).withIcon(FontAwesome.Icon.faw_book).withIdentifier(11),
                     new SectionDrawerItem().withName(R.string.drawer_item_settings),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(3),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_delete).withIcon(FontAwesome.Icon.faw_remove).withIdentifier(5),
@@ -121,6 +123,11 @@ public class MainToolBar {
                             new ShowToolBarRecyclerView(act, true);
                             recyclerView.setAdapter(new RecyclerViewAdapter(act, LoadWeeksList.WEEKS_LIST, RecyclerViewAdapter.IS_WEEKS_ADAPTER));
                             recyclerView.startAnimation(MainActivity.animPriehalSprava);
+                            break;
+                        case (11): // Зачетная книжка
+                            MainActivity.drawerResult.setSelection(0);
+                            intent = new Intent(context, Zachetka_layout.class);
+                            act.startActivity(intent);
                             break;
                     }
                 }

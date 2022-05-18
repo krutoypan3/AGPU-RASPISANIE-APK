@@ -89,6 +89,7 @@
         <activity android:name=".background_work.image_utils.ImageSelector"/>
         <activity android:name=".background_work.image_utils.GalleryUtil"/>
         <activity android:name="ru.agpu.artikproject.layout.BuildingInfo"/>
+        <activity android:name="ru.agpu.artikproject.layout.Zachetka_layout"/>
     </application>
 
 </manifest>

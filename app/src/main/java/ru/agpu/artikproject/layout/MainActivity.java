@@ -22,10 +22,10 @@ import java.util.Objects;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckAppUpdate;
-import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
+import ru.agpu.artikproject.background_work.debug.SendInfoToServer;
 import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.TodayClickListener;
@@ -33,10 +33,10 @@ import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.MainToolBar;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.ShowToolBarRecyclerView;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
-import ru.agpu.artikproject.background_work.debug.SendInfoToServer;
 import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
 import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
+import ru.agpu.artikproject.background_work.theme.CustomBackground;
 
 public class MainActivity extends AppCompatActivity {
 

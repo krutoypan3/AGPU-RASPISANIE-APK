@@ -90,4 +90,14 @@
     <string name="Selected_week">Выбрана неделя</string>
     <string name="rickardo_show">Узри господа-бога!</string>
     <string name="god_of_flex">Помолиться богу флекса!</string>
+    <string name="Semester">Семестр</string>
+    <string name="Teacher">Преподаватель</string>
+    <string name="Login">Логин</string>
+    <string name="Password">Пароль</string>
+    <string name="Enter">Войти</string>
+    <string name="zachetka_see">Для просмотра зачетной книжки введите логин и пароль ЭИОС АГПУ</string>
+    <string name="find_zach_book">Ищем вашу зачетную книжку...</string>
+    <string name="Record_book">Зачетная книжка</string>
+    <string name="your_record_book">ваша зачетная книжка</string>
+    <string name="Incorrect_data_entered">Введены неверные данные, повторите попытку</string>
 </resources>
