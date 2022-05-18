@@ -15,6 +15,15 @@ import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewI
 public class LoadBuildingsList extends Thread{
     private final Activity act;
     public static List<RecyclerViewItems> buildings_list;
+
+    public final static int BUILDING_MAIN = 0;
+    public final static int BUILDING_ZAOCHKA = 1;
+    public final static int BUILDING_SPF = 2;
+    public final static int BUILDING_FOC = 3;
+    public final static int BUILDING_TEHFAK = 4;
+    public final static int BUILDING_DORMITORY = 5;
+    public final static int BUILDING_ISTFAK = 6;
+
     /**
      * Подгружает список корпусов
      */
@@ -29,7 +38,6 @@ public class LoadBuildingsList extends Thread{
         list.add(new RecyclerViewItems(act.getString(R.string.adress_main), "https://i.ibb.co/M6n1bLj/photo-2022-05-09-17-54-18.jpg", act.getString(R.string.Audiences) +  " : " + act.getString(R.string.adress_main_aud)));
         list.add(new RecyclerViewItems(act.getString(R.string.adress_zaochka), "https://i.ibb.co/42sQ0VB/photo-2022-05-09-17-55-37.jpg", act.getString(R.string.Audiences) +  " : " + act.getString(R.string.adress_zaochka_aud)));
         list.add(new RecyclerViewItems(act.getString(R.string.adress_spf), "https://i.ibb.co/q56Z5Pv/photo-2022-05-09-17-55-30.jpg", act.getString(R.string.Audiences) +  " : " + act.getString(R.string.adress_spf_aud)));
-        list.add(new RecyclerViewItems(act.getString(R.string.adress_ebd), "https://i.ibb.co/0JvJT64/photo-2022-05-09-17-55-18.jpg", act.getString(R.string.Audiences) +  " : " + act.getString(R.string.adress_ebd_aud)));
         list.add(new RecyclerViewItems(act.getString(R.string.adress_foc), "https://i.ibb.co/rmTf87S/photo-2022-05-09-17-54-44.jpg", act.getString(R.string.Audiences) +  " : " + act.getString(R.string.adress_foc_aud)));
         list.add(new RecyclerViewItems(act.getString(R.string.adress_tehfak), "https://i.ibb.co/ZSVDrLS/photo-2022-05-09-17-55-06.jpg", act.getString(R.string.Audiences) +  " : " + act.getString(R.string.adress_tehfak_aud)));
         list.add(new RecyclerViewItems(act.getString(R.string.adress_obshaga), "https://i.ibb.co/xM0mtwV/photo-2022-05-09-17-55-33.jpg", act.getString(R.string.Audiences) +  " : " + act.getString(R.string.adress_obshaga_aud)));
