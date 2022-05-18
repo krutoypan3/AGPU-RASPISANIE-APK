@@ -99,8 +99,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
             holder.cardView.getLayoutParams().width = 50;
             holder.image.getLayoutParams().width = 50;
             holder.mainTextView.setTextColor(text_color);
-            holder.mainTextView.setPadding(5,0,5,0);
-            holder.subTextView.setPadding(5,10,5,0);
             holder.subTextView.setTextColor(text_color);
         }
         else {

@@ -37,8 +37,20 @@ public class OnSwipeTouchListener implements OnTouchListener {
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             boolean result = false;
             try {
-                float diffY = e2.getY() - e1.getY();
-                float diffX = e2.getX() - e1.getX();
+                float diffY;
+                float diffX;
+                if (e1 == null) {
+                    diffY = e2.getY();
+                    diffX = e2.getX();
+                }
+                else if (e2 == null) {
+                    diffX = e1.getX();
+                    diffY = e1.getY();
+                }
+                else {
+                    diffY = e2.getY() - e1.getY();
+                    diffX = e2.getX() - e1.getX();
+                }
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
                         if (diffX > 0) {

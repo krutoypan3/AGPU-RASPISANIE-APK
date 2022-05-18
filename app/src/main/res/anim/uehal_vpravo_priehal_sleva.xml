@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="false" >
+    <translate
+        android:fromXDelta="0%p"
+        android:toXDelta="100%p"
+        android:fillAfter="true"
+        android:duration="250"/>
+    <translate
+        android:fromXDelta="100%p"
+        android:startOffset="250"
+        android:toXDelta="-100%p"
+        android:fillAfter="true"
+        android:duration="1" />
+    <translate
+        android:fromXDelta="-100%p"
+        android:toXDelta="0%p"
+        android:startOffset="251"
+        android:duration="250"/>
+
+</set>

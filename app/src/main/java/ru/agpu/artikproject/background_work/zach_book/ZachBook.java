@@ -1,5 +1,6 @@
 package ru.agpu.artikproject.background_work.zach_book;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
 import android.view.View;
@@ -33,6 +34,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.OnSwipeTouchListener;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewItems;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
@@ -154,6 +156,7 @@ public class ZachBook  extends Thread {
     /**
      * Данная функция обновляет информацию о зачетке
      */
+    @SuppressLint("ClickableViewAccessibility")
     public void IS_LOADED(){
         act.runOnUiThread(() ->{ // Все действия выполняются в главном потоке
             TextView mainText = act.findViewById(R.id.zachetka_main_text); // Основной текст
@@ -202,6 +205,29 @@ public class ZachBook  extends Thread {
 
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView){}
+                });
+                // Слушатель свайпов зачетки
+                recyclerView.setOnTouchListener(new OnSwipeTouchListener(act.getApplicationContext()) {
+                    public void onSwipeLeft() {
+                        recyclerView.startAnimation(MainActivity.animUehalVlPriehalSprava);
+                        int count = spinner.getCount();
+                        int current_id = spinner.getSelectedItemPosition();
+                        if (current_id+1 > count-1)
+                            current_id = 0;
+                        else
+                            current_id += 1;
+                        spinner.setSelection(current_id);
+                    }
+                    public void onSwipeRight(){
+                        recyclerView.startAnimation(MainActivity.animUehalVpPriehalSleva);
+                        int count = spinner.getCount();
+                        int current_id = spinner.getSelectedItemPosition();
+                        if (current_id-1 < 0)
+                            current_id = count-1;
+                        else
+                            current_id -= 1;
+                        spinner.setSelection(current_id);
+                    }
                 });
             }
             else{ // Если данные не были получены

@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animUehalVp;
     public static Animation animUehalVl;
     public static Animation animUehalVlPriehalSprava;
+    public static Animation animUehalVpPriehalSleva;
     public static Animation animPriehalSprava;
     public static Animation animUehalVpravo;
     public static Animation animPriehalSleva;
@@ -109,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         animUehalVl = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vlevo);
         animUehalVpravo = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vpravo_daleko);
         animUehalVlPriehalSprava = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vlevo_priehal_sprava);
+        animUehalVpPriehalSleva = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vpravo_priehal_sleva);
         animPriehalSprava = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.priehal_sprava);
         animPriehalSleva = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.priehal_sleva);
         animRotate_ok = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_ok);
