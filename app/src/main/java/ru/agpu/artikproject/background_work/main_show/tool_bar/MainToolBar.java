@@ -26,9 +26,9 @@ import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CustomAlertDialog;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
 import ru.agpu.artikproject.background_work.debug.Device_info;
+import ru.agpu.artikproject.background_work.main_show.ChangeDay;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.LoadFacultiesList;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.weeks.LoadWeeksList;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Settings_layout;
@@ -61,6 +61,7 @@ public class MainToolBar {
                     new SecondaryDrawerItem().withName(R.string.drawer_item_github).withIcon(FontAwesome.Icon.faw_question).withIdentifier(6),
                     new DividerDrawerItem(),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withIdentifier(4),
+                    new SecondaryDrawerItem().withName(R.string.donate).withIcon(FontAwesome.Icon.faw_ruble).withIdentifier(12),
                     new DividerDrawerItem(),
                     new SecondaryDrawerItem().withName(R.string.feedback).withIcon(FontAwesome.Icon.faw_question_circle).withIdentifier(7),
                     new SecondaryDrawerItem().withName(R.string.app_info).withIcon(FontAwesome.Icon.faw_exclamation_circle).withIdentifier(8),
@@ -120,14 +121,18 @@ public class MainToolBar {
                             recyclerView.startAnimation(MainActivity.animPriehalSprava);
                             break;
                         case (10):
-                            new ShowToolBarRecyclerView(act, true);
-                            recyclerView.setAdapter(new RecyclerViewAdapter(act, LoadWeeksList.WEEKS_LIST, RecyclerViewAdapter.IS_WEEKS_ADAPTER));
-                            recyclerView.startAnimation(MainActivity.animPriehalSprava);
+                            // Отслеживание нажатий на смену даты
+                            new ChangeDay(act).setDate();
+                            MainActivity.drawerResult.setSelection(0);
                             break;
                         case (11): // Зачетная книжка
                             MainActivity.drawerResult.setSelection(0);
                             intent = new Intent(context, Zachetka_layout.class);
                             act.startActivity(intent);
+                            break;
+                        case (12):
+                            MainActivity.drawerResult.setSelection(0);
+                            act.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.sberbank.ru/ru/person/dl/jc?linkname=vOZKjMHL4expBFS5u")));
                             break;
                     }
                 }

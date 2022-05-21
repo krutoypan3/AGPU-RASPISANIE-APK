@@ -19,7 +19,6 @@ import ru.agpu.artikproject.background_work.debug.Device_info;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.BuildingsItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.FacultiesItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.groups.GroupsItemClick;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.weeks.WeeksItemClick;
 import ru.agpu.artikproject.background_work.theme.GetTextColor;
 import ru.agpu.artikproject.background_work.zach_book.GetMarkImageUrl;
 import ru.agpu.artikproject.layout.MainActivity;
@@ -33,7 +32,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public static final int IS_BUILDINGS_ADAPTER = 0;
     public static final int IS_FACULTIES_ADAPTER = 1;
     public static final int IS_FACULTIES_GROUPS_ADAPTER = 2;
-    public static final int IS_WEEKS_ADAPTER = 3;
     public static final int IS_MARK_ADAPTER = 4;
     public static int selected_faculties_position;
     public static String selected_faculties_logos;
@@ -69,10 +67,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
                     break;
                 case IS_FACULTIES_GROUPS_ADAPTER:
                     new GroupsItemClick((RecyclerView)parent, v, act);
-                    parent.startAnimation(MainActivity.animUehalVl);
-                    break;
-                case IS_WEEKS_ADAPTER:
-                    new WeeksItemClick((RecyclerView)parent, v, datas, act);
                     parent.startAnimation(MainActivity.animUehalVl);
                     break;
             }

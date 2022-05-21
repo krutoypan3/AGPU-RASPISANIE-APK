@@ -98,4 +98,7 @@
     <string name="Record_book">Зачетная книжка</string>
     <string name="your_record_book">ваша зачетная книжка</string>
     <string name="Incorrect_data_entered">Введены неверные данные, повторите попытку</string>
+    <string name="Not_find_week">Неделя не была найдена в базе данных</string>
+    <string name="Curent_day">Сейчас</string>
+    <string name="donate">Помочь с выгрузкой в PlayMarket</string>
 </resources>

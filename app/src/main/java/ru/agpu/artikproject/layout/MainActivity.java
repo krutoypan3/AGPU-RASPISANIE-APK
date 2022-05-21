@@ -26,6 +26,7 @@ import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.debug.SendInfoToServer;
+import ru.agpu.artikproject.background_work.main_show.ChangeDay;
 import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.TodayClickListener;
@@ -142,5 +143,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Отслеживание изменений текстового поля
         new EditTextRaspSearch_Listener(this, rasp_search_edit);
+
+        // Отслеживание нажатий на смену даты
+        findViewById(R.id.subtitle).setOnClickListener(view -> new ChangeDay(MainActivity.this).setDate());
     }
 }

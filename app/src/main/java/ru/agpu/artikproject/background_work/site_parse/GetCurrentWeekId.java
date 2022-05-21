@@ -13,8 +13,7 @@ import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.GetCurrentWeekId_Local;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
-import ru.agpu.artikproject.background_work.main_show.GetWeekFromId;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.weeks.LoadWeeksList;
+import ru.agpu.artikproject.background_work.main_show.UpdateDateInMainActivity;
 import ru.agpu.artikproject.layout.MainActivity;
 
 /**
@@ -77,8 +76,7 @@ public class GetCurrentWeekId extends Thread {
         }
         finally {
             try{
-                new GetWeekFromId(act); // Обновляем текущую неделю на главной странице
-                new LoadWeeksList().Load(); // Загрузка данных о группах в адаптер
+                new UpdateDateInMainActivity(act); // Обновляем текущую неделю на главной странице
             }
             catch (Exception e){
                 e.printStackTrace();

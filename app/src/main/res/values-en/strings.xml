@@ -91,4 +91,7 @@
     <string name="Record_book">Record book</string>
     <string name="your_record_book">your record book</string>
     <string name="Incorrect_data_entered">Incorrect data entered, please try again</string>
+    <string name="Not_find_week">The week was not found in the database</string>
+    <string name="Curent_day">It\'s</string>
+    <string name="donate">Help with uploading to PlayMarket</string>
 </resources>
