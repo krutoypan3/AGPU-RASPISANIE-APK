@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.layout.MainActivity;
@@ -23,10 +22,7 @@ public class UpdateDateInMainActivity {
         TextView current_week = act.findViewById(R.id.subtitle);
         act.runOnUiThread(() -> current_week.setText(s_po));
 
-        Calendar tempCalendar = ChangeDay.dateAndTime;
-
-        tempCalendar.add(Calendar.DAY_OF_WEEK, MainActivity.week_day);
-        @SuppressLint("SimpleDateFormat") String day = (new SimpleDateFormat("dd.MM.yyyy, EEEE")).format(tempCalendar.getTime());
+        @SuppressLint("SimpleDateFormat") String day = (new SimpleDateFormat("dd.MM.yyyy, EEEE")).format(ChangeDay.chosenDateCalendar.getTime());
         String today_date = act.getString(R.string.Curent_day) + " " + day;
         TextView today = act.findViewById(R.id.main_activity_text);
         act.runOnUiThread(() -> today.setText(today_date));

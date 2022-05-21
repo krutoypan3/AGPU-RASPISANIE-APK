@@ -15,7 +15,7 @@ import ru.agpu.artikproject.layout.MainActivity;
 
 public class ChangeDay {
     Activity act;
-    public static Calendar dateAndTime = Calendar.getInstance(); // Один календарь на все приложение
+    public static Calendar chosenDateCalendar = Calendar.getInstance(); // Календарь текущей даты на все приложение
 
     public ChangeDay(Activity act){
         this.act = act;
@@ -25,9 +25,9 @@ public class ChangeDay {
     // отображаем диалоговое окно для выбора даты
     public void setDate() {
         new DatePickerDialog(act, d,
-                dateAndTime.get(Calendar.YEAR),
-                dateAndTime.get(Calendar.MONTH),
-                dateAndTime.get(Calendar.DAY_OF_MONTH))
+                chosenDateCalendar.get(Calendar.YEAR),
+                chosenDateCalendar.get(Calendar.MONTH),
+                chosenDateCalendar.get(Calendar.DAY_OF_MONTH))
                 .show();
     }
 
@@ -36,7 +36,11 @@ public class ChangeDay {
      */
     private void setInitialDateTime() {
         int dayOfWeek = 2; // Конкретно нам нужен понедельник (начало недели)
-        int weekday = dateAndTime.get(Calendar.DAY_OF_WEEK); // Текущий день недели (1..7)
+        int weekday = chosenDateCalendar.get(Calendar.DAY_OF_WEEK); // Текущий день недели (1..7)
+
+        // Нельзя просто взять и одному календарю присвоить другой
+        Calendar weekStartCalendar = Calendar.getInstance();
+        weekStartCalendar.setTimeInMillis(chosenDateCalendar.getTimeInMillis());
 
         if (weekday == 1)
             MainActivity.week_day = 5;
@@ -47,17 +51,17 @@ public class ChangeDay {
         while (weekday != dayOfWeek){ // Если выбран не понедельник
             if (weekday == 1) { // Если выбрано воскресенье
                 weekday = dayOfWeek; // Ставим день недели понедельник
-                dateAndTime.add(Calendar.WEEK_OF_MONTH, -1); // Возвращаем календарь на неделю назад (т.к. вс-первый день новой недели | шатал я этим америкосов со своими стандартами, почему все не как у нормальных людей)
-                dateAndTime.add(Calendar.DAY_OF_WEEK, 1); // Добавляем день (1->2) (ставим понедельник)
+                weekStartCalendar.add(Calendar.WEEK_OF_MONTH, -1); // Возвращаем календарь на неделю назад (т.к. вс-первый день новой недели | шатал я этим америкосов со своими стандартами, почему все не как у нормальных людей)
+                weekStartCalendar.add(Calendar.DAY_OF_WEEK, 1); // Добавляем день (1->2) (ставим понедельник)
             }
             else{ // Если не ПН и не ВС
                 weekday -= 1; // Отнимаем день в счетчике
-                dateAndTime.add(Calendar.DAY_OF_WEEK, -1); // Отнимаем день в календаре
+                weekStartCalendar.add(Calendar.DAY_OF_WEEK, -1); // Отнимаем день в календаре
             }
         }
 
         // Приводим дату к виду дд.мм.гггг
-        Date date2 = dateAndTime.getTime();
+        Date date2 = weekStartCalendar.getTime();
         @SuppressLint("SimpleDateFormat") String dateStr = new SimpleDateFormat("dd.MM.yyyy").format(date2);
 
         // Получаем номер недели из базы данных и обновляем на главной странице
@@ -69,16 +73,16 @@ public class ChangeDay {
         }
         else{ // Если недели нет в базе данных
             Toast.makeText(act, R.string.Not_find_week, Toast.LENGTH_LONG).show(); // Выводим сообщение об ошибке выбора даты
-            dateAndTime = Calendar.getInstance(); // Ставим текущую дату
+            chosenDateCalendar = Calendar.getInstance(); // Ставим текущую дату
             setInitialDateTime(); // Обновляем данные
         }
     }
 
     // установка обработчика выбора даты
     DatePickerDialog.OnDateSetListener d = (view, year, monthOfYear, dayOfMonth) -> {
-        dateAndTime.set(Calendar.YEAR, year);
-        dateAndTime.set(Calendar.MONTH, monthOfYear);
-        dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        chosenDateCalendar.set(Calendar.YEAR, year);
+        chosenDateCalendar.set(Calendar.MONTH, monthOfYear);
+        chosenDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         setInitialDateTime();
     };
 }

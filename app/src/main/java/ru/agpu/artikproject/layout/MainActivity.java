@@ -145,6 +145,9 @@ public class MainActivity extends AppCompatActivity {
         new EditTextRaspSearch_Listener(this, rasp_search_edit);
 
         // Отслеживание нажатий на смену даты
-        findViewById(R.id.subtitle).setOnClickListener(view -> new ChangeDay(MainActivity.this).setDate());
+        findViewById(R.id.subtitle).setOnClickListener(view -> {
+            new ChangeDay(MainActivity.this).setDate();
+            view.startAnimation(animScale);
+        });
     }
 }
