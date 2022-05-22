@@ -61,7 +61,7 @@
     <string name="Theme_light">Light</string>
     <string name="theme_apply">Restart the app to apply the theme</string>
     <string name="day_off">DAY OFF.\n\nLooks like someone has a day off today…\nIt\'s time to think about rest and enjoy the beauties of this world…</string>
-    <string name="pasha_god">God, let me close this session!</string>
+    <string name="pasha_god">Application Theme</string>
     <string name="ficha_count">Easter eggs found:</string>
     <string name="go_to_settings">You got an easter egg! Go to settings!</string>
     <string name="Operation_canceled">Operation canceled by user</string>
@@ -94,4 +94,8 @@
     <string name="Not_find_week">The week was not found in the database</string>
     <string name="Curent_day">It\'s</string>
     <string name="donate">Help with uploading to PlayMarket</string>
+    <string name="about_app">About the app</string>
+    <string name="Terms_of_use">Terms of Use</string>
+    <string name="Leave_a_review">Leave a review</string>
+    <string name="an_update_is_available">an update is available!</string>
 </resources>

@@ -5,4 +5,5 @@
     <color name="button_color">#AA2e327b</color>
     <color name="custom_dialog_color">#FE0B2A4C</color>
     <color name="custom_dialog_color2">#CC111111</color>
+    <color name="update_btn">#0026E4</color>
 </resources>

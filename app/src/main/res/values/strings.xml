@@ -12,7 +12,7 @@
     <string name="Back">Назад</string>
     <string name="Forward">Вперед</string>
     <string name="Notify_about_changes">Уведомлять об изменениях</string>
-    <string name="settings_main_text">Выберите тему приложения:</string>
+    <string name="settings_main_text">Тема приложения</string>
     <string name="Audiences">Аудитории</string>
     <string name="adress_main">Главный корпус  по ул. Р. Люксембург, 159</string>
     <string name="adress_zaochka">Корпус по ул. Кирова 50 (Заочка)</string>
@@ -101,4 +101,9 @@
     <string name="Not_find_week">Неделя не была найдена в базе данных</string>
     <string name="Curent_day">Сейчас</string>
     <string name="donate">Помочь с выгрузкой в PlayMarket</string>
+    <string name="about_app">О приложении</string>
+    <string name="Terms_of_use">Условия использования</string>
+    <string name="Github" translatable="false">Github</string>
+    <string name="Leave_a_review">Оставить отзыв</string>
+    <string name="an_update_is_available">доступно обновление!</string>
 </resources>

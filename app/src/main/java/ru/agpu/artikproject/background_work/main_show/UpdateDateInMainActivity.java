@@ -12,7 +12,7 @@ import ru.agpu.artikproject.layout.MainActivity;
 
 public class UpdateDateInMainActivity {
     /**
-     * Устанавливает текущую неделю на главном экране
+     * Устанавливает дату на главном экране
      * @param act Активити
      */
     public UpdateDateInMainActivity(Activity act){

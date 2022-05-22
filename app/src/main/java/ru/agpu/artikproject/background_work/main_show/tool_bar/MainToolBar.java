@@ -22,7 +22,6 @@ import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import java.util.Random;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CustomAlertDialog;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
 import ru.agpu.artikproject.background_work.debug.Device_info;
@@ -58,13 +57,9 @@ public class MainToolBar {
                     new SectionDrawerItem().withName(R.string.drawer_item_settings),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(3),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_delete).withIcon(FontAwesome.Icon.faw_remove).withIdentifier(5),
-                    new SecondaryDrawerItem().withName(R.string.drawer_item_github).withIcon(FontAwesome.Icon.faw_question).withIdentifier(6),
                     new DividerDrawerItem(),
-                    new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github).withIdentifier(4),
                     new SecondaryDrawerItem().withName(R.string.donate).withIcon(FontAwesome.Icon.faw_ruble).withIdentifier(12),
                     new DividerDrawerItem(),
-                    new SecondaryDrawerItem().withName(R.string.feedback).withIcon(FontAwesome.Icon.faw_question_circle).withIdentifier(7),
-                    new SecondaryDrawerItem().withName(R.string.app_info).withIcon(FontAwesome.Icon.faw_exclamation_circle).withIdentifier(8),
                     new SecondaryDrawerItem().withName(context.getResources().getString(R.string.version) + ": " + Device_info.getAppVersion(context)).setEnabled(false)
             )
             .withOnDrawerItemClickListener((parent, view, position, id, drawerItem) -> {
@@ -84,33 +79,8 @@ public class MainToolBar {
                             act.startActivity(intent);
                             MainActivity.drawerResult.setSelection(0);
                             break;
-                        case (4):
-                            MainActivity.drawerResult.setSelection(0);
-                            act.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases")));
-                            MainActivity.drawerResult.setSelection(0);
-                            break;
                         case (5): // Если нажали на кнопку удаления
                             CustomAlertDialog cdd = new CustomAlertDialog(act, "delete");
-                            cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
-                            cdd.show();
-                            MainActivity.drawerResult.setSelection(0);
-                            break;
-                        case (6):
-                            MainActivity.drawerResult.setSelection(0);
-                            try { // Проверка обновлений
-                                new CheckAppUpdate(act, true, true).start();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            break;
-                        case (7):
-                            cdd = new CustomAlertDialog(act, "feedback");
-                            cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
-                            cdd.show();
-                            MainActivity.drawerResult.setSelection(0);
-                            break;
-                        case (8):
-                            cdd = new CustomAlertDialog(act, "about");
                             cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
                             cdd.show();
                             MainActivity.drawerResult.setSelection(0);

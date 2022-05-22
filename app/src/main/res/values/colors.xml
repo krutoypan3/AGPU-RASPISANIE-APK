@@ -30,4 +30,5 @@
     <color name="widget_text_color_dark">@color/white</color>
     <color name="widget_secondary_text_color_light">@color/coal</color>
     <color name="widget_secondary_text_color_dark">@color/arkt_iva</color>
+    <color name="update_btn">@color/sea</color>
 </resources>

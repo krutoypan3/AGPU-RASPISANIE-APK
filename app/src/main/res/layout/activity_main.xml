@@ -25,6 +25,17 @@
             android:transitionName="actionBar"
             app:titleTextColor="?android:textColorPrimary" />
 
+        <ImageView
+            android:id="@+id/update_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/ic_baseline_arrow_circle_up_24"
+            android:visibility="invisible"
+            android:elevation="5dp"
+            android:layout_width="35dp"
+            android:layout_margin="5dp"
+            android:layout_height="35dp" />
+
         <TextView
             android:id="@+id/main_activity_text"
             android:layout_width="match_parent"
