@@ -62,7 +62,6 @@ public class ZachBook  extends Thread {
         this.act = act;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void run() {
         try{// Проверяем переданные параметры, чтобы они не были пустыми

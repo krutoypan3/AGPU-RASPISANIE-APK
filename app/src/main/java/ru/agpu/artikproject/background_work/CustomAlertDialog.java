@@ -34,7 +34,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
     public EditText edit_text;
     public String new_main_text, new_body_text;
     public Uri uri;
-    public final String dialog_type;
+    public String dialog_type;
     public ListView list_view;
 
     /**

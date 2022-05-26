@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_activity_start_layout"
+    android:background="@drawable/background_light">
+
+    <!-- Добро пожаловать -->
+    <TextView
+        android:id="@+id/main_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:text="@string/EIOS"
+        android:textAppearance="@style/text_h2_style"
+        android:lineSpacingExtra="9sp"
+        android:gravity="center_horizontal|top"
+        />
+
+    <!-- Давайте сначала определим, кто вы -->
+    <TextView
+        android:id="@+id/second_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="4sp"
+        android:text="@string/You_have_account_EIOS"
+        android:textAppearance="@style/text_style"
+        android:translationY="-2.25sp" />
+
+    <!-- Buttons -->
+    <RelativeLayout
+        android:id="@+id/yes_i_have_data_btn"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_below="@id/second_text"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_blue"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:text="@string/yes_i_have_data"
+            android:textAppearance="@style/text_style_caps"
+            android:textColor="@color/gold" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/Im_not_sure_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:padding="20dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_blue_invert"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/yes_i_have_data_btn">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textAppearance="@style/text_style_caps"
+            android:textColor="@color/primary_btn"
+            android:text="@string/Im_not_sure"
+            />
+    </RelativeLayout>
+</RelativeLayout>

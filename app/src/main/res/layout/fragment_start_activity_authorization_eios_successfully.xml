@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_activity_start_layout"
+    android:background="@drawable/background_light">
+
+    <!-- Добро пожаловать -->
+    <TextView
+        android:id="@+id/main_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="150dp"
+        android:text="@string/Welcome"
+        android:textAppearance="@style/text_h2_style"
+        android:lineSpacingExtra="9sp"
+        android:gravity="center_horizontal|top"
+        />
+
+
+    <TextView
+        android:id="@+id/Your_group"
+        android:text="@string/Your_group"
+        android:layout_below="@id/main_text"
+        android:textSize="16sp"
+        android:padding="10dp"
+        android:textAppearance="@style/text_style"
+        android:layout_marginStart="30dp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <!-- Buttons -->
+    <RelativeLayout
+        android:id="@+id/Yes_go_to_the_schedule_btn"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_below="@id/main_text"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_blue"
+        android:padding="20dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:text="@string/Yes_go_to_the_schedule"
+            android:textAppearance="@style/text_style_caps"
+            android:textColor="@color/gold" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/No_find_a_schedule_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:padding="20dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_blue_invert"
+        android:layout_below="@id/Yes_go_to_the_schedule_btn"
+        android:layout_marginBottom="20dp"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textAppearance="@style/text_style_caps"
+            android:textColor="@color/primary_btn"
+            android:text="@string/No_find_a_schedule"
+            />
+    </RelativeLayout>
+</RelativeLayout>

@@ -22,6 +22,7 @@ import java.util.Objects;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckAppUpdate;
+import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
@@ -37,6 +38,7 @@ import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lis
 import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
 import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
+import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
 
 public class MainActivity extends AppCompatActivity {
@@ -149,5 +151,16 @@ public class MainActivity extends AppCompatActivity {
             new ChangeDay(MainActivity.this).setDate();
             view.startAnimation(animScale);
         });
+
+        if (getIntent().getBooleanExtra("start_rasp", false)){
+            Intent intent2 = new Intent(getApplicationContext(), Raspisanie_show.class);
+            if (CheckInternetConnection.getState(getApplicationContext())){
+                MainActivity.selectedItem = getIntent().getStringExtra("selectedItem");
+                MainActivity.selectedItem_type = getIntent().getStringExtra("selectedItem_type");
+                MainActivity.selectedItem_id = getIntent().getStringExtra("selectedItem_id");
+                new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
+            }
+            startActivity(intent2);
+        }
     }
 }
