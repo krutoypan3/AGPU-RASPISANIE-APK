@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_activity_start_layout"
+    android:background="@drawable/background_light">
+
+    <!-- Добро пожаловать -->
+    <TextView
+        android:id="@+id/main_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="12dp"
+        android:text="@string/What_is_hidden_in_the_name_of_the_group"
+        android:textAppearance="@style/text_h2_style"
+        android:lineSpacingExtra="9sp"
+        android:gravity="center_horizontal|top"
+        />
+
+    <ImageView
+        android:id="@+id/what_is_what"
+        android:adjustViewBounds="true"
+        android:padding="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_text"
+        android:src="@drawable/what_is_what" />
+
+    <!-- Buttons -->
+    <RelativeLayout
+        android:id="@+id/text1_lay"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_below="@id/what_is_what"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/button_blue"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gold"
+            android:text="1: "
+            android:textAppearance="@style/text_style_caps"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_toEndOf="@id/text1"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gold"
+            android:text="@string/Correspondence_form_of_study"
+            android:textAppearance="@style/text_style_caps"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/text2_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:padding="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_blue"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text1_lay">
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gold"
+            android:textAppearance="@style/text_style_caps"
+            android:text="2: "
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gold"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@id/text2"
+            android:textAppearance="@style/text_style_caps"
+            android:text="@string/Group"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/text3_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:padding="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_blue"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text2_lay">
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gold"
+            android:textAppearance="@style/text_style_caps"
+            android:text="3: "
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gold"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@id/text3"
+            android:textAppearance="@style/text_style_caps"
+            android:text="@string/Course_of_study"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/text4_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:padding="10dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/button_blue"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/text3_lay">
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gold"
+            android:textAppearance="@style/text_style_caps"
+            android:text="4: "
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gold"
+            android:layout_centerHorizontal="true"
+            android:layout_toEndOf="@id/text4"
+            android:textAppearance="@style/text_style_caps"
+            android:text="@string/Group_number"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -24,7 +24,7 @@ public class FragmentGroup extends Fragment {
         // Установка нового фона [и ТУТ НЕТ затемнителя] | Должно быть после setContentView
         view.findViewById(R.id.fragment_activity_start_layout).setBackground(CustomBackground.getBackground(view.getContext()));
 
-        StartActivity.FRAGMENT = StartActivity.FRAGMENT_GROUP;
+        StartActivity.FRAGMENT = StartActivity.BACK_TO_EIOS;
 
         // Я знаю название группы
         view.findViewById(R.id.I_know_group_name_btn).setOnClickListener(view1 -> {

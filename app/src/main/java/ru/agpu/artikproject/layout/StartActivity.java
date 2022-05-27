@@ -16,36 +16,30 @@ import ru.agpu.artikproject.background_work.theme.Theme;
 public class StartActivity extends AppCompatActivity {
     public static String FORM_OF_TRAINING;
     public static int FRAGMENT;
-    public final static int FRAGMENT_WELCOME = 1;
-    public final static int FRAGMENT_SELECT_TRAINING = 4;
-    public final static int FRAGMENT_SELECT_GROUP = 2;
-    public final static int FRAGMENT_GROUP = 3;
-    public final static int FRAGMENT_FORM_OF_TRAINING = 2;
-    public final static int FRAGMENT_EIOS = 5;
-    public final static int FRAGMENT_EIOS_AUTHORIZATION = 3;
-    public final static int FRAGMENT_EIOS_SUCCESSFULLY = 7;
+    public final static int BACK_TO_FORM_OF_TRAINING = 4;
+    public final static int BACK_TO_EIOS = 3;
+    public final static int BACK_TO_GROUP = 2;
+    public final static int BACK_TO_WELCOME = 5;
+    public final static int BACK_TO_AUTHOTIZATION = 7;
 
     @Override
     public void onBackPressed(){
         switch (FRAGMENT){
-            case(FRAGMENT_WELCOME):
-                break;
-            case(FRAGMENT_FORM_OF_TRAINING | FRAGMENT_SELECT_GROUP):
+            case(BACK_TO_GROUP):
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentGroup.class, null).commit();
                 break;
-            case(FRAGMENT_GROUP | FRAGMENT_EIOS_AUTHORIZATION):
+            case(BACK_TO_EIOS):
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentEIOS.class, null).commit();
                 break;
-            case(FRAGMENT_SELECT_TRAINING):
+            case(BACK_TO_FORM_OF_TRAINING):
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentFormOfTraining.class, null).commit();
                 break;
-            case(FRAGMENT_EIOS):
+            case(BACK_TO_WELCOME):
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentWelcome.class, null).commit();
                 break;
-            case(FRAGMENT_EIOS_SUCCESSFULLY):
+            case(BACK_TO_AUTHOTIZATION):
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentAuthorizationEIOS.class, null).commit();
                 break;
-
         }
     }
 

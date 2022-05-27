@@ -39,7 +39,7 @@ public class FragmentAuthorizationEIOSSuccessfully extends Fragment {
         new_text = getString(R.string.Your_group) + ": " + MySharedPreferences.get(view.getContext(), "user_info_group_name", "");
         textView.setText(new_text);
 
-        StartActivity.FRAGMENT = StartActivity.FRAGMENT_EIOS_AUTHORIZATION;
+        StartActivity.FRAGMENT = StartActivity.BACK_TO_EIOS;
 
         // Да, перейти к расписанию
         view.findViewById(R.id.Yes_go_to_the_schedule_btn).setOnClickListener(view1 -> {

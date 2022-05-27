@@ -37,7 +37,7 @@ public class FragmentAuthorizationEIOS extends Fragment {
         EditText Login_EIOS = view.findViewById(R.id.Login_EIOS);
         EditText Password_EIOS = view.findViewById(R.id.Password_EIOS);
 
-        StartActivity.FRAGMENT = StartActivity.FRAGMENT_EIOS_AUTHORIZATION;
+        StartActivity.FRAGMENT = StartActivity.BACK_TO_EIOS;
 
         // Продолжить (кнопка авторизации)
         view.findViewById(R.id.yes_i_have_data_btn).setOnClickListener(view1 -> {
@@ -58,6 +58,8 @@ public class FragmentAuthorizationEIOS extends Fragment {
                             Runnable waiting_task2 = () -> {
                                 try {
                                     userInfo.join();
+                                    MySharedPreferences.put(view.getContext(), "EIOS_LOGIN", Login);
+                                    MySharedPreferences.put(view.getContext(), "EIOS_PASSWORD", Password);
                                     MySharedPreferences.put(view.getContext(), "user_info_fio", userInfo.getUserFIO());
                                     MySharedPreferences.put(view.getContext(), "user_info_group_name", userInfo.getGroupName());
                                     MySharedPreferences.put(view.getContext(), "user_info_group_id", userInfo.getGroupId());

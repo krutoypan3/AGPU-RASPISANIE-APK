@@ -24,7 +24,7 @@ public class FragmentEIOS extends Fragment {
         // Установка нового фона [и ТУТ НЕТ затемнителя] | Должно быть после setContentView
         view.findViewById(R.id.fragment_activity_start_layout).setBackground(CustomBackground.getBackground(view.getContext()));
 
-        StartActivity.FRAGMENT = StartActivity.FRAGMENT_EIOS;
+        StartActivity.FRAGMENT = StartActivity.BACK_TO_WELCOME;
 
         // Да мне выдали данные для ЭИОС
         view.findViewById(R.id.yes_i_have_data_btn).setOnClickListener(view1 -> {

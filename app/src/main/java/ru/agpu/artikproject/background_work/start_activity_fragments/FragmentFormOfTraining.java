@@ -24,7 +24,7 @@ public class FragmentFormOfTraining extends Fragment {
         // Установка нового фона [и ТУТ НЕТ затемнителя] | Должно быть после setContentView
         view.findViewById(R.id.fragment_activity_start_layout).setBackground(CustomBackground.getBackground(view.getContext()));
 
-        StartActivity.FRAGMENT = StartActivity.FRAGMENT_FORM_OF_TRAINING;
+        StartActivity.FRAGMENT = StartActivity.BACK_TO_GROUP;
 
         // Очная форма обучения
         view.findViewById(R.id.Full_time_btn).setOnClickListener(view1 -> {

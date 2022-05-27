@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -42,7 +43,13 @@ public class FragmentSelectGroup extends Fragment {
         ListView listView = view.findViewById(R.id.list_groups);
         EditText group_name_et = view.findViewById(R.id.group_name);
 
-        StartActivity.FRAGMENT = StartActivity.FRAGMENT_SELECT_GROUP;
+        StartActivity.FRAGMENT = StartActivity.BACK_TO_GROUP;
+
+        view.findViewById(R.id.help_group).setOnClickListener(view12 -> {
+            view12.findViewById(R.id.help_group).setClickable(false);
+            view12.findViewById(R.id.help_group).startAnimation(AnimationUtils.loadAnimation(view12.getContext(), R.anim.scale));
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentGroupHelp.class, null).commit();
+        });
 
         group_name_et.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {} // До изменения поля
