@@ -237,5 +237,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
+        <Button
+            android:id="@+id/admin_btn"
+            android:layout_margin="5dp"
+            android:text="@string/admin_panel"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/update_layout"
+            android:background="@drawable/small_button"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </RelativeLayout>

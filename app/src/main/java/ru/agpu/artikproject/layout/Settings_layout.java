@@ -112,6 +112,7 @@ public class Settings_layout extends AppCompatActivity {
         // Отслеживание нажатий на кнопку гитхаба
         findViewById(R.id.GitHub_btn).setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases"))));
 
+        findViewById(R.id.admin_btn).setOnClickListener(view -> startActivity(new Intent(getApplicationContext(), Admin_panel.class)));
     }
 
     @Override

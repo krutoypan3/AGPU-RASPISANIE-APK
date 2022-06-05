@@ -90,6 +90,7 @@
         <activity android:name=".background_work.image_utils.GalleryUtil"/>
         <activity android:name="ru.agpu.artikproject.layout.BuildingInfo"/>
         <activity android:name="ru.agpu.artikproject.layout.Zachetka_layout"/>
+        <activity android:name="ru.agpu.artikproject.layout.Admin_panel"/>
     </application>
 
 </manifest>

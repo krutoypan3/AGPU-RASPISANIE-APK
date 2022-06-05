@@ -135,4 +135,6 @@
     <string name="Correspondence_form_of_study">Correspondence form of study</string>
     <string name="Course_of_study">Course of study</string>
     <string name="Group_number">Group number</string>
+    <string name="admin_panel">Admin panel</string>
+    <string name="Log_in_to_the_Admin_panel">Log in to the Admin panel</string>
 </resources>

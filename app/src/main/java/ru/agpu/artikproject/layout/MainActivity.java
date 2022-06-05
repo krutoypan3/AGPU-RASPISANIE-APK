@@ -26,6 +26,7 @@ import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
+import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.debug.SendInfoToServer;
 import ru.agpu.artikproject.background_work.main_show.ChangeDay;
 import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
     public static Drawer.Result drawerResult = null;
     public static Toolbar toolbar = null;
     public static SQLiteDatabase sqLiteDatabase;
+
+
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
     public void onDestroy(){
@@ -162,5 +165,9 @@ public class MainActivity extends AppCompatActivity {
             }
             startActivity(intent2);
         }
+
+        // Определяет первый запуск приложения**
+        if(MySharedPreferences.get(getApplicationContext(), "IsFirstAppStart", true))
+            MySharedPreferences.put(getApplicationContext(), "IsFirstAppStart", false);
     }
 }

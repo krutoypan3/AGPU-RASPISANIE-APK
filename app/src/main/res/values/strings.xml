@@ -143,4 +143,6 @@
     <string name="Correspondence_form_of_study">Заочная форма обучения</string>
     <string name="Course_of_study">Курс обучения</string>
     <string name="Group_number">Номер группы</string>
+    <string name="admin_panel">Панель администратора</string>
+    <string name="Log_in_to_the_Admin_panel">Вход в панель администратора</string>
 </resources>
