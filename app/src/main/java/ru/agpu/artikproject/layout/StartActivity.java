@@ -8,15 +8,17 @@ import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentAuthorizationEIOS;
 import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentEIOS;
-import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentFormOfTraining;
 import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentGroup;
 import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentWelcome;
 import ru.agpu.artikproject.background_work.theme.Theme;
 
+/**
+ * Стартовое активити - в нем определяется что будет происходить при нажатии на кнопку назад в
+ * разных фрагментах, а так же здесь хранятся различные временные данные необходимые фрагментам
+ */
 public class StartActivity extends AppCompatActivity {
-    public static String FORM_OF_TRAINING;
-    public static int FRAGMENT;
-    public final static int BACK_TO_FORM_OF_TRAINING = 4;
+    public static int FRAGMENT; // Номер открытого фрагмента
+    public static String SELECTED_GROUP = ""; // Выбранная группа
     public final static int BACK_TO_EIOS = 3;
     public final static int BACK_TO_GROUP = 2;
     public final static int BACK_TO_WELCOME = 5;
@@ -31,9 +33,6 @@ public class StartActivity extends AppCompatActivity {
             case(BACK_TO_EIOS):
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentEIOS.class, null).commit();
                 break;
-            case(BACK_TO_FORM_OF_TRAINING):
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentFormOfTraining.class, null).commit();
-                break;
             case(BACK_TO_WELCOME):
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentWelcome.class, null).commit();
                 break;
@@ -45,12 +44,10 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MainActivity.sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
-        Theme.setting(this);
-
+        MainActivity.sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase(); // Подключаемся к базе данных
+        Theme.setting(this); // Применяем тему к приложению
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_activity);
-
    }
 }

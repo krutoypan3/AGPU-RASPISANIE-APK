@@ -8,17 +8,21 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
+import ru.agpu.artikproject.background_work.TextDetranslit;
 import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
 
+/**
+ * Класс, который получает информацию о пользователю по токену
+ */
 public class GetUserInfo extends Thread{
-    private String USER_ID;
-    private String FIO;
-    private String FIRST_NAME;
-    private String LAST_NAME;
-    private String MIDDLE_NAME;
-    private String GROUP_NAME;
-    private String GROUP_ID;
-    private final String accessToken;
+    private String USER_ID; // ID пользователя
+    private String FIO; // Фамилия Имя Отчество [Я СКАЗАЛ ФАМИЛИЯ ИМЯ ОТЧЕСТВО!]
+    private String FIRST_NAME; // Имя
+    private String LAST_NAME; // Фамилия
+    private String MIDDLE_NAME; // Отчество
+    private String GROUP_NAME; // Имя группы
+    private String GROUP_ID; // ID Группы
+    private final String accessToken; // Токен пользователя
 
     public GetUserInfo(String accessToken){
         this.accessToken = accessToken;
@@ -58,39 +62,18 @@ public class GetUserInfo extends Thread{
                     .lines().collect(Collectors.joining("\n"));
 
             GROUP_NAME = text.split("\"group\":")[1].split("item1\":\"")[1].split("\"")[0];
-            GROUP_NAME = detranslit(GROUP_NAME);
+            GROUP_NAME = new TextDetranslit().detranslit(GROUP_NAME);
             for (int i = 0; i < GetFullGroupList_Online.faculties_group_name.size(); i++)
                 for (int j = 0; j < GetFullGroupList_Online.faculties_group_name.get(i).size(); j++)
                     if (GetFullGroupList_Online.faculties_group_name.get(i).get(j).item.equalsIgnoreCase(GROUP_NAME)) {
                         GROUP_ID = GetFullGroupList_Online.faculties_group_id.get(i).get(j).item;
                         return;
                     }
-            GROUP_ID = "69"; // TODO это затычка, которая сработает если все плохо
+            GROUP_ID = "-1"; // TODO это затычка, которая сработает если все плохо (не будет найден id группы)
         }
         catch (Exception e){
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Если вы читаете это то значит и на вашем берегу попался *плохой* человек который вбивает
-     * транслитом текст, который не стоило бы. Дай боже вам здоровья. Аминь!
-     * @param text Текст, который вам нужно *исправить*
-     * @return Исправленный текст
-     */
-    private String detranslit(String text){
-        text = text.replace("A", "А");
-        text = text.replace("B", "В");
-        text = text.replace("C", "С");
-        text = text.replace("E", "Е");
-        text = text.replace("H", "Н");
-        text = text.replace("K", "К");
-        text = text.replace("M", "М");
-        text = text.replace("O", "О");
-        text = text.replace("P", "Р");
-        text = text.replace("T", "Т");
-        text = text.replace("X", "Х");
-        return text;
     }
 
     public String getUserId(){

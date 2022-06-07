@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/fragment_admin_panel"
+    android:background="@drawable/background_light">
+
+    <!-- Добро пожаловать -->
+    <TextView
+        android:id="@+id/main_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/Choose_the_direction_of_training"
+        android:textAppearance="@style/text_style"
+        android:lineSpacingExtra="9sp"
+        android:gravity="center_horizontal|top"
+        />
+    <TextView
+        android:id="@+id/second_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_text"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/error"
+        android:gravity="center_horizontal|top"
+        android:lineSpacingExtra="4sp"
+        android:textAppearance="@style/text_style"
+        android:translationY="-2.25sp" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/second_text"
+        />
+
+</RelativeLayout>

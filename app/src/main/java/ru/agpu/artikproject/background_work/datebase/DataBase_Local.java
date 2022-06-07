@@ -12,7 +12,7 @@ public class DataBase_Local extends SQLiteOpenHelper {
      * @param context Контекст приложения
      */
     public DataBase_Local(Context context) {
-        super(context, DATABASE_NAME, null, 6);
+        super(context, DATABASE_NAME, null, 7);
     }
 
     @Override
@@ -46,8 +46,7 @@ public class DataBase_Local extends SQLiteOpenHelper {
                     "\t\"r_distant\"\tTEXT\n" +
                     ")");
         }
-        catch (Exception ignored){
-        }
+        catch (Exception ignored){}
         // База данных с избранным расписанием
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS \"rasp_update\" (\n" +
@@ -56,8 +55,7 @@ public class DataBase_Local extends SQLiteOpenHelper {
                     "\t\"r_selectedItem\"\tTEXT\n" +
                     ")");
         }
-        catch (Exception ignored){
-        }
+        catch (Exception ignored){}
         // Таблица с неделями
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS \"weeks_list\" (\n" +
@@ -66,14 +64,21 @@ public class DataBase_Local extends SQLiteOpenHelper {
                     "\t\"week_po\"\tTEXT\n" +
                     ")");
         }
-        catch (Exception ignored){
-        }
+        catch (Exception ignored){}
+        // Таблица с группами
         try{
             db.execSQL("CREATE TABLE IF NOT EXISTS \"groups_list\" (\n" +
                     "\t\"faculties_name\"\tTEXT,\n" +
                     "\t\"faculties_group_name\"\tTEXT,\n" +
                     "\t\"faculties_group_id\"\tTEXT\n" +
                     ")");
+        }
+        catch (Exception ignored){}
+        // Таблица с направлениями и их группами
+        try {
+            db.execSQL("CREATE TABLE IF NOT EXISTS \"directions_list\" (\n" +
+                    "\t\"direction_name\"\tTEXT,\n" +
+                    "\t\"group_name\"\tTEXT\n)");
         }
         catch (Exception ignored){}
     }

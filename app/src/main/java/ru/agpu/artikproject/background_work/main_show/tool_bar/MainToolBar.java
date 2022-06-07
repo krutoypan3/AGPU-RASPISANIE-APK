@@ -58,8 +58,6 @@ public class MainToolBar {
                     new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(3),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_delete).withIcon(FontAwesome.Icon.faw_remove).withIdentifier(5),
                     new DividerDrawerItem(),
-                    new SecondaryDrawerItem().withName(R.string.donate).withIcon(FontAwesome.Icon.faw_ruble).withIdentifier(12),
-                    new DividerDrawerItem(),
                     new SecondaryDrawerItem().withName(context.getResources().getString(R.string.version) + ": " + Device_info.getAppVersion(context)).setEnabled(false)
             )
             .withOnDrawerItemClickListener((parent, view, position, id, drawerItem) -> {
@@ -99,10 +97,6 @@ public class MainToolBar {
                             MainActivity.drawerResult.setSelection(0);
                             intent = new Intent(context, Zachetka_layout.class);
                             act.startActivity(intent);
-                            break;
-                        case (12):
-                            MainActivity.drawerResult.setSelection(0);
-                            act.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.sberbank.ru/ru/person/dl/jc?linkname=vOZKjMHL4expBFS5u")));
                             break;
                     }
                 }

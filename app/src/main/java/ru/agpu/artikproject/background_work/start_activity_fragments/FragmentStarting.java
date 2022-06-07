@@ -10,11 +10,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.GetDirectionsList;
 import ru.agpu.artikproject.background_work.Starter_MainActivity;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
 
+/**
+ * Фрагмент, который определяет первый запуск приложения и, если это первый старт, запускает
+ * следующий фрагмент.
+ */
 public class FragmentStarting extends Fragment {
 
     public FragmentStarting() {
@@ -29,14 +34,15 @@ public class FragmentStarting extends Fragment {
 
         // Если это первый запуск приложения
         if (MySharedPreferences.get(getContext(),"IsFirstAppStart", true)){
+            MySharedPreferences.put(getContext(), "IsFirstAppStart", false);
+            new GetDirectionsList().getDirectionsFromFirebase();
             // Запускаем фрагмент с приветствием
             new GetFullGroupList_Online().start(); // Получение полного списка групп и закидывание их в адаптер
             getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentWelcome.class, null).commit();
         }
-        else { // Иначе показываем анимацию запускаи переходим в приложение
+        else { // Иначе показываем анимацию запуска и переходим в приложение
             ImageView loading_ico = view.findViewById(R.id.loading_ico);
             new Starter_MainActivity((Activity) view.getContext(), loading_ico).start();
         }
     }
-
 }

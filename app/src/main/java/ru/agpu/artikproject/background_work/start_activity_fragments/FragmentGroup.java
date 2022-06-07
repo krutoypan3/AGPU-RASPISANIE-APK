@@ -12,6 +12,9 @@ import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.layout.StartActivity;
 
+/**
+ * Фрагмент, на котором предоставляется выбор: "Выбор группы" или "Выбор направления"
+ */
 public class FragmentGroup extends Fragment {
 
     public FragmentGroup() {
@@ -37,10 +40,8 @@ public class FragmentGroup extends Fragment {
         view.findViewById(R.id.I_know_the_direction_of_training_btn).setOnClickListener(view1 -> {
             view.findViewById(R.id.I_know_the_direction_of_training_btn).setClickable(false);
             view.findViewById(R.id.I_know_the_direction_of_training_btn).startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.scale));
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentFormOfTraining.class, null).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentSelectTraining.class, null).commit();
         });
-
     }
-
 }
 

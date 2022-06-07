@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.TextDetranslit;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
@@ -25,8 +26,8 @@ import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.StartActivity;
 
 public class FragmentSelectGroup extends Fragment {
-    static ArrayList<ListViewItems> groups_name = new ArrayList<>();
-    static ArrayList<String> groups_id = new ArrayList<>();
+    static ArrayList<ListViewItems> groups_name = new ArrayList<>(); // Отсортированный список с названиями групп
+    static ArrayList<String> groups_id = new ArrayList<>(); // Отсортированный список с id групп
 
     // Тут вроде все готово
     public FragmentSelectGroup() {
@@ -45,38 +46,46 @@ public class FragmentSelectGroup extends Fragment {
 
         StartActivity.FRAGMENT = StartActivity.BACK_TO_GROUP;
 
+        // Прослушка нажатий на кнопку помощи с группой
         view.findViewById(R.id.help_group).setOnClickListener(view12 -> {
-            view12.findViewById(R.id.help_group).setClickable(false);
-            view12.findViewById(R.id.help_group).startAnimation(AnimationUtils.loadAnimation(view12.getContext(), R.anim.scale));
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentGroupHelp.class, null).commit();
+            view12.findViewById(R.id.help_group).setClickable(false); // Отключаем кнопку после нажатия
+            view12.findViewById(R.id.help_group).startAnimation(AnimationUtils.loadAnimation(view12.getContext(), R.anim.scale)); // Воспроизводим анимацию
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentGroupHelp.class, null).commit(); // Переходим к фрагменты с помощью с группой
         });
 
+        // Прослушиваем изменения текстового поля ввода группы
         group_name_et.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {} // До изменения поля
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {} // После изменения поля
             public void onTextChanged(CharSequence s, int start, int before, int count) { // Во время изменения поля
                 String search_group = group_name_et.getText().toString().trim().toLowerCase();
-                groups_name.clear();
-                groups_id.clear();
+                groups_name.clear(); // Очищаем списки с ранее отсортированными результатами
+                groups_id.clear(); // Так же очищаем отсортированные id
                 if (!(search_group.equals(""))) { // Если строка поиска не пустая
                     for (int i = 0; i < GetFullGroupList_Online.faculties_group_name.size(); i++){
                         for (int j = 0; j < GetFullGroupList_Online.faculties_group_name.get(i).size(); j++){
-                            if (GetFullGroupList_Online.faculties_group_name.get(i).get(j).item.toLowerCase().contains(search_group)){
-                                groups_id.add(GetFullGroupList_Online.faculties_group_id.get(i).get(j).item);
-                                groups_name.add(new ListViewItems(GetFullGroupList_Online.faculties_group_name.get(i).get(j).item));
+                            // Сравниваем "детранслированный" текст сохраненных групп с "детранслированным" текстом строки поиска
+                            if (new TextDetranslit().detranslit(GetFullGroupList_Online.faculties_group_name.get(i).get(j).item.toLowerCase()).contains(new TextDetranslit().detranslit(search_group))){
+                                groups_id.add(GetFullGroupList_Online.faculties_group_id.get(i).get(j).item); // Добавляем ID группы в отсортированный массив
+                                groups_name.add(new ListViewItems(GetFullGroupList_Online.faculties_group_name.get(i).get(j).item)); // Добавляем название группы в отсортированный массив
                             }
                         }
                     }
                 }
+                // После сортировки применяем адаптер с отсортированными группами
                 listView.setAdapter(new ListViewAdapter(view.getContext(), groups_name));
-                if (listView.getCount() == 0)
+                if (listView.getCount() == 0) // Если групп не было найдено
+                    // Делаем цвет строки поиска красным
                     group_name_et.setTextColor(view.getContext().getColor(R.color.error));
-                else
+                else // Возвращаем цвет строки поиска в исходное состояние
                     group_name_et.setTextColor(view.getContext().getColor(R.color.black));
             }
         });
 
+        group_name_et.setText(StartActivity.SELECTED_GROUP); // Устанавливаем ранее выбранную группу в поле ввода (если таковая есть)
+        // Прослушиваем нажатия на группы
         listView.setOnItemClickListener((adapterView, view1, i, l) -> {
+            // При нажатии на группу - открывается расписание с выбранной группой
             Intent intent = new Intent(act.getApplicationContext(), MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.putExtra("start_rasp", true);
@@ -85,7 +94,5 @@ public class FragmentSelectGroup extends Fragment {
             intent.putExtra("selectedItem", groups_name.get(i).item);
             act.startActivity(intent);
         });
-
     }
-
 }

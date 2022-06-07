@@ -17,6 +17,9 @@ import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.StartActivity;
 
+/**
+ * Фрагмент, в который отправляет пользователя после успешной авторизации в ЭИОС
+ */
 public class FragmentAuthorizationEIOSSuccessfully extends Fragment {
 
     public FragmentAuthorizationEIOSSuccessfully() {
@@ -29,36 +32,47 @@ public class FragmentAuthorizationEIOSSuccessfully extends Fragment {
         // Установка нового фона [и ТУТ НЕТ затемнителя] | Должно быть после setContentView
         view.findViewById(R.id.fragment_activity_start_layout).setBackground(CustomBackground.getBackground(view.getContext()));
 
-        Activity act = (Activity) view.getContext();
+        // Если, не дай боже, у нас не найден ID группы, то ищем его вручную
+        if (MySharedPreferences.get(view.getContext(), "user_info_group_id", "").equals("-1")){
+            // Удаляем первую букву Z и S (Удаляем сокращенки и заочки
+            // [Вместо SZВМ-ИВТ-3-1 будет показан список: ВМ-ИВТ-3-1, ZВМ-ИВТ-3-1, SZВМ-ИВТ-3-1],
+            // это нужно потому что группа может быть как SZВМ так и ZSВМ (короче - человеческий фактор (криворукие не могут определиться в каком порядке ставить буквы))
+            String group_name = MySharedPreferences.get(view.getContext(), "user_info_group_name", "").toUpperCase().replaceFirst("Z", "").replaceFirst("S", "");
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentSelectGroup.class, null).commit();
+            StartActivity.SELECTED_GROUP = group_name;
+        }
+        else{
+            Activity act = (Activity) view.getContext();
 
-        TextView main_text = view.findViewById(R.id.main_text);
-        String new_text = getString(R.string.Welcome) + ", " + MySharedPreferences.get(view.getContext(), "user_info_first_name", "");
-        main_text.setText(new_text);
+            TextView main_text = view.findViewById(R.id.main_text);
+            String new_text = getString(R.string.Welcome) + ", " + MySharedPreferences.get(view.getContext(), "user_info_first_name", "");
+            main_text.setText(new_text);
 
-        TextView textView = view.findViewById(R.id.Your_group);
-        new_text = getString(R.string.Your_group) + ": " + MySharedPreferences.get(view.getContext(), "user_info_group_name", "");
-        textView.setText(new_text);
+            TextView textView = view.findViewById(R.id.Your_group);
+            new_text = getString(R.string.Your_group) + ": " + MySharedPreferences.get(view.getContext(), "user_info_group_name", "").toUpperCase();
+            textView.setText(new_text);
 
-        StartActivity.FRAGMENT = StartActivity.BACK_TO_EIOS;
+            StartActivity.FRAGMENT = StartActivity.BACK_TO_EIOS;
 
-        // Да, перейти к расписанию
-        view.findViewById(R.id.Yes_go_to_the_schedule_btn).setOnClickListener(view1 -> {
-            view.findViewById(R.id.Yes_go_to_the_schedule_btn).setClickable(false);
-            view.findViewById(R.id.Yes_go_to_the_schedule_btn).startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.scale));
-            Intent intent = new Intent(act.getApplicationContext(), MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("start_rasp", true);
-            intent.putExtra("selectedItem_id", MySharedPreferences.get(view.getContext(), "user_info_group_id", ""));
-            intent.putExtra("selectedItem_type", "Group");
-            intent.putExtra("selectedItem", MySharedPreferences.get(view.getContext(), "user_info_group_name", ""));
-            act.startActivity(intent);
-        });
+            // Да, перейти к расписанию
+            view.findViewById(R.id.Yes_go_to_the_schedule_btn).setOnClickListener(view1 -> {
+                view.findViewById(R.id.Yes_go_to_the_schedule_btn).setClickable(false);
+                view.findViewById(R.id.Yes_go_to_the_schedule_btn).startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.scale));
+                Intent intent = new Intent(act.getApplicationContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("start_rasp", true);
+                intent.putExtra("selectedItem_id", MySharedPreferences.get(view.getContext(), "user_info_group_id", ""));
+                intent.putExtra("selectedItem_type", "Group");
+                intent.putExtra("selectedItem", MySharedPreferences.get(view.getContext(), "user_info_group_name", ""));
+                act.startActivity(intent);
+            });
 
-        // Нет, найти расписание
-        view.findViewById(R.id.No_find_a_schedule_btn).setOnClickListener(view1 -> {
-            view.findViewById(R.id.No_find_a_schedule_btn).setClickable(false);
-            view.findViewById(R.id.No_find_a_schedule_btn).startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.scale));
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentGroup.class, null).commit();
-        });
+            // Нет, найти расписание
+            view.findViewById(R.id.No_find_a_schedule_btn).setOnClickListener(view1 -> {
+                view.findViewById(R.id.No_find_a_schedule_btn).setClickable(false);
+                view.findViewById(R.id.No_find_a_schedule_btn).startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.scale));
+                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentGroup.class, null).commit();
+            });
+        }
     }
 }

@@ -5,6 +5,11 @@
     android:id="@+id/fragment_activity_start_layout"
     android:background="@drawable/background_light">
 
+    <RelativeLayout
+        android:id="@+id/background_darker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_darker">
     <!-- Добро пожаловать -->
     <TextView
         android:id="@+id/main_text"
@@ -19,7 +24,15 @@
         android:lineSpacingExtra="9sp"
         android:gravity="center_horizontal|top"
         />
-
+        <ImageView
+            android:id="@+id/help_group"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_baseline_touch_app_24"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            />
     <RelativeLayout
         android:id="@+id/training_name_example_layout"
         android:layout_marginTop="30dp"
@@ -45,7 +58,9 @@
         android:id="@+id/list_training"
         android:layout_below="@id/training_name_example_layout"
         android:layout_margin="12dp"
+        android:dividerHeight="1dp"
+        android:divider="@color/alert_dialog_divider_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+    </RelativeLayout>
 </RelativeLayout>
