@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.zach_book;
+package ru.agpu.artikproject.background_work.main_show.fragments.zach_book;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

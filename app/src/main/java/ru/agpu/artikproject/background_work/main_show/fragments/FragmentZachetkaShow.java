@@ -18,7 +18,7 @@ import java.io.IOException;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
-import ru.agpu.artikproject.background_work.zach_book.ZachBook;
+import ru.agpu.artikproject.background_work.main_show.fragments.zach_book.ZachBook;
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class FragmentZachetkaShow extends Fragment {

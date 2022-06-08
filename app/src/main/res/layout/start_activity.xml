@@ -1,6 +1,20 @@
-<androidx.fragment.app.FragmentContainerView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_container_view"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="ru.agpu.artikproject.background_work.start_activity_fragments.FragmentStarting" />
+    android:id="@+id/fragment_activity_start_layout"
+    android:background="@drawable/background_light">
+
+    <RelativeLayout
+        android:id="@+id/background_darker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_darker">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_container_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:name="ru.agpu.artikproject.background_work.start_activity_fragments.FragmentStarting" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -21,7 +21,6 @@ import ru.agpu.artikproject.background_work.TextDetranslit;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
-import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.StartActivity;
 
@@ -37,8 +36,6 @@ public class FragmentSelectGroup extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Установка нового фона [и ТУТ НЕТ затемнителя] | Должно быть после setContentView
-        view.findViewById(R.id.fragment_activity_start_layout).setBackground(CustomBackground.getBackground(view.getContext()));
 
         Activity act = (Activity) view.getContext();
         ListView listView = view.findViewById(R.id.list_groups);

@@ -28,6 +28,7 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentMainShow
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentZachetkaShow;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
+import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentSelectTraining;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Settings_layout;
 
@@ -50,7 +51,7 @@ public class MainToolBar {
                     new DividerDrawerItem(),
                     new PrimaryDrawerItem().withName(R.string.drawer_item_location).withIcon(FontAwesome.Icon.faw_location_arrow).withIdentifier(2),
                     new PrimaryDrawerItem().withName(R.string.faculties_list).withIcon(FontAwesome.Icon.faw_user_plus).withIdentifier(9),
-                    new PrimaryDrawerItem().withName("Список направлений").withIcon(FontAwesome.Icon.faw_arrow_circle_o_right).withIdentifier(12),
+                    new PrimaryDrawerItem().withName(R.string.Directions_list).withIcon(FontAwesome.Icon.faw_arrow_circle_o_right).withIdentifier(12),
                     new PrimaryDrawerItem().withName(R.string.Record_book).withIcon(FontAwesome.Icon.faw_book).withIdentifier(11),
                     new SectionDrawerItem().withName(R.string.drawer_item_settings),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(3),
@@ -62,6 +63,7 @@ public class MainToolBar {
                 if (drawerItem instanceof Nameable) {
                     switch (drawerItem.getIdentifier()) {
                         case (12):
+                            MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentSelectTraining.class, null).commit();
                             break;
                         case (1):
                             MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();

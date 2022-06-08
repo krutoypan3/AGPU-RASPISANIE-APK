@@ -17,11 +17,10 @@ import ru.agpu.artikproject.background_work.main_show.TodayClickListener;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
-import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class FragmentMainShow extends Fragment {
-    // Тут вроде все готово
+
     public FragmentMainShow() {
         super(R.layout.fragment_main_activity_main_show);
     }
@@ -36,7 +35,6 @@ public class FragmentMainShow extends Fragment {
         new LoadBuildingsList(activity).start(); // Загрузка данных об строениях в адаптер
 
         new GetCurrentWeekId(activity).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
-        new GetFullGroupList_Online().start(); // Получение полного списка групп и закидывание их в адаптер
 
         new TodayClickListener(activity, view.findViewById(R.id.main_activity_text)); // Прослушка нажатий на текущую дату
 

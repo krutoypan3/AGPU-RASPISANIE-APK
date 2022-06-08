@@ -17,7 +17,6 @@ import ru.agpu.artikproject.background_work.CustomAlertDialog;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.eios.Authorization;
 import ru.agpu.artikproject.background_work.eios.GetUserInfo;
-import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.layout.StartActivity;
 
 public class FragmentAuthorizationEIOS extends Fragment {
@@ -30,8 +29,6 @@ public class FragmentAuthorizationEIOS extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Установка нового фона [и ТУТ НЕТ затемнителя] | Должно быть после setContentView
-        view.findViewById(R.id.fragment_activity_start_layout).setBackground(CustomBackground.getBackground(view.getContext()));
         Activity act = (Activity) view.getContext();
 
         EditText Login_EIOS = view.findViewById(R.id.Login_EIOS);

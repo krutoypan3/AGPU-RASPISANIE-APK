@@ -20,7 +20,7 @@ import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lis
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.FacultiesItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.groups.GroupsItemClick;
 import ru.agpu.artikproject.background_work.theme.GetTextColor;
-import ru.agpu.artikproject.background_work.zach_book.GetMarkImageUrl;
+import ru.agpu.artikproject.background_work.main_show.fragments.zach_book.GetMarkImageUrl;
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {

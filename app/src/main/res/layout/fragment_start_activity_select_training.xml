@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/fragment_activity_start_layout"
-    android:background="@drawable/background_light">
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/background_darker"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_darker">
     <!-- Добро пожаловать -->
     <TextView
         android:id="@+id/main_text"
@@ -62,5 +55,4 @@
         android:divider="@color/alert_dialog_divider_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    </RelativeLayout>
 </RelativeLayout>

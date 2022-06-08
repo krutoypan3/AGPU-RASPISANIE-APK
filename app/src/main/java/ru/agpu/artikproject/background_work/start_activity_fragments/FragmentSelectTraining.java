@@ -21,7 +21,6 @@ import ru.agpu.artikproject.background_work.CustomAlertDialog;
 import ru.agpu.artikproject.background_work.GetDirectionsList;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
-import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.layout.StartActivity;
 
 /**
@@ -36,9 +35,6 @@ public class FragmentSelectTraining extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Установка нового фона | Должно быть после setContentView
-        view.findViewById(R.id.fragment_activity_start_layout).setBackground(CustomBackground.getBackground(view.getContext()));
-        view.findViewById(R.id.background_darker).setBackgroundColor(CustomBackground.getBackgroundDarker(view.getContext()));
 
         StartActivity.FRAGMENT = StartActivity.BACK_TO_GROUP;
 
@@ -88,16 +84,14 @@ public class FragmentSelectTraining extends Fragment {
             dialog_confirm.no.setText(view.getContext().getString(R.string.Back));
             // Устанавливаем слушатель нажатий на кнопку перехода к группе
             dialog_confirm.yes.setOnClickListener(view2 -> {
-                // Открываем фрагмент с выбором группы
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentSelectGroup.class, null).commit();
                 dialog_confirm.dismiss(); // Закрываем диалог
                 // Удаляем первую букву Z и S (Удаляем сокращенки и заочки
                 // [Вместо SZВМ-ИВТ-3-1 будет показан список: ВМ-ИВТ-3-1, ZВМ-ИВТ-3-1, SZВМ-ИВТ-3-1],
                 // это нужно потому что группа может быть как SZВМ так и ZSВМ (короче - человеческий фактор (криворукие не могут определиться в каком порядке ставить буквы))
-                String group_name = sorted_directions.get(i).item.split("\n")[0].split(view.getContext().getString(R.string.Group) + ": ")[1].toUpperCase().replaceFirst("Z", "").replaceFirst("S", "");
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentSelectGroup.class, null).commit();
                 // Устанавливаем выбранную группу в основное активити фрагмента
-                StartActivity.SELECTED_GROUP = group_name;
+                StartActivity.SELECTED_GROUP = sorted_directions.get(i).item.split("\n")[0].split(view.getContext().getString(R.string.Group) + ": ")[1].toUpperCase().replaceFirst("Z", "").replaceFirst("S", "");
+                // Открываем фрагмент с выбором группы
+                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentSelectGroup.class, null).commit();
             });
         });
 

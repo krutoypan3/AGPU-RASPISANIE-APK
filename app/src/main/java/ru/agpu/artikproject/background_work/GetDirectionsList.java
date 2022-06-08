@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 
@@ -28,6 +29,14 @@ public class GetDirectionsList {
             list.add(r.getString(0));
             list.add(r.getString(1));
             DirectionsList.add(list);
+            }
+        }
+        else{
+            getDirectionsFromFirebase();
+            try {
+                TimeUnit.MILLISECONDS.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
         return DirectionsList;

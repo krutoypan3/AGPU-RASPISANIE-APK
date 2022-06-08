@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
-import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.StartActivity;
 
@@ -29,8 +28,6 @@ public class FragmentAuthorizationEIOSSuccessfully extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Установка нового фона [и ТУТ НЕТ затемнителя] | Должно быть после setContentView
-        view.findViewById(R.id.fragment_activity_start_layout).setBackground(CustomBackground.getBackground(view.getContext()));
 
         // Если, не дай боже, у нас не найден ID группы, то ищем его вручную
         if (MySharedPreferences.get(view.getContext(), "user_info_group_id", "").equals("-1")){

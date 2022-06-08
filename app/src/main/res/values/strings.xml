@@ -146,4 +146,5 @@
     <string name="admin_panel">Панель администратора</string>
     <string name="Log_in_to_the_Admin_panel">Вход в панель администратора</string>
     <string name="if_understand_group_name">Если вы не понимаете, что значат цифры в названии группы, - нажмите на значок справа сверху.</string>
+    <string name="Directions_list">Список направлений</string>
 </resources>

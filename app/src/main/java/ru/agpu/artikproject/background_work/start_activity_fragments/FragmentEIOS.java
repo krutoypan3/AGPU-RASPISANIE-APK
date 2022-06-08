@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.layout.StartActivity;
 
 public class FragmentEIOS extends Fragment {
@@ -21,8 +20,6 @@ public class FragmentEIOS extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Установка нового фона [и ТУТ НЕТ затемнителя] | Должно быть после setContentView
-        view.findViewById(R.id.fragment_activity_start_layout).setBackground(CustomBackground.getBackground(view.getContext()));
 
         StartActivity.FRAGMENT = StartActivity.BACK_TO_WELCOME;
 

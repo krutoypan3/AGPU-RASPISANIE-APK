@@ -138,4 +138,5 @@
     <string name="admin_panel">Admin panel</string>
     <string name="Log_in_to_the_Admin_panel">Log in to the Admin panel</string>
     <string name="if_understand_group_name">If you don\'t understand what the numbers in the group name mean, - click on the icon on the top right.</string>
+    <string name="Directions_list">List of directions</string>
 </resources>
