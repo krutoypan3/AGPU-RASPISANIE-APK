@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
 
 import com.mikepenz.materialdrawer.Drawer;
 
@@ -21,9 +21,8 @@ import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
-import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentMainShow;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.MainToolBar;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.ShowToolBarRecyclerView;
 import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
@@ -50,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animRotate_ok;
     public static Drawer.Result drawerResult = null;
     public static Toolbar toolbar = null;
+    public static FragmentManager fragmentManager;
 
 
     // Вызывается перед выходом из "полноценного" состояния.
@@ -62,16 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        if (findViewById(R.id.recyclerView).getVisibility() == View.VISIBLE){
-            findViewById(R.id.recyclerView).startAnimation(animUehalVpravo);
-        }
-        if(drawerResult.isDrawerOpen()){
-            drawerResult.closeDrawer();
-        }
-        else{
-            new ShowToolBarRecyclerView(this, false);
-            new WatchSaveGroupRasp(this);
-        }
+        MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();
     }
 
     @Override
@@ -123,5 +114,7 @@ public class MainActivity extends AppCompatActivity {
             }
             startActivity(intent2);
         }
+
+        fragmentManager = getSupportFragmentManager();
     }
 }

@@ -23,15 +23,13 @@ import java.util.Random;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CustomAlertDialog;
-import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
 import ru.agpu.artikproject.background_work.debug.Device_info;
-import ru.agpu.artikproject.background_work.main_show.ChangeDay;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.LoadFacultiesList;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentMainShow;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentZachetkaShow;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Settings_layout;
-import ru.agpu.artikproject.layout.Zachetka_layout;
 
 
 public class MainToolBar {
@@ -53,7 +51,6 @@ public class MainToolBar {
                     new PrimaryDrawerItem().withName(R.string.drawer_item_location).withIcon(FontAwesome.Icon.faw_location_arrow).withIdentifier(2),
                     new PrimaryDrawerItem().withName(R.string.faculties_list).withIcon(FontAwesome.Icon.faw_user_plus).withIdentifier(9),
                     new PrimaryDrawerItem().withName("Список направлений").withIcon(FontAwesome.Icon.faw_arrow_circle_o_right).withIdentifier(12),
-                    new PrimaryDrawerItem().withName(R.string.weeks_list).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(10),
                     new PrimaryDrawerItem().withName(R.string.Record_book).withIcon(FontAwesome.Icon.faw_book).withIdentifier(11),
                     new SectionDrawerItem().withName(R.string.drawer_item_settings),
                     new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog).withIdentifier(3),
@@ -67,39 +64,28 @@ public class MainToolBar {
                         case (12):
                             break;
                         case (1):
-                            new ShowToolBarRecyclerView(act, false);
+                            MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();
                             break;
                         case (2):
-                            new ShowToolBarRecyclerView(act, true);
-                            recyclerView.setAdapter(new RecyclerViewAdapter(act, LoadBuildingsList.buildings_list, RecyclerViewAdapter.IS_BUILDINGS_ADAPTER));
-                            recyclerView.startAnimation(MainActivity.animPriehalSprava);
+                            FragmentRecyclerviewShow.SELECTED_LIST = 1;
+                            MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentRecyclerviewShow.class, null).commit();
                             break;
                         case (3): // Кнопка 'Настройки'
                             MainActivity.drawerResult.setSelection(0);
                             Intent intent = new Intent(context, Settings_layout.class);
                             act.startActivity(intent);
-                            MainActivity.drawerResult.setSelection(0);
                             break;
                         case (5): // Если нажали на кнопку удаления
                             CustomAlertDialog cdd = new CustomAlertDialog(act, "delete");
                             cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
                             cdd.show();
-                            MainActivity.drawerResult.setSelection(0);
                             break;
                         case (9):
-                            new ShowToolBarRecyclerView(act, true);
-                            recyclerView.setAdapter(new RecyclerViewAdapter(act, LoadFacultiesList.FACULTIES_LIST, RecyclerViewAdapter.IS_FACULTIES_ADAPTER));
-                            recyclerView.startAnimation(MainActivity.animPriehalSprava);
-                            break;
-                        case (10):
-                            // Отслеживание нажатий на смену даты
-                            new ChangeDay(act).setDate();
-                            MainActivity.drawerResult.setSelection(0);
+                            FragmentRecyclerviewShow.SELECTED_LIST = 2;
+                            MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentRecyclerviewShow.class, null).commit();
                             break;
                         case (11): // Зачетная книжка
-                            MainActivity.drawerResult.setSelection(0);
-                            intent = new Intent(context, Zachetka_layout.class);
-                            act.startActivity(intent);
+                            MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentZachetkaShow.class, null).commit();
                             break;
                     }
                 }

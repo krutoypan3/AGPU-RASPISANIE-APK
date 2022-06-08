@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.ShowToolBarRecyclerView;
 import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.layout.MainActivity;
@@ -31,6 +30,5 @@ public class GroupsItemClick {
             new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, act.getApplicationContext()).start();
         }
         act.startActivity(intent);
-        new ShowToolBarRecyclerView(act, false);
     }
 }
