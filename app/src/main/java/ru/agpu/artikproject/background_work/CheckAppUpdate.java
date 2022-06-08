@@ -27,7 +27,6 @@ import ru.agpu.artikproject.background_work.debug.Device_info;
 public class CheckAppUpdate extends Thread {
     private final Activity act;
     private final boolean show_no_update_message;
-    private static boolean show = false;
     public static boolean app_have_update = false;
     public static String whats_new;
     public static String url_download;
@@ -40,17 +39,6 @@ public class CheckAppUpdate extends Thread {
     public CheckAppUpdate(Activity act, boolean show_no_update) {
         this.act = act;
         this.show_no_update_message = show_no_update;
-    }
-    /**
-     * Класс отвечающий за ручной поиск обновлений приложения
-     * @param act Контекст приложения
-     * @param show_no_update Показать уведомление об отсутствии обновлений (True / False)
-     * @param show Показать уведомление о наличии обновлений (True / False)
-     */
-    public CheckAppUpdate(Activity act, boolean show_no_update, boolean show) {
-        this.act = act;
-        this.show_no_update_message = show_no_update;
-        CheckAppUpdate.show = show;
     }
 
     @SuppressLint("InflateParams")
@@ -87,7 +75,6 @@ public class CheckAppUpdate extends Thread {
                 assert assets != null;
                 JSONObject assets_0 = (JSONObject) assets.get(0);
                 url_download = (String) assets_0.get("browser_download_url");
-                if (show) show_update_message();
             }
             else if(show_no_update_message){ // Если версии одинаковые
                 new Handler(Looper.getMainLooper()).post(() -> Toast.makeText(act, R.string.no_new_version, Toast.LENGTH_SHORT).show());

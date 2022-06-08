@@ -7,9 +7,6 @@ import android.os.StrictMode;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,34 +17,22 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
-import ru.agpu.artikproject.background_work.debug.SendInfoToServer;
-import ru.agpu.artikproject.background_work.main_show.ChangeDay;
-import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
-import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
-import ru.agpu.artikproject.background_work.main_show.TodayClickListener;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.MainToolBar;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.ShowToolBarRecyclerView;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.service.PlayService;
-import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
-import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
 
 public class MainActivity extends AppCompatActivity {
 
-    public EditText rasp_search_edit;
     public static ArrayList<ListViewItems> group_listed;
     public static String[] group_listed_type;
     public static String[] group_listed_id;
-    public ListView listview;
-    public TextView today;
     public static String selectedItem;
     public static String selectedItem_type;
     public static String selectedItem_id;
@@ -89,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DataBase_Local.sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
@@ -107,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
+        // Инициализируем анимации
         animScale = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.scale);
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate);
         animUehalVp = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.uehal_vpravo);
@@ -117,9 +101,6 @@ public class MainActivity extends AppCompatActivity {
         animPriehalSprava = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.priehal_sprava);
         animPriehalSleva = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.priehal_sleva);
         animRotate_ok = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_ok);
-        rasp_search_edit = findViewById(R.id.rasp_search_edit);
-        listview = findViewById(R.id.listview);
-        today = findViewById(R.id.main_activity_text);
 
         // Инициализируем тулбар
         toolbar = findViewById(R.id.toolbar);
@@ -128,29 +109,9 @@ public class MainActivity extends AppCompatActivity {
         try { new MainToolBar(MainActivity.this); } // Заполняем тулбар и вызываем его
         catch (PackageManager.NameNotFoundException e) { e.printStackTrace(); }
 
-        new CheckAppUpdate(MainActivity.this, false).start(); // Запуск проверки обновлений при входе в приложение
-        new SendInfoToServer(MainActivity.this).start(); // Запуск отправки анонимной статистики для отадки ошибок
-        new GetCurrentWeekId(MainActivity.this).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
-        new GetFullGroupList_Online().start(); // Получение полного списка групп и закидывание их в адаптер
-        new TodayClickListener(this, today); // Прослушка нажатий на текущую дату
-        new LoadBuildingsList(this).start(); // Загрузка данных об строениях в адаптер
         week_day = GetCurrentWeekDay.get();
 
-        // Отслеживание нажатий и зажатий на список групп и аудиторий
-        new ListViewGroupListener(MainActivity.this, listview);
-
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
-
-        new WatchSaveGroupRasp(this); // Первичный вывод групп которые были открыты ранее
-
-        // Отслеживание изменений текстового поля
-        new EditTextRaspSearch_Listener(this, rasp_search_edit);
-
-        // Отслеживание нажатий на смену даты
-        findViewById(R.id.subtitle).setOnClickListener(view -> {
-            new ChangeDay(MainActivity.this).setDate();
-            view.startAnimation(animScale);
-        });
 
         if (getIntent().getBooleanExtra("start_rasp", false)){
             Intent intent2 = new Intent(getApplicationContext(), Raspisanie_show.class);

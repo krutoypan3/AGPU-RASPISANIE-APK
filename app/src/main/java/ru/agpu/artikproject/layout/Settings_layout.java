@@ -15,6 +15,7 @@ import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CustomAlertDialog;
 import ru.agpu.artikproject.background_work.debug.Device_info;
+import ru.agpu.artikproject.background_work.debug.LeaveReview;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.BackgroundDarkerListener;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaShow;
 import ru.agpu.artikproject.background_work.settings_layout.theme_radio_group.ThemeRadioButtonSetting;
@@ -94,9 +95,7 @@ public class Settings_layout extends AppCompatActivity {
 
         // Отслеживание нажатий на кнопку оставления отзыва
         findViewById(R.id.leave_a_review).setOnClickListener(view -> {
-            CustomAlertDialog cdd = new CustomAlertDialog(Settings_layout.this, "feedback");
-            cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
-            cdd.show();
+            new LeaveReview(this);
         });
 
         TextView about_version_text = findViewById(R.id.about_version_text);

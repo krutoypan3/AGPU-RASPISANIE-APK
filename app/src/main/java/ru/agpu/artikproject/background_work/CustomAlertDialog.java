@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
@@ -23,7 +22,6 @@ import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap;
 import ru.agpu.artikproject.background_work.rasp_show.Para_info;
-import ru.agpu.artikproject.background_work.debug.SendInfoToServer;
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class CustomAlertDialog extends Dialog implements android.view.View.OnClickListener {
@@ -88,12 +86,6 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 main_text.setText(R.string.delete_all_save);
                 body_text.setText(R.string.delete_confirm);
                 yes.setText(R.string.Delete_everything);
-                break;
-            case "feedback":
-                main_text.setText(R.string.FeedBack_title);
-                body_text.setText(R.string.FeedBack_subtitle);
-                yes.setText(R.string.Post_review);
-                edit_text.setVisibility(View.VISIBLE);
                 break;
             case "para_pasha":
                 main_text.setText(R.string.pasha_god);
@@ -180,11 +172,6 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                         DataBase_Local.sqLiteDatabase.execSQL("DELETE FROM rasp_update");
                         MainActivity.group_listed = null;
                         new WatchSaveGroupRasp(act);
-                        break;
-                    case "feedback":
-                        String value = String.valueOf(edit_text.getText());
-                        Toast.makeText(act.getApplicationContext(), value, Toast.LENGTH_SHORT).show();
-                        new SendInfoToServer(act.getApplicationContext(), value).start();
                         break;
                     case "map_confirm":
                         new ShowBuildingsOnTheMap(Para_info.finalCorp, act);
