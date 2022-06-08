@@ -29,7 +29,6 @@ import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.Theme;
 import ru.agpu.artikproject.background_work.widget.WidgetConfig;
 import ru.agpu.artikproject.background_work.widget.WidgetService;
-import ru.agpu.artikproject.layout.MainActivity;
 
 public class WidgetProvider extends AppWidgetProvider {
     @Override // При обновлении виджета
@@ -92,7 +91,7 @@ public class WidgetProvider extends AppWidgetProvider {
                 appWidgetId, updIntent, PendingIntent.FLAG_IMMUTABLE);
         rv.setOnClickPendingIntent(R.id.tvUpdate, updPIntent); // Привязываем кнопку к нашему намерению на обновление
 
-        MainActivity.sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключаемся к базе данных
+        DataBase_Local.sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключаемся к базе данных
         int week_day = GetCurrentWeekDay.get(); // Получаем текущий день
         int week_id = GetCurrentWeekId_Local.get(context); // Получаем текущую неделю
 
@@ -105,7 +104,7 @@ public class WidgetProvider extends AppWidgetProvider {
                     new GetRasp(selectedItem_id, selectedItem_type, selectedItem_name, GetCurrentWeekId_Local.get(context), context, "widget").start();
                 }
                 rv.setTextViewText(R.id.tvUpdate, selectedItem_name); // Устанавливаем название группы на кнопку
-                Cursor fr = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
+                Cursor fr = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                         "r_group_code = " + selectedItem_id + " AND " +
                         "r_week_number = " + week_id + " AND " +
                         "r_week_day = " + week_day + " ORDER BY r_para_number", null); // Делаем выборку пар

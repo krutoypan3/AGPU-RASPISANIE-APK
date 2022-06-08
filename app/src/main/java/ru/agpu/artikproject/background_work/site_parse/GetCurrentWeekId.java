@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.GetCurrentWeekId_Local;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
+import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.main_show.UpdateDateInMainActivity;
 import ru.agpu.artikproject.layout.MainActivity;
@@ -54,12 +55,12 @@ public class GetCurrentWeekId extends Thread {
             }
             try { // Получаем информацию о начале и конце недели
                 String current_week = String.valueOf(MainActivity.week_id);
-                Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM weeks_list WHERE week_id = '" + current_week + "'",null);
+                Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM weeks_list WHERE week_id = '" + current_week + "'",null);
                 if (r.getCount() == 0){ // При отсутствии недели в базе данных обновляем список недель в базе данных
                     new GetFullWeekList_Online().start(); // Если неделя отсутствует в БД, то обновляем список недель
                 }
                 else{ // Если неделя есть в базе данных, то заполняем списки информацией из базы данных
-                    Cursor f = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM weeks_list ORDER BY week_id", null);
+                    Cursor f = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM weeks_list ORDER BY week_id", null);
                     while (f.moveToNext()){
                         weeks_s_po.add(new ListViewItems(f.getString(1) + " " + f.getString(2)));
                         GetFullWeekList_Online.weeks_id.add(f.getString(0));

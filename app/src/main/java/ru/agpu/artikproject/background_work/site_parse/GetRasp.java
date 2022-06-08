@@ -19,7 +19,6 @@ import java.util.Objects;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.ShowNotification;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
-import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Raspisanie_show;
 
 public class GetRasp extends Thread {
@@ -146,7 +145,7 @@ public class GetRasp extends Thread {
                                 }
                             }
 
-                            Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE r_group_code = " + r_selectedItem_id + " AND r_week_number = " + (week_id_upd + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j + " AND " + " r_search_type = '" + r_selectedItem_type + "'", null); // SELECT запрос
+                            Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE r_group_code = " + r_selectedItem_id + " AND r_week_number = " + (week_id_upd + ff) + " AND r_week_day = " + i + " AND r_para_number = " + j + " AND " + " r_search_type = '" + r_selectedItem_type + "'", null); // SELECT запрос
                             if (r.getCount() == 0) {
                                 put_db(i, j, ff);
                             } // Если даной недели нет в базе
@@ -164,7 +163,7 @@ public class GetRasp extends Thread {
                                         !(Objects.equals(predmet_distant, predmet_distant_db)) |
                                         !(Objects.equals(predmet_group, predmet_group_db)) | !(Objects.equals(predmet_podgroup, predmet_podgroup_db)) |
                                         !(Objects.equals(predmet_aud, predmet_aud_db)) | !(Objects.equals(predmet_time, predmet_time_db))) {
-                                    MainActivity.sqLiteDatabase.delete("raspisanie", whereClause, null);
+                                    DataBase_Local.sqLiteDatabase.delete("raspisanie", whereClause, null);
                                     put_db(i, j, ff);
                                     // Это нужно для вызова вне основного потока
                                     new Handler(Looper.getMainLooper()).post(() -> { // Выводим уведомление о наличии нового расписания
@@ -172,7 +171,7 @@ public class GetRasp extends Thread {
                                     });
                                 }
                                 if (type.equals("widget")){
-                                    MainActivity.sqLiteDatabase.delete("raspisanie", whereClause, null);
+                                    DataBase_Local.sqLiteDatabase.delete("raspisanie", whereClause, null);
                                     put_db(i, j, ff);
                                 }
                             }

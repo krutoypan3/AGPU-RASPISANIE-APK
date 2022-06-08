@@ -3,20 +3,18 @@ package ru.agpu.artikproject.background_work.service;
 import android.content.Context;
 import android.database.Cursor;
 
+import java.util.ArrayList;
 
-import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
-import ru.agpu.artikproject.background_work.site_parse.GetRasp;
-import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.GetCurrentWeekId_Local;
-
-import java.util.ArrayList;
+import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
+import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 
 public class CheckRaspChanges {
     public CheckRaspChanges(Context context) {
         if (CheckInternetConnection.getState(context)) {
-            MainActivity.sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключаемся к базе данных
-            Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code, r_selectedItem_type, r_selectedItem FROM rasp_update", null); // SELECT запрос
+            DataBase_Local.sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключаемся к базе данных
+            Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT r_group_code, r_selectedItem_type, r_selectedItem FROM rasp_update", null); // SELECT запрос
             ArrayList<String> r_group0 = new ArrayList<>();
             ArrayList<String> r_group1 = new ArrayList<>();
             ArrayList<String> r_group2 = new ArrayList<>();

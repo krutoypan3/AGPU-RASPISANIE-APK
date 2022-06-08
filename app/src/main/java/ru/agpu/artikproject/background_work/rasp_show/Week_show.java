@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import java.util.Objects;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.theme.GetTextColor;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Raspisanie_show;
@@ -27,10 +28,10 @@ public class Week_show {
      */
     public Week_show(Context context){
         try{
-            Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
+            Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
-            Cursor f = MainActivity.sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM raspisanie WHERE " +
+            Cursor f = DataBase_Local.sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM raspisanie WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
             if (r.getCount()!=0) {

@@ -14,7 +14,6 @@ import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.GetCurrentWeekId_Local;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
-import ru.agpu.artikproject.layout.MainActivity;
 
 public class Widget implements RemoteViewsFactory {
 
@@ -90,14 +89,14 @@ public class Widget implements RemoteViewsFactory {
     public void onDataSetChanged() {
         try{
             data.clear(); // Обнуляем список
-            MainActivity.sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключение к базе данных должно быть выше функций получения дня недели и недели
+            DataBase_Local.sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключение к базе данных должно быть выше функций получения дня недели и недели
             int week_day = GetCurrentWeekDay.get();
             int week_id = GetCurrentWeekId_Local.get(context);
 
             String selectedItem_id = MySharedPreferences.get(context, widgetID + "_selected_item_id", "");
 
             if (!selectedItem_id.equals("")){
-                Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
+                Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                     "r_group_code = " + selectedItem_id + " AND " +
                     "r_week_number = " + week_id + " AND " +
                     "r_week_day = " + week_day + " ORDER BY r_para_number", null);

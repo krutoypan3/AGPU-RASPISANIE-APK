@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class ChangeDay {
@@ -65,7 +66,7 @@ public class ChangeDay {
         @SuppressLint("SimpleDateFormat") String dateStr = new SimpleDateFormat("dd.MM.yyyy").format(date2);
 
         // Получаем номер недели из базы данных и обновляем на главной странице
-        Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM weeks_list WHERE week_s LIKE '%" + dateStr + "%'",null);
+        Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM weeks_list WHERE week_s LIKE '%" + dateStr + "%'",null);
         if (r.getCount() > 0){ // Если неделя есть в базе данных
             r.moveToFirst(); // Берем первую полученную позицию выборки
             MainActivity.week_id = Integer.parseInt(r.getString(0)); // Устанавливаем новый номер недели

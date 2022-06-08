@@ -15,12 +15,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 
 public class GetDirectionsList {
 
     public ArrayList<List<String>> getDirectionsFromDatabase(){
-        Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM directions_list", null);
+        Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM directions_list", null);
         ArrayList<List<String>> DirectionsList = new ArrayList<>();
         if (!(r.getCount() == 0)) {
             while (r.moveToNext()){
@@ -45,7 +45,7 @@ public class GetDirectionsList {
                     ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
                     rowValues.put("direction_name", dataSnapshot.getValue().toString().split("group_name=")[1].split(",")[0]);
                     rowValues.put("group_name", dataSnapshot.getValue().toString().split("direction_name=")[1].replace("}", ""));
-                    MainActivity.sqLiteDatabase.insert("directions_list", null, rowValues);
+                    DataBase_Local.sqLiteDatabase.insert("directions_list", null, rowValues);
                 }
             }
 

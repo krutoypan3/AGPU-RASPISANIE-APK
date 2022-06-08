@@ -51,7 +51,8 @@ public class MainToolBar {
                     new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
                     new DividerDrawerItem(),
                     new PrimaryDrawerItem().withName(R.string.drawer_item_location).withIcon(FontAwesome.Icon.faw_location_arrow).withIdentifier(2),
-                    new PrimaryDrawerItem().withName(R.string.groups_list).withIcon(FontAwesome.Icon.faw_user_plus).withIdentifier(9),
+                    new PrimaryDrawerItem().withName(R.string.faculties_list).withIcon(FontAwesome.Icon.faw_user_plus).withIdentifier(9),
+                    new PrimaryDrawerItem().withName("Список направлений").withIcon(FontAwesome.Icon.faw_arrow_circle_o_right).withIdentifier(12),
                     new PrimaryDrawerItem().withName(R.string.weeks_list).withIcon(FontAwesome.Icon.faw_calendar).withIdentifier(10),
                     new PrimaryDrawerItem().withName(R.string.Record_book).withIcon(FontAwesome.Icon.faw_book).withIdentifier(11),
                     new SectionDrawerItem().withName(R.string.drawer_item_settings),
@@ -63,6 +64,8 @@ public class MainToolBar {
             .withOnDrawerItemClickListener((parent, view, position, id, drawerItem) -> {
                 if (drawerItem instanceof Nameable) {
                     switch (drawerItem.getIdentifier()) {
+                        case (12):
+                            break;
                         case (1):
                             new ShowToolBarRecyclerView(act, false);
                             break;

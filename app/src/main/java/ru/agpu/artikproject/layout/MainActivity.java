@@ -2,7 +2,6 @@ package ru.agpu.artikproject.layout;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animRotate_ok;
     public static Drawer.Result drawerResult = null;
     public static Toolbar toolbar = null;
-    public static SQLiteDatabase sqLiteDatabase;
 
 
     // Вызывается перед выходом из "полноценного" состояния.
@@ -95,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
+        DataBase_Local.sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 

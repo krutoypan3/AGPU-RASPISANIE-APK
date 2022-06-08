@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.widget.CheckBox;
 
+import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class RaspUpdateCheckBoxListener extends Thread{
@@ -15,7 +16,7 @@ public class RaspUpdateCheckBoxListener extends Thread{
 
     @Override
     public void run() {
-        Cursor sss = MainActivity.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
+        Cursor sss = DataBase_Local.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
         checkBox.setChecked(sss.getCount() != 0);
         checkBox.setOnClickListener(v -> {
             if (checkBox.isChecked()) {
@@ -24,10 +25,10 @@ public class RaspUpdateCheckBoxListener extends Thread{
                 rowValues.put("r_group_code", MainActivity.selectedItem_id);
                 rowValues.put("r_selectedItem_type", MainActivity.selectedItem_type);
                 rowValues.put("r_selectedItem", MainActivity.selectedItem);
-                MainActivity.sqLiteDatabase.insert("rasp_update", null, rowValues);
+                DataBase_Local.sqLiteDatabase.insert("rasp_update", null, rowValues);
             } else {
                 checkBox.setTextColor(Color.GRAY);
-                MainActivity.sqLiteDatabase.delete("rasp_update", "r_group_code = '" + MainActivity.selectedItem_id + "'", null);
+                DataBase_Local.sqLiteDatabase.delete("rasp_update", "r_group_code = '" + MainActivity.selectedItem_id + "'", null);
             }
 
         });

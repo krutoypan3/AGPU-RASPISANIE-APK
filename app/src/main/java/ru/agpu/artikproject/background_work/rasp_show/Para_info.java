@@ -18,6 +18,7 @@ import ru.agpu.artikproject.background_work.CustomAlertDialog;
 import ru.agpu.artikproject.background_work.GetCorpFromAudNumber;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
+import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Raspisanie_show;
@@ -28,7 +29,7 @@ public class Para_info {
         ListViewItems para_adap = (ListViewItems) Raspisanie_show.day_para_view.getItemAtPosition(position);
         String para_time = para_adap.item.split("\n")[0];
         String prepod_aud = para_adap.item.split("\n")[2];
-        Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
+        Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                 "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                 "r_week_number = " + MainActivity.week_id + " AND " +
                 "r_week_day = " + MainActivity.week_day + " AND " +

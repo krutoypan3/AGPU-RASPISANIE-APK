@@ -44,7 +44,7 @@ public class StartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        MainActivity.sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase(); // Подключаемся к базе данных
+        DataBase_Local.sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase(); // Подключаемся к базе данных
         Theme.setting(this); // Применяем тему к приложению
 
         super.onCreate(savedInstanceState);

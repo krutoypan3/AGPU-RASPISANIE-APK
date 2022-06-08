@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 
 public class GetFullWeekList_Online extends Thread{
     static public final List<String> weeks_id = new ArrayList<>();
@@ -56,7 +56,7 @@ public class GetFullWeekList_Online extends Thread{
                         rowValues.put("week_id", id);
                         rowValues.put("week_s", s);
                         rowValues.put("week_po", po);
-                        MainActivity.sqLiteDatabase.insert("weeks_list", null, rowValues);
+                        DataBase_Local.sqLiteDatabase.insert("weeks_list", null, rowValues);
                     }
                 } catch (Exception ignored) {
                 }

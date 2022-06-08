@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
+import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.LoadFacultiesList;
-import ru.agpu.artikproject.layout.MainActivity;
 
 public class GetFullGroupList_Online extends Thread {
     static public final ArrayList<ListViewItems> faculties_name = new ArrayList<>();
@@ -25,14 +25,14 @@ public class GetFullGroupList_Online extends Thread {
     @Override
     public void run() {
         try {
-            Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT DISTINCT faculties_name FROM groups_list", null);
+            Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT DISTINCT faculties_name FROM groups_list", null);
             if (!(r.getCount() == 0)) { // При отсутствии недели в базе данных обновляем список недель в базе данных
                 while (r.moveToNext()) {
                     faculties_name.add(new ListViewItems(r.getString(0)));
                 }
                 for (int i = 0; i < faculties_name.size(); i++) {
                     String cur_faculties = faculties_name.get(i).item;
-                    r = MainActivity.sqLiteDatabase.rawQuery("SELECT faculties_group_name, faculties_group_id FROM groups_list WHERE faculties_name = '" + cur_faculties + "'", null);
+                    r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT faculties_group_name, faculties_group_id FROM groups_list WHERE faculties_name = '" + cur_faculties + "'", null);
                     ArrayList<ListViewItems> faculties_group_name_cur = new ArrayList<>(); // Инициализируем список с названием групп для текущего факультета
                     ArrayList<ListViewItems> faculties_group_id_cur = new ArrayList<>(); // Инициализируем список с id групп для текущего факультета
                     while (r.moveToNext()) {
@@ -72,7 +72,7 @@ public class GetFullGroupList_Online extends Thread {
                         rowValues.put("faculties_name", fac_name);
                         rowValues.put("faculties_group_name", faculties_group_name_cur_group);
                         rowValues.put("faculties_group_id", faculties_group_id_cur_group);
-                        MainActivity.sqLiteDatabase.insert("groups_list", null, rowValues);
+                        DataBase_Local.sqLiteDatabase.insert("groups_list", null, rowValues);
                     }
                     faculties_group_name.add(faculties_group_name_cur); // Добавляем название группы
                     faculties_group_id.add(faculties_group_id_cur); // Добавиляем id группы

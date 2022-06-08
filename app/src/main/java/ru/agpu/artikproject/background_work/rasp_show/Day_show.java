@@ -3,14 +3,15 @@ package ru.agpu.artikproject.background_work.rasp_show;
 import android.content.Context;
 import android.database.Cursor;
 
-import ru.agpu.artikproject.background_work.site_parse.GetRasp;
-import ru.agpu.artikproject.layout.MainActivity;
+import java.util.ArrayList;
+
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
+import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
+import ru.agpu.artikproject.background_work.site_parse.GetRasp;
+import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Raspisanie_show;
-
-import java.util.ArrayList;
 
 public class Day_show {
     /**
@@ -20,7 +21,7 @@ public class Day_show {
      */
     public Day_show(Context context) {
         ArrayList<ListViewItems> group_list = new ArrayList<>();
-        Cursor r = MainActivity.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
+        Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
                 "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                 "r_week_number = " + MainActivity.week_id + " AND " +
                 "r_week_day = " + MainActivity.week_day + " ORDER BY r_para_number", null);

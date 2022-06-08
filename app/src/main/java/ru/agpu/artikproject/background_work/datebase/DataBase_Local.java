@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBase_Local extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "raspisanie.db";
+    public static SQLiteDatabase sqLiteDatabase;
     /**
      * Класс отвечающий за первичное создание \ подключение к локальной базе данных
      * @param context Контекст приложения

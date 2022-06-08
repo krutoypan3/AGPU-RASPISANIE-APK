@@ -27,8 +27,8 @@ public class WatchSaveGroupRasp {
      */
     public WatchSaveGroupRasp(Context context, boolean widget){
         if (widget){
-            MainActivity.sqLiteDatabase = new DataBase_Local(context).getWritableDatabase();
-            r = MainActivity.sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM raspisanie WHERE r_group NOT NULL AND r_prepod NOT NULL AND r_search_type NOT NULL GROUP BY r_group_code", null);
+            DataBase_Local.sqLiteDatabase = new DataBase_Local(context).getWritableDatabase();
+            r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM raspisanie WHERE r_group NOT NULL AND r_prepod NOT NULL AND r_search_type NOT NULL GROUP BY r_group_code", null);
             if (r.moveToFirst()){
                 watch();
             }
@@ -43,7 +43,7 @@ public class WatchSaveGroupRasp {
         ListView listview = act.findViewById(R.id.listview);
         TextView result = act.findViewById(R.id.result);
 
-        r = MainActivity.sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM raspisanie WHERE r_group NOT NULL AND r_prepod NOT NULL AND r_search_type NOT NULL GROUP BY r_group_code", null);
+        r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT DISTINCT r_group_code, r_group, r_search_type, r_prepod, r_aud FROM raspisanie WHERE r_group NOT NULL AND r_prepod NOT NULL AND r_search_type NOT NULL GROUP BY r_group_code", null);
         if (r.moveToFirst()){
             watch();
             MainActivity.group_listed = group_list;
