@@ -50,16 +50,22 @@ public class WatchSaveGroupRasp {
             MainActivity.group_listed_type = group_list_type.toArray(new String[0]);
             MainActivity.group_listed_id = group_list_id.toArray(new String[0]);
         } // Вывод SELECT запроса
-        if( MainActivity.group_listed == null || r.getCount() == 0){
-            result.setText(R.string.no_saved_group);
-            listview.setVisibility(View.INVISIBLE);
-        }
-        else {
-            ListViewAdapter adapter = new ListViewAdapter(act.getApplicationContext(), MainActivity.group_listed);
-            listview.setAdapter(adapter);
-            result.setText("");
-            listview.setVisibility(View.VISIBLE);
-        }
+        act.runOnUiThread(() -> {
+            try {
+                if (MainActivity.group_listed == null || r.getCount() == 0) {
+                    result.setText(R.string.no_saved_group);
+                    listview.setVisibility(View.INVISIBLE);
+                } else {
+                    ListViewAdapter adapter = new ListViewAdapter(act.getApplicationContext(), MainActivity.group_listed);
+                    listview.setAdapter(adapter);
+                    result.setText("");
+                    listview.setVisibility(View.VISIBLE);
+                }
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        });
     }
 
     public void watch(){

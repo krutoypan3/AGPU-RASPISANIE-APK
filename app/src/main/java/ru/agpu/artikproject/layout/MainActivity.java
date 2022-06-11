@@ -17,13 +17,16 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentMainShow;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.MainToolBar;
+import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.service.PlayService;
+import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
 
@@ -62,7 +65,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
+        if (drawerResult.isDrawerOpen()){ // Если тулбар открыт
+            drawerResult.closeDrawer(); // Закрываем его
+        }
         MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();
+        drawerResult.setSelection(0);
     }
 
     @Override
@@ -101,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
         catch (PackageManager.NameNotFoundException e) { e.printStackTrace(); }
 
         week_day = GetCurrentWeekDay.get();
+
+        new CheckAppUpdate(this, false).start(); // Запуск проверки обновлений при входе в приложение
+        new LoadBuildingsList(this).start(); // Загрузка данных об строениях в адаптер
+        new GetCurrentWeekId(this).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
 
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 

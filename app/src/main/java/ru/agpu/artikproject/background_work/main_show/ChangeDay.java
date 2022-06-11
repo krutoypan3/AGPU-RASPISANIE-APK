@@ -70,7 +70,7 @@ public class ChangeDay {
         if (r.getCount() > 0){ // Если неделя есть в базе данных
             r.moveToFirst(); // Берем первую полученную позицию выборки
             MainActivity.week_id = Integer.parseInt(r.getString(0)); // Устанавливаем новый номер недели
-            new UpdateDateInMainActivity(act); // Обновляем текст на главном экране
+            new UpdateDateInMainActivity(act).start(); // Обновляем текст на главном экране
         }
         else{ // Если недели нет в базе данных
             Toast.makeText(act, R.string.Not_find_week, Toast.LENGTH_LONG).show(); // Выводим сообщение об ошибке выбора даты

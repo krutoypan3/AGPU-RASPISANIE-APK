@@ -9,8 +9,6 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.widget.ImageView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.mikepenz.iconics.typeface.FontAwesome;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -39,7 +37,6 @@ public class MainToolBar {
      * @param act Activity главного меню
      */
     public MainToolBar(Activity act) throws PackageManager.NameNotFoundException {
-        RecyclerView recyclerView = act.findViewById(R.id.recyclerView);
         Context context = act.getApplicationContext();
         MainActivity.drawerResult = new Drawer()
             .withActivity(act)  // В каком активити создать тулбар

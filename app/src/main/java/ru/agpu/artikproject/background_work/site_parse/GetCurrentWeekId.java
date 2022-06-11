@@ -2,14 +2,12 @@ package ru.agpu.artikproject.background_work.site_parse;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.widget.TextView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 
-import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.GetCurrentWeekId_Local;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
@@ -23,6 +21,7 @@ import ru.agpu.artikproject.layout.MainActivity;
  */
 public class GetCurrentWeekId extends Thread {
     final Activity act;
+
     static public final ArrayList<ListViewItems> weeks_s_po = new ArrayList<>();
     /**
      * Получаем тукущую неделю и общий список недель
@@ -35,7 +34,6 @@ public class GetCurrentWeekId extends Thread {
     @Override
     public void run() {
         try{
-            TextView todayTextView = act.findViewById(R.id.main_activity_text);
             // Получаем последнюю сохраненную неделю из базы данных
             MainActivity.week_id = GetCurrentWeekId_Local.get(act.getApplicationContext());
             // Затем пробуем получить текущую неделю через интернет
@@ -44,8 +42,6 @@ public class GetCurrentWeekId extends Thread {
                 String urlq = "http://www.it-institut.ru/SearchString/Index/118";
                 doc = Jsoup.connect(urlq).get();
                 String today_info = doc.select("div").toString().split("today-info")[1];
-                String today = today_info.split("</h5>")[0].split("<h5>")[1]; // Сегодня **.**.****, ******
-                act.runOnUiThread(() -> todayTextView.setText(today)); // Устанавливаем текущий день на главном экране
                 MainActivity.week_id = Integer.parseInt(today_info.split("value=\"")[1].split("\"")[0]); // Получаем текущую неделю с интернета
 
                 MySharedPreferences.put(act.getApplicationContext(), "week_id", MainActivity.week_id);
@@ -77,7 +73,7 @@ public class GetCurrentWeekId extends Thread {
         }
         finally {
             try{
-                new UpdateDateInMainActivity(act); // Обновляем текущую неделю на главной странице
+                new UpdateDateInMainActivity(act).start(); // Обновляем текущую неделю на главной странице
             }
             catch (Exception e){
                 e.printStackTrace();
