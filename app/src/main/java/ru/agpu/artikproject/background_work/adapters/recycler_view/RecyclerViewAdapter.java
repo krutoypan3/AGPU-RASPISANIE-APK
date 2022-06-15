@@ -63,7 +63,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
                     break;
                 case IS_FACULTIES_ADAPTER:
                     new FacultiesItemClick((RecyclerView)parent, v, datas, act);
-                    parent.startAnimation(MainActivity.animUehalVlPriehalSprava);
                     break;
                 case IS_FACULTIES_GROUPS_ADAPTER:
                     new GroupsItemClick((RecyclerView)parent, v, act);

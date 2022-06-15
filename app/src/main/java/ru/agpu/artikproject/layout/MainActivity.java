@@ -1,20 +1,18 @@
 package ru.agpu.artikproject.layout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 
-import com.mikepenz.materialdrawer.Drawer;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckAppUpdate;
@@ -23,7 +21,10 @@ import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentMainShow;
-import ru.agpu.artikproject.background_work.main_show.tool_bar.MainToolBar;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSettingsShow;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentZachetkaShow;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
@@ -50,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animPriehalSleva;
     public static Animation animScale;
     public static Animation animRotate_ok;
-    public static Drawer.Result drawerResult = null;
-    public static Toolbar toolbar = null;
     public static FragmentManager fragmentManager;
 
 
@@ -65,13 +64,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        if (drawerResult.isDrawerOpen()){ // Если тулбар открыт
-            drawerResult.closeDrawer(); // Закрываем его
-        }
-        MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();
-        drawerResult.setSelection(0);
+
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DataBase_Local.sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
@@ -100,14 +96,42 @@ public class MainActivity extends AppCompatActivity {
         animPriehalSleva = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.priehal_sleva);
         animRotate_ok = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_ok);
 
-        // Инициализируем тулбар
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        try { new MainToolBar(MainActivity.this); } // Заполняем тулбар и вызываем его
-        catch (PackageManager.NameNotFoundException e) { e.printStackTrace(); }
 
         week_day = GetCurrentWeekDay.get();
+
+        fragmentManager = getSupportFragmentManager();
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigatin_view);
+
+        bottomNavigationView.setOnItemReselectedListener(item -> {
+            // TODO Заглушка, чтобы элементы повторно не отрисовывались при нажатии на нижний бар
+        });
+
+        bottomNavigationView.setSelectedItemId(R.id.details_page_Home_page);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.details_page_Record_book:
+                    // Зачетная книжка
+                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentZachetkaShow.class, null).commit();
+                    return true;
+                case R.id.details_page_Faculties_list:
+                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentSelectGroupDirectionFaculty.class, null).commit();
+                    return true;
+                case R.id.details_page_Home_page:
+                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();
+                    return true;
+                case R.id.details_page_Audiences:
+                    FragmentRecyclerviewShow.SELECTED_LIST = 1;
+                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentRecyclerviewShow.class, null).commit();
+                    return true;
+                case R.id.details_page_Settings:
+                    // Кнопка 'Настройки'
+                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentSettingsShow.class, null).commit();
+                    return true;
+                default:
+                    return false;
+            }
+        });
 
         new CheckAppUpdate(this, false).start(); // Запуск проверки обновлений при входе в приложение
         new LoadBuildingsList(this).start(); // Загрузка данных об строениях в адаптер
@@ -125,7 +149,5 @@ public class MainActivity extends AppCompatActivity {
             }
             startActivity(intent2);
         }
-
-        fragmentManager = getSupportFragmentManager();
     }
 }

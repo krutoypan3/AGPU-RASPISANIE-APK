@@ -8,6 +8,8 @@
     <color name="sea">#077b8a</color>
     <color name="sea50">#CC446EAE</color>
     <color name="button_color">#96446EAE</color>
+    <color name="bottom_nav_bar_color">#FED6EAFF</color>
+    <color name="bottom_nav_bar_text_color">#FE0C3058</color>
     <color name="gold">#FFFFFF</color>  <!-- Основной цвет текста в приложении -->
     <!-- Основной цвет текста в приложении -->
     <color name="coal">#3b4d61</color>

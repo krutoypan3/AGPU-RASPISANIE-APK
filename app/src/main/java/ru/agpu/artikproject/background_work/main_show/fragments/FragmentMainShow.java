@@ -42,7 +42,7 @@ public class FragmentMainShow extends Fragment {
         new EditTextRaspSearch_Listener(activity, view.findViewById(R.id.rasp_search_edit));
 
         // Первичный вывод групп которые были открыты ранее
-        new Thread(() -> new WatchSaveGroupRasp(activity)).start();
+        new WatchSaveGroupRasp(activity);
 
         // Отслеживание нажатий на смену даты
         view.findViewById(R.id.subtitle).setOnClickListener(view2 -> {

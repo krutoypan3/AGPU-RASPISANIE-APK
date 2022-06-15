@@ -10,8 +10,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
 public class Authorization extends Thread{
-    String login;
-    String password;
+    final String login;
+    final String password;
     private String ACCESS_TOKEN;
     private String MSG_ERROR;
 

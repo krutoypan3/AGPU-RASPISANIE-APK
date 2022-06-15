@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/details_page_Record_book"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="@string/Record_book" />
+
+    <item
+        android:id="@+id/details_page_Faculties_list"
+        android:icon="@drawable/ic_baseline_people_24"
+        android:title="@string/faculties_list" />
+
+    <item
+        android:id="@+id/details_page_Home_page"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/Home_page" />
+
+    <item
+        android:id="@+id/details_page_Audiences"
+        android:icon="@drawable/ic_baseline_location_city_24"
+        android:title="@string/Audiences" />
+
+    <item
+        android:id="@+id/details_page_Settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/drawer_item_settings" />
+</menu>

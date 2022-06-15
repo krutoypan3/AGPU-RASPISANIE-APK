@@ -94,8 +94,8 @@
     <string name="Password">Пароль</string>
     <string name="Enter">Войти</string>
     <string name="zachetka_see">Для просмотра зачетной книжки введите логин и пароль ЭИОС АГПУ</string>
-    <string name="find_zach_book">Ищем вашу зачетную книжку...</string>
-    <string name="Record_book">Зачетная книжка</string>
+    <string name="find_zach_book">Ищем вашу зачетную книжку…</string>
+    <string name="Record_book">Зачетка</string>
     <string name="your_record_book">ваша зачетная книжка</string>
     <string name="Incorrect_data_entered">Введены неверные данные, повторите попытку</string>
     <string name="Not_find_week">Неделя не была найдена в базе данных</string>
@@ -133,7 +133,7 @@
     <string name="I_know_group_name">Я знаю название своей группы</string>
     <string name="I_know_the_direction_of_training">Я знаю направление подготовки</string>
     <string name="Enter_group_name">Введите название группы</string>
-    <string name="group_name_example">Например: ВМ-ИВТ-1-1</string>
+    <string name="group_name_example">Например: ВМ–ИВТ–1–1</string>
     <string name="Choose_the_direction_of_training">Выберите направление подготовки</string>
     <string name="training_name_example">Например: 09.03.01 Информатика</string>
     <string name="Restore_password">Сброс пароля</string>
@@ -147,4 +147,9 @@
     <string name="Log_in_to_the_Admin_panel">Вход в панель администратора</string>
     <string name="if_understand_group_name">Если вы не понимаете, что значат цифры в названии группы, - нажмите на значок справа сверху.</string>
     <string name="Directions_list">Список направлений</string>
+    <string name="Home_page">Главная</string>
+    <string name="How_do_you_want_to_find_your_schedule">Как вы хотите найти свое расписание?</string>
+    <string name="Select_from_the_list_of_faculties">Выбрать из списка факультетов</string>
+    <string name="Find_by_directions_of_training">Найти по направлению подготовки</string>
+    <string name="Find_by_group_name">Найти по названию группы</string>
 </resources>

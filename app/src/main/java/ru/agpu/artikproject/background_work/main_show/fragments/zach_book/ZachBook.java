@@ -2,7 +2,6 @@ package ru.agpu.artikproject.background_work.main_show.fragments.zach_book;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jsoup.Jsoup;
@@ -142,7 +140,7 @@ public class ZachBook  extends Thread {
                 }
                 MARKS_LIST = list; // Обновляем глобальный список
                 Collections.sort(SEMESTR_LIST); // Сортируем список семестров
-                Collections.sort(MARKS_LIST, Comparator.comparing(RecyclerViewItems::getMainText)); // Сортируем список оценок по семестрам
+                MARKS_LIST.sort(Comparator.comparing(RecyclerViewItems::getMainText)); // Сортируем список оценок по семестрам
                 IS_LOADED = true; // Ставим переключатель в состояние true - данные успешно загружены
             }
             else // Если сервер ответил ошибкой или не ответил
@@ -174,6 +172,8 @@ public class ZachBook  extends Thread {
                 RecyclerView recyclerView = act.findViewById(R.id.recyclerView); // Список с оценками
 
                 recyclerView.setVisibility(View.VISIBLE); // Показываем список с оценками
+                act.findViewById(R.id.login_layout).setVisibility(View.INVISIBLE);
+                act.findViewById(R.id.password_layout).setVisibility(View.INVISIBLE);
                 ETLogin.setVisibility(View.INVISIBLE); // Скрываем поле ввода логина
                 ETPassword.setVisibility(View.INVISIBLE); // Скрываем поле ввода пароля
                 // Устанавливаем полученные данные в адаптер
@@ -192,7 +192,6 @@ public class ZachBook  extends Thread {
                 spinner.setAdapter(adapter); // Применяем адаптер к элементу spinner
                 // Прослушиваем выбор нового семестра в спинере
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         String semestr = (String) adapterView.getItemAtPosition(i); // Получаем семестр
@@ -200,7 +199,7 @@ public class ZachBook  extends Thread {
                         for (RecyclerViewItems item: ZachBook.MARKS_LIST) // И сортируем данные по семестру
                             if (item.getMainText().equals(semestr))
                                 MARKS_LIST_SORTED.add(item);
-                        Collections.sort(MARKS_LIST_SORTED, Comparator.comparing(RecyclerViewItems::getSubText2));
+                        MARKS_LIST_SORTED.sort(Comparator.comparing(RecyclerViewItems::getSubText2));
                         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(act, MARKS_LIST_SORTED, RecyclerViewAdapter.IS_MARK_ADAPTER);
                         // Устанавливаем новый адаптер
                         recyclerView.setAdapter(recyclerViewAdapter);

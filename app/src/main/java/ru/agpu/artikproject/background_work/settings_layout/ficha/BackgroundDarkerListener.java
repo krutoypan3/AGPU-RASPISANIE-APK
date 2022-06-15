@@ -18,9 +18,9 @@ public class BackgroundDarkerListener {
      */
     @SuppressLint("ClickableViewAccessibility")
     public BackgroundDarkerListener(Activity act){
-        RelativeLayout backgroundDarker = act.findViewById(R.id.background_darker); // Находим сам фон
+        RelativeLayout update_layout = act.findViewById(R.id.update_layout); // Находим сам фон
         ImageView animImage = act.findViewById(R.id.animImage); // Находим изначально невидимое пустое изображение
-        backgroundDarker.setOnTouchListener((v, event) -> { // При нажатии на фон
+        update_layout.setOnTouchListener((v, event) -> { // При нажатии на фон
             animImage.setX(event.getX()-100); // Определяем позицию нажатия по X
             animImage.setY(event.getY()-100); // Определяем позицию нажатия по Y
             switch (event.getAction()){ // Получаем информацию о том, что делает пользователь

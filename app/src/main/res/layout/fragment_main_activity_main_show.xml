@@ -28,17 +28,28 @@
         android:textColor="?android:textColorSecondary"
         android:textSize="18sp"/>
 
-    <EditText
-        android:id="@+id/rasp_search_edit"
+    <RelativeLayout
+        android:id="@+id/rasp_search_edit_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_activity_text"
         android:layout_marginTop="50sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitle"
+        android:background="@drawable/button_blue_invert"
+        android:padding="5dp">
+    <EditText
+        android:id="@+id/rasp_search_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:ems="10"
         android:hint="@string/rasp_find"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/subtitle"
+        android:backgroundTint="@android:color/transparent"
 
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -46,7 +57,7 @@
         android:textColorHint="?android:textColorSecondary"
         android:theme="@style/Theme.MyApp.Main"
         android:importantForAutofill="no" />
-
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/result"
@@ -54,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rasp_search_edit"
+        app:layout_constraintTop_toBottomOf="@id/rasp_search_edit_layout"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -64,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rasp_search_edit"
+        app:layout_constraintTop_toBottomOf="@id/rasp_search_edit_layout"
         android:textSize="24sp"/>
 
 

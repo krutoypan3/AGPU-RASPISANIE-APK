@@ -27,6 +27,12 @@
         <item name="textAllCaps">true</item>
     </style>
 
+    <style name="text_h3_style">
+        <item name="android:textSize">26sp</item>
+        <item name="fontFamily">@font/montserrat_semibold</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
     <style name="text_style">
         <item name="fontFamily">@font/montserrat_semibold</item>
         <item name="android:textSize">16sp</item>

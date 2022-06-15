@@ -6,4 +6,6 @@
     <color name="custom_dialog_color">#FE0B2A4C</color>
     <color name="custom_dialog_color2">#CC111111</color>
     <color name="update_btn">#0026E4</color>
+    <color name="bottom_nav_bar_color">#AA1D216F</color>
+    <color name="bottom_nav_bar_text_color">#FEC7E1FF</color>
 </resources>

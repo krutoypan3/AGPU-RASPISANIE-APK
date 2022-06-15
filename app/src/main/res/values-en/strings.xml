@@ -139,4 +139,9 @@
     <string name="Log_in_to_the_Admin_panel">Log in to the Admin panel</string>
     <string name="if_understand_group_name">If you don\'t understand what the numbers in the group name mean, - click on the icon on the top right.</string>
     <string name="Directions_list">List of directions</string>
+    <string name="Home_page">Home</string>
+    <string name="How_do_you_want_to_find_your_schedule">How do you want to find your schedule?</string>
+    <string name="Select_from_the_list_of_faculties">Select from the list of faculties</string>
+    <string name="Find_by_directions_of_training">Find by directions of training</string>
+    <string name="Find_by_group_name">Find by group name</string>
 </resources>

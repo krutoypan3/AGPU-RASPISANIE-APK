@@ -14,12 +14,10 @@ import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.LoadFacultiesList;
-import ru.agpu.artikproject.layout.MainActivity;
 
 public class FragmentRecyclerviewShow extends Fragment {
     public static int SELECTED_LIST;
 
-    // Тут вроде все готово
     public FragmentRecyclerviewShow() {
         super(R.layout.fragment_main_activity_recyclerview_show);
     }
@@ -38,7 +36,6 @@ public class FragmentRecyclerviewShow extends Fragment {
                 break;
             case(2):
                 recyclerView.setAdapter(new RecyclerViewAdapter(activity, LoadFacultiesList.FACULTIES_LIST, RecyclerViewAdapter.IS_FACULTIES_ADAPTER));
-                recyclerView.startAnimation(MainActivity.animPriehalSprava);
                 break;
         }
 

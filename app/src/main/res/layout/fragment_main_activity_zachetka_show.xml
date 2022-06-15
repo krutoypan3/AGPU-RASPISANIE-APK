@@ -43,35 +43,59 @@
         android:layout_below="@id/zachetka_main_text"
         android:layout_centerHorizontal="true"/>
 
+    <RelativeLayout
+        android:id="@+id/login_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/zachetka_main_text"
+        android:layout_marginTop="50sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/button_blue_invert"
+        android:padding="10dp">
     <EditText
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:textAlignment="center"
-        android:padding="20dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/zachetka_main_text"
         android:layout_centerHorizontal="true"
-
+        android:textColor="@color/black"
+        android:textColorHint="?android:textColorSecondary"
+        android:backgroundTint="@android:color/transparent"
         android:hint="@string/Login" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/password_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_layout"
+        android:layout_marginTop="10sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/button_blue_invert"
+        android:padding="10dp">
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:textAlignment="center"
-        android:padding="20dp"
         android:inputType="textPassword"
         android:layout_height="wrap_content"
-        android:layout_below="@id/login"
         android:layout_centerHorizontal="true"
-
+        android:textColorHint="?android:textColorSecondary"
+        android:textColor="@color/black"
+        android:backgroundTint="@android:color/transparent"
         android:hint="@string/Password"/>
-
+    </RelativeLayout>
     <Button
         android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Enter"
-        android:layout_below="@id/password"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/password_layout"
         android:layout_centerHorizontal="true"
-        android:padding="20dp" />
+        android:padding="15dp" />
 
 </RelativeLayout>
