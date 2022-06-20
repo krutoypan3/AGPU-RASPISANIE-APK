@@ -39,36 +39,31 @@ public class OnSwipeTouchListener implements OnTouchListener {
             try {
                 float diffY;
                 float diffX;
-                if (e1 == null) {
-                    diffY = e2.getY();
-                    diffX = e2.getX();
-                }
-                else if (e2 == null) {
-                    diffX = e1.getX();
-                    diffY = e1.getY();
-                }
-                else {
+                if (e1 == null || e2 == null)
+                    return false;
+                try {
                     diffY = e2.getY() - e1.getY();
                     diffX = e2.getX() - e1.getX();
-                }
-                if (Math.abs(diffX) > Math.abs(diffY)) {
-                    if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                        if (diffX > 0) {
-                            onSwipeRight();
+                    if (Math.abs(diffX) > Math.abs(diffY)) {
+                        if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                            if (diffX > 0) {
+                                onSwipeRight();
+                            } else {
+                                onSwipeLeft();
+                            }
+                            result = true;
+                        }
+                    }
+                    else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
+                        if (diffY > 0) {
+                            onSwipeBottom();
                         } else {
-                            onSwipeLeft();
+                            onSwipeTop();
                         }
                         result = true;
                     }
-                }
-                else if (Math.abs(diffY) > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY_THRESHOLD) {
-                    if (diffY > 0) {
-                        onSwipeBottom();
-                    } else {
-                        onSwipeTop();
-                    }
-                    result = true;
-                }
+                } catch (Exception ignored) {}
+                return false;
             } catch (Exception exception) {
                 exception.printStackTrace();
             }

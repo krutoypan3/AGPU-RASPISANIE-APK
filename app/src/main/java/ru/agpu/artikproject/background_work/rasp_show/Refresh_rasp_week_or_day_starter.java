@@ -1,7 +1,7 @@
 package ru.agpu.artikproject.background_work.rasp_show;
 
 
-import android.content.Context;
+import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
@@ -13,14 +13,14 @@ import ru.agpu.artikproject.layout.MainActivity;
 import ru.agpu.artikproject.layout.Raspisanie_show;
 
 public class Refresh_rasp_week_or_day_starter extends Thread {
-    final Context context;
+    final Activity activity;
 
     /**
      * Класс отвечающий за запуск обновления расписания в недельном или днемном режиме
-     * @param context Контекст приложения
+     * @param activity Контекст приложения
      */
-    public Refresh_rasp_week_or_day_starter(Context context){
-        this.context = context;
+    public Refresh_rasp_week_or_day_starter(Activity activity){
+        this.activity = activity;
     }
 
     @Override
@@ -34,8 +34,8 @@ public class Refresh_rasp_week_or_day_starter extends Thread {
         }
         // Это нужно для вызова вне основного потока
         new Handler(Looper.getMainLooper()).post(() -> {
-            if (!Raspisanie_show.week_day_on_off) { new Day_show(context); }
-            else{ new Week_show(context); }
+            if (!Raspisanie_show.week_day_on_off) { new Day_show(activity); }
+            else{ new Week_show(activity.getApplicationContext()); }
             if (Raspisanie_show.refresh_successful) { Raspisanie_show.refresh_btn.setBackgroundResource(R.drawable.refresh_2); }
             else{ Raspisanie_show.refresh_btn.setBackgroundResource(R.drawable.refresh_0); }
             Raspisanie_show.refresh_btn.setClickable(true);

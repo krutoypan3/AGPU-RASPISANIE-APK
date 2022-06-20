@@ -30,6 +30,19 @@ public class GetTextColor {
     }
 
     /**
+     * Возвращает обратный цвет текста для текущей темы приложения
+     * @param context Контекст приложения
+     * @return R.color.(цвет)
+     */
+    public static int getAppColorInvert(Context context) {
+        int color = getAppColor(context);
+        if (color == context.getColor(R.color.black))
+            return context.getColor(R.color.gold);
+        else
+            return context.getColor(R.color.black);
+    }
+
+    /**
      * Возвращает цвет текста для текущей темы системы
      * @param context Контекст приложения
      * @return R.color.(цвет)
