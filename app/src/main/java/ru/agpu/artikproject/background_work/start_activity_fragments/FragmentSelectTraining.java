@@ -12,6 +12,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +92,7 @@ public class FragmentSelectTraining extends Fragment {
                 // Устанавливаем выбранную группу в основное активити фрагмента
                 StartActivity.SELECTED_GROUP = sorted_directions.get(i).item.split("\n")[0].split(view.getContext().getString(R.string.Group) + ": ")[1].toUpperCase().replaceFirst("Z", "").replaceFirst("S", "");
                 // Открываем фрагмент с выбором группы
-                getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentSelectGroup.class, null).commit();
+                getParentFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container_view, FragmentSelectGroup.class, null).commit();
             });
         });
 

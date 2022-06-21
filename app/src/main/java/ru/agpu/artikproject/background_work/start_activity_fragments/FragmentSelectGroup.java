@@ -13,6 +13,7 @@ import android.widget.ListView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 
@@ -47,7 +48,7 @@ public class FragmentSelectGroup extends Fragment {
         view.findViewById(R.id.help_group).setOnClickListener(view12 -> {
             view12.findViewById(R.id.help_group).setClickable(false); // Отключаем кнопку после нажатия
             view12.findViewById(R.id.help_group).startAnimation(AnimationUtils.loadAnimation(view12.getContext(), R.anim.scale)); // Воспроизводим анимацию
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentGroupHelp.class, null).commit(); // Переходим к фрагменты с помощью с группой
+            getParentFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container_view, FragmentGroupHelp.class, null).commit(); // Переходим к фрагменты с помощью с группой
         });
 
         // Прослушиваем изменения текстового поля ввода группы

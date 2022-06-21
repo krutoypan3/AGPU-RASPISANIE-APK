@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -112,21 +113,32 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.details_page_Record_book:
                     // Зачетная книжка
-                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentZachetkaShow.class, null).commit();
+                    fragmentManager.beginTransaction()
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .replace(R.id.fragment_container_view, FragmentZachetkaShow.class, null)
+                            .commit();
                     return true;
                 case R.id.details_page_Faculties_list:
-                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentSelectGroupDirectionFaculty.class, null).commit();
+                    fragmentManager.beginTransaction()
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .replace(R.id.fragment_container_view, FragmentSelectGroupDirectionFaculty.class, null).commit();
                     return true;
                 case R.id.details_page_Home_page:
-                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();
+                    fragmentManager.beginTransaction()
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                            .replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();
                     return true;
                 case R.id.details_page_Audiences:
                     FragmentRecyclerviewShow.SELECTED_LIST = 1;
-                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentRecyclerviewShow.class, null).commit();
+                    fragmentManager.beginTransaction()
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .replace(R.id.fragment_container_view, FragmentRecyclerviewShow.class, null).commit();
                     return true;
                 case R.id.details_page_Settings:
                     // Кнопка 'Настройки'
-                    MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container_view, FragmentSettingsShow.class, null).commit();
+                    fragmentManager.beginTransaction()
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            .replace(R.id.fragment_container_view, FragmentSettingsShow.class, null).commit();
                     return true;
                 default:
                     return false;
