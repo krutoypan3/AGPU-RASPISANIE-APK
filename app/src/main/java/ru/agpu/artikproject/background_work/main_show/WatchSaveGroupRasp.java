@@ -3,7 +3,6 @@ package ru.agpu.artikproject.background_work.main_show;
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -54,12 +53,10 @@ public class WatchSaveGroupRasp {
             try {
                 if (MainActivity.group_listed == null || r.getCount() == 0) {
                     result.setText(R.string.no_saved_group);
-                    listview.setVisibility(View.INVISIBLE);
                 } else {
                     ListViewAdapter adapter = new ListViewAdapter(act.getApplicationContext(), MainActivity.group_listed);
                     listview.setAdapter(adapter);
                     result.setText("");
-                    listview.setVisibility(View.VISIBLE);
                 }
             }
             catch (Exception e){

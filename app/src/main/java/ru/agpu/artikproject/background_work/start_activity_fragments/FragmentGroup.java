@@ -24,7 +24,7 @@ public class FragmentGroup extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        StartActivity.FRAGMENT = StartActivity.BACK_TO_EIOS;
+        StartActivity.FRAGMENT = StartActivity.BACK_TO_WELCOME;
 
         // Я знаю название группы
         view.findViewById(R.id.I_know_group_name_btn).setOnClickListener(view1 -> {

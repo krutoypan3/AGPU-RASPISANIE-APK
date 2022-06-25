@@ -6,8 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
-import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentAuthorizationEIOS;
-import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentEIOS;
 import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentGroup;
 import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentWelcome;
 import ru.agpu.artikproject.background_work.theme.Theme;
@@ -19,10 +17,8 @@ import ru.agpu.artikproject.background_work.theme.Theme;
 public class StartActivity extends AppCompatActivity {
     public static int FRAGMENT; // Номер открытого фрагмента
     public static String SELECTED_GROUP = ""; // Выбранная группа
-    public final static int BACK_TO_EIOS = 3;
     public final static int BACK_TO_GROUP = 2;
     public final static int BACK_TO_WELCOME = 5;
-    public final static int BACK_TO_AUTHOTIZATION = 7;
 
     @Override
     public void onBackPressed(){
@@ -30,14 +26,8 @@ public class StartActivity extends AppCompatActivity {
             case(BACK_TO_GROUP):
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentGroup.class, null).commit();
                 break;
-            case(BACK_TO_EIOS):
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentEIOS.class, null).commit();
-                break;
             case(BACK_TO_WELCOME):
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentWelcome.class, null).commit();
-                break;
-            case(BACK_TO_AUTHOTIZATION):
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentAuthorizationEIOS.class, null).commit();
                 break;
         }
     }

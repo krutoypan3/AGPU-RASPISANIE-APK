@@ -26,14 +26,14 @@ public class FragmentWelcome extends Fragment {
         view.findViewById(R.id.I_just_got_in_btn).setOnClickListener(view1 -> {
             view.findViewById(R.id.I_just_got_in_btn).setClickable(false);
             view.findViewById(R.id.I_just_got_in_btn).startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.scale));
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentEIOS.class, null).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentGroup.class, null).commit();
         });
 
         // Я студент
         view.findViewById(R.id.Im_a_student_btn).setOnClickListener(view1 -> {
             view.findViewById(R.id.Im_a_student_btn).setClickable(false);
             view.findViewById(R.id.Im_a_student_btn).startAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.scale));
-            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentEIOS.class, null).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentGroup.class, null).commit();
         });
 
         // Я преподаватель

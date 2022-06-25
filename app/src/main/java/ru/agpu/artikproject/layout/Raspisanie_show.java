@@ -74,7 +74,7 @@ public class Raspisanie_show extends AppCompatActivity {
         new Refresh_rasp_week_or_day_starter(this).start(); // Обновляем расписание
         CheckBox mCheckBox = findViewById(R.id.checkBox); // Уведомление об обновлении расписания
 
-        new RaspUpdateCheckBoxListener(mCheckBox).start();
+        new RaspUpdateCheckBoxListener(this).start();
         // Кнопка увеличивающая размер текста в режиме недели
         week_day_change_btn_size_up.setOnClickListener(v -> new Week_show_resize().size_add());
 

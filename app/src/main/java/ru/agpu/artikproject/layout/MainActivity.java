@@ -25,7 +25,6 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentMainShow
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSettingsShow;
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentZachetkaShow;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
@@ -53,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animScale;
     public static Animation animRotate_ok;
     public static FragmentManager fragmentManager;
+    BottomNavigationView bottomNavigationView;
+
+    public static int FRAGMENT; // Номер открытого фрагмента
+    public static boolean IS_MAIN_SHOWED = true;
+    public final static int BACK_TO_SELECT_GROUP_DIRECTION_FACULTY = 1;
+    public final static int BACK_TO_MAIN_SHOW = 2;
 
 
     // Вызывается перед выходом из "полноценного" состояния.
@@ -65,7 +70,18 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-
+        switch (FRAGMENT){
+            case(BACK_TO_SELECT_GROUP_DIRECTION_FACULTY):
+                FRAGMENT = BACK_TO_MAIN_SHOW;
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentSelectGroupDirectionFaculty.class, null).commit();
+                break;
+            case(BACK_TO_MAIN_SHOW):
+                if (!IS_MAIN_SHOWED){
+                    IS_MAIN_SHOWED = true;
+                    bottomNavigationView.setSelectedItemId(R.id.details_page_Home_page);
+                }
+                break;
+        }
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -102,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigatin_view);
+        bottomNavigationView = findViewById(R.id.bottom_navigatin_view);
 
         bottomNavigationView.setOnItemReselectedListener(item -> {
             // TODO Заглушка, чтобы элементы повторно не отрисовывались при нажатии на нижний бар
@@ -111,19 +127,13 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.details_page_Home_page);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.details_page_Record_book:
-                    // Зачетная книжка
-                    fragmentManager.beginTransaction()
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .replace(R.id.fragment_container_view, FragmentZachetkaShow.class, null)
-                            .commit();
-                    return true;
                 case R.id.details_page_Faculties_list:
                     fragmentManager.beginTransaction()
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .replace(R.id.fragment_container_view, FragmentSelectGroupDirectionFaculty.class, null).commit();
-                    return true;
+                    break;
                 case R.id.details_page_Home_page:
+                    IS_MAIN_SHOWED = true;
                     fragmentManager.beginTransaction()
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                             .replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();
@@ -133,16 +143,19 @@ public class MainActivity extends AppCompatActivity {
                     fragmentManager.beginTransaction()
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .replace(R.id.fragment_container_view, FragmentRecyclerviewShow.class, null).commit();
-                    return true;
+                    break;
                 case R.id.details_page_Settings:
                     // Кнопка 'Настройки'
                     fragmentManager.beginTransaction()
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .replace(R.id.fragment_container_view, FragmentSettingsShow.class, null).commit();
-                    return true;
+                    break;
                 default:
                     return false;
             }
+            IS_MAIN_SHOWED = false;
+            FRAGMENT = BACK_TO_MAIN_SHOW;
+            return true;
         });
 
         new CheckAppUpdate(this, false).start(); // Запуск проверки обновлений при входе в приложение

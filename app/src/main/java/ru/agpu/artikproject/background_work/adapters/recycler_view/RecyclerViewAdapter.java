@@ -20,7 +20,6 @@ import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lis
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.FacultiesItemClick;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.groups.GroupsItemClick;
 import ru.agpu.artikproject.background_work.theme.GetTextColor;
-import ru.agpu.artikproject.background_work.main_show.fragments.zach_book.GetMarkImageUrl;
 import ru.agpu.artikproject.layout.MainActivity;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
@@ -32,7 +31,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public static final int IS_BUILDINGS_ADAPTER = 0;
     public static final int IS_FACULTIES_ADAPTER = 1;
     public static final int IS_FACULTIES_GROUPS_ADAPTER = 2;
-    public static final int IS_MARK_ADAPTER = 4;
     public static int selected_faculties_position;
     public static String selected_faculties_logos;
 
@@ -79,32 +77,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, int position) {
         // Cet item in countries via position
         RecyclerViewItems item = this.datas.get(position);
-        int text_color = GetTextColor.getAppColor(act.getApplicationContext());
         String imageResUrl;
-        if (adapter_is == IS_MARK_ADAPTER){
-            String subtext = act.getString(R.string.Semester) + ": " + item.getMainText() + ", " + act.getString(R.string.Teacher) + ": " + item.getSubText3();
-            String maintext = item.getSubText4() + " - " + item.getImageResourceUrl();
-            holder.subTextView.setText(subtext);
-            holder.mainTextView.setText(maintext);
-            imageResUrl = new GetMarkImageUrl().get(item.getSubText2());
-            holder.cardView.getLayoutParams().height = 50;
-            holder.image.getLayoutParams().height = 50;
-            holder.cardView.getLayoutParams().width = 50;
-            holder.image.getLayoutParams().width = 50;
-            holder.mainTextView.setTextColor(text_color);
-            holder.subTextView.setTextColor(text_color);
-        }
-        else {
-            imageResUrl = item.getImageResourceUrl();
-            holder.mainTextView.setText(item.getMainText());
-            int textColor = GetTextColor.getAppColor(act.getApplicationContext());
-            if (textColor == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                textColor = GetTextColor.getAppColor(act.getApplicationContext());
-            holder.mainTextView.setTextColor(textColor);
-            String newSubText = item.getSubText();
-            holder.subTextView.setText(newSubText);
-            holder.subTextView.setTextColor(textColor);
-        }
+        imageResUrl = item.getImageResourceUrl();
+        holder.mainTextView.setText(item.getMainText());
+        int textColor = GetTextColor.getAppColor(act.getApplicationContext());
+        if (textColor == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            textColor = GetTextColor.getAppColor(act.getApplicationContext());
+        holder.mainTextView.setTextColor(textColor);
+        String newSubText = item.getSubText();
+        holder.subTextView.setText(newSubText);
+        holder.subTextView.setTextColor(textColor);
+
         Glide.with(act.getApplicationContext())
                 .load(imageResUrl)
                 .apply(new RequestOptions().override(Device_info.getDeviceWidth(act.getApplicationContext()), 360))
