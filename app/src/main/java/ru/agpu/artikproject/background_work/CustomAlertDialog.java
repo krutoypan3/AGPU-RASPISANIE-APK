@@ -35,6 +35,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
     public Uri uri;
     public String dialog_type;
     public ListView list_view;
+    private static final int DIALOG_PHOTO_HEIGHT = 700;
 
     /**
      * Диалог о наличии обновлений
@@ -94,7 +95,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 list_view.setVisibility(View.VISIBLE);
                 para_info_photo.setVisibility(View.VISIBLE);
                 ViewGroup.LayoutParams params = para_info_photo.getLayoutParams(); // получаем параметры
-                params.height = 700;
+                params.height = DIALOG_PHOTO_HEIGHT;
                 params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
                 para_info_photo.setLayoutParams(params);
                 break;
@@ -127,7 +128,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                 no.setVisibility(View.INVISIBLE);
                 yes.setText(R.string.god_of_flex);
                 params = para_info_photo.getLayoutParams(); // получаем параметры
-                params.height = 600;
+                params.height = DIALOG_PHOTO_HEIGHT;
                 params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
                 para_info_photo.setLayoutParams(params);
                 break;
