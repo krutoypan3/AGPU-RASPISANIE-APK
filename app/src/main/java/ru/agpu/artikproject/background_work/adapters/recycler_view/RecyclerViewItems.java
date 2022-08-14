@@ -7,21 +7,21 @@ public class RecyclerViewItems {
     private String mainText;
 
     // Image name (Without extension)
-    private final String imageResourceId;
+    private final String imageResourceUrl;
     private String subText;
 
     private String subText2;
     private String subText3;
     private String subText4;
 
-    public RecyclerViewItems(String subText, String imageResourceId, String subText2) {
+    public RecyclerViewItems(String subText, String imageResourceUrl, String subText2) {
         this.mainText = subText;
-        this.imageResourceId = imageResourceId;
+        this.imageResourceUrl = imageResourceUrl;
         this.subText = subText2;
     }
-    public RecyclerViewItems(String subText, String imageResourceId, String subText2, String subText3, String subText4) {
+    public RecyclerViewItems(String subText, String imageResourceUrl, String subText2, String subText3, String subText4) {
         this.mainText = subText;
-        this.imageResourceId = imageResourceId;
+        this.imageResourceUrl = imageResourceUrl;
         this.subText2 = subText2;
         this.subText3 = subText3;
         this.subText4 = subText4;
@@ -41,7 +41,7 @@ public class RecyclerViewItems {
     }
 
     public String getImageResourceUrl() {
-        return imageResourceId;
+        return imageResourceUrl;
     }
 
     @NonNull

@@ -88,6 +88,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.subTextView.setText(newSubText);
         holder.subTextView.setTextColor(textColor);
 
+        // Отображаем картинку в адаптере
         Glide.with(act.getApplicationContext())
                 .load(imageResUrl)
                 .apply(new RequestOptions().override(Device_info.getDeviceWidth(act.getApplicationContext()), 360))

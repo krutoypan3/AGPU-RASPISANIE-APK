@@ -25,3 +25,6 @@ hs_err_pid*
 app/google-services.json
 app/release/app-release.apk
 app/release/output-metadata.json
+app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
+app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
+app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
