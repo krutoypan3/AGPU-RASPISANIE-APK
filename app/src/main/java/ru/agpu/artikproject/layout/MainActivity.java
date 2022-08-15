@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public static int FRAGMENT; // Номер открытого фрагмента
     public static boolean IS_MAIN_SHOWED = true;
     public final static int BACK_TO_SELECT_GROUP_DIRECTION_FACULTY = 1;
+    public final static int BACK_TO_BUILDINGS_SHOW = 3;
     public final static int BACK_TO_MAIN_SHOW = 2;
 
 
@@ -80,6 +81,13 @@ public class MainActivity extends AppCompatActivity {
                     IS_MAIN_SHOWED = true;
                     bottomNavigationView.setSelectedItemId(R.id.details_page_Home_page);
                 }
+                break;
+            case (BACK_TO_BUILDINGS_SHOW):
+                FRAGMENT = BACK_TO_MAIN_SHOW;
+                FragmentRecyclerviewShow.SELECTED_LIST = 1;
+                getSupportFragmentManager().beginTransaction()
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                        .replace(R.id.fragment_container_view, FragmentRecyclerviewShow.class, null).commit();
                 break;
         }
     }
@@ -135,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.details_page_Home_page:
                     IS_MAIN_SHOWED = true;
                     fragmentManager.beginTransaction()
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();
                     return true;
                 case R.id.details_page_Audiences:
