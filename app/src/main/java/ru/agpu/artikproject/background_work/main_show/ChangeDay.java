@@ -75,7 +75,6 @@ public class ChangeDay {
         else{ // Если недели нет в базе данных
             Toast.makeText(act, R.string.Not_find_week, Toast.LENGTH_LONG).show(); // Выводим сообщение об ошибке выбора даты
             chosenDateCalendar = Calendar.getInstance(); // Ставим текущую дату
-            setInitialDateTime(); // Обновляем данные
         }
     }
 
