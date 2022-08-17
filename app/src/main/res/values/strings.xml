@@ -152,4 +152,6 @@
     <string name="Select_from_the_list_of_faculties">Выбрать из списка факультетов</string>
     <string name="Find_by_directions_of_training">Найти по направлению подготовки</string>
     <string name="Find_by_group_name">Найти по названию группы</string>
+    <string name="Schedule">Расписание</string>
+    <string name="Favorite_chedule_will_appear">Здесь появится ваше избранное расписание.</string>
 </resources>

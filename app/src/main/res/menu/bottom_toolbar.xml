@@ -6,6 +6,11 @@
         android:title="@string/faculties_list" />
 
     <item
+        android:id="@+id/details_page_Schedule"
+        android:icon="@drawable/ic_baseline_menu_book_24"
+        android:title="@string/Schedule" />
+
+    <item
         android:id="@+id/details_page_Home_page"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="@string/Home_page" />

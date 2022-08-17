@@ -19,7 +19,7 @@ import java.util.Objects;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.ShowNotification;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
-import ru.agpu.artikproject.layout.Raspisanie_show;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 
 public class GetRasp extends Thread {
     final String r_selectedItem;
@@ -68,8 +68,8 @@ public class GetRasp extends Thread {
     @Override
     public void run() {
         //if (type.equals("CheckRaspChanges")){Raspisanie_show.refresh_on_off = false;}
-        if (!Raspisanie_show.refresh_on_off) {
-            Raspisanie_show.refresh_on_off = true;
+        if (!FragmentScheduleShow.refresh_on_off) {
+            FragmentScheduleShow.refresh_on_off = true;
             System.out.println("Был сделан запрос на обновление расписания для " + r_selectedItem);
             try{
                 Document doc;
@@ -79,8 +79,8 @@ public class GetRasp extends Thread {
                     try {
                         doc = Jsoup.connect(urlq).get();
                     } catch (IOException e) { // Прерывание функции, если нет интернета
-                        Raspisanie_show.refresh_on_off = false;
-                        Raspisanie_show.refresh_successful = false;
+                        FragmentScheduleShow.refresh_on_off = false;
+                        FragmentScheduleShow.refresh_successful = false;
                         return;
                     }
                     List<String[]> days = new ArrayList<>();
@@ -178,14 +178,14 @@ public class GetRasp extends Thread {
                         }
                     }
                 }
-                Raspisanie_show.refresh_successful = true;
+                FragmentScheduleShow.refresh_successful = true;
             }
             catch(Exception e){
                 e.printStackTrace();
             }
             finally {
                 System.out.println("Расписание для " + r_selectedItem + " было обновлено");
-                Raspisanie_show.refresh_on_off = false;
+                FragmentScheduleShow.refresh_on_off = false;
             }
         }
     }

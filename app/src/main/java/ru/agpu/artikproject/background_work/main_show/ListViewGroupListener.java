@@ -1,15 +1,16 @@
 package ru.agpu.artikproject.background_work.main_show;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.widget.ListView;
 
-import ru.agpu.artikproject.background_work.site_parse.GetRasp;
-import ru.agpu.artikproject.layout.MainActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.CustomAlertDialog;
-import ru.agpu.artikproject.layout.Raspisanie_show;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
+import ru.agpu.artikproject.background_work.site_parse.GetRasp;
+import ru.agpu.artikproject.layout.MainActivity;
 
 public class ListViewGroupListener {
     public static int position;
@@ -33,11 +34,15 @@ public class ListViewGroupListener {
         MainActivity.selectedItem = MainActivity.group_listed.get(position).item;
         MainActivity.selectedItem_type = MainActivity.group_listed_type[position];
         MainActivity.selectedItem_id = MainActivity.group_listed_id[position];
-        Intent intent = new Intent(act.getApplicationContext(), Raspisanie_show.class);
         if (CheckInternetConnection.getState(act.getApplicationContext())){
             new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, act.getApplicationContext()).start();
         }
-        act.startActivity(intent);
+        MainActivity.IS_MAIN_SHOWED = false;
+        MainActivity.FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW;
+        MainActivity.bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);
+        MainActivity.fragmentManager.beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .replace(R.id.fragment_container_view, FragmentScheduleShow.class, null).commit();
     }
     /**
      * Отслеживает долгое нажатие на элемент списка с аудиториями

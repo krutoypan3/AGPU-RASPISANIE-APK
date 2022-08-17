@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckAppUpdate;
@@ -21,8 +22,11 @@ import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
+import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentMainShow;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentNoHaveFavoriteSchedule;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow;
+import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSettingsShow;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
@@ -52,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     public static Animation animScale;
     public static Animation animRotate_ok;
     public static FragmentManager fragmentManager;
-    BottomNavigationView bottomNavigationView;
+    public static BottomNavigationView bottomNavigationView;
 
     public static int FRAGMENT; // Номер открытого фрагмента
     public static boolean IS_MAIN_SHOWED = true;
@@ -146,6 +150,19 @@ public class MainActivity extends AppCompatActivity {
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .replace(R.id.fragment_container_view, FragmentMainShow.class, null).commit();
                     return true;
+                case R.id.details_page_Schedule:
+                    // Если данные не пустые - показываем расписание по ним
+                    if (!Objects.equals(MainActivity.selectedItem, "")) {
+                        fragmentManager.beginTransaction()
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                .replace(R.id.fragment_container_view, FragmentScheduleShow.class, null).commit();
+                    }
+                    else { // Иначе - выводим сообщение о том, что тут будет показано расписание
+                        fragmentManager.beginTransaction()
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                .replace(R.id.fragment_container_view, FragmentNoHaveFavoriteSchedule.class, null).commit();
+                    }
+                    break;
                 case R.id.details_page_Audiences:
                     FragmentRecyclerviewShow.SELECTED_LIST = 1;
                     fragmentManager.beginTransaction()
@@ -172,15 +189,32 @@ public class MainActivity extends AppCompatActivity {
 
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 
+        // Выгружаем данные о последнем открытом расписании в главное активити
+        selectedItem = MySharedPreferences.get(getApplicationContext(), "selectedItem", "");
+        selectedItem_type = MySharedPreferences.get(getApplicationContext(), "selectedItem_type", "");
+        selectedItem_id = MySharedPreferences.get(getApplicationContext(), "selectedItem_id", "");
+        if (!Objects.equals(selectedItem, "")){
+            IS_MAIN_SHOWED = false;
+            FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW;
+            bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);
+            fragmentManager.beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .replace(R.id.fragment_container_view, FragmentScheduleShow.class, null).commit();
+        }
+
         if (getIntent().getBooleanExtra("start_rasp", false)){
-            Intent intent2 = new Intent(getApplicationContext(), Raspisanie_show.class);
             if (CheckInternetConnection.getState(getApplicationContext())){
                 MainActivity.selectedItem = getIntent().getStringExtra("selectedItem");
                 MainActivity.selectedItem_type = getIntent().getStringExtra("selectedItem_type");
                 MainActivity.selectedItem_id = getIntent().getStringExtra("selectedItem_id");
                 new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
             }
-            startActivity(intent2);
+            MainActivity.fragmentManager.beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .replace(R.id.fragment_container_view, FragmentScheduleShow.class, null).commit();
+            MainActivity.IS_MAIN_SHOWED = false;
+            MainActivity.FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW;
+            MainActivity.bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);
         }
     }
 }

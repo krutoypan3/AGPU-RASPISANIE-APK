@@ -1,26 +1,20 @@
 package ru.agpu.artikproject.background_work.rasp_show;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.view.View;
 import android.widget.CheckBox;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.layout.MainActivity;
 
-public class RaspUpdateCheckBoxListener extends Thread{
-    final Activity activity;
-    public RaspUpdateCheckBoxListener(Activity activity){
-        this.activity = activity;
-    }
-
-    @Override
-    public void run() {
+public class RaspUpdateCheckBoxListener {
+    public RaspUpdateCheckBoxListener(View view) {
         try {
             Cursor sss = DataBase_Local.sqLiteDatabase.rawQuery("SELECT r_group_code FROM rasp_update WHERE r_group_code = '" + MainActivity.selectedItem_id + "'", null);
-            CheckBox checkBox = activity.findViewById(R.id.checkBox);
+            CheckBox checkBox = view.findViewById(R.id.checkBox);
             checkBox.setChecked(sss.getCount() != 0);
             checkBox.setOnClickListener(v -> {
                 if (checkBox.isChecked()) {
@@ -35,8 +29,8 @@ public class RaspUpdateCheckBoxListener extends Thread{
                     DataBase_Local.sqLiteDatabase.delete("rasp_update", "r_group_code = '" + MainActivity.selectedItem_id + "'", null);
                 }
             });
-        }
-        catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
