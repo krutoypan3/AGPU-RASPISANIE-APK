@@ -19,6 +19,7 @@ import java.util.Objects;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
+import ru.agpu.artikproject.background_work.FirstAppStartHelper;
 import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
@@ -193,14 +194,6 @@ public class MainActivity extends AppCompatActivity {
         selectedItem = MySharedPreferences.get(getApplicationContext(), "selectedItem", "");
         selectedItem_type = MySharedPreferences.get(getApplicationContext(), "selectedItem_type", "");
         selectedItem_id = MySharedPreferences.get(getApplicationContext(), "selectedItem_id", "");
-        if (!Objects.equals(selectedItem, "")){
-            IS_MAIN_SHOWED = false;
-            FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW;
-            bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);
-            fragmentManager.beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .replace(R.id.fragment_container_view, FragmentScheduleShow.class, null).commit();
-        }
 
         if (getIntent().getBooleanExtra("start_rasp", false)){
             if (CheckInternetConnection.getState(getApplicationContext())){
@@ -209,12 +202,16 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.selectedItem_id = getIntent().getStringExtra("selectedItem_id");
                 new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, getApplicationContext()).start();
             }
-            MainActivity.fragmentManager.beginTransaction()
+        }
+
+        if (!MySharedPreferences.get(getApplicationContext(), "IsFirstAppStart", true) && !Objects.equals(selectedItem, "")){
+            IS_MAIN_SHOWED = false;
+            FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW;
+            bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);
+            fragmentManager.beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .replace(R.id.fragment_container_view, FragmentScheduleShow.class, null).commit();
-            MainActivity.IS_MAIN_SHOWED = false;
-            MainActivity.FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW;
-            MainActivity.bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);
         }
+        findViewById(R.id.main_app_text).setOnClickListener(v -> new FirstAppStartHelper(this));
     }
 }

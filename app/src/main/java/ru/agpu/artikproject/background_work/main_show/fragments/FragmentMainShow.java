@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.FirstAppStartHelper;
+import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.main_show.ChangeDay;
 import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearch_Listener;
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
@@ -49,5 +51,10 @@ public class FragmentMainShow extends Fragment {
             new ChangeDay(activity).setDate();
             view2.startAnimation(MainActivity.animScale);
         });
+
+        if (MySharedPreferences.get(getContext(), "IsFirstAppStart", true)) {
+            MySharedPreferences.put(getContext(), "IsFirstAppStart", false);
+            new FirstAppStartHelper((Activity) view.getContext());
+        }
     }
 }

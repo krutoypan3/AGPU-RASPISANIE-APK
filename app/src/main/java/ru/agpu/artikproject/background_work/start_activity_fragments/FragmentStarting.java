@@ -31,7 +31,6 @@ public class FragmentStarting extends Fragment {
 
         // Если это первый запуск приложения
         if (MySharedPreferences.get(getContext(),"IsFirstAppStart", true)){
-            MySharedPreferences.put(getContext(), "IsFirstAppStart", false);
             new GetDirectionsList().getDirectionsFromFirebase();
             // Запускаем фрагмент с приветствием
             getParentFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentWelcome.class, null).commit();

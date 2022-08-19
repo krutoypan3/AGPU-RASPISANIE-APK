@@ -41,22 +41,23 @@
         app:layout_constraintTop_toBottomOf="@id/subtitle"
         android:background="@drawable/button_blue_invert"
         android:padding="5dp">
-    <EditText
-        android:id="@+id/rasp_search_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:ems="10"
-        android:hint="@string/rasp_find"
 
-        android:backgroundTint="@android:color/transparent"
+        <EditText
+            android:id="@+id/rasp_search_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/transparent"
+            android:ems="10"
+            android:hint="@string/rasp_find"
 
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textAlignment="center"
-        android:textColorHint="?android:textColorSecondary"
-        android:theme="@style/Theme.MyApp.Main"
-        android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textColorHint="?android:textColorSecondary"
+            android:theme="@style/Theme.MyApp.Main" />
     </RelativeLayout>
 
     <TextView

@@ -2,7 +2,7 @@
     <string name="app_name">АГПУ расписание</string>
     <string name="drawer_item_home">Расписание</string>
     <string name="drawer_item_location">Аудитории и корпуса</string>
-    <string name="drawer_item_settings">Настройки</string>
+    <string name="settings">Настройки</string>
     <string name="drawer_item_delete">Очистить</string>
     <string name="drawer_item_open_source" translatable="false">GitHub</string>
     <string name="drawer_item_github">Проверить обновления</string>
@@ -154,4 +154,12 @@
     <string name="Find_by_group_name">Найти по названию группы</string>
     <string name="Schedule">Расписание</string>
     <string name="Favorite_chedule_will_appear">Здесь появится ваше избранное расписание.</string>
+    <string name="Home_page_description">На данной странице вы можете найти интересующее вас расписание и изменить дату.</string>
+    <string name="Current_date">Текущая дата</string>
+    <string name="Current_date_description">Здесь можно изменить дату на которую будет показано ваше расписание.</string>
+    <string name="rasp_find_description">Здесь вы можете найти ваше расписание по названию группы, имени преподавателя и по аудитории</string>
+    <string name="faculties_list_description">Продвинутый поиск по факультетам, направлениям и группам</string>
+    <string name="Schedule_description">На данной странице будет отображаться последнее открытое расписание</string>
+    <string name="Audiences_description">На данной странице можно узнать о корпусах и аудиториях, что в них находятся</string>
+    <string name="settings_description">Здесь можно поменять тему и фон приложения</string>
 </resources>

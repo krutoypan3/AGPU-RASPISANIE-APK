@@ -23,5 +23,5 @@
     <item
         android:id="@+id/details_page_Settings"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="@string/drawer_item_settings" />
+        android:title="@string/settings" />
 </menu>

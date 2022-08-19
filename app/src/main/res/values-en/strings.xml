@@ -3,7 +3,7 @@
     <string name="app_name">ASPU schedule</string>
     <string name="drawer_item_home">Schedule</string>
     <string name="drawer_item_location">Auditoriums and buildings</string>
-    <string name="drawer_item_settings">Settings</string>
+    <string name="settings">Settings</string>
     <string name="drawer_item_delete">Clear</string>
     <string name="drawer_item_github">Check for updates</string>
     <string name="feedback">Leave feedback</string>
@@ -146,4 +146,12 @@
     <string name="Find_by_group_name">Find by group name</string>
     <string name="Schedule">Schedule</string>
     <string name="Favorite_chedule_will_appear">Your favorite schedule will appear here.</string>
+    <string name="Home_page_description">On this page you can find the schedule you are interested in and change the date.</string>
+    <string name="Current_date">Current date</string>
+    <string name="Current_date_description">Here you can change the date on which your schedule will be shown.</string>
+    <string name="rasp_find_description">Here you can find your schedule by group name, teacher name and by audience</string>
+    <string name="faculties_list_description">Advanced search by faculties, directions and groups</string>
+    <string name="Schedule_description">The last open schedule will be displayed on this page</string>
+    <string name="Audiences_description">On this page you can find out about the buildings and classrooms that they contain</string>
+    <string name="settings_description">Here you can change the theme and background of the application</string>
 </resources>
