@@ -5,6 +5,8 @@ import android.widget.ListView;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.CustomAlertDialog;
@@ -39,7 +41,8 @@ public class ListViewGroupListener {
         }
         MainActivity.IS_MAIN_SHOWED = false;
         MainActivity.FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW;
-        MainActivity.bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);
+        BottomNavigationView bottomNavigationView = act.findViewById(R.id.bottom_navigatin_view);
+        bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);
         MainActivity.fragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .replace(R.id.fragment_container_view, FragmentScheduleShow.class, null).commit();

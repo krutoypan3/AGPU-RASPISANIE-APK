@@ -6,6 +6,8 @@ import android.view.View;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
@@ -36,7 +38,7 @@ public class GroupsItemClick {
                 .replace(R.id.fragment_container_view, FragmentScheduleShow.class, null).commit();
         MainActivity.IS_MAIN_SHOWED = false;
         MainActivity.FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW;
-        MainActivity.bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);
-
+        BottomNavigationView bottomNavigationView = act.findViewById(R.id.bottom_navigatin_view);
+        bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);
     }
 }
