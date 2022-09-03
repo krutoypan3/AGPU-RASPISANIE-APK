@@ -22,7 +22,7 @@ import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap;
 import ru.agpu.artikproject.background_work.rasp_show.Para_info;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class CustomAlertDialog extends Dialog implements android.view.View.OnClickListener {
 

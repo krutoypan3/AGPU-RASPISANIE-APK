@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class FragmentWelcome extends Fragment {
 

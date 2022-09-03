@@ -13,7 +13,7 @@ import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.main_show.UpdateDateInMainActivity;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 /**
  * Данный класс получает текущую неделю с сайта,

@@ -25,7 +25,7 @@ import ru.agpu.artikproject.background_work.rasp_show.Swipe_rasp;
 import ru.agpu.artikproject.background_work.rasp_show.Week_day_change;
 import ru.agpu.artikproject.background_work.rasp_show.Week_show_resize;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class FragmentScheduleShow extends Fragment {
     public static boolean refresh_on_off = false;

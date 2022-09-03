@@ -22,8 +22,8 @@ import ru.agpu.artikproject.background_work.TextDetranslit;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
-import ru.agpu.artikproject.layout.MainActivity;
-import ru.agpu.artikproject.layout.StartActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.StartActivity;
 
 public class FragmentSelectGroup extends Fragment {
     static ArrayList<ListViewItems> groups_name = new ArrayList<>(); // Отсортированный список с названиями групп

@@ -12,7 +12,7 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 import ru.agpu.artikproject.R;
 
 public class ShowNotification extends Thread {

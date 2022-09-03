@@ -25,7 +25,7 @@ import java.util.List;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 
 public class GetGroupList_Search extends Thread {

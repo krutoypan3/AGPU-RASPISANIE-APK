@@ -29,7 +29,7 @@ import ru.agpu.artikproject.background_work.settings_layout.user_background.User
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserBackgroundSelectorListener;
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserSeekBarListener;
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserSeekBarSetting;
-import ru.agpu.artikproject.layout.Admin_panel;
+import ru.agpu.artikproject.presentation.layout.Admin_panel;
 
 public class FragmentSettingsShow extends Fragment {
     ImageView userBackgroundLightSelector;

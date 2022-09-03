@@ -32,7 +32,7 @@ import ru.agpu.artikproject.background_work.debug.Device_info;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class FragmentBuildingInfo extends Fragment {
 

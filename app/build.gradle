@@ -35,6 +35,12 @@ dependencies {
         transitive = true
     }
 
+    // Module domain
+    implementation project(path: ':domain')
+
+    // Module data
+    implementation project(path: ':data')
+    
     // RxJava 3
     implementation "io.reactivex.rxjava3:rxjava:3.0.13"
 

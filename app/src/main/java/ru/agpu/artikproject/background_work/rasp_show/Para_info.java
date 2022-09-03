@@ -23,7 +23,7 @@ import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.rasp_show.recycler_view.RecyclerViewItems;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class Para_info {
     public static int finalCorp;

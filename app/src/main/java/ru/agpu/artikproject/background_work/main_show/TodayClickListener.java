@@ -12,7 +12,7 @@ import java.util.Random;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class TodayClickListener {
     /**

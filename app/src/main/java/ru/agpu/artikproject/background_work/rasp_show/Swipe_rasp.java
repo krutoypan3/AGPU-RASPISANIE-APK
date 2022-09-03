@@ -8,7 +8,7 @@ import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class Swipe_rasp {
     public Swipe_rasp(String direction, View view) {

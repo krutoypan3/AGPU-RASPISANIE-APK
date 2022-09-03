@@ -22,7 +22,7 @@ import ru.agpu.artikproject.background_work.CustomAlertDialog;
 import ru.agpu.artikproject.background_work.GetDirectionsList;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
-import ru.agpu.artikproject.layout.StartActivity;
+import ru.agpu.artikproject.presentation.layout.StartActivity;
 
 /**
  * Фрагмент с выбором направления обучения на стартовом экране

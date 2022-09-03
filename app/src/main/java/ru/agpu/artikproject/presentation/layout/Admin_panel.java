@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.layout;
+package ru.agpu.artikproject.presentation.layout;
 
 import android.os.Bundle;
 

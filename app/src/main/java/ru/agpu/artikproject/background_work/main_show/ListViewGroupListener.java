@@ -12,7 +12,7 @@ import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.CustomAlertDialog;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class ListViewGroupListener {
     public static int position;

@@ -73,7 +73,7 @@
             android:permission="android.permission.BIND_REMOTEVIEWS">
         </service>
 
-        <activity android:name="ru.agpu.artikproject.layout.StartActivity"
+        <activity android:name=".presentation.layout.StartActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
@@ -83,10 +83,10 @@
         </activity>
 
         <!-- Основное активити -->
-        <activity android:name="ru.agpu.artikproject.layout.MainActivity"/>
+        <activity android:name=".presentation.layout.MainActivity"/>
         <activity android:name=".background_work.image_utils.ImageSelector"/>
         <activity android:name=".background_work.image_utils.GalleryUtil"/>
-        <activity android:name="ru.agpu.artikproject.layout.Admin_panel"/>
+        <activity android:name=".presentation.layout.Admin_panel"/>
     </application>
 
 </manifest>

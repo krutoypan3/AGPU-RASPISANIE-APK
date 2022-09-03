@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.layout;
+package ru.agpu.artikproject.presentation.layout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -16,6 +16,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
@@ -33,6 +37,9 @@ import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
+import ru.agpu.artikproject.data.repository.current_week_id.CurrentWeekIdImpl;
+import ru.agpu.artikproject.domain.repository.CurrentWeekIdRepository;
+import ru.agpu.artikproject.domain.usecase.CurrentWeekIdGetUseCase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,25 +69,26 @@ public class MainActivity extends AppCompatActivity {
     public final static int BACK_TO_SELECT_GROUP_DIRECTION_FACULTY = 1;
     public final static int BACK_TO_BUILDINGS_SHOW = 3;
     public final static int BACK_TO_MAIN_SHOW = 2;
+    Disposable disposable = null;
 
 
     // Вызывается перед выходом из "полноценного" состояния.
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         // Очистите все ресурсы. Это касается завершения работы
         // потоков, закрытия соединений с базой данных и т. д.
         super.onDestroy();
     }
 
     @Override
-    public void onBackPressed(){
-        switch (FRAGMENT){
-            case(BACK_TO_SELECT_GROUP_DIRECTION_FACULTY):
+    public void onBackPressed() {
+        switch (FRAGMENT) {
+            case (BACK_TO_SELECT_GROUP_DIRECTION_FACULTY):
                 FRAGMENT = BACK_TO_MAIN_SHOW;
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_view, FragmentSelectGroupDirectionFaculty.class, null).commit();
                 break;
-            case(BACK_TO_MAIN_SHOW):
-                if (!IS_MAIN_SHOWED){
+            case (BACK_TO_MAIN_SHOW):
+                if (!IS_MAIN_SHOWED) {
                     IS_MAIN_SHOWED = true;
                     bottomNavigationView.setSelectedItemId(R.id.details_page_Home_page);
                 }
@@ -142,8 +150,25 @@ public class MainActivity extends AppCompatActivity {
         selectedItem_type = MySharedPreferences.get(getApplicationContext(), "selectedItem_type", "");
         selectedItem_id = MySharedPreferences.get(getApplicationContext(), "selectedItem_id", "");
 
-        if (getIntent().getBooleanExtra("start_rasp", false)){
-            if (CheckInternetConnection.getState(getApplicationContext())){
+
+        Observable<Integer> observable = Observable.create(subscriber -> { // Создаем observable, который будет выполняться в отдельном потоке
+            CurrentWeekIdRepository currentWeekIdRepository = new CurrentWeekIdImpl(getApplicationContext());
+            CurrentWeekIdGetUseCase currentWeekIdGetUseCase = new CurrentWeekIdGetUseCase(currentWeekIdRepository);
+            subscriber.onNext(currentWeekIdGetUseCase.execute());
+            subscriber.onComplete();
+        });
+
+        disposable = observable
+                .subscribeOn(Schedulers.newThread()) // Выбираем ядро на котором будет выполняться наш observable
+                .observeOn(AndroidSchedulers.mainThread()) // Выбираем ядро на котором будет выполняться наш код после observable
+                .subscribe(week_id -> { // Код, выполняющийся после observable
+                            MainActivity.week_id = week_id;
+                        }
+                );
+
+
+        if (getIntent().getBooleanExtra("start_rasp", false)) {
+            if (CheckInternetConnection.getState(getApplicationContext())) {
                 selectedItem = getIntent().getStringExtra("selectedItem");
                 selectedItem_type = getIntent().getStringExtra("selectedItem_type");
                 selectedItem_id = getIntent().getStringExtra("selectedItem_id");
@@ -151,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (!MySharedPreferences.get(getApplicationContext(), "IsFirstAppStart", true) && !Objects.equals(selectedItem, "")){
+        if (!MySharedPreferences.get(getApplicationContext(), "IsFirstAppStart", true) && !Objects.equals(selectedItem, "")) {
             IS_MAIN_SHOWED = false;
             FRAGMENT = BACK_TO_MAIN_SHOW;
             bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);

@@ -26,7 +26,7 @@ import ru.agpu.artikproject.background_work.rasp_show.recycler_view.RecyclerView
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.ColorChanger;
 import ru.agpu.artikproject.background_work.theme.Theme;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class Day_show {
     String mainText = "";

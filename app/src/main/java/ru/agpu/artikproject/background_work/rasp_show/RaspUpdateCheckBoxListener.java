@@ -8,7 +8,7 @@ import android.widget.CheckBox;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class RaspUpdateCheckBoxListener {
     public RaspUpdateCheckBoxListener(View view) {

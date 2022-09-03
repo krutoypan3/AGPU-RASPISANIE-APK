@@ -7,6 +7,13 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.iml" filepath="$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.main.iml" filepath="$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/ArtikProject.domain.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/ArtikProject.domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/ArtikProject.domain.main.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/ArtikProject.domain.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/ArtikProject.domain.test.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/ArtikProject.domain.test.iml" />
     </modules>
   </component>
 </project>

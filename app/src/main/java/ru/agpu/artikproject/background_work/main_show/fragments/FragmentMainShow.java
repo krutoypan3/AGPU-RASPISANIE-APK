@@ -17,7 +17,7 @@ import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.TodayClickListener;
 import ru.agpu.artikproject.background_work.main_show.UpdateDateInMainActivity;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class FragmentMainShow extends Fragment {
 

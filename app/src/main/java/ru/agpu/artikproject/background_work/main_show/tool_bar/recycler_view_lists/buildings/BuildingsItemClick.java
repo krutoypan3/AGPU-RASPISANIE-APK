@@ -15,7 +15,7 @@ import java.util.List;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewItems;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class BuildingsItemClick {
     /**

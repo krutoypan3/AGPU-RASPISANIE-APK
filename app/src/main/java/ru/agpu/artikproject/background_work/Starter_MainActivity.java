@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import java.util.concurrent.TimeUnit;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 
 public class Starter_MainActivity extends Thread {

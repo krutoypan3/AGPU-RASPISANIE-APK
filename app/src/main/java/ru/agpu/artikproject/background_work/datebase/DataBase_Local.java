@@ -1,4 +1,4 @@
-    package ru.agpu.artikproject.background_work.datebase;
+package ru.agpu.artikproject.background_work.datebase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,13 +7,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBase_Local extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "raspisanie.db";
+    public static final String TABLE_NAME_SEMANTIC_GROUP = "semantic_group";
+    private static final int DATABASE_VERSION = 8;
     public static SQLiteDatabase sqLiteDatabase;
+
     /**
      * Класс отвечающий за первичное создание \ подключение к локальной базе данных
+     *
      * @param context Контекст приложения
      */
     public DataBase_Local(Context context) {
-        super(context, DATABASE_NAME, null, 7);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
@@ -26,7 +30,21 @@ public class DataBase_Local extends SQLiteOpenHelper {
         createDB(db);
     }
 
-    private void createDB(SQLiteDatabase db){
+    private void createDB(SQLiteDatabase db) {
+        // Таблица со списком факультетов и групп
+        try {
+            db.execSQL("CREATE TABLE IF NOT EXISTS \"" + TABLE_NAME_SEMANTIC_GROUP + "\" (\n" +
+                    "\t\"id\"\tTEXT,\n" +
+                    "\t\"name\"\tTEXT,\n" +
+                    "\t\"group_id\"\tTEXT,\n" +
+                    "\t\"group_is_archive\"\tTEXT,\n" +
+                    "\t\"group_number_of_students\"\tTEXT,\n" +
+                    "\t\"group_name\"\tTEXT,\n" +
+                    "\t\"group_is_raspis\"\tTEXT\n" +
+                    ")");
+        } catch (Exception ignored) {
+        }
+
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS \"raspisanie\" (\n" +
                     "\t\"r_group_code\"\tINTEGER,\n" +
@@ -46,8 +64,8 @@ public class DataBase_Local extends SQLiteOpenHelper {
                     "\t\"r_color\"\tTEXT,\n" +
                     "\t\"r_distant\"\tTEXT\n" +
                     ")");
+        } catch (Exception ignored) {
         }
-        catch (Exception ignored){}
         // База данных с избранным расписанием
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS \"rasp_update\" (\n" +
@@ -55,8 +73,8 @@ public class DataBase_Local extends SQLiteOpenHelper {
                     "\t\"r_selectedItem_type\"\tTEXT,\n" +
                     "\t\"r_selectedItem\"\tTEXT\n" +
                     ")");
+        } catch (Exception ignored) {
         }
-        catch (Exception ignored){}
         // Таблица с неделями
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS \"weeks_list\" (\n" +
@@ -64,23 +82,23 @@ public class DataBase_Local extends SQLiteOpenHelper {
                     "\t\"week_s\"\tTEXT,\n" +
                     "\t\"week_po\"\tTEXT\n" +
                     ")");
+        } catch (Exception ignored) {
         }
-        catch (Exception ignored){}
         // Таблица с группами
-        try{
+        try {
             db.execSQL("CREATE TABLE IF NOT EXISTS \"groups_list\" (\n" +
                     "\t\"faculties_name\"\tTEXT,\n" +
                     "\t\"faculties_group_name\"\tTEXT,\n" +
                     "\t\"faculties_group_id\"\tTEXT\n" +
                     ")");
+        } catch (Exception ignored) {
         }
-        catch (Exception ignored){}
         // Таблица с направлениями и их группами
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS \"directions_list\" (\n" +
                     "\t\"direction_name\"\tTEXT,\n" +
                     "\t\"group_name\"\tTEXT\n)");
+        } catch (Exception ignored) {
         }
-        catch (Exception ignored){}
     }
 }

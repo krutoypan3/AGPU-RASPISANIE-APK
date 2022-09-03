@@ -16,7 +16,7 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecycler
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSettingsShow;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class BottomNavigationViewListener {
     @SuppressLint("NonConstantResourceId")

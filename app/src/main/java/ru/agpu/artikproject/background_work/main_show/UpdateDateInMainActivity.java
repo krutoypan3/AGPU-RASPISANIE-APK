@@ -2,20 +2,25 @@ package ru.agpu.artikproject.background_work.main_show;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.database.Cursor;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.data.repository.weeks_list.WeeksListImpl;
+import ru.agpu.artikproject.domain.models.WeeksListItem;
+import ru.agpu.artikproject.domain.repository.FullWeekListRepository;
+import ru.agpu.artikproject.domain.usecase.weeks_list.WeeksListGetByWeekIdUseCase;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
-public class UpdateDateInMainActivity extends Thread{
+public class UpdateDateInMainActivity extends Thread {
 
     private final Activity act;
+
     /**
      * Устанавливает дату на главном экране
+     *
      * @param act Активити
      */
     public UpdateDateInMainActivity(Activity act) {
@@ -23,12 +28,15 @@ public class UpdateDateInMainActivity extends Thread{
     }
 
     @Override
-    public void run(){
+    public void run() {
         try {
-            Cursor f = DataBase_Local.sqLiteDatabase.rawQuery("SELECT week_s, week_po FROM weeks_list WHERE week_id = '" + MainActivity.week_id + "'", null);
-            if (f.moveToNext()) {
-                f.moveToFirst();
-                String s_po = f.getString(0) + " " + f.getString(1);
+            FullWeekListRepository fullWeekListRepository = new WeeksListImpl(act.getApplicationContext());
+            List<WeeksListItem> weekList = new WeeksListGetByWeekIdUseCase(
+                    fullWeekListRepository,
+                    MainActivity.week_id
+            ).execute();
+            if (!weekList.isEmpty()) {
+                String s_po = weekList.get(0).getStartDate() + " " + weekList.get(0).getEndDate();
                 act.runOnUiThread(() -> {
                     try {
                         TextView current_week = act.findViewById(R.id.subtitle);
@@ -49,8 +57,7 @@ public class UpdateDateInMainActivity extends Thread{
                     }
                 });
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

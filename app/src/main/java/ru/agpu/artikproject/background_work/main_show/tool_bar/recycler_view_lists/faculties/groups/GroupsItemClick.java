@@ -14,7 +14,7 @@ import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewA
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
-import ru.agpu.artikproject.layout.MainActivity;
+import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class GroupsItemClick {
     /**
