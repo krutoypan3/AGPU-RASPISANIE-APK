@@ -10,7 +10,7 @@ import java.util.List;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.data.repository.weeks_list.WeeksListImpl;
 import ru.agpu.artikproject.domain.models.WeeksListItem;
-import ru.agpu.artikproject.domain.repository.FullWeekListRepository;
+import ru.agpu.artikproject.domain.repository.WeeksListRepository;
 import ru.agpu.artikproject.domain.usecase.weeks_list.WeeksListGetByWeekIdUseCase;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
@@ -30,9 +30,9 @@ public class UpdateDateInMainActivity extends Thread {
     @Override
     public void run() {
         try {
-            FullWeekListRepository fullWeekListRepository = new WeeksListImpl(act.getApplicationContext());
+            WeeksListRepository weeksListRepository = new WeeksListImpl(act.getApplicationContext());
             List<WeeksListItem> weekList = new WeeksListGetByWeekIdUseCase(
-                    fullWeekListRepository,
+                    weeksListRepository,
                     MainActivity.week_id
             ).execute();
             if (!weekList.isEmpty()) {

@@ -34,7 +34,6 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSchedule
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.service.PlayService;
-import ru.agpu.artikproject.background_work.site_parse.GetCurrentWeekId;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.agpu.artikproject.data.repository.current_week_id.CurrentWeekIdImpl;
@@ -141,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
         new BottomNavigationViewListener(this); // Слушатель нажатий на нижний тулбар
         new CheckAppUpdate(this, false).start(); // Запуск проверки обновлений при входе в приложение
         new LoadBuildingsList(this).start(); // Загрузка данных об строениях в адаптер
-        new GetCurrentWeekId(this).start(); // Получение номера текущей недели и закидывание списка недель в адаптер
 
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 

@@ -9,7 +9,7 @@ private const val KEY_NAME = "week_id"
 
 class CurrentWeekIdImpl(private val context: Context) : CurrentWeekIdRepository {
     override fun getWeekId(): Int {
-        var weekId = GetCurrentWeekIdLocal().get(context)
+        var weekId = CurrentWeekIdGetFromLocal().get(context)
         if (weekId == 0) {
             weekId = CurrentWeekIdGetFromApi().get() ?: 0
             setWeekId(week_id = weekId)

@@ -3,22 +3,25 @@ package ru.agpu.artikproject.background_work.main_show;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.database.Cursor;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
+import ru.agpu.artikproject.data.repository.weeks_list.WeeksListImpl;
+import ru.agpu.artikproject.domain.models.WeeksListItem;
+import ru.agpu.artikproject.domain.repository.WeeksListRepository;
+import ru.agpu.artikproject.domain.usecase.weeks_list.WeeksListGetByLikeStartDateUseCase;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class ChangeDay {
     Activity act;
     public static Calendar chosenDateCalendar = Calendar.getInstance(); // Календарь текущей даты на все приложение
 
-    public ChangeDay(Activity act){
+    public ChangeDay(Activity act) {
         this.act = act;
         setInitialDateTime();
     }
@@ -49,13 +52,12 @@ public class ChangeDay {
             MainActivity.week_day = weekday - 2; // Устанавливаем выбранный день на главной странице
 
         // Считаем дату понедельника
-        while (weekday != dayOfWeek){ // Если выбран не понедельник
+        while (weekday != dayOfWeek) { // Если выбран не понедельник
             if (weekday == 1) { // Если выбрано воскресенье
                 weekday = dayOfWeek; // Ставим день недели понедельник
                 weekStartCalendar.add(Calendar.WEEK_OF_MONTH, -1); // Возвращаем календарь на неделю назад (т.к. вс-первый день новой недели | шатал я этим америкосов со своими стандартами, почему все не как у нормальных людей)
                 weekStartCalendar.add(Calendar.DAY_OF_WEEK, 1); // Добавляем день (1->2) (ставим понедельник)
-            }
-            else{ // Если не ПН и не ВС
+            } else { // Если не ПН и не ВС
                 weekday -= 1; // Отнимаем день в счетчике
                 weekStartCalendar.add(Calendar.DAY_OF_WEEK, -1); // Отнимаем день в календаре
             }
@@ -66,13 +68,14 @@ public class ChangeDay {
         @SuppressLint("SimpleDateFormat") String dateStr = new SimpleDateFormat("dd.MM.yyyy").format(date2);
 
         // Получаем номер недели из базы данных и обновляем на главной странице
-        Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM weeks_list WHERE week_s LIKE '%" + dateStr + "%'",null);
-        if (r.getCount() > 0){ // Если неделя есть в базе данных
-            r.moveToFirst(); // Берем первую полученную позицию выборки
-            MainActivity.week_id = Integer.parseInt(r.getString(0)); // Устанавливаем новый номер недели
+        WeeksListRepository weeksListRepository = new WeeksListImpl(act.getApplicationContext());
+        List<WeeksListItem> weeksListItems = new WeeksListGetByLikeStartDateUseCase(
+                weeksListRepository, dateStr).execute();
+        if (!weeksListItems.isEmpty()) { // Если неделя есть
+            // Берем первую полученную позицию выборки
+            MainActivity.week_id = weeksListItems.get(0).getWeekId(); // Устанавливаем новый номер недели
             new UpdateDateInMainActivity(act).start(); // Обновляем текст на главном экране
-        }
-        else{ // Если недели нет в базе данных
+        } else { // Если недели нет в базе данных
             Toast.makeText(act, R.string.Not_find_week, Toast.LENGTH_LONG).show(); // Выводим сообщение об ошибке выбора даты
             chosenDateCalendar = Calendar.getInstance(); // Ставим текущую дату
         }

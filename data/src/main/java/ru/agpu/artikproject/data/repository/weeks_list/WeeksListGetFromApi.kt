@@ -8,7 +8,7 @@ import java.io.IOException
 const val WEEK_LIST_URL = "http://www.it-institut.ru/SearchString/OpenAllWeek?ClientId=118"
 const val SEMESTR_ID_URL = "http://www.it-institut.ru/SearchString/ShowTestWeeks?ClientId=118"
 
-class FullWeekListGetFromApi {
+class WeeksListGetFromApi {
     fun get(): ArrayList<WeeksListItem> {
         val weeksListItems = ArrayList<WeeksListItem>()
         try {

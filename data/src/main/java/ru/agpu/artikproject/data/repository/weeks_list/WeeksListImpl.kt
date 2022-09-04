@@ -2,13 +2,13 @@ package ru.agpu.artikproject.data.repository.weeks_list
 
 import android.content.Context
 import ru.agpu.artikproject.domain.models.WeeksListItem
-import ru.agpu.artikproject.domain.repository.FullWeekListRepository
+import ru.agpu.artikproject.domain.repository.WeeksListRepository
 
-class WeeksListImpl(private val context: Context) : FullWeekListRepository {
+class WeeksListImpl(private val context: Context) : WeeksListRepository {
     override fun get(): List<WeeksListItem> {
         var weeksList = WeeksListGetFromLocal().get(context = context)
         if (weeksList.isEmpty()) {
-            weeksList = FullWeekListGetFromApi().get()
+            weeksList = WeeksListGetFromApi().get()
             if (weeksList.isNotEmpty())
                 set(weeksList)
         }

@@ -5,7 +5,7 @@ import android.content.Context
 private const val SHARED_PREFS_NAME = "last_open_app_info"
 private const val KEY_NAME = "week_id"
 
-class GetCurrentWeekIdLocal {
+class CurrentWeekIdGetFromLocal {
     fun get(context: Context): Int {
         val sharedPreferences =
             context.getSharedPreferences(SHARED_PREFS_NAME, Context.MODE_PRIVATE)
