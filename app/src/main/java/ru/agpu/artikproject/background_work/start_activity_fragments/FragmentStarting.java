@@ -13,7 +13,9 @@ import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.GetDirectionsList;
 import ru.agpu.artikproject.background_work.Starter_MainActivity;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
-import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
+import ru.agpu.artikproject.data.repository.groups_list.GroupsListImpl;
+import ru.agpu.artikproject.domain.repository.GroupsListRepository;
+import ru.agpu.artikproject.domain.usecase.groups_list.GroupsListGetUseCase;
 
 /**
  * Фрагмент, который определяет первый запуск приложения и, если это первый старт, запускает
@@ -39,6 +41,7 @@ public class FragmentStarting extends Fragment {
             ImageView loading_ico = view.findViewById(R.id.loading_ico);
             new Starter_MainActivity((Activity) view.getContext(), loading_ico).start();
         }
-        new GetFullGroupList_Online().start(); // Получение полного списка групп и закидывание их в адаптер
+        GroupsListRepository groupsListRepository = new GroupsListImpl(requireContext());
+        new GroupsListGetUseCase(groupsListRepository).execute();
     }
 }

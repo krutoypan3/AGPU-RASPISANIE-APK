@@ -31,7 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public static final int IS_BUILDINGS_ADAPTER = 0;
     public static final int IS_FACULTIES_ADAPTER = 1;
     public static final int IS_FACULTIES_GROUPS_ADAPTER = 2;
-    public static int selected_faculties_position;
+    public static String selected_faculties_position;
     public static String selected_faculties_logos;
 
     public RecyclerViewAdapter(Activity act, List<RecyclerViewItems> datas, int adapter_is) {

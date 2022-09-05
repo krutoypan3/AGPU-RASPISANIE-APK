@@ -16,12 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.TextDetranslit;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
-import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
+import ru.agpu.artikproject.data.repository.groups_list.GroupsListImpl;
+import ru.agpu.artikproject.domain.models.GroupsListItem;
+import ru.agpu.artikproject.domain.repository.GroupsListRepository;
+import ru.agpu.artikproject.domain.usecase.groups_list.GroupsListGetUseCase;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 import ru.agpu.artikproject.presentation.layout.StartActivity;
 
@@ -51,6 +55,9 @@ public class FragmentSelectGroup extends Fragment {
             getParentFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container_view, FragmentGroupHelp.class, null).commit(); // Переходим к фрагменты с помощью с группой
         });
 
+        GroupsListRepository groupsListRepository = new GroupsListImpl(view.getContext());
+        List<GroupsListItem> groupsListItems = new GroupsListGetUseCase(groupsListRepository).execute();
+
         // Прослушиваем изменения текстового поля ввода группы
         group_name_et.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {} // До изменения поля
@@ -60,13 +67,11 @@ public class FragmentSelectGroup extends Fragment {
                 groups_name.clear(); // Очищаем списки с ранее отсортированными результатами
                 groups_id.clear(); // Так же очищаем отсортированные id
                 if (!(search_group.equals(""))) { // Если строка поиска не пустая
-                    for (int i = 0; i < GetFullGroupList_Online.faculties_group_name.size(); i++){
-                        for (int j = 0; j < GetFullGroupList_Online.faculties_group_name.get(i).size(); j++){
-                            // Сравниваем "детранслированный" текст сохраненных групп с "детранслированным" текстом строки поиска
-                            if (new TextDetranslit().detranslit(GetFullGroupList_Online.faculties_group_name.get(i).get(j).item.toLowerCase()).contains(new TextDetranslit().detranslit(search_group))){
-                                groups_id.add(GetFullGroupList_Online.faculties_group_id.get(i).get(j).item); // Добавляем ID группы в отсортированный массив
-                                groups_name.add(new ListViewItems(GetFullGroupList_Online.faculties_group_name.get(i).get(j).item)); // Добавляем название группы в отсортированный массив
-                            }
+                    for (int i = 0; i < groupsListItems.size(); i++){
+                        // Сравниваем "детранслированный" текст сохраненных групп с "детранслированным" текстом строки поиска
+                        if (new TextDetranslit().detranslit(groupsListItems.get(i).getGroupName().toLowerCase()).contains(new TextDetranslit().detranslit(search_group))){
+                            groups_id.add(groupsListItems.get(i).getGroupId()); // Добавляем ID группы в отсортированный массив
+                            groups_name.add(new ListViewItems(groupsListItems.get(i).getGroupName())); // Добавляем название группы в отсортированный массив
                         }
                     }
                 }

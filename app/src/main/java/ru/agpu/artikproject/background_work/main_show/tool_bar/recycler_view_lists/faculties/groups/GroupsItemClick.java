@@ -8,28 +8,43 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
-import ru.agpu.artikproject.background_work.site_parse.GetFullGroupList_Online;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
+import ru.agpu.artikproject.data.repository.groups_list.GroupsListImpl;
+import ru.agpu.artikproject.domain.models.GroupsListItem;
+import ru.agpu.artikproject.domain.repository.GroupsListRepository;
+import ru.agpu.artikproject.domain.usecase.groups_list.GroupsListGetUseCase;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class GroupsItemClick {
     /**
      * Обрабатывает нажатия на список групп
+     *
      * @param recyclerView RecyclerView
-     * @param itemView Выбранный элемент (View)
-     * @param act Активити
+     * @param itemView     Выбранный элемент (View)
+     * @param act          Активити
      */
-    public GroupsItemClick(RecyclerView recyclerView, View itemView, Activity act){
+    public GroupsItemClick(RecyclerView recyclerView, View itemView, Activity act) {
         int itemPosition = recyclerView.getChildLayoutPosition(itemView); // Получаем позицию нажатого элемента
-        MainActivity.selectedItem = GetFullGroupList_Online.faculties_group_name.get(RecyclerViewAdapter.selected_faculties_position).get(itemPosition).item;
-        MainActivity.selectedItem_type = "Group";
-        MainActivity.selectedItem_id = GetFullGroupList_Online.faculties_group_id.get(RecyclerViewAdapter.selected_faculties_position).get(itemPosition).item;
 
-        if (CheckInternetConnection.getState(act.getApplicationContext())){
+        GroupsListRepository groupsListRepository = new GroupsListImpl(act.getApplicationContext());
+        List<GroupsListItem> groupsListItems = new GroupsListGetUseCase(groupsListRepository).execute();
+        groupsListItems = groupsListItems.stream()
+                .filter(a -> a.getFacultiesName()
+                        .equals(RecyclerViewAdapter.selected_faculties_position))
+                .collect(Collectors.toList());
+
+        MainActivity.selectedItem = groupsListItems.get(itemPosition).getGroupName();
+        MainActivity.selectedItem_type = "Group";
+        MainActivity.selectedItem_id = groupsListItems.get(itemPosition).getGroupId();
+
+        if (CheckInternetConnection.getState(act.getApplicationContext())) {
             new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, act.getApplicationContext()).start();
         }
 

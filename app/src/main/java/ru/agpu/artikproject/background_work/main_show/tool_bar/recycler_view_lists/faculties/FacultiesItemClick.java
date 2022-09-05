@@ -22,8 +22,8 @@ public class FacultiesItemClick {
     public FacultiesItemClick(RecyclerView recyclerView, View itemView, List<RecyclerViewItems> datas, Activity act){
         int itemPosition = recyclerView.getChildLayoutPosition(itemView); // Получаем позицию нажатого элемента
         RecyclerViewItems item  = datas.get(itemPosition); // Получаем сам нажатый элемент
-        RecyclerViewAdapter.selected_faculties_position = itemPosition;
+        RecyclerViewAdapter.selected_faculties_position = item.getMainText();
         RecyclerViewAdapter.selected_faculties_logos = item.getImageResourceUrl();
-        recyclerView.setAdapter(new RecyclerViewAdapter(act, new LoadFacultiesGroupsList().get(itemPosition), RecyclerViewAdapter.IS_FACULTIES_GROUPS_ADAPTER));
+        recyclerView.setAdapter(new RecyclerViewAdapter(act, new LoadFacultiesGroupsList().get(act.getApplicationContext()), RecyclerViewAdapter.IS_FACULTIES_GROUPS_ADAPTER));
     }
 }
