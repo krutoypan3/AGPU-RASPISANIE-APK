@@ -10,10 +10,12 @@ import android.widget.RemoteViewsService.RemoteViewsFactory;
 import java.util.ArrayList;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
-import ru.agpu.artikproject.background_work.GetCurrentWeekId_Local;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
+import ru.agpu.artikproject.data.repository.CurrentWeekDayImpl;
+import ru.agpu.artikproject.data.repository.current_week_id.CurrentWeekIdImpl;
+import ru.agpu.artikproject.domain.usecase.CurrentWeekDayGetUseCase;
+import ru.agpu.artikproject.domain.usecase.CurrentWeekIdGetUseCase;
 
 public class Widget implements RemoteViewsFactory {
 
@@ -90,8 +92,9 @@ public class Widget implements RemoteViewsFactory {
         try{
             data.clear(); // Обнуляем список
             DataBase_Local.sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключение к базе данных должно быть выше функций получения дня недели и недели
-            int week_day = GetCurrentWeekDay.get();
-            int week_id = GetCurrentWeekId_Local.get(context);
+
+            int week_day = new CurrentWeekDayGetUseCase(new CurrentWeekDayImpl()).execute();
+            int week_id = new CurrentWeekIdGetUseCase(new CurrentWeekIdImpl(context)).execute();
 
             String selectedItem_id = MySharedPreferences.get(context, widgetID + "_selected_item_id", "");
 

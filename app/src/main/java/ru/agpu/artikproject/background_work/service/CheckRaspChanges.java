@@ -7,9 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
-import ru.agpu.artikproject.background_work.GetCurrentWeekId_Local;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
+import ru.agpu.artikproject.data.repository.current_week_id.CurrentWeekIdImpl;
+import ru.agpu.artikproject.domain.usecase.CurrentWeekIdGetUseCase;
 
 public class CheckRaspChanges {
     public CheckRaspChanges(Context context) {
@@ -20,7 +21,7 @@ public class CheckRaspChanges {
                 ArrayList<String> r_group1 = new ArrayList<>();
                 ArrayList<String> r_group2 = new ArrayList<>();
 
-                int week_id_upd = GetCurrentWeekId_Local.get(context); // Номер текущей недели
+                int week_id_upd = new CurrentWeekIdGetUseCase(new CurrentWeekIdImpl(context)).execute();
                 r.moveToFirst();
                 do {
                     if (r.getCount() != 0) {

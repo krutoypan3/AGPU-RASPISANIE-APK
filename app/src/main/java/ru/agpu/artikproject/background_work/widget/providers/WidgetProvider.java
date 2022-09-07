@@ -21,14 +21,16 @@ import java.util.TimeZone;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
-import ru.agpu.artikproject.background_work.GetCurrentWeekDay;
-import ru.agpu.artikproject.background_work.GetCurrentWeekId_Local;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.Theme;
 import ru.agpu.artikproject.background_work.widget.WidgetConfig;
 import ru.agpu.artikproject.background_work.widget.WidgetService;
+import ru.agpu.artikproject.data.repository.CurrentWeekDayImpl;
+import ru.agpu.artikproject.data.repository.current_week_id.CurrentWeekIdImpl;
+import ru.agpu.artikproject.domain.usecase.CurrentWeekDayGetUseCase;
+import ru.agpu.artikproject.domain.usecase.CurrentWeekIdGetUseCase;
 
 public class WidgetProvider extends AppWidgetProvider {
     @Override // При обновлении виджета
@@ -92,8 +94,8 @@ public class WidgetProvider extends AppWidgetProvider {
         rv.setOnClickPendingIntent(R.id.tvUpdate, updPIntent); // Привязываем кнопку к нашему намерению на обновление
 
         DataBase_Local.sqLiteDatabase = new DataBase_Local(context).getWritableDatabase(); // Подключаемся к базе данных
-        int week_day = GetCurrentWeekDay.get(); // Получаем текущий день
-        int week_id = GetCurrentWeekId_Local.get(context); // Получаем текущую неделю
+        int week_day = new CurrentWeekDayGetUseCase(new CurrentWeekDayImpl()).execute();
+        int week_id = new CurrentWeekIdGetUseCase(new CurrentWeekIdImpl(context)).execute();
 
         try{ // Получаем группу, по номеру виджета из базы данных
             String selectedItem_name = MySharedPreferences.get(context, appWidgetId + "_selected_item_name", "");
@@ -101,7 +103,7 @@ public class WidgetProvider extends AppWidgetProvider {
             String selectedItem_type = MySharedPreferences.get(context, appWidgetId + "_selected_item_type", "");
             if (!selectedItem_id.equals("")) {
                 if (CheckInternetConnection.getState(context)){ // Обновляем расписание для этой группы
-                    new GetRasp(selectedItem_id, selectedItem_type, selectedItem_name, GetCurrentWeekId_Local.get(context), context, "widget").start();
+                    new GetRasp(selectedItem_id, selectedItem_type, selectedItem_name, week_id, context, "widget").start();
                 }
                 rv.setTextViewText(R.id.tvUpdate, selectedItem_name); // Устанавливаем название группы на кнопку
                 Cursor fr = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
