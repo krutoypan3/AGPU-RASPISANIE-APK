@@ -17,9 +17,9 @@ import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewItems;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
-import ru.agpu.artikproject.data.repository.groups_list.GroupsListImpl;
-import ru.agpu.artikproject.domain.repository.GroupsListRepository;
-import ru.agpu.artikproject.domain.usecase.groups_list.GroupsListGetFacultiesUseCase;
+import ru.oganesyanartem.core.data.repository.groups_list.GroupsListImpl;
+import ru.oganesyanartem.core.domain.repository.GroupsListRepository;
+import ru.oganesyanartem.core.domain.usecase.groups_list.GroupsListGetFacultiesUseCase;
 
 public class FragmentRecyclerviewShow extends Fragment {
     public static int SELECTED_LIST;

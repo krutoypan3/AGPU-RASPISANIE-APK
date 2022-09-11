@@ -13,7 +13,7 @@ android {
         applicationId "ru.agpu.artikproject"
         minSdkVersion 24
         targetSdkVersion 32
-        versionCode 101
+        versionCode 102
         versionName "2.5.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -36,12 +36,9 @@ dependencies {
         transitive = true
     }
 
-    // Module domain
-    implementation project(path: ':domain')
+    // Module core
+    implementation project(path: ':core')
 
-    // Module data
-    implementation project(path: ':data')
-    
     // RxJava 3
     implementation "io.reactivex.rxjava3:rxjava:3.0.13"
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'

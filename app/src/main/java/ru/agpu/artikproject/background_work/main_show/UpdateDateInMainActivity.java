@@ -8,10 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.data.repository.weeks_list.WeeksListImpl;
-import ru.agpu.artikproject.domain.models.WeeksListItem;
-import ru.agpu.artikproject.domain.repository.WeeksListRepository;
-import ru.agpu.artikproject.domain.usecase.weeks_list.WeeksListGetByWeekIdUseCase;
+import ru.oganesyanartem.core.data.repository.weeks_list.WeeksListImpl;
+import ru.oganesyanartem.core.domain.models.WeeksListItem;
+import ru.oganesyanartem.core.domain.repository.WeeksListRepository;
+import ru.oganesyanartem.core.domain.usecase.weeks_list.WeeksListGetByWeekIdUseCase;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class UpdateDateInMainActivity extends Thread {

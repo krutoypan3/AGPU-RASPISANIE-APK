@@ -27,10 +27,10 @@ import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.Theme;
 import ru.agpu.artikproject.background_work.widget.WidgetConfig;
 import ru.agpu.artikproject.background_work.widget.WidgetService;
-import ru.agpu.artikproject.data.repository.CurrentWeekDayImpl;
-import ru.agpu.artikproject.data.repository.current_week_id.CurrentWeekIdImpl;
-import ru.agpu.artikproject.domain.usecase.CurrentWeekDayGetUseCase;
-import ru.agpu.artikproject.domain.usecase.CurrentWeekIdGetUseCase;
+import ru.oganesyanartem.core.data.repository.CurrentWeekDayImpl;
+import ru.oganesyanartem.core.data.repository.current_week_id.CurrentWeekIdImpl;
+import ru.oganesyanartem.core.domain.usecase.CurrentWeekDayGetUseCase;
+import ru.oganesyanartem.core.domain.usecase.CurrentWeekIdGetUseCase;
 
 public class WidgetProvider extends AppWidgetProvider {
     @Override // При обновлении виджета

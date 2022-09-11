@@ -16,10 +16,10 @@ import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewAdapter;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
-import ru.agpu.artikproject.data.repository.groups_list.GroupsListImpl;
-import ru.agpu.artikproject.domain.models.GroupsListItem;
-import ru.agpu.artikproject.domain.repository.GroupsListRepository;
-import ru.agpu.artikproject.domain.usecase.groups_list.GroupsListGetUseCase;
+import ru.oganesyanartem.core.data.repository.groups_list.GroupsListImpl;
+import ru.oganesyanartem.core.domain.models.GroupsListItem;
+import ru.oganesyanartem.core.domain.repository.GroupsListRepository;
+import ru.oganesyanartem.core.domain.usecase.groups_list.GroupsListGetUseCase;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class GroupsItemClick {

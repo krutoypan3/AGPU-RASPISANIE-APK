@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
-import ru.agpu.artikproject.data.repository.CurrentWeekDayImpl;
-import ru.agpu.artikproject.data.repository.current_week_id.CurrentWeekIdImpl;
-import ru.agpu.artikproject.domain.usecase.CurrentWeekDayGetUseCase;
-import ru.agpu.artikproject.domain.usecase.CurrentWeekIdGetUseCase;
+import ru.oganesyanartem.core.data.repository.CurrentWeekDayImpl;
+import ru.oganesyanartem.core.data.repository.current_week_id.CurrentWeekIdImpl;
+import ru.oganesyanartem.core.domain.usecase.CurrentWeekDayGetUseCase;
+import ru.oganesyanartem.core.domain.usecase.CurrentWeekIdGetUseCase;
 
 public class Widget implements RemoteViewsFactory {
 

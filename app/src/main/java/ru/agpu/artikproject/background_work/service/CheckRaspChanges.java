@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
-import ru.agpu.artikproject.data.repository.current_week_id.CurrentWeekIdImpl;
-import ru.agpu.artikproject.domain.usecase.CurrentWeekIdGetUseCase;
+import ru.oganesyanartem.core.data.repository.current_week_id.CurrentWeekIdImpl;
+import ru.oganesyanartem.core.domain.usecase.CurrentWeekIdGetUseCase;
 
 public class CheckRaspChanges {
     public CheckRaspChanges(Context context) {

@@ -7,6 +7,10 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ArtikProject.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/ArtikProject.core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/ArtikProject.core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/ArtikProject.core.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/core/ArtikProject.core.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/ArtikProject.core.main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/ArtikProject.core.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/ArtikProject.core.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/core/ArtikProject.core.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.iml" filepath="$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.main.iml" filepath="$PROJECT_DIR$/.idea/modules/data/ArtikProject.data.main.iml" />
