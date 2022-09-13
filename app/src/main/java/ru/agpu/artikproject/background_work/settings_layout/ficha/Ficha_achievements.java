@@ -11,7 +11,7 @@ import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
  */
 public class Ficha_achievements {
     private static final String[] FICHA_LIST = new String[]{
-            "ficha_toolbar1", "ficha_toolbar2", "ficha_setting_logo", "ficha_setting_leonardo",
+            "ficha_setting_logo", "ficha_setting_leonardo",
             "ficha_para_lapshin", "ficha_para_kozlov", "ficha_refresh", "ficha_god",
             "ficha_today", "ficha_building_ico", "ficha_building_main_text", "ficha_ricardo"};
     public static final int MAX_FICHA_COUNT = FICHA_LIST.length;
