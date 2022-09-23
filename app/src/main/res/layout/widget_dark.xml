@@ -32,11 +32,11 @@
         android:textColor="@color/widget_secondary_text_color_dark"
         android:layout_centerHorizontal="true">
     </TextView>
-    <ListView
+    <GridView
         android:id="@+id/lvList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/tvUpdate_time"
         android:padding="8dp"
-        android:layout_below="@id/tvUpdate_time">
-    </ListView>
+        />
 </RelativeLayout>

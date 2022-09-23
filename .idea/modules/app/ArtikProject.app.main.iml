@@ -36,7 +36,7 @@
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/5185d4bde002432e84b0164b7b99bf74/transformed/jetified-jsoup.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/d879a4c3143a0615243b26f637ea3087/transformed/jetified-jtds-1.3.1.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/7050bf091137f268384119bc0dc26975/transformed/jetified-sqlite-jdbc-3.8.11.2.jar</arg>
-                <arg>$USER_HOME$/.gradle/caches/transforms-3/532d2f7eea75b09790d08b55f79a7393/transformed/jetified-library-0.9.5-api.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/transforms-3/ae08d6bd86d1e9f38258b4a74ef18565/transformed/jetified-library-0.9.5-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/e463108bf2202c182e0a47d4f388e3a6/transformed/jetified-library-0.7.3-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/4eef4b8e7aeef2614e559bc2e7cf84bc/transformed/legacy-support-v4-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/transforms-3/2ef419f71f58b7319e0ab3b8d32dad2a/transformed/jetified-taptargetview-1.13.3-api.jar</arg>
@@ -160,6 +160,7 @@
             <stringArg name="languageVersion" arg="1.7" />
           </stringArguments>
           <arrayArguments>
+            <arrayArg name="friendPaths" />
             <arrayArg name="pluginClasspaths" />
             <arrayArg name="pluginOptions" />
           </arrayArguments>

@@ -69,8 +69,8 @@ public class Widget implements RemoteViewsFactory {
     public RemoteViews getViewAt(int position) {
         RemoteViews rView = new RemoteViews(context.getPackageName(),
                 R.layout.item);
-        rView.setTextViewText(R.id.tvItemText, data.get(position));
-        rView.setTextColor(R.id.tvItemText, text_color);
+        rView.setTextViewText(R.id.item_name, data.get(position));
+        rView.setTextColor(R.id.item_name, text_color);
         return rView;
     }
 

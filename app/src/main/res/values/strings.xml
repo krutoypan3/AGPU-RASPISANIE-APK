@@ -162,4 +162,9 @@
     <string name="Schedule_description">На данной странице будет отображаться последнее открытое расписание</string>
     <string name="Audiences_description">На данной странице можно узнать о корпусах и аудиториях, что в них находятся</string>
     <string name="settings_description">Здесь можно поменять тему и фон приложения</string>
+    <string name="time_example" translatable="false">8:00\n\n\n15:00</string>
+    <string name="rasp_item_example" translatable="false">Программирование на языках высшего уровня\nЛапшин Н.А., ст.п. 13\n(ВМ-ИВТ-4-1)</string>
+    <string name="rasp_item_name_example" translatable="false">Администрирование сетей и сетевых архитектур при использовании особого программного обеспечения</string>
+    <string name="rasp_item_prepod_and_aud_example" translatable="false">Лапшин Н.А., ст.пр., Актовый зал</string>
+    <string name="rasp_item_group_example" translatable="false">ВМ-ИВТ-5-1</string>
 </resources>

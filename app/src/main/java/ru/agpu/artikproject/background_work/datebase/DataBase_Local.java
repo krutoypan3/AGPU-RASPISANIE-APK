@@ -47,8 +47,8 @@ public class DataBase_Local extends SQLiteOpenHelper {
 
         try {
             db.execSQL("CREATE TABLE IF NOT EXISTS \"raspisanie\" (\n" +
-                    "\t\"r_group_code\"\tINTEGER,\n" +
-                    "\t\"r_week_day\"\tINTEGER,\n" +
+                    "\t\"r_group_code\"\tINTEGER,\n" + // 0
+                    "\t\"r_week_day\"\tINTEGER,\n" + // 1
                     "\t\"r_week_number\"\tINTEGER,\n" +
                     "\t\"r_para_number\"\tINTEGER,\n" +
                     "\t\"r_name\"\tTEXT,\n" +
@@ -60,9 +60,9 @@ public class DataBase_Local extends SQLiteOpenHelper {
                     "\t\"r_week_day_name\"\tTEXT,\n" +
                     "\t\"r_week_day_date\"\tTEXT,\n" +
                     "\t\"r_search_type\"\tTEXT,\n" +
-                    "\t\"r_last_update\"\tNUMERIC,\n" +
-                    "\t\"r_color\"\tTEXT,\n" +
-                    "\t\"r_distant\"\tTEXT\n" +
+                    "\t\"r_last_update\"\tNUMERIC,\n" + // 13
+                    "\t\"r_color\"\tTEXT,\n" + // 14
+                    "\t\"r_distant\"\tTEXT\n" + // 15
                     ")");
         } catch (Exception ignored) {
         }

@@ -56,6 +56,7 @@
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_maintext_background_light.xml" value="0.232" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_maintext_dark.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_maintext_light.xml" value="0.3728205128205128" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_rv_separator_background.xml" value="0.2775" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_shape.xml" value="0.3728205128205128" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_shape_white.xml" value="0.20625" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/drawable/widget_subtext_background.xml" value="0.3728205128205128" />
@@ -102,12 +103,15 @@
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/start_activity.xml" value="0.35833333333333334" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget.xml" value="0.1" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_config.xml" value="0.23958333333333334" />
-        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_dark.xml" value="0.22010869565217392" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_dark.xml" value="0.33" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_gv_item.xml" value="0.5" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_item.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_layout.xml" value="0.34692028985507245" />
-        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_light.xml" value="0.1" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_light.xml" value="0.33" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_preview.xml" value="0.21" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_preview_dark.xml" value="0.22604166666666667" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_preview_light.xml" value="0.1" />
+        <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/widget_rv_item.xml" value="0.5" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/layout/zachetka_layout.xml" value="0.33" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/menu/bottom_toolbar.xml" value="0.32222222222222224" />
         <entry key="..\:/Users/Kruto/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
@@ -214,6 +218,6 @@
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
-    <option name="id" value="Android" />
+    <option name="id" value="jpab" />
   </component>
 </project>

@@ -57,7 +57,7 @@ public class ListViewAdapter extends BaseAdapter {
         if (view == null) {
             view = lInflater.inflate(R.layout.item, parent, false);
         }
-        TextView textView = view.findViewById(R.id.tvItemText);
+        TextView textView = view.findViewById(R.id.item_name);
         textView.setPadding(30,30,30,30);
         textView.setTextSize(15);
         if (!widget) textView.setTextColor(GetTextColor.getAppColor(ctx));
