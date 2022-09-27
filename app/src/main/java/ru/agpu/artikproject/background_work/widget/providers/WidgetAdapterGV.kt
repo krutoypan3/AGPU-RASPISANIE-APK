@@ -30,11 +30,11 @@ class WidgetAdapterGV(
 
         val grid: View = convertView
             ?: (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
-                .inflate(R.layout.widget_gv_item, parent, false)
+                .inflate(R.layout.widget_gv_item, parent, true)
 
         val timeRange = grid.findViewById<TextView>(R.id.time_range)
         val separator = grid.findViewById<ImageView>(R.id.separator)
-        val backgroundConstraint = grid.findViewById<ConstraintLayout>(R.id.background_relative)
+        val backgroundConstraint = grid.findViewById<ConstraintLayout>(R.id.background_image_view)
         val itemName = grid.findViewById<TextView>(R.id.item_name)
         val itemPrepodAndTime = grid.findViewById<TextView>(R.id.item_prepod_and_time)
         val itemGroup = grid.findViewById<TextView>(R.id.item_group)

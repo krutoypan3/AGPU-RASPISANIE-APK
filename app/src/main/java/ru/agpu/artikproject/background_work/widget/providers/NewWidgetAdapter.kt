@@ -1,6 +1,5 @@
 package ru.agpu.artikproject.background_work.widget.providers
 
-import android.R.attr.bitmap
 import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
@@ -12,6 +11,9 @@ import androidx.core.database.getStringOrNull
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.datebase.DataBase_Local
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
+import ru.agpu.artikproject.background_work.debug.Device_info
+import ru.agpu.artikproject.background_work.image_utils.GetRoundedCornerBitmap
+import ru.agpu.artikproject.background_work.theme.ColorChanger
 import ru.agpu.artikproject.background_work.widget.WidgetGridViewItem
 import ru.oganesyanartem.core.data.repository.CurrentWeekDayImpl
 import ru.oganesyanartem.core.data.repository.current_week_id.CurrentWeekIdImpl
@@ -68,20 +70,18 @@ class NewWidgetAdapter(val context: Context, intent: Intent) : RemoteViewsFactor
         rView.setTextColor(R.id.item_prepod_and_time, textColor)
         rView.setTextColor(R.id.item_group, textColor)
 
-        val shape = GradientDrawable(
-            GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(context.getColor(R.color.sea), context.getColor(R.color.sea))
+        var backgroundColor = viewItem.backgroundConstraint
+        if (textColor == context.getColor(R.color.white))
+            backgroundColor = ColorChanger.GetDarkColor(viewItem.backgroundConstraint, 120)
+
+        val bitmap = GetRoundedCornerBitmap.getRoundedCornerBitmapByColor(
+            900,
+            300,
+            backgroundColor,
+            30
         )
-        shape.cornerRadius = 50f
 
-        val mutableBitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(mutableBitmap)
-        canvas.drawBitmap(mutableBitmap, Matrix(), null)
-
-        shape.draw(canvas)
-        rView.setImageViewBitmap(R.id.background_relative, mutableBitmap)
-
-        AppWidgetManager.getInstance(context).updateAppWidget(widgetID, rView);
+        rView.setImageViewBitmap(R.id.background_image_view, bitmap)
 
 // TODO Если нужно будет изменить фон ращделителя в зависимости от темы... separator
         return rView
@@ -130,12 +130,13 @@ class NewWidgetAdapter(val context: Context, intent: Intent) : RemoteViewsFactor
                             val timeRange = r.getString(9)
                             val newTimeRange = timeRange.trimIndent().split("-")[0] +
                                     "\n\n\n\n" + timeRange.trimIndent().split("-")[1]
+
+
                             val currentItem = WidgetGridViewItem(
                                 timeRange = newTimeRange,
                                 separator = 0,
                                 backgroundConstraint = Color.parseColor(
-                                    r.getStringOrNull(14)?.trimIndent()
-                                        ?: CONSTRAINT_BACKGROUND_DEFAULT
+                                    r.getStringOrNull(14) ?: CONSTRAINT_BACKGROUND_DEFAULT
                                 ),
                                 itemName = r.getStringOrNull(4)?.trimIndent() ?: PARA_NAME_DEFAULT,
                                 itemPrepodAndTime = str,
@@ -168,7 +169,7 @@ class NewWidgetAdapter(val context: Context, intent: Intent) : RemoteViewsFactor
     override fun onDestroy() {}
 
     companion object {
-        const val CONSTRAINT_BACKGROUND_DEFAULT = "000000"
+        const val CONSTRAINT_BACKGROUND_DEFAULT = "#000000"
         const val PARA_NAME_DEFAULT = "LOL, I:DON'T:KNOW"
         const val GROUP_NAME_DEFAULT = ""
     }

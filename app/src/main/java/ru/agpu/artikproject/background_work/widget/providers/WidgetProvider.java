@@ -117,7 +117,7 @@ public class WidgetProvider extends AppWidgetProvider {
 
                     GregorianCalendar calendar = new GregorianCalendar(TimeZone.getTimeZone("US/Central"));
                     calendar.setTimeInMillis(last_update); // Затем выводим информацию о текущем дне и времени последнего обновления расписания
-                    rv.setTextViewText(R.id.tvUpdate_time,  fr.getString(10) + " " + fr.getString(11) + "   " + context.getResources().getString(R.string.last_update) + ": " + sdf2.format(calendar.getTime()));
+                    rv.setTextViewText(R.id.tvUpdate_time,  fr.getString(11) + " " + sdf2.format(calendar.getTime()));
                 }
             }
         }catch (Exception e){e.printStackTrace();}
