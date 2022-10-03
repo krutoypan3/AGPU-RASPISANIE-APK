@@ -137,9 +137,10 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
         // Было принято решение ставить 1 вместо 0.
         if (para_info_photo.getVisibility() == View.INVISIBLE) // Если фотка в диалоге пустая
             para_info_photo.getLayoutParams().height = 1; // Скрываем фото
-        if (body_text.getVisibility() == View.INVISIBLE) // Если текст в теле пустой
+        if (body_text.getVisibility() == View.INVISIBLE) { // Если текст в теле пустой
             body_text.getLayoutParams().height = 1; // Скрываем текст
-            body_text.setPadding(0,0,0,0); // Убираем отступы
+            body_text.setPadding(0, 0, 0, 0); // Убираем отступы
+        }
         if (list_view.getVisibility() == View.INVISIBLE) // Если список пуст
             list_view.getLayoutParams().height = 1; // Убираем список
         if (edit_text.getVisibility() == View.INVISIBLE) // Если ввод текста пуст

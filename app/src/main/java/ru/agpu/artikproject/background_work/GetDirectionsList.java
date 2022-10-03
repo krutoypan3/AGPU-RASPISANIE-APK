@@ -20,18 +20,17 @@ import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
 
 public class GetDirectionsList {
 
-    public ArrayList<List<String>> getDirectionsFromDatabase(){
+    public ArrayList<List<String>> getDirectionsFromDatabase() {
         Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM directions_list", null);
         ArrayList<List<String>> DirectionsList = new ArrayList<>();
         if (!(r.getCount() == 0)) {
-            while (r.moveToNext()){
-            List<String> list = new ArrayList<>();
-            list.add(r.getString(0));
-            list.add(r.getString(1));
-            DirectionsList.add(list);
+            while (r.moveToNext()) {
+                List<String> list = new ArrayList<>();
+                list.add(r.getString(0));
+                list.add(r.getString(1));
+                DirectionsList.add(list);
             }
-        }
-        else{
+        } else {
             getDirectionsFromFirebase();
             try {
                 TimeUnit.MILLISECONDS.sleep(3000);
@@ -42,7 +41,7 @@ public class GetDirectionsList {
         return DirectionsList;
     }
 
-    public void getDirectionsFromFirebase(){
+    public void getDirectionsFromFirebase() {
         FirebaseDatabase databaseReference = FirebaseDatabase.getInstance();
         DatabaseReference myRef = databaseReference.getReference("Directions");
 
@@ -50,7 +49,7 @@ public class GetDirectionsList {
             // При использовании этих функций не пострадал ни один ребенок
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
-                if  (dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null) {
                     ContentValues rowValues = new ContentValues(); // Значения для вставки в базу данных
                     rowValues.put("direction_name", dataSnapshot.getValue().toString().split("group_name=")[1].split(",")[0]);
                     rowValues.put("group_name", dataSnapshot.getValue().toString().split("direction_name=")[1].replace("}", ""));

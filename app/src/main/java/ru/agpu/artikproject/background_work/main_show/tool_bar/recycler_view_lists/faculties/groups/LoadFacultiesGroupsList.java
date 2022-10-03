@@ -21,9 +21,8 @@ public class LoadFacultiesGroupsList {
         List<RecyclerViewItems> GROUPS_LIST = new ArrayList<>();
         GroupsListRepository groupsListRepository = new GroupsListImpl(context);
         List<GroupsListItem> groupsListItems = new GroupsListGetByFacultiesUseCase(groupsListRepository, RecyclerViewAdapter.selected_faculties_position).execute();
-        for (int i = 0; i < groupsListItems.size(); i++) {
+        for (int i = 0; i < groupsListItems.size(); i++)
             GROUPS_LIST.add(new RecyclerViewItems(groupsListItems.get(i).getGroupName(), RecyclerViewAdapter.selected_faculties_logos, ""));
-        }
         return GROUPS_LIST;
     }
 }

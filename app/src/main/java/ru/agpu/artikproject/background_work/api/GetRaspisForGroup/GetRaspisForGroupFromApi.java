@@ -26,7 +26,7 @@ public class GetRaspisForGroupFromApi {
                     for (int k = 0; k < ParaManyPodgroupItemsJson.length(); k++) {
                         JSONArray ParaOnePodgroupItemsJson = ParaManyPodgroupItemsJson.getJSONArray(k);
                         ArrayList<ParaOnePodgroupItem> paraOnePodgroupItems = new ArrayList<>();
-                        for (int h = 0; h < ParaOnePodgroupItemsJson.length(); h++) {
+                        for (int h = 0; h < ParaOnePodgroupItemsJson.length(); h++)
                             paraOnePodgroupItems.add(new ParaOnePodgroupItem(
                                     ParaOnePodgroupItemsJson.getJSONObject(h).getString("Id"),
                                     ParaOnePodgroupItemsJson.getJSONObject(h).getString("Auditoriya"),
@@ -44,7 +44,6 @@ public class GetRaspisForGroupFromApi {
                                     ParaOnePodgroupItemsJson.getJSONObject(h).getString("IsCollisionClassroom"),
                                     ParaOnePodgroupItemsJson.getJSONObject(h).getString("IsCollisionTeacher")
                             ));
-                        }
                         paraManyPodgroupItems.add(paraOnePodgroupItems);
                     }
                     paraDayItems.add(paraManyPodgroupItems);
