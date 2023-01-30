@@ -5,11 +5,14 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.content.res.AppCompatResources;
 
 import java.io.File;
+import java.time.LocalDate;
+import java.time.Month;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
@@ -27,7 +30,24 @@ public class CustomBackground {
             if (theme == AppCompatDelegate.MODE_NIGHT_NO)
                 return getBackgroundDrawable(context, "background_light"); // Если светлая, то возвращаем светлый фон
             return getBackgroundDrawable(context, "background_dark"); // Если темная, то возвращаем темный фон
-        } // Если пользовательский фон отключен, то возвращаем стандартный фон
+        }
+        // Проверяем ивентовые фоны
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            LocalDate date = LocalDate.now();
+            // 14 Февраля - день влюблённых
+            if (date.getMonth() == Month.FEBRUARY && date.getDayOfMonth() == 14) {
+                if (theme == AppCompatDelegate.MODE_NIGHT_NO) {
+                    return AppCompatResources.getDrawable(context, R.drawable.event_background_pic_14_february_light);
+                }
+                return AppCompatResources.getDrawable(context, R.drawable.event_background_pic_14_february_dark);
+            }
+        }
+        else { // Игнорим ивенты
+            // Серьезно? Чел, купи себе новый телефон, Сейчас еще существуют люди использующие телефоны с андроидом ниже 8?
+        }
+
+
+        // Если пользовательский фон отключен, то возвращаем стандартный фон
         if (theme == AppCompatDelegate.MODE_NIGHT_NO)
             return AppCompatResources.getDrawable(context, R.drawable.background_light);
         return AppCompatResources.getDrawable(context, R.drawable.background_dark);

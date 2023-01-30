@@ -28,3 +28,6 @@ app/release/output-metadata.json
 app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
 app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
 app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
+.gradle/
+.idea/
+
