@@ -13,8 +13,8 @@ android {
         applicationId "ru.agpu.artikproject"
         minSdkVersion 24
         targetSdkVersion 32
-        versionCode 105
-        versionName "2.5.3.2"
+        versionCode 106
+        versionName "2.5.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
