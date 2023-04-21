@@ -47,15 +47,15 @@ class StartActivity : AppCompatActivity() {
 
         // Исключительно в качестве теста -------------------------------------------
         // Загрузить расписание группы с id 2365
-        Single.just(true)
-            .observeOn(Schedulers.newThread())
-            .subscribeOn(Schedulers.newThread())
-            .doOnSubscribe { RetrofitToRealm().loadRaspisForGroup(2365) }
-            .onErrorResumeNext {
-                it.printStackTrace()
-                Single.just(false)
-            }
-            .subscribe()
+//        Single.just(true)
+//            .observeOn(Schedulers.newThread())
+//            .subscribeOn(Schedulers.newThread())
+//            .doOnSubscribe { RetrofitToRealm().loadRaspisForGroup(2365) }
+//            .onErrorResumeNext {
+//                it.printStackTrace()
+//                Single.just(false)
+//            }
+//            .subscribe()
         // --------------------------------------------------------------------------
 
 
