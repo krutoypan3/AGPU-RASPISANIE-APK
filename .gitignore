@@ -28,6 +28,7 @@ app/release/output-metadata.json
 app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
 app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
 app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
-.gradle/
-.idea/
+.gradle/*
+.idea/*
 
+.idea/libraries/Gradle__com_google_android_datatransport_transport_backend_cct_3_1_5_aar.xml

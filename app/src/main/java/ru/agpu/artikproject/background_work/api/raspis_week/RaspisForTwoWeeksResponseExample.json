@@ -1,0 +1,1572 @@
+[
+  {
+    "WeekWithRaspis": {
+      "Monday": [
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2655748,
+              "Auditoriya": "НЕ НАЗНАЧЕНО",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 9953,
+              "DisciplineName": "Производственная преддипломная практика",
+              "PrepodFIO": "Не назначено",
+              "Comment": "",
+              "ParaTypeColor": "#FFFFFF",
+              "DayNumber": 1,
+              "TipZanyatiya": "",
+              "ParaNummber": 245,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Tuesday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2697143,
+              "Auditoriya": "13",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 9953,
+              "DisciplineName": "Производственная преддипломная практика",
+              "PrepodFIO": "Андрусенко Е.Ю., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#FFFFFF",
+              "DayNumber": 2,
+              "TipZanyatiya": "диф. зач.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Wednesday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700642,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 888,
+              "DisciplineName": "Экономика ",
+              "PrepodFIO": "Богданова А.В., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#e8e582",
+              "DayNumber": 3,
+              "TipZanyatiya": "прак.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700625,
+              "Auditoriya": "51",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 748,
+              "DisciplineName": "Безопасность жизнедеятельности",
+              "PrepodFIO": "Штейнгардт Н.С., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 3,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700489,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30414,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по разработке баз данных\"",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 3,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2700490,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30415,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по сопровождению информационных систем\"",
+              "PrepodFIO": "Костин К.А.,пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 3,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700562,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 3,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2700564,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Лоба И.С., ст.пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 3,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Thursday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700593,
+              "Auditoriya": "25",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#f7e3e7",
+              "DayNumber": 4,
+              "TipZanyatiya": "лек.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2655738,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30412,
+              "DisciplineName": "Дисциплина по выбору \"Организация процесса проектирования информационных систем управления бизнес-процессами\"",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 4,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2655739,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30413,
+              "DisciplineName": "Дисциплина по выбору \"Управление проектами в области информационных технологий\"",
+              "PrepodFIO": "Костин К.А.,пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 4,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700558,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 4,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2700559,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Лоба И.С., ст.пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 4,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700626,
+              "Auditoriya": "51",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 748,
+              "DisciplineName": "Безопасность жизнедеятельности",
+              "PrepodFIO": "Штейнгардт Н.С., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#e8e582",
+              "DayNumber": 4,
+              "TipZanyatiya": "прак.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Friday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700560,
+              "Auditoriya": "65",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 5,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2700561,
+              "Auditoriya": "65",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Лоба И.С., ст.пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 5,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700484,
+              "Auditoriya": "21",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30414,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по разработке баз данных\"",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 5,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2700485,
+              "Auditoriya": "21",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30415,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по сопровождению информационных систем\"",
+              "PrepodFIO": "Костин К.А.,пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 5,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700588,
+              "Auditoriya": "13",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Дышкант Е.Е., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#f7e3e7",
+              "DayNumber": 5,
+              "TipZanyatiya": "лек.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700403,
+              "Auditoriya": "13",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Николаева Л.Г., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 5,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2700404,
+              "Auditoriya": "12",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Бельченко И.В.,р.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 5,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Saturday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2655744,
+              "Auditoriya": "9",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Николаева Л.Г., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 246,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2655745,
+              "Auditoriya": "12",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Бельченко И.В.,р.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 246,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700536,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30412,
+              "DisciplineName": "Дисциплина по выбору \"Организация процесса проектирования информационных систем управления бизнес-процессами\"",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2700538,
+              "Auditoriya": "7",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30413,
+              "DisciplineName": "Дисциплина по выбору \"Управление проектами в области информационных технологий\"",
+              "PrepodFIO": "Костин К.А.,пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700480,
+              "Auditoriya": "9",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Николаева Л.Г., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2700482,
+              "Auditoriya": "12",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Бельченко И.В.,р.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2700521,
+              "Auditoriya": "9",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Николаева Л.Г., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2700522,
+              "Auditoriya": "12",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Бельченко И.В.,р.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Sunday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ]
+    },
+    "CurrentWeek": {
+      "Id": 3133,
+      "Name": "34",
+      "StartDate": "\/Date(1681678800000)\/",
+      "EndDate": "\/Date(1682197200000)\/",
+      "SemestId": 211,
+      "OwnerId": 0
+    }
+  },
+  {
+    "WeekWithRaspis": {
+      "Monday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2710677,
+              "Auditoriya": "28",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#f7e3e7",
+              "DayNumber": 1,
+              "TipZanyatiya": "лек.",
+              "ParaNummber": 246,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701250,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 888,
+              "DisciplineName": "Экономика ",
+              "PrepodFIO": "Богданова А.В., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#e8e582",
+              "DayNumber": 1,
+              "TipZanyatiya": "прак.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2710678,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30453,
+              "DisciplineName": "Разговоры о важном",
+              "PrepodFIO": "Богданова А.В., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#FFFFFF",
+              "DayNumber": 1,
+              "TipZanyatiya": "",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701243,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30414,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по разработке баз данных\"",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 1,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2701244,
+              "Auditoriya": "21",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30415,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по сопровождению информационных систем\"",
+              "PrepodFIO": "Костин К.А.,пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 1,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701254,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 748,
+              "DisciplineName": "Безопасность жизнедеятельности",
+              "PrepodFIO": "Штейнгардт Н.С., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#e8e582",
+              "DayNumber": 1,
+              "TipZanyatiya": "прак.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Tuesday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701245,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30414,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по разработке баз данных\"",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 2,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2701247,
+              "Auditoriya": "21",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30415,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по сопровождению информационных систем\"",
+              "PrepodFIO": "Костин К.А.,пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 2,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701125,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Лоба И.С., ст.пр.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 2,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2701126,
+              "Auditoriya": "21",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 2,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701240,
+              "Auditoriya": "13",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Дышкант Е.Е., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#f7e3e7",
+              "DayNumber": 2,
+              "TipZanyatiya": "лек.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701231,
+              "Auditoriya": "23а",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Лоба И.С., ст.пр.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 2,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2701232,
+              "Auditoriya": "7",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 2,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Wednesday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701253,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 748,
+              "DisciplineName": "Безопасность жизнедеятельности",
+              "PrepodFIO": "Штейнгардт Н.С., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#f7e3e7",
+              "DayNumber": 3,
+              "TipZanyatiya": "лек.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701242,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 748,
+              "DisciplineName": "Безопасность жизнедеятельности",
+              "PrepodFIO": "Штейнгардт Н.С., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 3,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701251,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30414,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по разработке баз данных\"",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#f7e3e7",
+              "DayNumber": 3,
+              "TipZanyatiya": "лек.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2701252,
+              "Auditoriya": "21",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30415,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по сопровождению информационных систем\"",
+              "PrepodFIO": "Дышкант Е.Е., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#f7e3e7",
+              "DayNumber": 3,
+              "TipZanyatiya": "лек.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701119,
+              "Auditoriya": "23а",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Лоба И.С., ст.пр.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 3,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2701120,
+              "Auditoriya": "7",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 11952,
+              "DisciplineName": "Защита информации",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 3,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Thursday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701255,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 748,
+              "DisciplineName": "Безопасность жизнедеятельности",
+              "PrepodFIO": "Штейнгардт Н.С., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#e8e582",
+              "DayNumber": 4,
+              "TipZanyatiya": "прак.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701019,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30412,
+              "DisciplineName": "Дисциплина по выбору \"Организация процесса проектирования информационных систем управления бизнес-процессами\"",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 4,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2701020,
+              "Auditoriya": "7",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30413,
+              "DisciplineName": "Дисциплина по выбору \"Управление проектами в области информационных технологий\"",
+              "PrepodFIO": "Костин К.А.,пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 4,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701241,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 888,
+              "DisciplineName": "Экономика ",
+              "PrepodFIO": "Богданова А.В., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#e8e582",
+              "DayNumber": 4,
+              "TipZanyatiya": "прак.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2710626,
+              "Auditoriya": "8",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30414,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по разработке баз данных\"",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 4,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2710627,
+              "Auditoriya": "21",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30415,
+              "DisciplineName": "Дисциплина по выбору \"Практикум по сопровождению информационных систем\"",
+              "PrepodFIO": "Костин К.А.,пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 4,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Friday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701321,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 888,
+              "DisciplineName": "Экономика ",
+              "PrepodFIO": "Богданова А.В., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#e8e582",
+              "DayNumber": 5,
+              "TipZanyatiya": "прак.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701035,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 748,
+              "DisciplineName": "Безопасность жизнедеятельности",
+              "PrepodFIO": "Штейнгардт Н.С., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#f7e3e7",
+              "DayNumber": 5,
+              "TipZanyatiya": "лек.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2710621,
+              "Auditoriya": "9",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Ларина И.Б., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 5,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2710622,
+              "Auditoriya": "12",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Бельченко И.В.,р.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 5,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 250,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2710624,
+              "Auditoriya": "9",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Ларина И.Б., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 5,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 251,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2710625,
+              "Auditoriya": "12",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Бельченко И.В.,р.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 5,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 251,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Saturday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701188,
+              "Auditoriya": "9",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Ларина И.Б., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 246,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2701189,
+              "Auditoriya": "12",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Бельченко И.В.,р.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 246,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701190,
+              "Auditoriya": "12",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30412,
+              "DisciplineName": "Дисциплина по выбору \"Организация процесса проектирования информационных систем управления бизнес-процессами\"",
+              "PrepodFIO": "Давиденко А.Н., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2701191,
+              "Auditoriya": "9",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 30413,
+              "DisciplineName": "Дисциплина по выбору \"Управление проектами в области информационных технологий\"",
+              "PrepodFIO": "Костин К.А.,пр.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 247,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701223,
+              "Auditoriya": "105 Т",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "",
+              "DisciplineId": 748,
+              "DisciplineName": "Безопасность жизнедеятельности",
+              "PrepodFIO": "Штейнгардт Н.С., доц.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 248,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": [
+            {
+              "Id": 2701184,
+              "Auditoriya": "9",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "1",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Ларина И.Б., доц.",
+              "Comment": "",
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            },
+            {
+              "Id": 2701185,
+              "Auditoriya": "12",
+              "Gruppa": "ВМ-ИВТ-4-1",
+              "WeekType": 1,
+              "Podgruppa": "2",
+              "DisciplineId": 30416,
+              "DisciplineName": "Основы компьютерной безопасности",
+              "PrepodFIO": "Бельченко И.В.,р.",
+              "Comment": null,
+              "ParaTypeColor": "#d3e2d0",
+              "DayNumber": 6,
+              "TipZanyatiya": "лаб.",
+              "ParaNummber": 249,
+              "IsCollisionClassroom": false,
+              "IsCollisionTeacher": false
+            }
+          ]
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ],
+      "Sunday": [
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        },
+        {
+          "PodgrupsInPar": []
+        }
+      ]
+    },
+    "CurrentWeek": {
+      "Id": 3134,
+      "Name": "35",
+      "StartDate": "\/Date(1682283600000)\/",
+      "EndDate": "\/Date(1682802000000)\/",
+      "SemestId": 211,
+      "OwnerId": 0
+    }
+  }
+]
