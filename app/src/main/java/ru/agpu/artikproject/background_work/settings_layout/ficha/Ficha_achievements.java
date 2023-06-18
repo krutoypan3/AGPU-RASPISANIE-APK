@@ -62,7 +62,7 @@ public class Ficha_achievements {
 
     public void playWindowsFicha(Activity activity) {
         if (new Random().nextInt(5) == 0) {
-            put(activity, Ficha_achievements.FICHA_KEYS);
+            put(activity, Ficha_achievements.FICHA_WINDOWS);
             AudioManager audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
             mp = MediaPlayer.create(activity, R.raw.windows);

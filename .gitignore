@@ -61,3 +61,4 @@ app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFrom
 .idea/modules/core/ArtikProject.core.iml
 .idea/modules/core/ArtikProject.core.main.iml
 .idea/modules/core/ArtikProject.core.unitTest.iml
+.gradle/7.3.3/checksums/checksums.lock
