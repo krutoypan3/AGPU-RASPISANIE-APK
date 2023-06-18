@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -25,7 +27,7 @@ import ru.agpu.artikproject.background_work.CheckAppUpdate;
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
 import ru.agpu.artikproject.background_work.FirstAppStartHelper;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
-import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
+import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.main_show.BottomNavigationViewListener;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow;
@@ -33,6 +35,7 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSchedule
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.service.PlayService;
+import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.oganesyanartem.core.data.repository.CurrentWeekDayImpl;
@@ -81,6 +84,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.i("onKeyMultiple", "kc=" + keyCode);
+        new Ficha_achievements().playKeysFicha(this, keyCode);
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
     public void onBackPressed() {
         switch (FRAGMENT) {
             case (BACK_TO_SELECT_GROUP_DIRECTION_FACULTY):
@@ -106,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        DataBase_Local.sqLiteDatabase = new DataBase_Local(getApplicationContext()).getWritableDatabase();
+        DataBaseSqlite.Companion.getSqliteDatabase(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -171,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
                 selectedItem = getIntent().getStringExtra("selectedItem");
                 selectedItem_type = getIntent().getStringExtra("selectedItem_type");
                 selectedItem_id = getIntent().getStringExtra("selectedItem_id");
-                new GetRasp(selectedItem_id, selectedItem_type, selectedItem, week_id, getApplicationContext()).start();
+                new GetRasp(selectedItem_id, selectedItem_type, selectedItem, week_id, getApplicationContext(), null).start();
             }
         }
 

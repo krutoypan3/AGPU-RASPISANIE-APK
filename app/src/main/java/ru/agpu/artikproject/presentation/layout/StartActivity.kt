@@ -1,15 +1,11 @@
 package ru.agpu.artikproject.presentation.layout
 
+import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
 import io.realm.Realm
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.background_work.api.RetrofitToRealm
-import ru.agpu.artikproject.background_work.datebase.DataBase_Local
+import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite
 import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentGroup
 import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentWelcome
 import ru.agpu.artikproject.background_work.theme.Theme
@@ -59,7 +55,7 @@ class StartActivity : AppCompatActivity() {
         // --------------------------------------------------------------------------
 
 
-        DataBase_Local.sqLiteDatabase = DataBase_Local(applicationContext).writableDatabase // Подключаемся к базе данных
+        DataBaseSqlite.getSqliteDatabase(applicationContext) // Подключаемся к базе данных
         Theme.setting(this) // Применяем тему к приложению
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_activity)

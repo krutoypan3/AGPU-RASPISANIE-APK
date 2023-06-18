@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
+import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite;
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap;
@@ -170,8 +170,8 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                         act.startActivity(new Intent(Intent.ACTION_VIEW, uri));
                         break;
                     case "delete":
-                        DataBase_Local.sqLiteDatabase.execSQL("DELETE FROM raspisanie");
-                        DataBase_Local.sqLiteDatabase.execSQL("DELETE FROM rasp_update");
+                        DataBaseSqlite.Companion.getSqliteDatabase(v.getContext()).execSQL("DELETE FROM raspisanie");
+                        DataBaseSqlite.Companion.getSqliteDatabase(v.getContext()).execSQL("DELETE FROM rasp_update");
                         MainActivity.group_listed = null;
                         new WatchSaveGroupRasp(act);
                         break;
@@ -179,7 +179,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                         new ShowBuildingsOnTheMap(Para_info.finalCorp, act);
                         break;
                     case "delete_one_saved_group":
-                        DataBase_Local.sqLiteDatabase.delete("raspisanie", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] +
+                        DataBaseSqlite.Companion.getSqliteDatabase(v.getContext()).delete("raspisanie", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] +
                                 "' AND r_search_type = '" + MainActivity.group_listed_type[ListViewGroupListener.position] + "'", null);
                         new WatchSaveGroupRasp(act); // Первичный вывод групп которые были открыты ранее
                         break;

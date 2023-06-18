@@ -2,12 +2,19 @@ package ru.agpu.artikproject.background_work.main_show;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewTreeViewModelKt;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
+import java.util.Random;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentMainShow;
@@ -16,6 +23,7 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecycler
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSettingsShow;
+import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class BottomNavigationViewListener {
@@ -28,6 +36,20 @@ public class BottomNavigationViewListener {
         });
 
         bottomNavigationView.setSelectedItemId(R.id.details_page_Home_page);
+        bottomNavigationView.setOnItemReselectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.details_page_Home_page:
+                    if (MainActivity.IS_MAIN_SHOWED) {
+                        if (new Random().nextInt(30) == 0) {
+                            Ficha_achievements.put(activity, Ficha_achievements.FICHA_GO_TO_HOME);
+                            AudioManager audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
+                            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
+                            MediaPlayer mp = MediaPlayer.create(activity, R.raw.luntik_i_kloun);
+                            mp.start();
+                        }
+                    }
+            }
+        });
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.details_page_Faculties_list:

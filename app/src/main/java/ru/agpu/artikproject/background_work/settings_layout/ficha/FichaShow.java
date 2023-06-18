@@ -28,7 +28,7 @@ public class FichaShow{
             String newText = fic_count + " / " + Ficha_achievements.MAX_FICHA_COUNT;
             ficha_count.setText(newText);
         }
-        if (fic_count == Ficha_achievements.MAX_FICHA_COUNT){ // Если собранны все фичи
+        if (fic_count >= Ficha_achievements.MAX_FICHA_COUNT){ // Если собранны все фичи
             ficha_count_text.setText("Пасхалки?.Ты собрал их все: ");
             if (mp == null) mp = MediaPlayer.create(act.getApplicationContext(), R.raw.nyan_cat);
             else if (!mp.isPlaying()){
@@ -37,6 +37,9 @@ public class FichaShow{
             }
             ficha_nyan.setVisibility(View.VISIBLE);
             Glide.with(act.getApplicationContext()).load("https://www.nyan.cat/cats/original.gif").into(new DrawableImageViewTarget(ficha_nyan));
+        }
+        if (fic_count > Ficha_achievements.MAX_FICHA_COUNT){ // Если собраны все фичи + хоть одна секретка
+            ficha_count_text.setText("Ого, да ты собрал все пасхалки и даже больше: ");
         }
     }
 }

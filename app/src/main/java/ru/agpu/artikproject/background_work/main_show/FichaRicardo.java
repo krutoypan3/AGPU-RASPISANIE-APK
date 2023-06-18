@@ -24,7 +24,7 @@ public class FichaRicardo {
         Glide.with(act).asGif().load("https://i.ibb.co/JHf4whr/ricardo-ricardo-milos.gif").into(cdd.para_info_photo);
         AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
-        String url = "https://top-rington.com/ringo/06/halogen-u-got-that-versiya-3.mp3"; // your URL here
+        String url = "https://ruo.morsmusic.org/load/1602697468/Halogen_-_U_Got_That_(musmore.com).mp3"; // your URL here
         try {
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);

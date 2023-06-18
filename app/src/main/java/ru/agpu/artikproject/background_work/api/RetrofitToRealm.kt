@@ -2,8 +2,6 @@ package ru.agpu.artikproject.background_work.api
 
 
 import android.util.Log
-import ru.agpu.artikproject.background_work.datebase.realm.raspis_for_group.RaspisWeekForGroupRepositoryImpl
-import ru.agpu.artikproject.background_work.datebase.realm.semantic_group.SemanticGroupRepositoryImpl
 
 class RetrofitToRealm {
     private lateinit var service: RetrofitApi
@@ -26,7 +24,7 @@ class RetrofitToRealm {
             .blockingGet()
 
         // Сохраняем в базу данных
-        SemanticGroupRepositoryImpl().updateSemanticGroup(data)
+//        SemanticGroupRepositoryImpl().updateSemanticGroup(data)
         return true
     }
 
@@ -43,14 +41,8 @@ class RetrofitToRealm {
 
         data.forEach {
             it.WeekWithRaspis.let { raspisWeekResponse ->
-                RaspisWeekForGroupRepositoryImpl().updateRaspisWeekForGroup(raspisWeekResponse)
+//                RaspisWeekForGroupRepositoryImpl().updateRaspisWeekForGroup(raspisWeekResponse)
             }
-        }
-
-        val x = RaspisWeekForGroupRepositoryImpl().getAllRaspisWeekForGroup()
-
-        x.forEach{
-            it.DayNumber?.let { it1 -> Log.i("loadRaspisForGroup", it1.toString()) }
         }
 
         return true

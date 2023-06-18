@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.Random;
 
+import kotlin.jvm.Synchronized;
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
@@ -28,6 +29,7 @@ import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievem
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class FragmentScheduleShow extends Fragment {
+    // TODO нужно сделать переменную synchronize
     public static boolean refresh_on_off = false;
     public static boolean week_day_on_off = false;
     public static boolean refresh_successful = true;

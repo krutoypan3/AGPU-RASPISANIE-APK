@@ -21,6 +21,7 @@ import ru.agpu.artikproject.background_work.debug.Device_info;
 import ru.agpu.artikproject.background_work.debug.LeaveReview;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.BackgroundDarkerListener;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaShow;
+import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import ru.agpu.artikproject.background_work.settings_layout.theme_radio_group.ThemeRadioButtonSetting;
 import ru.agpu.artikproject.background_work.settings_layout.theme_radio_group.ThemeRadioGroupListener;
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserBackgroundCheckBoxListener;
@@ -110,8 +111,11 @@ public class FragmentSettingsShow extends Fragment {
 
         // Отслеживание нажатий на кнопку гитхаба
         view.findViewById(R.id.GitHub_btn).setOnClickListener(view2 -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/krutoypan3/AGPU-RASPISANIE-APK/releases"))));
+        view.findViewById(R.id.GitHub_btn).setOnLongClickListener(view1 -> {
+            new Ficha_achievements().playWindowsFicha(activity);
+            return true;
+        });
 
         view.findViewById(R.id.admin_btn).setOnClickListener(view2 -> startActivity(new Intent(view.getContext(), Admin_panel.class)));
-
     }
 }

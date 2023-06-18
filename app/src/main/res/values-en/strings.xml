@@ -64,6 +64,8 @@
     <string name="pasha_god">Application Theme</string>
     <string name="ficha_count">Easter eggs found:</string>
     <string name="go_to_settings">You got an easter egg! Go to settings!</string>
+    <string name="touch_up">Touch up!</string>
+    <string name="touch_up_scam">AHAHAH, BUT DONT POKE WARNED🤣</string>
     <string name="Operation_canceled">Operation canceled by user</string>
     <string name="Permission_denied">You must grant permissions to access this feature.</string>
     <string name="Error_image_selection">Image selection error</string>

@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: C (4)">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/sqlite-jdbc-3.8.11.2.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Desktop/MyJavaProjects/AGPU-RASPISANIE-APK/app/libs/sqlite-jdbc-3.8.11.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

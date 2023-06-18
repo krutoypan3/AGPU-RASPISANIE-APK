@@ -20,7 +20,7 @@ import ru.agpu.artikproject.background_work.CustomAlertDialog;
 import ru.agpu.artikproject.background_work.GetCorpFromAudNumber;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
-import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
+import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite;
 import ru.agpu.artikproject.background_work.rasp_show.recycler_view.RecyclerViewItems;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
@@ -49,12 +49,12 @@ public class Para_info {
 
 
         prepod_aud = prepod_aud.replace( act.getString(R.string.Prepod) + ": ", "");
-        Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
+        Cursor r = DataBaseSqlite.Companion.getSqliteDatabase(act).rawQuery("SELECT * FROM raspisanie WHERE " +
                 "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                 "r_week_number = " + MainActivity.week_id + " AND " +
                 "r_week_day = " + MainActivity.week_day + " AND " +
                 "r_razmer = '" + para_time + "' AND " +
-                "r_prepod LIKE '%" + prepod_aud + "%'", null);
+                "r_prepod LIKE '%" + prepod_aud.split("\\.")[0] + "%'", null);
         if (r.getCount() != 0) {
             r.moveToFirst();
             ArrayList<ListViewItems> group_list = new ArrayList<>();
@@ -124,16 +124,7 @@ public class Para_info {
                             sss = ((ListViewItems)cdd.list_view.getItemAtPosition(pos)).item.split(",")[0].split(": ")[1];
 
                             // Этот блок кода созда исключительно в развлекательных целях и не несет в себе цель кого-то задеть или обидеть
-                            if (sss.equals("Козлов В.А.")) {
-                                if (new Random().nextInt(5) == 0) {
-                                    Ficha_achievements.put(act.getApplicationContext(), "ficha_para_kozlov");
-                                    AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
-                                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
-                                    MediaPlayer mp = MediaPlayer.create(act, R.raw.povezlo_povezlo);
-                                    mp.start();
-                                }
-                            }
-                            else if (sss.equals("Лапшин Н.А.")) {
+                            if (sss.equals("Лапшин Н.А.")) {
                                 if (new Random().nextInt(5) == 0) {
                                     Ficha_achievements.put(act.getApplicationContext(), "ficha_para_lapshin");
                                     AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);

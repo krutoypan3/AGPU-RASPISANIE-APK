@@ -45,7 +45,7 @@ public class GroupsItemClick {
         MainActivity.selectedItem_id = groupsListItems.get(itemPosition).getGroupId();
 
         if (CheckInternetConnection.getState(act.getApplicationContext())) {
-            new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, act.getApplicationContext()).start();
+            new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, act.getApplicationContext(), null).start();
         }
 
         MainActivity.fragmentManager.beginTransaction()

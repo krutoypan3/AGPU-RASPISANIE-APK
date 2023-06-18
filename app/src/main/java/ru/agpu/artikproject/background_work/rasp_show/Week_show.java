@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 import java.util.Objects;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.datebase.DataBase_Local;
+import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite;
 import ru.agpu.artikproject.background_work.theme.GetTextColor;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
@@ -34,10 +34,10 @@ public class Week_show {
             main_text = activity.findViewById(R.id.main_text);
             TableLayout week_para_view = activity.findViewById(R.id.week_para_view);
 
-            Cursor r = DataBase_Local.sqLiteDatabase.rawQuery("SELECT * FROM raspisanie WHERE " +
+            Cursor r = DataBaseSqlite.Companion.getSqliteDatabase(context).rawQuery("SELECT * FROM raspisanie WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
-            Cursor f = DataBase_Local.sqLiteDatabase.rawQuery("SELECT DISTINCT r_razmer FROM raspisanie WHERE " +
+            Cursor f = DataBaseSqlite.Companion.getSqliteDatabase(context).rawQuery("SELECT DISTINCT r_razmer FROM raspisanie WHERE " +
                     "r_group_code = " + MainActivity.selectedItem_id + " AND " +
                     "r_week_number = " + MainActivity.week_id + " ORDER BY r_week_day, r_para_number", null);
             if (r.getCount()!=0) {

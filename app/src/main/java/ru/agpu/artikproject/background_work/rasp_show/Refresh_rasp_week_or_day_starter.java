@@ -43,7 +43,7 @@ public class Refresh_rasp_week_or_day_starter extends Thread {
         new Handler(Looper.getMainLooper()).post(() -> {
             try {
                 if (!FragmentScheduleShow.week_day_on_off)
-                    new Day_show(view);
+                    new DayShow(view);
                 else
                     new Week_show(view.getContext());
 

@@ -43,12 +43,12 @@ public class Swipe_rasp {
                         refresh_btn_ficha.setVisibility(View.VISIBLE);
                         refresh_btn.startAnimation(MainActivity.animRotate);
                         refresh_btn.setBackgroundResource(R.drawable.refresh_1);
-                        new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, view.getContext()).start();
+                        new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, view.getContext(), null).start();
                         new Refresh_rasp_week_or_day_starter(view).start();
                     }
                     break;
             }
-            new Day_show(view);
+            new DayShow(view);
             week_day_bt1.setClickable(true);
             week_day_bt2.setClickable(true);
         } else {
@@ -61,7 +61,7 @@ public class Swipe_rasp {
                 case "Right": MainActivity.week_id += 1; break;
             }
             if (CheckInternetConnection.getState(view.getContext())) {
-                new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, view.getContext()).start();
+                new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, view.getContext(), null).start();
             }
             new Refresh_rasp_week_or_day_starter(view).start();
         }

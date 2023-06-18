@@ -40,7 +40,7 @@ public class Week_day_change {
             view.findViewById(R.id.day_para_view_rec).setVisibility(View.VISIBLE);
             week_para_view.setVisibility(View.INVISIBLE);
             FragmentScheduleShow.week_day_on_off = false;
-            new Day_show(view);
+            new DayShow(view);
             gesture_layout.setVisibility(View.VISIBLE);
             week_day_change_btn_size_up.setVisibility(View.INVISIBLE);
             week_day_change_btn_size_down.setVisibility(View.INVISIBLE);

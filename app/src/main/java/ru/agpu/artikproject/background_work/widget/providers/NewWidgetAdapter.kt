@@ -4,14 +4,12 @@ import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.*
-import android.graphics.drawable.GradientDrawable
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService.RemoteViewsFactory
 import androidx.core.database.getStringOrNull
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.background_work.datebase.DataBase_Local
+import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
-import ru.agpu.artikproject.background_work.debug.Device_info
 import ru.agpu.artikproject.background_work.image_utils.GetRoundedCornerBitmap
 import ru.agpu.artikproject.background_work.theme.ColorChanger
 import ru.agpu.artikproject.background_work.widget.WidgetGridViewItem
@@ -101,14 +99,12 @@ class NewWidgetAdapter(val context: Context, intent: Intent) : RemoteViewsFactor
     override fun onDataSetChanged() {
         try {
             data.clear() // Обнуляем список
-            DataBase_Local.sqLiteDatabase =
-                DataBase_Local(context).writableDatabase // Подключение к базе данных должно быть выше функций получения дня недели и недели
             val week_day = CurrentWeekDayGetUseCase(CurrentWeekDayImpl()).execute()
             val week_id = CurrentWeekIdGetUseCase(CurrentWeekIdImpl(context)).execute()
             val selectedItem_id =
                 MySharedPreferences.get(context, widgetID.toString() + "_selected_item_id", "")
             if (selectedItem_id != "") {
-                val r = DataBase_Local.sqLiteDatabase.rawQuery(
+                val r = DataBaseSqlite.getSqliteDatabase(context).rawQuery(
                     "SELECT * FROM raspisanie WHERE " +
                             "r_group_code = " + selectedItem_id + " AND " +
                             "r_week_number = " + week_id + " AND " +

@@ -37,7 +37,7 @@ public class ListViewGroupListener {
         MainActivity.selectedItem_type = MainActivity.group_listed_type[position];
         MainActivity.selectedItem_id = MainActivity.group_listed_id[position];
         if (CheckInternetConnection.getState(act.getApplicationContext())){
-            new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, act.getApplicationContext()).start();
+            new GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, act.getApplicationContext(), null).start();
         }
         MainActivity.IS_MAIN_SHOWED = false;
         MainActivity.FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW;
