@@ -23,6 +23,8 @@ import ru.agpu.artikproject.background_work.GetDirectionsList;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.presentation.layout.StartActivity;
+import ru.oganesyanartem.core.data.repository.TextDetranslitImpl;
+import ru.oganesyanartem.core.domain.usecase.TextDetranslitUseCase;
 
 /**
  * Фрагмент с выбором направления обучения на стартовом экране
@@ -90,7 +92,14 @@ public class FragmentSelectTraining extends Fragment {
                 // [Вместо SZВМ-ИВТ-3-1 будет показан список: ВМ-ИВТ-3-1, ZВМ-ИВТ-3-1, SZВМ-ИВТ-3-1],
                 // это нужно потому что группа может быть как SZВМ так и ZSВМ (короче - человеческий фактор (криворукие не могут определиться в каком порядке ставить буквы))
                 // Устанавливаем выбранную группу в основное активити фрагмента
-                StartActivity.SELECTED_GROUP = sorted_directions.get(i).item.split("\n")[0].split(view.getContext().getString(R.string.Group) + ": ")[1].toUpperCase().replaceFirst("Z", "").replaceFirst("S", "");
+                TextDetranslitUseCase textDetranslitUseCase = new TextDetranslitUseCase(new TextDetranslitImpl());
+                StartActivity.SELECTED_GROUP = textDetranslitUseCase.execute(sorted_directions.get(i).item
+                        .split("\n")[0]
+                        .split(view.getContext().getString(R.string.Group) + ": ")[1]
+                        .toUpperCase()
+                        .replaceFirst("Z", "")
+                        .replaceFirst("S", "")
+                );
                 // Открываем фрагмент с выбором группы
                 getParentFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container_view, FragmentSelectGroup.class, null).commit();
             });

@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+.gradle/
+.idea/
+
 # Log file
 *.log
 
@@ -21,44 +24,8 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-.idea/vcs.xml
+
 app/google-services.json
 app/release/app-release.apk
 app/release/output-metadata.json
-app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
-app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
-app/src/main/java/ru/agpu/artikproject/background_work/api_tests/GetTeachersFromApi.java
-.gradle/*
-.idea/*
 
-.idea/libraries/Gradle__com_google_android_datatransport_transport_backend_cct_3_1_5_aar.xml
-.idea/misc.xml
-.gradle/7.3.3/checksums/checksums.lock
-.gradle/7.3.3/checksums/md5-checksums.bin
-.gradle/7.3.3/checksums/sha1-checksums.bin
-.gradle/7.3.3/executionHistory/executionHistory.bin
-.gradle/7.3.3/executionHistory/executionHistory.lock
-.gradle/7.3.3/fileHashes/fileHashes.bin
-.gradle/7.3.3/fileHashes/fileHashes.lock
-.gradle/7.3.3/fileHashes/resourceHashesCache.bin
-.gradle/buildOutputCleanup/buildOutputCleanup.lock
-.gradle/buildOutputCleanup/outputFiles.bin
-.gradle/file-system.probe
-.idea/compiler.xml
-.idea/libraries/Gradle__androidx_core_core_ktx_1_2_0_aar.xml
-.idea/libraries/Gradle__C.xml
-.idea/libraries/Gradle__C__1_.xml
-.idea/libraries/Gradle__C__2_.xml
-.idea/libraries/Gradle__C__3_.xml
-.idea/libraries/Gradle__C__4_.xml
-.idea/libraries/Gradle__com_mikepenz_materialdrawer_library_0_9_5_aar.xml
-.idea/misc.xml
-.idea/modules/app/ArtikProject.app.androidTest.iml
-.idea/modules/app/ArtikProject.app.iml
-.idea/modules/app/ArtikProject.app.main.iml
-.idea/modules/app/ArtikProject.app.unitTest.iml
-.idea/modules/core/ArtikProject.core.androidTest.iml
-.idea/modules/core/ArtikProject.core.iml
-.idea/modules/core/ArtikProject.core.main.iml
-.idea/modules/core/ArtikProject.core.unitTest.iml
-.gradle/7.3.3/checksums/checksums.lock
