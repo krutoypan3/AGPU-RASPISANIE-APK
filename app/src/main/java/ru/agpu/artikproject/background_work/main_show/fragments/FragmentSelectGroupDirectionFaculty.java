@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import ru.agpu.artikproject.R;
+import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentSelectGroup;
+import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentSelectTraining;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class FragmentSelectGroupDirectionFaculty extends Fragment {
