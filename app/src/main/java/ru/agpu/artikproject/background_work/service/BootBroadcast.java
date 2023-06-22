@@ -11,10 +11,15 @@ public class BootBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.i("onReceive", "Обн.: " + intent.getAction());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            context.startForegroundService(new Intent(context, PlayService.class));
-        } else {
-            context.startService(new Intent(context, PlayService.class));
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                context.startForegroundService(new Intent(context, PlayService.class));
+            } else {
+                context.startService(new Intent(context, PlayService.class));
+            }
+        } catch (Exception e) {
+            Log.e("BootBroadcast", "onReceive error");
+            e.printStackTrace();
         }
     }
 }

@@ -108,10 +108,12 @@ public class GetGroupList_Search extends Thread {
         // Это нужно для вызова вне основного потока
         new Handler(Looper.getMainLooper()).post(() -> {
             ListView listview = act.findViewById(R.id.listview);
-            ListViewAdapter adapter = new ListViewAdapter(act.getApplicationContext(), MainActivity.group_listed);
-            listview.setAdapter(adapter);
-            result.setText("");
-            listview.setVisibility(View.VISIBLE);
+            if (listview != null) {
+                ListViewAdapter adapter = new ListViewAdapter(act.getApplicationContext(), MainActivity.group_listed);
+                listview.setAdapter(adapter);
+                result.setText("");
+                listview.setVisibility(View.VISIBLE);
+            }
         });
     }
 }
