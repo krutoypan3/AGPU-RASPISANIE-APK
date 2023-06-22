@@ -3,13 +3,10 @@ package ru.agpu.artikproject.background_work.main_show;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewTreeViewModelKt;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

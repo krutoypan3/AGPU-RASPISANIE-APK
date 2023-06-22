@@ -57,7 +57,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         recyclerViewItem.setOnClickListener(v -> {
             switch (adapter_is){
                 case IS_BUILDINGS_ADAPTER:
-                    new BuildingsItemClick((RecyclerView)parent, v, datas, act);
+                    new BuildingsItemClick((RecyclerView)parent, v, datas);
                     break;
                 case IS_FACULTIES_ADAPTER:
                     new FacultiesItemClick((RecyclerView)parent, v, datas, act);

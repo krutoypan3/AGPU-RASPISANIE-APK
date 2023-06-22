@@ -6,7 +6,7 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 
 import ru.agpu.artikproject.background_work.CheckInternetConnection;
-import ru.agpu.artikproject.background_work.site_parse.GetGroupList_Search;
+import ru.agpu.artikproject.background_work.site_parse.GetGroupListSearch;
 
 public class EditTextRaspSearch_Listener {
     /**
@@ -23,7 +23,7 @@ public class EditTextRaspSearch_Listener {
                     if (!CheckInternetConnection.getState(act.getApplicationContext())){ new WatchSaveGroupRasp(act); } // Если нет доступа к интернету то выводить список из бд
                     else {
                         String urlq = "https://www.it-institut.ru/SearchString/KeySearch?Id=118&SearchProductName=" + editText.getText().toString();
-                        new GetGroupList_Search(urlq, act).start(); // Отправляем запрос на сервер и выводим получившийся список
+                        new GetGroupListSearch(urlq, act).start(); // Отправляем запрос на сервер и выводим получившийся список
                     }
                     if (editText.getText().toString().equalsIgnoreCase("рикардо")){
                         new FichaRicardo(act);

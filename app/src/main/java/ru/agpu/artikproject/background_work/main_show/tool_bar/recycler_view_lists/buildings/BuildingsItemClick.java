@@ -1,6 +1,5 @@
 package ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
@@ -23,17 +22,16 @@ public class BuildingsItemClick {
      * @param recyclerView RecyclerView
      * @param itemView Выбранный элемент (View)
      * @param datas Информация о выбранном элементе
-     * @param act Активити
      */
-    public BuildingsItemClick(RecyclerView recyclerView, View itemView, List<RecyclerViewItems> datas, Activity act) {
+    public BuildingsItemClick(RecyclerView recyclerView, View itemView, List<RecyclerViewItems> datas) {
         int itemPosition = recyclerView.getChildLayoutPosition(itemView); // Получаем позицию нажатого элемента
         RecyclerViewItems item  = datas.get(itemPosition); // Получаем сам нажатый элемент
 
-        FragmentBuildingInfo.itemPosition = itemPosition; // Позицию
+        FragmentBuildingInfo.Companion.setItemPosition(itemPosition); // Позицию
 
-        FragmentBuildingInfo.mainText = item.getMainText(); // Основной текст
+        FragmentBuildingInfo.Companion.setMainText(item.getMainText()); // Основной текст
 
-        FragmentBuildingInfo.subText = item.getSubText(); // Дополнительный текст
+        FragmentBuildingInfo.Companion.setSubText(item.getSubText()); // Дополнительный текст
 
         ImageView imageView = itemView.findViewById(R.id.cardViewAudImage); // Картинка
         BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
@@ -41,9 +39,9 @@ public class BuildingsItemClick {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
 
-        FragmentBuildingInfo.pictureByteArrayOutputArray = baos.toByteArray();
+        FragmentBuildingInfo.Companion.setPictureByteArrayOutputArray(baos.toByteArray());
 
-        FragmentBuildingInfo.pictureUrl = item.getImageResourceUrl();
+        FragmentBuildingInfo.Companion.setPictureUrl(item.getImageResourceUrl());
 
         MainActivity.FRAGMENT = MainActivity.BACK_TO_BUILDINGS_SHOW;
         MainActivity.fragmentManager.beginTransaction()
