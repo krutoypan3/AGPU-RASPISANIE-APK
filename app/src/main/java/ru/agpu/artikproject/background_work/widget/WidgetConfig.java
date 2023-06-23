@@ -8,10 +8,10 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
-import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.R;
 
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
+import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 
 
 public class WidgetConfig extends Activity {
@@ -29,17 +29,17 @@ public class WidgetConfig extends Activity {
         ConfigWidgetListView = findViewById(R.id.configWidgetListView); // Список с ранее открытыми группами при создании виджета
         WatchSaveGroupRasp sap = new WatchSaveGroupRasp(getApplicationContext(), true); // Получаем список сохраненных групп из базы данных
         try{
-        if(!(sap.group_list.size() == 0)){ // Если в списке есть группы \ аудитории \ преподаватели
-            ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(), sap.group_list, true);
+        if(!(sap.getGroupList().size() == 0)){ // Если в списке есть группы \ аудитории \ преподаватели
+            ListViewAdapter adapter = new ListViewAdapter(getApplicationContext(), sap.getGroupList(), true);
             WidgetConfig.ConfigWidgetListView.setAdapter(adapter); // Применяем адаптер к списку конфигурационного активити
         }}
         catch (Exception e){e.printStackTrace();}
         ConfigWidgetListView.setOnItemClickListener((parent, view, position, id) -> // Обрабатываем нажатие на элементы списка
             {
                 // Добавляем информацию о выбранном элементе в таблицу базы данных с id виджета
-                selectedItem = sap.group_list.get(position).item;
-                selectedItem_type = sap.group_list_type.toArray(new String[0])[position];
-                selectedItem_id = sap.group_list_id.toArray(new String[0])[position];
+                selectedItem = sap.getGroupList().get(position).item;
+                selectedItem_type = sap.getGroupListType().toArray(new String[0])[position];
+                selectedItem_id = sap.getGroupListId().toArray(new String[0])[position];
 
                 MySharedPreferences.put(getApplicationContext(), awID + "_selected_item_id", selectedItem_id);
                 MySharedPreferences.put(getApplicationContext(), awID + "_selected_item_type", selectedItem_type);

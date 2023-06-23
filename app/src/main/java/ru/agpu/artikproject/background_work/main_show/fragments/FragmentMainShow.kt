@@ -8,7 +8,7 @@ import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.FirstAppStartHelper
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 import ru.agpu.artikproject.background_work.main_show.ChangeDay
-import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearch_Listener
+import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearchListener
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener
 import ru.agpu.artikproject.background_work.main_show.TodayClickListener
 import ru.agpu.artikproject.background_work.main_show.UpdateDateInMainActivity
@@ -30,7 +30,7 @@ class FragmentMainShow: Fragment(R.layout.fragment_main_activity_main_show) {
         UpdateDateInMainActivity(activity).start()
 
         // Отслеживание изменений текстового поля
-        EditTextRaspSearch_Listener(activity, view.findViewById(R.id.rasp_search_edit))
+        EditTextRaspSearchListener(activity, view.findViewById(R.id.rasp_search_edit))
 
         // Первичный вывод групп которые были открыты ранее
         WatchSaveGroupRasp(activity)

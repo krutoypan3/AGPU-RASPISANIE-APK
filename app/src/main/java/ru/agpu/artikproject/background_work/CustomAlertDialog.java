@@ -173,15 +173,15 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                         DataBaseSqlite.Companion.getSqliteDatabase(v.getContext()).execSQL("DELETE FROM raspisanie");
                         DataBaseSqlite.Companion.getSqliteDatabase(v.getContext()).execSQL("DELETE FROM rasp_update");
                         MainActivity.group_listed = null;
-                        new WatchSaveGroupRasp(act);
+                        new WatchSaveGroupRasp(act, null);
                         break;
                     case "map_confirm":
                         new ShowBuildingsOnTheMap(Para_info.finalCorp, act);
                         break;
                     case "delete_one_saved_group":
-                        DataBaseSqlite.Companion.getSqliteDatabase(v.getContext()).delete("raspisanie", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.position] +
-                                "' AND r_search_type = '" + MainActivity.group_listed_type[ListViewGroupListener.position] + "'", null);
-                        new WatchSaveGroupRasp(act); // Первичный вывод групп которые были открыты ранее
+                        DataBaseSqlite.Companion.getSqliteDatabase(v.getContext()).delete("raspisanie", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.Companion.getPosition()] +
+                                "' AND r_search_type = '" + MainActivity.group_listed_type[ListViewGroupListener.Companion.getPosition()] + "'", null);
+                        new WatchSaveGroupRasp(act, null); // Первичный вывод групп которые были открыты ранее
                         break;
                 }
                 break;
