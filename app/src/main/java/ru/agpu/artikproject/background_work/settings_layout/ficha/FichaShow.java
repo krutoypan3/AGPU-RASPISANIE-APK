@@ -21,14 +21,14 @@ public class FichaShow{
         TextView ficha_count_text = act.findViewById(R.id.ficha_count_text);
         TextView ficha_count = act.findViewById(R.id.ficha_count);
         ImageView ficha_nyan = act.findViewById(R.id.ficha_nyan);
-        int fic_count = Ficha_achievements.get(act.getApplicationContext());
+        int fic_count = FichaAchievements.Companion.get(act.getApplicationContext());
         if (fic_count > 0){ // Если найдена хоть одна фича, делаем информацию о фичах видимой
             ficha_count_text.setVisibility(View.VISIBLE); // Основной текст
             ficha_count.setVisibility(View.VISIBLE); // Количество фич
-            String newText = fic_count + " / " + Ficha_achievements.MAX_FICHA_COUNT;
+            String newText = fic_count + " / " + FichaAchievements.Companion.getMAX_FICHA_COUNT();
             ficha_count.setText(newText);
         }
-        if (fic_count >= Ficha_achievements.MAX_FICHA_COUNT){ // Если собранны все фичи
+        if (fic_count >= FichaAchievements.Companion.getMAX_FICHA_COUNT()){ // Если собранны все фичи
             ficha_count_text.setText("Пасхалки?.Ты собрал их все: ");
             if (mp == null) mp = MediaPlayer.create(act.getApplicationContext(), R.raw.nyan_cat);
             else if (!mp.isPlaying()){
@@ -38,7 +38,7 @@ public class FichaShow{
             ficha_nyan.setVisibility(View.VISIBLE);
             Glide.with(act.getApplicationContext()).load("https://www.nyan.cat/cats/original.gif").into(new DrawableImageViewTarget(ficha_nyan));
         }
-        if (fic_count > Ficha_achievements.MAX_FICHA_COUNT){ // Если собраны все фичи + хоть одна секретка
+        if (fic_count > FichaAchievements.Companion.getMAX_FICHA_COUNT()){ // Если собраны все фичи + хоть одна секретка
             ficha_count_text.setText("Ого, да ты собрал все пасхалки и даже больше: ");
         }
     }

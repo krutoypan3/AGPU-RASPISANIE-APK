@@ -25,12 +25,12 @@ public class BackgroundDarkerListener {
             animImage.setY(event.getY()-100); // Определяем позицию нажатия по Y
             switch (event.getAction()){ // Получаем информацию о том, что делает пользователь
                 case MotionEvent.ACTION_DOWN: // Если опускает палец на экран
-                    Ficha_achievements.put(act.getApplicationContext(), "ficha_setting_logo"); // Засчитываем фичу с плавающим логотипом
+                    FichaAchievements.Companion.put(act.getApplicationContext(), "ficha_setting_logo"); // Засчитываем фичу с плавающим логотипом
                     new FichaShow(act); // Обновляем список найденных фич, т.к. находимся на слое настроек
                     animImage.setVisibility(View.VISIBLE); // Делаем невидимую картинку видимой
                     if (new Random().nextInt(20) == 0){ // С шансом 1 к 20 устанавливаем другое фото вместо логотипа
                         animImage.setImageResource(R.drawable.ficha_leonardo); // Ставим фото Леонардо
-                        Ficha_achievements.put(act.getApplicationContext(), "ficha_setting_leonardo"); // Засчитываем фичу
+                        FichaAchievements.Companion.put(act.getApplicationContext(), "ficha_setting_leonardo"); // Засчитываем фичу
                     }
                     break;
                 case MotionEvent.ACTION_UP: // Если поднимает палец

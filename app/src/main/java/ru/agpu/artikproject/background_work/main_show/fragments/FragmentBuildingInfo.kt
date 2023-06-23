@@ -22,7 +22,7 @@ import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener
 import ru.agpu.artikproject.background_work.debug.Device_info
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap
-import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements
+import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.background_work.theme.CustomBackground
 import ru.agpu.artikproject.presentation.layout.MainActivity
 import java.util.Random
@@ -76,7 +76,7 @@ class FragmentBuildingInfo : Fragment(R.layout.fragment_main_activity_building_i
             mainTextView.startAnimation(MainActivity.animScale)
             val randomInt = Random().nextInt(30)
             if (randomInt == 0) {
-                Ficha_achievements.put(view.context, "ficha_building_main_text")
+                FichaAchievements.put(view.context, "ficha_building_main_text")
                 val audioManager = view.context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)
                 val mp = MediaPlayer.create(view.context, R.raw.amogus)
@@ -90,7 +90,7 @@ class FragmentBuildingInfo : Fragment(R.layout.fragment_main_activity_building_i
                 imageView.startAnimation(MainActivity.animUehalVl)
                 val randomInt = Random().nextInt(10)
                 if (randomInt == 0) {
-                    Ficha_achievements.put(view.context, "ficha_building_ico")
+                    FichaAchievements.put(view.context, "ficha_building_ico")
                     val audioManager = view.context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)
                     val mp = MediaPlayer.create(view.context, R.raw.winx)

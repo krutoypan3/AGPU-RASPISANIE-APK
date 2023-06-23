@@ -23,10 +23,10 @@ public class Week_day_change {
         ImageView week_day_change_btn_size_up = view.findViewById(R.id.week_day_change_btn_size_up);
         ImageView week_day_change_btn_size_down = view.findViewById(R.id.week_day_change_btn_size_down);
 
-        if (!FragmentScheduleShow.week_day_on_off){
+        if (!FragmentScheduleShow.Companion.getWeek_day_on_off()){
             week_day_change_btn.setImageResource(R.drawable.ic_baseline_today_24);
             week_day_change_btn.setAnimation(MainActivity.animScale);
-            FragmentScheduleShow.week_day_on_off = true;
+            FragmentScheduleShow.Companion.setWeek_day_on_off(true);
             new Week_show(view.getContext());
             view.findViewById(R.id.day_para_view_rec).setVisibility(View.INVISIBLE);
             week_para_view.setVisibility(View.VISIBLE);
@@ -39,7 +39,7 @@ public class Week_day_change {
             week_day_change_btn.setAnimation(MainActivity.animScale);
             view.findViewById(R.id.day_para_view_rec).setVisibility(View.VISIBLE);
             week_para_view.setVisibility(View.INVISIBLE);
-            FragmentScheduleShow.week_day_on_off = false;
+            FragmentScheduleShow.Companion.setWeek_day_on_off(false);
             new DayShow(view);
             gesture_layout.setVisibility(View.VISIBLE);
             week_day_change_btn_size_up.setVisibility(View.INVISIBLE);

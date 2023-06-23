@@ -22,7 +22,7 @@ import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems;
 import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite;
 import ru.agpu.artikproject.background_work.rasp_show.recycler_view.RecyclerViewItems;
-import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
+import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class Para_info {
@@ -93,7 +93,7 @@ public class Para_info {
                             String sss = ((ListViewItems)cdd.list_view.getItemAtPosition(pos)).item;
                             if (sss.contains("практика") || sss.contains("экз.") || sss.contains("зач.") ||
                                     sss.contains("экзамен") || sss.contains("зачет")  || sss.contains("зачёт")){
-                                Ficha_achievements.put(act.getApplicationContext(), "ficha_god");
+                                FichaAchievements.Companion.put(act.getApplicationContext(), "ficha_god");
                                 CustomAlertDialog cdd2 = new CustomAlertDialog(act, "para_pasha");
                                 cdd2.show();
                                 cdd2.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -126,7 +126,7 @@ public class Para_info {
                             // Этот блок кода созда исключительно в развлекательных целях и не несет в себе цель кого-то задеть или обидеть
                             if (sss.equals("Лапшин Н.А.")) {
                                 if (new Random().nextInt(5) == 0) {
-                                    Ficha_achievements.put(act.getApplicationContext(), "ficha_para_lapshin");
+                                    FichaAchievements.Companion.put(act.getApplicationContext(), "ficha_para_lapshin");
                                     AudioManager audioManager = (AudioManager) act.getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
                                     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
                                     MediaPlayer mp = MediaPlayer.create(act, R.raw.povezlo_povezlo);

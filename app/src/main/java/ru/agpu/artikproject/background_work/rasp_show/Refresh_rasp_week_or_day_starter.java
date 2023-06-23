@@ -26,7 +26,7 @@ public class Refresh_rasp_week_or_day_starter extends Thread {
 
     @Override
     public void run() {
-        while (FragmentScheduleShow.refresh_on_off){
+        while (FragmentScheduleShow.Companion.getRefresh_on_off()){
             try {
                 TimeUnit.MILLISECONDS.sleep(500);
             } catch (InterruptedException e) {
@@ -42,13 +42,13 @@ public class Refresh_rasp_week_or_day_starter extends Thread {
         // Это нужно для вызова вне основного потока
         new Handler(Looper.getMainLooper()).post(() -> {
             try {
-                if (!FragmentScheduleShow.week_day_on_off)
+                if (!FragmentScheduleShow.Companion.getWeek_day_on_off())
                     new DayShow(view);
                 else
                     new Week_show(view.getContext());
 
                 if (view.isShown()) {
-                    if (FragmentScheduleShow.refresh_successful)
+                    if (FragmentScheduleShow.Companion.getRefresh_successful())
                         refresh_btn.setBackgroundResource(R.drawable.refresh_2);
                     else
                         refresh_btn.setBackgroundResource(R.drawable.refresh_0);

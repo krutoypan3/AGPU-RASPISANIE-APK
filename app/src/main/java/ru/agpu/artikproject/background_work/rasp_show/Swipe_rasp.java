@@ -19,7 +19,7 @@ public class Swipe_rasp {
 
         week_day_bt1.setClickable(false);
         week_day_bt2.setClickable(false);
-        if (!FragmentScheduleShow.week_day_on_off) {
+        if (!FragmentScheduleShow.Companion.getWeek_day_on_off()) {
             switch (direction) {
                 case "Left":
                     week_day_bt1.setAnimation(MainActivity.animUehalVl);
@@ -38,7 +38,7 @@ public class Swipe_rasp {
                     }
                     break;
                 case "Bottom":
-                    if (!FragmentScheduleShow.refresh_on_off) {
+                    if (!FragmentScheduleShow.Companion.getRefresh_on_off()) {
                         refresh_btn.setClickable(false);
                         refresh_btn_ficha.setVisibility(View.VISIBLE);
                         refresh_btn.startAnimation(MainActivity.animRotate);

@@ -35,7 +35,7 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSchedule
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
 import ru.agpu.artikproject.background_work.service.PlayService;
-import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
+import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
 import ru.oganesyanartem.core.data.repository.CurrentWeekDayImpl;
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         Log.i("onKeyMultiple", "kc=" + keyCode);
-        new Ficha_achievements().playKeysFicha(this, keyCode);
+        new FichaAchievements().playKeysFicha(this, keyCode);
         return super.onKeyDown(keyCode, event);
     }
 
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case (BACK_TO_BUILDINGS_SHOW):
                 FRAGMENT = BACK_TO_MAIN_SHOW;
-                FragmentRecyclerviewShow.SELECTED_LIST = 1;
+                FragmentRecyclerviewShow.Companion.setSELECTED_LIST(1);
                 getSupportFragmentManager().beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                         .replace(R.id.fragment_container_view, FragmentRecyclerviewShow.class, null).commit();

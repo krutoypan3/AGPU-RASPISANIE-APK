@@ -20,7 +20,7 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecycler
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSettingsShow;
-import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
+import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class BottomNavigationViewListener {
@@ -38,7 +38,7 @@ public class BottomNavigationViewListener {
                 case R.id.details_page_Home_page:
                     if (MainActivity.IS_MAIN_SHOWED) {
                         if (new Random().nextInt(30) == 0) {
-                            Ficha_achievements.put(activity, Ficha_achievements.FICHA_GO_TO_HOME);
+                            FichaAchievements.Companion.put(activity, FichaAchievements.FICHA_GO_TO_HOME);
                             AudioManager audioManager = (AudioManager) activity.getSystemService(Context.AUDIO_SERVICE);
                             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0);
                             MediaPlayer mp = MediaPlayer.create(activity, R.raw.luntik_i_kloun);
@@ -74,7 +74,7 @@ public class BottomNavigationViewListener {
                     }
                     break;
                 case R.id.details_page_Audiences:
-                    FragmentRecyclerviewShow.SELECTED_LIST = 1;
+                    FragmentRecyclerviewShow.Companion.setSELECTED_LIST(1);
                     MainActivity.fragmentManager.beginTransaction()
                             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                             .replace(R.id.fragment_container_view, FragmentRecyclerviewShow.class, null).commit();

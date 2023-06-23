@@ -11,13 +11,13 @@ import java.io.IOException;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.CustomAlertDialog;
-import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha_achievements;
+import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements;
 
 public class FichaRicardo {
     static MediaPlayer mediaPlayer = new MediaPlayer();
 
     public FichaRicardo(Activity act){
-        Ficha_achievements.put(act.getApplicationContext(), "ficha_ricardo");
+        FichaAchievements.Companion.put(act.getApplicationContext(), "ficha_ricardo");
         CustomAlertDialog cdd = new CustomAlertDialog(act, "ricardo_pasha");
         cdd.getWindow().setBackgroundDrawableResource(R.drawable.custom_dialog_background);
         cdd.show();
