@@ -14,10 +14,10 @@ import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 import ru.agpu.artikproject.background_work.rasp_show.RaspUpdateCheckBoxListener
-import ru.agpu.artikproject.background_work.rasp_show.Refresh_rasp_week_or_day_starter
-import ru.agpu.artikproject.background_work.rasp_show.Swipe_rasp
-import ru.agpu.artikproject.background_work.rasp_show.Week_day_change
-import ru.agpu.artikproject.background_work.rasp_show.Week_show_resize
+import ru.agpu.artikproject.background_work.rasp_show.RefreshRaspWeekOrDayStarter
+import ru.agpu.artikproject.background_work.rasp_show.SwipeRasp
+import ru.agpu.artikproject.background_work.rasp_show.WeekDayChange
+import ru.agpu.artikproject.background_work.rasp_show.WeekShowResize
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.presentation.layout.MainActivity
 import java.util.Random
@@ -53,18 +53,18 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         val gestureLayout = view.findViewById<ConstraintLayout>(R.id.raspisanie_day) // Слой для отслеживания жестов
         val raspisanieShowLayout = view.findViewById<RelativeLayout>(R.id.raspisanie_show) // Основной слой
 
-        Refresh_rasp_week_or_day_starter(view).start() // Обновляем расписание
+        RefreshRaspWeekOrDayStarter(view).start() // Обновляем расписание
 
         // Кнопка увеличивающая размер текста в режиме недели
-        weekDayChangeBtnSizeUp.setOnClickListener { Week_show_resize().size_add() }
+        weekDayChangeBtnSizeUp.setOnClickListener { WeekShowResize().sizeAdd() }
         // Кнопка уменьшающая размер текста в режиме недели
-        weekDayChangeBtnSizeDown.setOnClickListener { Week_show_resize().size_dec() }
+        weekDayChangeBtnSizeDown.setOnClickListener { WeekShowResize().sizeDec() }
 
         refreshBtn.startAnimation(MainActivity.animRotate)
         refreshBtn.setBackgroundResource(R.drawable.refresh_1)
 
         // Первичный вывод расписания
-        Swipe_rasp("Bottom", view)
+        SwipeRasp("Bottom", view)
 
         // Функция перехода на сайт с расписанием при нажатии на кнопку
         val raspSite = view.findViewById<ImageView>(R.id.rasp_site)
@@ -83,11 +83,11 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         }
 
         // Переход к предыдущему дню
-        weekDayBt1.setOnClickListener { Swipe_rasp("Left", view) }
+        weekDayBt1.setOnClickListener { SwipeRasp("Left", view) }
         // Переход к следующему дню
-        weekDayBt2.setOnClickListener { Swipe_rasp("Right", view) }
+        weekDayBt2.setOnClickListener { SwipeRasp("Right", view) }
         // Обновить расписание
-        refreshBtn.setOnClickListener { Swipe_rasp("Bottom", view) }
+        refreshBtn.setOnClickListener { SwipeRasp("Bottom", view) }
 
         refreshBtnFicha.setOnClickListener {
             when (Random().nextInt(4)) {
@@ -103,21 +103,21 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         }
 
         // Смена недельного режима и дневного
-        weekDayChangeBtn.setOnClickListener { Week_day_change(view) }
+        weekDayChangeBtn.setOnClickListener { WeekDayChange(view) }
 
         // Отслеживание жестов по расписанию
         view.findViewById<View>(R.id.day_para_view_rec)
             .setOnTouchListener(object : OnSwipeTouchListener(view.context) {
-                override fun onSwipeRight() { Swipe_rasp("Left", view) }
-                override fun onSwipeLeft() { Swipe_rasp("Right", view) }
+                override fun onSwipeRight() { SwipeRasp("Left", view) }
+                override fun onSwipeLeft() { SwipeRasp("Right", view) }
             })
 
 
         // Отслеживание жестов под дневным расписанием
         gestureLayout.setOnTouchListener(object : OnSwipeTouchListener(view.context) {
-            override fun onSwipeRight() { Swipe_rasp("Left", view) }
-            override fun onSwipeLeft() { Swipe_rasp("Right", view) }
-            override fun onSwipeBottom() { Swipe_rasp("Bottom", view) }
+            override fun onSwipeRight() { SwipeRasp("Left", view) }
+            override fun onSwipeLeft() { SwipeRasp("Right", view) }
+            override fun onSwipeBottom() { SwipeRasp("Bottom", view) }
         })
     }
 }
