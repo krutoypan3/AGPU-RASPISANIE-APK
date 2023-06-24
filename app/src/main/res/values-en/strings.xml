@@ -64,6 +64,8 @@
     <string name="pasha_god">Application Theme</string>
     <string name="ficha_count">Easter eggs found:</string>
     <string name="go_to_settings">You got an easter egg! Go to settings!</string>
+    <string name="open_all_ficha">You have discovered all the Easter eggs!!</string>
+    <string name="clear_all_ficha">All Easter eggs have been cleared!</string>
     <string name="touch_up">Touch up!</string>
     <string name="touch_up_scam">AHAHAH, BUT DONT POKE WARNED🤣</string>
     <string name="Operation_canceled">Operation canceled by user</string>
@@ -133,6 +135,7 @@
     <string name="Restore_password">Restore password</string>
     <string name="You_will_be_directed_to_the_EIOS">You will be directed to the EIOS website to reset your password</string>
     <string name="Error">An error has occurred</string>
+    <string name="Firebase_login_error">Invalid username or password</string>
     <string name="What_is_hidden_in_the_name_of_the_group">What is hidden in the name of the group?</string>
     <string name="Correspondence_form_of_study">Correspondence form of study</string>
     <string name="Course_of_study">Course of study</string>
@@ -156,4 +159,5 @@
     <string name="Schedule_description">The last open schedule will be displayed on this page</string>
     <string name="Audiences_description">On this page you can find out about the buildings and classrooms that they contain</string>
     <string name="settings_description">Here you can change the theme and background of the application</string>
+    <string name="Open_all_ficha">Открыть все пасхалки</string>
 </resources>

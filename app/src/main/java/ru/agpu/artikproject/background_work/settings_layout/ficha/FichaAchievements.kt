@@ -9,6 +9,7 @@ import android.view.KeyEvent
 import android.widget.Toast
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
+import ru.agpu.artikproject.background_work.main_show.FichaRicardo
 import java.util.Random
 
 // TODO В идеале класс сделать статикой
@@ -18,12 +19,13 @@ class FichaAchievements {
         const val FICHA_WINDOWS = "ficha_windows"
         const val FICHA_KEYS = "ficha_keys"
         const val FICHA_KEYS_TWO = "ficha_keys_two"
+        const val FICHA_ADMIN = "ficha_admin"
 
         private val FICHA_LIST = arrayOf(
             "ficha_setting_logo", "ficha_setting_leonardo",
             "ficha_para_lapshin", "ficha_refresh", "ficha_god",
             "ficha_today", "ficha_building_ico", "ficha_building_main_text", "ficha_ricardo",
-            FICHA_GO_TO_HOME, FICHA_WINDOWS, FICHA_KEYS, FICHA_KEYS_TWO
+            FICHA_GO_TO_HOME, FICHA_WINDOWS, FICHA_KEYS, FICHA_KEYS_TWO, FICHA_ADMIN
         )
 
         private val FICHA_SECRET_LIST = arrayOf(
@@ -63,6 +65,24 @@ class FichaAchievements {
             }
             MySharedPreferences.put(context, name, true)
         }
+
+        /**
+         * Собрать все пасхалки (только для админа)
+         * @param context Контекст приложения
+         */
+        fun putAll(context: Context?) {
+            FICHA_LIST.forEach { fichaName ->
+                MySharedPreferences.put(context, fichaName, true)
+            }
+            Toast.makeText(context, R.string.open_all_ficha, Toast.LENGTH_LONG).show()
+        }
+
+        fun removeAll(context: Context?) {
+            FICHA_LIST.forEach { fichaName ->
+                MySharedPreferences.remove(context, fichaName)
+            }
+            Toast.makeText(context, R.string.clear_all_ficha, Toast.LENGTH_LONG).show()
+        }
     }
 
     fun playWindowsFicha(activity: Activity) {
@@ -76,6 +96,11 @@ class FichaAchievements {
         } else {
             Toast.makeText(activity, R.string.touch_up, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun playAdminFicha(activity: Activity) {
+        put(activity, FICHA_ADMIN)
+        FichaRicardo(activity)
     }
 
     fun playKeysFicha(activity: Activity, keyCode: Int) {

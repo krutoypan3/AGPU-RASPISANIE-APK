@@ -72,6 +72,8 @@
     <string name="pasha_god">Боже, дай мне закрыть эту сессию!</string>
     <string name="ficha_count">Найдено пасхолок:</string>
     <string name="go_to_settings">Вы обнаружили пасхалку! Перейдите в настройки!</string>
+    <string name="open_all_ficha">Вы обнаружили все пасхалки!</string>
+    <string name="clear_all_ficha">Все пасхалки были очищены!</string>
     <string name="touch_up">Апути!</string>
     <string name="touch_up_scam">ААХХАХАХААХАХХАХАХ, А ВОТ НЕ НАДО ТЫКАТЬ🤣</string>
     <string name="Operation_canceled">Операция отменена пользователем</string>
@@ -141,6 +143,7 @@
     <string name="Restore_password">Сброс пароля</string>
     <string name="You_will_be_directed_to_the_EIOS">Вы будете направлены на сайт ЭИОС для сброса пароля</string>
     <string name="Error">Произошла ошибка</string>
+    <string name="Firebase_login_error">Неверный логин или пароль</string>
     <string name="What_is_hidden_in_the_name_of_the_group">Что скрыто в названии группы?</string>
     <string name="Correspondence_form_of_study">Заочная форма обучения</string>
     <string name="Course_of_study">Курс обучения</string>
@@ -169,4 +172,5 @@
     <string name="rasp_item_name_example" translatable="false">Администрирование сетей и сетевых архитектур при использовании особого программного обеспечения</string>
     <string name="rasp_item_prepod_and_aud_example" translatable="false">Лапшин Н.А., ст.пр., Актовый зал</string>
     <string name="rasp_item_group_example" translatable="false">ВМ-ИВТ-5-1</string>
+    <string name="Open_all_ficha">Открыть все пасхалки</string>
 </resources>
