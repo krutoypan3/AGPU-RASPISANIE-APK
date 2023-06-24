@@ -100,7 +100,7 @@ class FichaAchievements {
 
     fun playAdminFicha(activity: Activity) {
         put(activity, FICHA_ADMIN)
-        FichaRicardo(activity)
+        FichaAdmin(activity)
     }
 
     fun playKeysFicha(activity: Activity, keyCode: Int) {
