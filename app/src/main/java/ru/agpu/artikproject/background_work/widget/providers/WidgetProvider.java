@@ -101,7 +101,7 @@ public class WidgetProvider extends AppWidgetProvider {
             String selectedItem_id = MySharedPreferences.get(context, appWidgetId + "_selected_item_id", "");
             String selectedItem_type = MySharedPreferences.get(context, appWidgetId + "_selected_item_type", "");
             if (!selectedItem_id.equals("")) {
-                if (CheckInternetConnection.getState(context)){ // Обновляем расписание для этой группы
+                if (CheckInternetConnection.INSTANCE.getState(context)){ // Обновляем расписание для этой группы
                     new GetRasp(selectedItem_id, selectedItem_type, selectedItem_name, week_id, context, "widget").start();
                 }
                 rv.setTextViewText(R.id.tvUpdate, selectedItem_name); // Устанавливаем название группы на кнопку

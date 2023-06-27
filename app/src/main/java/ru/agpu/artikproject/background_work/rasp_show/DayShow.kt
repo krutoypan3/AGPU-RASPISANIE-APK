@@ -14,8 +14,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.CheckInternetConnection
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
-import ru.agpu.artikproject.background_work.rasp_show.recycler_view.RecyclerViewAdapter
-import ru.agpu.artikproject.background_work.rasp_show.recycler_view.RecyclerViewItems
+import ru.agpu.artikproject.background_work.rasp_show.recycler_view.DayShowRVAdapter
+import ru.agpu.artikproject.background_work.rasp_show.recycler_view.DayShowRVItems
 import ru.agpu.artikproject.background_work.site_parse.GetRasp
 import ru.agpu.artikproject.background_work.theme.ColorChanger
 import ru.agpu.artikproject.background_work.theme.Theme
@@ -29,7 +29,7 @@ import ru.agpu.artikproject.presentation.layout.MainActivity
 class DayShow(view: View) {
     init {
         var mainText = ""
-        val list = mutableListOf<RecyclerViewItems>()
+        val list = mutableListOf<DayShowRVItems>()
 
         val observable: Observable<String> = Observable.create { subscriber -> // Создаем observable, который будет выполняться в отдельном потоке
 
@@ -87,7 +87,8 @@ class DayShow(view: View) {
                     }
 
                     list.add(
-                        RecyclerViewItems(paraNumber.toString(), paraTime, raspisanie.paraName,
+                        DayShowRVItems(
+                            paraNumber.toString(), paraTime, raspisanie.paraName ?: "",
                             "$paraAud ${raspisanie.paraDistant ?: ""}\n$paraGroup ${raspisanie.paraPodgroup ?: ""}",
                             paraPrepod, raspColorLeft, raspColorRight
                         )
@@ -114,7 +115,11 @@ class DayShow(view: View) {
 
                         val recyclerView = view.findViewById<RecyclerView>(R.id.day_para_view_rec)
                         recyclerView.layoutManager = LinearLayoutManager(view.context)
-                        recyclerView.adapter = RecyclerViewAdapter(view.context as Activity, list)
+                        recyclerView.adapter =
+                            DayShowRVAdapter(
+                                view.context as Activity,
+                                list
+                            )
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()

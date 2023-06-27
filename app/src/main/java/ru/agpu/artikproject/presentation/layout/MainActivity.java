@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (getIntent().getBooleanExtra("start_rasp", false)) {
-            if (CheckInternetConnection.getState(getApplicationContext())) {
+            if (CheckInternetConnection.INSTANCE.getState(getApplicationContext())) {
                 selectedItem = getIntent().getStringExtra("selectedItem");
                 selectedItem_type = getIntent().getStringExtra("selectedItem_type");
                 selectedItem_id = getIntent().getStringExtra("selectedItem_id");

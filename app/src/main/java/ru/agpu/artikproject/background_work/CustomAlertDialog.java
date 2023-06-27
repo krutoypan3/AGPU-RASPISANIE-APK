@@ -21,7 +21,7 @@ import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite;
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap;
-import ru.agpu.artikproject.background_work.rasp_show.Para_info;
+import ru.agpu.artikproject.background_work.rasp_show.ParaInfo;
 import ru.agpu.artikproject.presentation.layout.MainActivity;
 
 public class CustomAlertDialog extends Dialog implements android.view.View.OnClickListener {
@@ -176,7 +176,7 @@ public class CustomAlertDialog extends Dialog implements android.view.View.OnCli
                         new WatchSaveGroupRasp(act, null);
                         break;
                     case "map_confirm":
-                        new ShowBuildingsOnTheMap(Para_info.finalCorp, act);
+                        new ShowBuildingsOnTheMap(ParaInfo.Companion.getFinalCorp(), act);
                         break;
                     case "delete_one_saved_group":
                         DataBaseSqlite.Companion.getSqliteDatabase(v.getContext()).delete("raspisanie", "r_group_code = '" + MainActivity.group_listed_id[ListViewGroupListener.Companion.getPosition()] +

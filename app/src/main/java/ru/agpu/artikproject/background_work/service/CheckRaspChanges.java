@@ -2,7 +2,6 @@ package ru.agpu.artikproject.background_work.service;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
@@ -14,7 +13,7 @@ import ru.oganesyanartem.core.domain.usecase.CurrentWeekIdGetUseCase;
 
 public class CheckRaspChanges {
     public CheckRaspChanges(Context context) {
-        if (CheckInternetConnection.getState(context)) {
+        if (CheckInternetConnection.INSTANCE.getState(context)) {
             Cursor r = DataBaseSqlite.Companion.getSqliteDatabase(context).rawQuery("SELECT r_group_code, r_selectedItem_type, r_selectedItem FROM rasp_update", null); // SELECT запрос
             ArrayList<String> r_group0 = new ArrayList<>();
             ArrayList<String> r_group1 = new ArrayList<>();
