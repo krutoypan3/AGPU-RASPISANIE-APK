@@ -49,7 +49,7 @@ public class WidgetProvider extends AppWidgetProvider {
         int text_color;
         RemoteViews rv;
         if (widget_color == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM){
-            int current_theme = Theme.getCurrentSystemTheme(context);
+            int current_theme = Theme.INSTANCE.getCurrentSystemTheme(context);
             if (current_theme == AppCompatDelegate.MODE_NIGHT_YES) {
                 rv = new RemoteViews(context.getPackageName(),
                         R.layout.widget_dark);

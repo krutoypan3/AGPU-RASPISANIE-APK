@@ -10,7 +10,7 @@ import androidx.core.database.getStringOrNull
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
-import ru.agpu.artikproject.background_work.image_utils.GetRoundedCornerBitmap
+import ru.agpu.artikproject.background_work.image_utils.RoundedCornersUtil
 import ru.agpu.artikproject.background_work.theme.ColorChanger
 import ru.agpu.artikproject.background_work.widget.WidgetGridViewItem
 import ru.oganesyanartem.core.data.repository.CurrentWeekDayImpl
@@ -70,9 +70,9 @@ class NewWidgetAdapter(val context: Context, intent: Intent) : RemoteViewsFactor
 
         var backgroundColor = viewItem.backgroundConstraint
         if (textColor == context.getColor(R.color.white))
-            backgroundColor = ColorChanger.GetDarkColor(viewItem.backgroundConstraint, 120)
+            backgroundColor = ColorChanger.getDarkColor(viewItem.backgroundConstraint, 120)
 
-        val bitmap = GetRoundedCornerBitmap.getRoundedCornerBitmapByColor(
+        val bitmap = RoundedCornersUtil.getRoundedCornersBitmapByColor(
             900,
             300,
             backgroundColor,

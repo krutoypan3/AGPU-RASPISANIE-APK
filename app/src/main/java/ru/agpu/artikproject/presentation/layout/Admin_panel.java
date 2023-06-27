@@ -10,7 +10,7 @@ import ru.agpu.artikproject.background_work.theme.Theme;
 public class Admin_panel extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Theme.setting(this);
+        Theme.INSTANCE.setting(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_panel);
     }

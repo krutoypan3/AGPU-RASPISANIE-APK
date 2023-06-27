@@ -34,7 +34,6 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecycler
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
-import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
@@ -121,8 +120,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Установка нового фона и затемнителя | Должно быть после setContentView
-        findViewById(R.id.main_activity_layout).setBackground(CustomBackground.getBackground(getApplicationContext()));
-        findViewById(R.id.background_darker).setBackgroundColor(CustomBackground.getBackgroundDarker(getApplicationContext()));
+        findViewById(R.id.main_activity_layout).setBackground(CustomBackground.INSTANCE.getBackground(getApplicationContext()));
+        findViewById(R.id.background_darker).setBackgroundColor(CustomBackground.INSTANCE.getBackgroundDarker(getApplicationContext()));
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); // Без этих двух строк
         StrictMode.setThreadPolicy(policy); // мы не можем подключиться к базе данных MSSQL так как потокам становится плохо

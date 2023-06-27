@@ -32,8 +32,8 @@ object MySharedPreferences {
         edit.apply() //apply
     }
 
-    operator fun get(context: Context?, name: String?, default_value: String): String? {
-        return PreferenceManager.getDefaultSharedPreferences(context).getString(name, default_value)
+    operator fun get(context: Context?, name: String?, default_value: String): String {
+        return PreferenceManager.getDefaultSharedPreferences(context).getString(name, default_value) ?: ""
     }
 
     operator fun get(context: Context?, name: String?, default_value: Int): Int {

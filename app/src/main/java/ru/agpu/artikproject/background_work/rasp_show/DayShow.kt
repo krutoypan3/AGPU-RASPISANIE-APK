@@ -79,10 +79,10 @@ class DayShow(view: View) {
                     val raspColorRight: Int
                     val raspColorLeft: Int
                     if (Theme.getApplicationTheme(view.context) == AppCompatDelegate.MODE_NIGHT_YES) {
-                        raspColorRight = ColorChanger.GetDarkColor(paraColor, 120)
-                        raspColorLeft = ColorChanger.GetLightColor(raspColorRight, 30)
+                        raspColorRight = ColorChanger.getDarkColor(paraColor, 120)
+                        raspColorLeft = ColorChanger.getLightColor(raspColorRight, 30)
                     } else {
-                        raspColorRight = ColorChanger.GetLightColor(paraColor, 30)
+                        raspColorRight = ColorChanger.getLightColor(paraColor, 30)
                         raspColorLeft = paraColor
                     }
 
