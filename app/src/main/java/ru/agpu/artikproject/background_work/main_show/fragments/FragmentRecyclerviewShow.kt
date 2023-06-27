@@ -45,7 +45,7 @@ class FragmentRecyclerviewShow: Fragment(R.layout.fragment_main_activity_recycle
         when (SELECTED_LIST) {
             1 -> recyclerView.adapter = RecyclerViewAdapter(
                     activity,
-                    LoadBuildingsList.buildings_list,
+                    LoadBuildingsList.buildings_list ?: emptyList(),
                     RecyclerViewAdapter.IS_BUILDINGS_ADAPTER
             )
 

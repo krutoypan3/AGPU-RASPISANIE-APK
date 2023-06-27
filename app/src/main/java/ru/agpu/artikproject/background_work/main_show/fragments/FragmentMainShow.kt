@@ -40,7 +40,7 @@ class FragmentMainShow: Fragment(R.layout.fragment_main_activity_main_show) {
             ChangeDay(activity).setDate()
             it.startAnimation(MainActivity.animScale)
         }
-        if (MySharedPreferences.get(context, "IsFirstAppStart", true)) {
+        if (MySharedPreferences[context, "IsFirstAppStart", true]) {
             MySharedPreferences.put(context, "IsFirstAppStart", false)
             FirstAppStartHelper(view.context as Activity)
         }

@@ -26,7 +26,7 @@ public class CustomBackground {
      */
     public static Drawable getBackground(Context context){
         int theme = Theme.getApplicationTheme(context);  // Получаем тему приложения
-        if (MySharedPreferences.get(context, "enable_background_user", false)) { // Если включен пользовательский фон
+        if (MySharedPreferences.INSTANCE.get(context, "enable_background_user", false)) { // Если включен пользовательский фон
             if (theme == AppCompatDelegate.MODE_NIGHT_NO)
                 return getBackgroundDrawable(context, "background_light"); // Если светлая, то возвращаем светлый фон
             return getBackgroundDrawable(context, "background_dark"); // Если темная, то возвращаем темный фон
@@ -67,7 +67,7 @@ public class CustomBackground {
 
     // Микрофункция возвращающая картинку в зависимости от темы
     private static Drawable getBackgroundDrawable(Context context, String background_type){
-        File file = new File(MySharedPreferences.get(context, background_type, "")); // Получаем картинку фона
+        File file = new File(MySharedPreferences.INSTANCE.get(context, background_type, "")); // Получаем картинку фона
         if (!file.equals(new File(""))) { // Если путь к файлу не пустой, то возвращаем картинку
             return new BitmapDrawable(context.getResources(), BitmapFactory.decodeFile(file.getAbsolutePath()));
         } // Если файл пустой - возвращаем стандартные обои
@@ -80,12 +80,12 @@ public class CustomBackground {
     private static int getBackgroundDarkerColor(Context context, boolean lightDarker){
         int level = 30;
         if (lightDarker) { // Если тема светлая, то возвращаем светлый затемнитель
-            if (MySharedPreferences.get(context, "enable_background_user", false))
-                level = MySharedPreferences.get(context, "light_darker_level", 30);
+            if (MySharedPreferences.INSTANCE.get(context, "enable_background_user", false))
+                level = MySharedPreferences.INSTANCE.get(context, "light_darker_level", 30);
             return Color.argb((int) (level * 2.5), 255, 255, 255);
         } // Если тема темная, то возвращаем темный затемнитель
-        if (MySharedPreferences.get(context, "enable_background_user", false))
-            level = MySharedPreferences.get(context, "dark_darker_level", 30);
+        if (MySharedPreferences.INSTANCE.get(context, "enable_background_user", false))
+            level = MySharedPreferences.INSTANCE.get(context, "dark_darker_level", 30);
         return Color.argb((int) (level * 2.5), 0, 0, 0);
     }
 }

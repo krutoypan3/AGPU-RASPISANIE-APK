@@ -7,9 +7,9 @@ import android.os.Bundle;
 
 import android.widget.ListView;
 
-import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.R;
 
+import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp;
 
@@ -37,13 +37,13 @@ public class WidgetConfig extends Activity {
         ConfigWidgetListView.setOnItemClickListener((parent, view, position, id) -> // Обрабатываем нажатие на элементы списка
             {
                 // Добавляем информацию о выбранном элементе в таблицу базы данных с id виджета
-                selectedItem = sap.getGroupList().get(position).item;
+                selectedItem = sap.getGroupList().get(position).getItem();
                 selectedItem_type = sap.getGroupListType().toArray(new String[0])[position];
                 selectedItem_id = sap.getGroupListId().toArray(new String[0])[position];
 
-                MySharedPreferences.put(getApplicationContext(), awID + "_selected_item_id", selectedItem_id);
-                MySharedPreferences.put(getApplicationContext(), awID + "_selected_item_type", selectedItem_type);
-                MySharedPreferences.put(getApplicationContext(), awID + "_selected_item_name", selectedItem);
+                MySharedPreferences.INSTANCE.put(getApplicationContext(), awID + "_selected_item_id", selectedItem_id);
+                MySharedPreferences.INSTANCE.put(getApplicationContext(), awID + "_selected_item_type", selectedItem_type);
+                MySharedPreferences.INSTANCE.put(getApplicationContext(), awID + "_selected_item_name", selectedItem);
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, awID);

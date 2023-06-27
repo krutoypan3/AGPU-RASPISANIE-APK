@@ -27,7 +27,7 @@ public class Theme {
      * @param new_theme Id новой темы
      */
     public static void set(Context context, int new_theme){
-        MySharedPreferences.put(context, "currentTheme", new_theme);
+        MySharedPreferences.INSTANCE.put(context, "currentTheme", new_theme);
     }
 
     /**
@@ -36,7 +36,7 @@ public class Theme {
      * @return Id сохраненной темы
      */
      public static int get(Context context){
-         return MySharedPreferences.get(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+         return MySharedPreferences.INSTANCE.get(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
     }
 
     /**
@@ -46,7 +46,7 @@ public class Theme {
      * @return Id сохраненной темы
      */
     public static int getApplicationTheme(Context context){
-         int theme = MySharedPreferences.get(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+         int theme = MySharedPreferences.INSTANCE.get(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
          if (theme == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
              theme = getCurrentSystemTheme(context);
          return theme;

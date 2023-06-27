@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.CheckAppUpdate
 import ru.agpu.artikproject.background_work.CustomAlertDialog
-import ru.agpu.artikproject.background_work.debug.Device_info
+import ru.agpu.artikproject.background_work.debug.DeviceInfo
 import ru.agpu.artikproject.background_work.debug.LeaveReview
 import ru.agpu.artikproject.background_work.settings_layout.ficha.BackgroundDarkerListener
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaShow
@@ -94,7 +94,7 @@ class FragmentSettingsShow: Fragment(R.layout.fragment_main_activity_settings_sh
 
         val aboutVersionText = view.findViewById<TextView>(R.id.about_version_text)
         try {
-            var newVersionText = getString(R.string.app_name) + " " + Device_info.getAppVersion(view.context)
+            var newVersionText = getString(R.string.app_name) + " " + DeviceInfo.getAppVersion(view.context)
             if (CheckAppUpdate.app_have_update) {
                 newVersionText += " " + getString(R.string.an_update_is_available)
             }

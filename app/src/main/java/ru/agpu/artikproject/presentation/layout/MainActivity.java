@@ -155,9 +155,9 @@ public class MainActivity extends AppCompatActivity {
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 
         // Выгружаем данные о последнем открытом расписании в главное активити
-        selectedItem = MySharedPreferences.get(getApplicationContext(), "selectedItem", "");
-        selectedItem_type = MySharedPreferences.get(getApplicationContext(), "selectedItem_type", "");
-        selectedItem_id = MySharedPreferences.get(getApplicationContext(), "selectedItem_id", "");
+        selectedItem = MySharedPreferences.INSTANCE.get(getApplicationContext(), "selectedItem", "");
+        selectedItem_type = MySharedPreferences.INSTANCE.get(getApplicationContext(), "selectedItem_type", "");
+        selectedItem_id = MySharedPreferences.INSTANCE.get(getApplicationContext(), "selectedItem_id", "");
 
 
         Observable<Integer> observable = Observable.create(subscriber -> { // Создаем observable, который будет выполняться в отдельном потоке
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (!MySharedPreferences.get(getApplicationContext(), "IsFirstAppStart", true) && !Objects.equals(selectedItem, "")) {
+        if (!MySharedPreferences.INSTANCE.get(getApplicationContext(), "IsFirstAppStart", true) && !Objects.equals(selectedItem, "")) {
             IS_MAIN_SHOWED = false;
             FRAGMENT = BACK_TO_MAIN_SHOW;
             bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);

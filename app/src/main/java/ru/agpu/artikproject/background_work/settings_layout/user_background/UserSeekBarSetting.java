@@ -16,12 +16,12 @@ public class UserSeekBarSetting {
      */
     public UserSeekBarSetting(Activity act, SeekBar seekBar, boolean lightSeekBar) {
         if(lightSeekBar) { // Если ползунок светлый
-            int level = MySharedPreferences.get(act.getApplicationContext(), "light_darker_level", 30); // Получаем сохраненный уровень ползунка (если его нет, то ставим 30%)
+            int level = MySharedPreferences.INSTANCE.get(act.getApplicationContext(), "light_darker_level", 30); // Получаем сохраненный уровень ползунка (если его нет, то ставим 30%)
             seekBar.setProgress(level); // Устанавливаем полученый уровень
             act.findViewById(R.id.background_light_image_selector_darker).setBackgroundColor(Color.argb((int) (level * 2.5), 255, 255, 255)); // Затемняем мини-фон
         }
         else { // Если ползунок темный
-            int level = MySharedPreferences.get(act.getApplicationContext(), "dark_darker_level", 30); // Получаем сохраненный уровень ползунка (если его нет, то ставим 30%)
+            int level = MySharedPreferences.INSTANCE.get(act.getApplicationContext(), "dark_darker_level", 30); // Получаем сохраненный уровень ползунка (если его нет, то ставим 30%)
             seekBar.setProgress(level); // Устанавливаем полученый уровень
             act.findViewById(R.id.background_dark_image_selector_darker).setBackgroundColor(Color.argb((int) (level * 2.5), 0, 0, 0)); // Затемняем мини-фон
         }

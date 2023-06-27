@@ -14,7 +14,7 @@ public class UserBackgroundCheckBoxListener {
      */
     public UserBackgroundCheckBoxListener(Activity act, CheckBox userBackgroundCheckBox) {
         userBackgroundCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            MySharedPreferences.put(act.getApplicationContext(), "enable_background_user", isChecked);
+            MySharedPreferences.INSTANCE.put(act.getApplicationContext(), "enable_background_user", isChecked);
             new UserBackgroundCheckboxSetVisible(act, isChecked);
         });
     }

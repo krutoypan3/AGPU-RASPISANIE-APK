@@ -22,7 +22,7 @@ import java.io.IOException;
 
 import ru.agpu.artikproject.R;
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences;
-import ru.agpu.artikproject.background_work.debug.Device_info;
+import ru.agpu.artikproject.background_work.debug.DeviceInfo;
 
 public class ImageSelector extends Activity {
 
@@ -86,8 +86,8 @@ public class ImageSelector extends Activity {
 
                     // Подгоняем изображение под размер экрана
                     image = Bitmap.createScaledBitmap(image,
-                            Device_info.getDeviceWidth(getApplicationContext()),
-                            Device_info.getDeviceHeight(getApplicationContext()), false);
+                            DeviceInfo.INSTANCE.getDeviceWidth(getApplicationContext()),
+                            DeviceInfo.INSTANCE.getDeviceHeight(getApplicationContext()), false);
 
                     // Сжимаем изображение до 30% от исходного (вес картинки / 3)
                     ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -104,7 +104,7 @@ public class ImageSelector extends Activity {
                     File file = new File(getFilesDir(), type + ".jpg");
 
                     // И сохраняем путь к картинке в приложении
-                    MySharedPreferences.put(getApplicationContext(), type, file.getPath());
+                    MySharedPreferences.INSTANCE.put(getApplicationContext(), type, file.getPath());
 
                     Toast.makeText(getApplicationContext(), R.string.theme_apply, Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {

@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.Objects;
 
 import ru.agpu.artikproject.R;
-import ru.agpu.artikproject.background_work.debug.Device_info;
+import ru.agpu.artikproject.background_work.debug.DeviceInfo;
 
 
 public class CheckAppUpdate extends Thread {
@@ -61,7 +61,7 @@ public class CheckAppUpdate extends Thread {
             Object obj = new JSONParser().parse(ass);
             JSONObject jo = (JSONObject) obj;
             String newVersion = (String) Objects.requireNonNull(jo.get("tag_name"));
-            String currentVersion = Device_info.getAppVersion(act.getApplicationContext());
+            String currentVersion = DeviceInfo.INSTANCE.getAppVersion(act.getApplicationContext());
             if(!newVersion.equals(currentVersion)){ // Если версия приложения отличается от версии приложения на сервере
                 act.runOnUiThread(() -> {
                     ImageView update_btn = act.findViewById(R.id.update_btn);

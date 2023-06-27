@@ -12,7 +12,7 @@ public class UserBackgroundCheckBoxSetting{
      * @param userBackgroundCheckBox ЧекБокс
      */
     public UserBackgroundCheckBoxSetting(Activity act, CheckBox userBackgroundCheckBox) {
-        if (MySharedPreferences.get(act.getApplicationContext(), "enable_background_user", false)){
+        if (MySharedPreferences.INSTANCE.get(act.getApplicationContext(), "enable_background_user", false)){
             userBackgroundCheckBox.setChecked(true);
             new UserBackgroundCheckboxSetVisible(act, true);
         }

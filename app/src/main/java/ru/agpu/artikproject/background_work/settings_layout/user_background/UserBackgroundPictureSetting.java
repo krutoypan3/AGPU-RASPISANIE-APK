@@ -14,12 +14,12 @@ public class UserBackgroundPictureSetting {
      * @param userBackgroundDarkSelector Темный фон
      */
     public UserBackgroundPictureSetting(Activity act, ImageView userBackgroundLightSelector, ImageView userBackgroundDarkSelector){
-        String background_light = MySharedPreferences.get(act.getApplicationContext(), "background_light", "");
+        String background_light = MySharedPreferences.INSTANCE.get(act.getApplicationContext(), "background_light", "");
         if (!background_light.equals("")){ // Если светлая картинка есть
             userBackgroundLightSelector.setImageURI(null); // Без обнуления новая картинка не встанет
             userBackgroundLightSelector.setImageURI(Uri.parse(background_light)); // Установка новой картинки
         }
-        String background_dark = MySharedPreferences.get(act.getApplicationContext(), "background_dark", "");
+        String background_dark = MySharedPreferences.INSTANCE.get(act.getApplicationContext(), "background_dark", "");
         if (!background_dark.equals("")){ // Если темная картинка есть
             userBackgroundDarkSelector.setImageURI(null); // Без обнуления новая картинка не встанет
             userBackgroundDarkSelector.setImageURI(Uri.parse(background_dark)); // Установка новой картинки

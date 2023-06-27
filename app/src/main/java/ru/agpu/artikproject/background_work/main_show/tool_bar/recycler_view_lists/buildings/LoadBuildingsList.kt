@@ -7,7 +7,7 @@ import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewI
 class LoadBuildingsList(val act: Activity): Thread() {
 
     companion object {
-        var buildings_list: List<RecyclerViewItems>? = null
+        var buildings_list = listOf<RecyclerViewItems>()
 
         const val BUILDING_ZAOCHKA = 1
         const val BUILDING_SPF = 2

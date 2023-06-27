@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener
-import ru.agpu.artikproject.background_work.debug.Device_info
+import ru.agpu.artikproject.background_work.debug.DeviceInfo
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.background_work.theme.CustomBackground
@@ -60,7 +60,7 @@ class FragmentBuildingInfo : Fragment(R.layout.fragment_main_activity_building_i
         val bitmapDrawable: Drawable = BitmapDrawable(resources, bmp)
         val imageView = view.findViewById<ImageView>(R.id.cardViewAudImage_second) // Находим нашу вьюшку (ImageView) на слое
         Glide.with(view.context).load(pictureUrl)
-            .apply(RequestOptions().override(Device_info.getDeviceWidth(view.context), 960))
+            .apply(RequestOptions().override(DeviceInfo.getDeviceWidth(view.context), 960))
             .dontTransform()
             .placeholder(bitmapDrawable)
             .into(imageView)
