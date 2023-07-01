@@ -44,9 +44,9 @@ class UserSeekBarListener(act: Activity, seekBar: SeekBar, isLightSeekBar: Boole
             override fun onStopTrackingTouch(seekBar: SeekBar) {
                 // После того как пользователь отпустит ползунок, сохраняем новые значения затемнителя
                 if (isLightSeekBar) // Если светлый ползунок - сохраняем засветлитель
-                    MySharedPreferences.put(act.applicationContext, "light_darker_level", seekBar.progress)
+                    MySharedPreferences.putPref(act.applicationContext, "light_darker_level", seekBar.progress)
                 else  // Если темный ползунок - сохраняем затемнитель
-                    MySharedPreferences.put(act.applicationContext, "dark_darker_level", seekBar.progress)
+                    MySharedPreferences.putPref(act.applicationContext, "dark_darker_level", seekBar.progress)
             }
         })
     }

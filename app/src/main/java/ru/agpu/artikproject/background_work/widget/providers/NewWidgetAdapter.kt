@@ -102,7 +102,7 @@ class NewWidgetAdapter(val context: Context, intent: Intent) : RemoteViewsFactor
             val week_day = CurrentWeekDayGetUseCase(CurrentWeekDayImpl()).execute()
             val week_id = CurrentWeekIdGetUseCase(CurrentWeekIdImpl(context)).execute()
             val selectedItem_id =
-                MySharedPreferences.get(context, widgetID.toString() + "_selected_item_id", "")
+                MySharedPreferences.getPref(context, widgetID.toString() + "_selected_item_id", "")
             if (selectedItem_id != "") {
                 val r = DataBaseSqlite.getSqliteDatabase(context).rawQuery(
                     "SELECT * FROM raspisanie WHERE " +

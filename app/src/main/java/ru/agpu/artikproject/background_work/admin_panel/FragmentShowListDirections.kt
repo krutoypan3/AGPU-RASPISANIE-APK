@@ -14,8 +14,8 @@ class FragmentShowListDirections: Fragment(R.layout.fragment_admin_panel_show_li
         val openAllFichaCB = view.findViewById<CheckBox>(R.id.open_all_ficha)
         openAllFichaCB.setOnCheckedChangeListener { _, isChecked ->
             when(isChecked) {
-                true -> FichaAchievements.putAll(context)
-                false -> FichaAchievements.removeAll(context)
+                true -> FichaAchievements.putAllFicha(context)
+                false -> FichaAchievements.removeAllFicha(context)
             }
         }
     }

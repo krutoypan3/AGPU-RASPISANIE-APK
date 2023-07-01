@@ -20,7 +20,7 @@ class FichaShow(act: Activity) {
         val fichaCountTextTV = act.findViewById<TextView>(R.id.ficha_count_text)
         val fichaCountTV = act.findViewById<TextView>(R.id.ficha_count)
         val fichaNyanIV = act.findViewById<ImageView>(R.id.ficha_nyan)
-        val fichaCount = FichaAchievements.get(act.applicationContext)
+        val fichaCount = FichaAchievements.getFicha(act.applicationContext)
         if (fichaCount > 0) { // Если найдена хоть одна фича, делаем информацию о фичах видимой
             fichaCountTextTV.visibility = View.VISIBLE // Основной текст
             fichaCountTV.visibility = View.VISIBLE // Количество фич

@@ -22,6 +22,7 @@ import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener
 import ru.agpu.artikproject.background_work.debug.DeviceInfo
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap
+import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.background_work.theme.CustomBackground
 import ru.agpu.artikproject.presentation.layout.MainActivity
@@ -74,30 +75,12 @@ class FragmentBuildingInfo : Fragment(R.layout.fragment_main_activity_building_i
         // Отслеживание нажатий на иконку университета в тулбаре (фича)
         mainTextView.setOnClickListener {
             mainTextView.startAnimation(MainActivity.animScale)
-            val randomInt = Random().nextInt(30)
-            if (randomInt == 0) {
-                FichaAchievements.put(view.context, "ficha_building_main_text")
-                val audioManager = view.context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)
-                val mp = MediaPlayer.create(view.context, R.raw.amogus)
-                mp.start()
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://i.ibb.co/HFbRBrx/3.jpg"))
-                startActivity(intent)
-            }
+            FichaAchievements().playFichaBuildingMainText(view.context)
         }
         imageView.setOnTouchListener(object : OnSwipeTouchListener(view.context) {
             override fun onSwipeLeft() {
                 imageView.startAnimation(MainActivity.animUehalVl)
-                val randomInt = Random().nextInt(10)
-                if (randomInt == 0) {
-                    FichaAchievements.put(view.context, "ficha_building_ico")
-                    val audioManager = view.context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)
-                    val mp = MediaPlayer.create(view.context, R.raw.winx)
-                    mp.start()
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://i.ibb.co/rZvW4Mj/yao-min-65474631-orig.jpg"))
-                    startActivity(intent)
-                }
+                FichaAchievements().playFichaBuildingIco(view.context)
             }
         })
     }

@@ -97,9 +97,9 @@ public class WidgetProvider extends AppWidgetProvider {
         int week_id = new CurrentWeekIdGetUseCase(new CurrentWeekIdImpl(context)).execute();
 
         try{ // Получаем группу, по номеру виджета из базы данных
-            String selectedItem_name = MySharedPreferences.INSTANCE.get(context, appWidgetId + "_selected_item_name", "");
-            String selectedItem_id = MySharedPreferences.INSTANCE.get(context, appWidgetId + "_selected_item_id", "");
-            String selectedItem_type = MySharedPreferences.INSTANCE.get(context, appWidgetId + "_selected_item_type", "");
+            String selectedItem_name = MySharedPreferences.INSTANCE.getPref(context, appWidgetId + "_selected_item_name", "");
+            String selectedItem_id = MySharedPreferences.INSTANCE.getPref(context, appWidgetId + "_selected_item_id", "");
+            String selectedItem_type = MySharedPreferences.INSTANCE.getPref(context, appWidgetId + "_selected_item_type", "");
             if (!selectedItem_id.equals("")) {
                 if (CheckInternetConnection.INSTANCE.getState(context)){ // Обновляем расписание для этой группы
                     new GetRasp(selectedItem_id, selectedItem_type, selectedItem_name, week_id, context, "widget").start();
@@ -150,9 +150,9 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     public static void deleteWidget(Context context, int[] appWidgetIds){
-        MySharedPreferences.INSTANCE.remove(context, appWidgetIds[0] + "_selected_item_id");
-        MySharedPreferences.INSTANCE.remove(context, appWidgetIds[0] + "_selected_item_name");
-        MySharedPreferences.INSTANCE.remove(context, appWidgetIds[0] + "_selected_item_type");
+        MySharedPreferences.INSTANCE.removePref(context, appWidgetIds[0] + "_selected_item_id");
+        MySharedPreferences.INSTANCE.removePref(context, appWidgetIds[0] + "_selected_item_name");
+        MySharedPreferences.INSTANCE.removePref(context, appWidgetIds[0] + "_selected_item_type");
         Toast.makeText(context, "Были рады помочь вам!", Toast.LENGTH_SHORT).show();
     }
 

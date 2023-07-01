@@ -1,9 +1,6 @@
 package ru.agpu.artikproject.background_work.main_show
 
 import android.app.Activity
-import android.content.Context
-import android.media.AudioManager
-import android.media.MediaPlayer
 import android.view.MenuItem
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,9 +13,7 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSchedule
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSettingsShow
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
-import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements.Companion.put
 import ru.agpu.artikproject.presentation.layout.MainActivity
-import java.util.Random
 
 class BottomNavigationViewListener(activity: Activity) {
     init {
@@ -30,13 +25,7 @@ class BottomNavigationViewListener(activity: Activity) {
         bottomNavigationView.setOnItemReselectedListener { item: MenuItem ->
             when (item.itemId) {
                 R.id.details_page_Home_page -> if (MainActivity.IS_MAIN_SHOWED) {
-                    if (Random().nextInt(30) == 0) {
-                        put(activity, FichaAchievements.FICHA_GO_TO_HOME)
-                        val audioManager = activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-                        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)
-                        val mp: MediaPlayer = MediaPlayer.create(activity, R.raw.luntik_i_kloun)
-                        mp.start()
-                    }
+                    FichaAchievements().playFichaGoToHome(activity)
                 }
             }
         }

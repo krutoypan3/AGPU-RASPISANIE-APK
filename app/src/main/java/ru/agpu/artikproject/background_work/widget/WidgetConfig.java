@@ -41,9 +41,9 @@ public class WidgetConfig extends Activity {
                 selectedItem_type = sap.getGroupListType().toArray(new String[0])[position];
                 selectedItem_id = sap.getGroupListId().toArray(new String[0])[position];
 
-                MySharedPreferences.INSTANCE.put(getApplicationContext(), awID + "_selected_item_id", selectedItem_id);
-                MySharedPreferences.INSTANCE.put(getApplicationContext(), awID + "_selected_item_type", selectedItem_type);
-                MySharedPreferences.INSTANCE.put(getApplicationContext(), awID + "_selected_item_name", selectedItem);
+                MySharedPreferences.INSTANCE.putPref(getApplicationContext(), awID + "_selected_item_id", selectedItem_id);
+                MySharedPreferences.INSTANCE.putPref(getApplicationContext(), awID + "_selected_item_type", selectedItem_type);
+                MySharedPreferences.INSTANCE.putPref(getApplicationContext(), awID + "_selected_item_name", selectedItem);
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, awID);

@@ -22,7 +22,7 @@ object CustomBackground {
      */
     fun getBackground(context: Context): Drawable? {
         val theme = Theme.getApplicationTheme(context) // Получаем тему приложения
-        if (MySharedPreferences[context, "enable_background_user", false]) { // Если включен пользовательский фон
+        if (MySharedPreferences.getPref(context, "enable_background_user", false)) { // Если включен пользовательский фон
             return if (theme == AppCompatDelegate.MODE_NIGHT_NO)
                 getBackgroundDrawable(context, "background_light") // Если светлая, то возвращаем светлый фон
             else
@@ -64,7 +64,7 @@ object CustomBackground {
 
     // Микрофункция возвращающая картинку в зависимости от темы
     private fun getBackgroundDrawable(context: Context, background_type: String): Drawable? {
-        val file = File(MySharedPreferences[context, background_type, ""]) // Получаем картинку фона
+        val file = File(MySharedPreferences.getPref(context, background_type, "")) // Получаем картинку фона
         if (file != File("")) { // Если путь к файлу не пустой, то возвращаем картинку
             return BitmapDrawable(context.resources, BitmapFactory.decodeFile(file.absolutePath))
         } // Если файл пустой - возвращаем стандартные обои
@@ -78,12 +78,12 @@ object CustomBackground {
     private fun getBackgroundDarkerColor(context: Context, lightDarker: Boolean): Int {
         var level = 30
         if (lightDarker) { // Если тема светлая, то возвращаем светлый затемнитель
-            if (MySharedPreferences[context, "enable_background_user", false])
-                level = MySharedPreferences[context, "light_darker_level", 30]
+            if (MySharedPreferences.getPref(context, "enable_background_user", false))
+                level = MySharedPreferences.getPref(context, "light_darker_level", 30)
             return Color.argb((level * 2.5).toInt(), 255, 255, 255)
         } // Если тема темная, то возвращаем темный затемнитель
-        if (MySharedPreferences[context, "enable_background_user", false])
-            level = MySharedPreferences[context, "dark_darker_level", 30]
+        if (MySharedPreferences.getPref(context, "enable_background_user", false))
+            level = MySharedPreferences.getPref(context, "dark_darker_level", 30)
         return Color.argb((level * 2.5).toInt(), 0, 0, 0)
     }
 }

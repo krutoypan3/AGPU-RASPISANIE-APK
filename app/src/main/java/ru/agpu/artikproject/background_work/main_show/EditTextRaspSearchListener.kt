@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import ru.agpu.artikproject.background_work.CheckInternetConnection
+import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.background_work.site_parse.GetGroupListSearch
 
 /**
@@ -27,7 +28,7 @@ class EditTextRaspSearchListener(act: Activity, editText: EditText) {
                         GetGroupListSearch(urlq, act).start() // Отправляем запрос на сервер и выводим получившийся список
                     }
                     if (editText.text.toString().equals("рикардо", ignoreCase = true)) {
-                        FichaRicardo(act)
+                        FichaAchievements().playFichaRicardo(act)
                     }
                 } else {
                     WatchSaveGroupRasp(act)

@@ -17,12 +17,12 @@ class UserBackgroundPictureSetting(
     userBackgroundDarkSelector: ImageView
 ) {
     init {
-        val backgroundLight = MySharedPreferences[act.applicationContext, "background_light", ""]
+        val backgroundLight = MySharedPreferences.getPref(act.applicationContext, "background_light", "")
         if (backgroundLight != "") { // Если светлая картинка есть
             userBackgroundLightSelector.setImageURI(null) // Без обнуления новая картинка не встанет
             userBackgroundLightSelector.setImageURI(Uri.parse(backgroundLight)) // Установка новой картинки
         }
-        val backgroundDark = MySharedPreferences[act.applicationContext, "background_dark", ""]
+        val backgroundDark = MySharedPreferences.getPref(act.applicationContext, "background_dark", "")
         if (backgroundDark != "") { // Если темная картинка есть
             userBackgroundDarkSelector.setImageURI(null) // Без обнуления новая картинка не встанет
             userBackgroundDarkSelector.setImageURI(Uri.parse(backgroundDark)) // Установка новой картинки

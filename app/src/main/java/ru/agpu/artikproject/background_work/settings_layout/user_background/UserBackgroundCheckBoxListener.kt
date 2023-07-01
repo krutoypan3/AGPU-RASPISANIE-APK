@@ -14,7 +14,7 @@ import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 class UserBackgroundCheckBoxListener(act: Activity, userBackgroundCheckBox: CheckBox) {
     init {
         userBackgroundCheckBox.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            MySharedPreferences.put(act.applicationContext, "enable_background_user", isChecked)
+            MySharedPreferences.putPref(act.applicationContext, "enable_background_user", isChecked)
             UserBackgroundCheckboxSetVisible(act, isChecked)
         }
     }

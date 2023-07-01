@@ -18,6 +18,7 @@ import ru.agpu.artikproject.background_work.rasp_show.RefreshRaspWeekOrDayStarte
 import ru.agpu.artikproject.background_work.rasp_show.SwipeRasp
 import ru.agpu.artikproject.background_work.rasp_show.WeekDayChange
 import ru.agpu.artikproject.background_work.rasp_show.WeekShowResize
+import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.presentation.layout.MainActivity
 import java.util.Random
@@ -39,9 +40,9 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         super.onViewCreated(view, savedInstanceState)
 
         // Сохраняем последнее открытое расписание
-        MySharedPreferences.put(view.context, "selectedItem", MainActivity.selectedItem)
-        MySharedPreferences.put(view.context, "selectedItem_type", MainActivity.selectedItem_type)
-        MySharedPreferences.put(view.context, "selectedItem_id", MainActivity.selectedItem_id)
+        MySharedPreferences.putPref(view.context, "selectedItem", MainActivity.selectedItem)
+        MySharedPreferences.putPref(view.context, "selectedItem_type", MainActivity.selectedItem_type)
+        MySharedPreferences.putPref(view.context, "selectedItem_id", MainActivity.selectedItem_id)
 
         val weekDayBt1 = view.findViewById<Button>(R.id.week_day_bt1) // Кнопка перехода к предыдущему дню
         val weekDayBt2 = view.findViewById<Button>(R.id.week_day_bt2) // Кнопка перехода к следующему дню
@@ -90,16 +91,7 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         refreshBtn.setOnClickListener { SwipeRasp("Bottom", view) }
 
         refreshBtnFicha.setOnClickListener {
-            when (Random().nextInt(4)) {
-                0 -> {
-                    raspisanieShowLayout.startAnimation(MainActivity.animRotate_ok)
-                    FichaAchievements.put(view.context, "ficha_refresh")
-                }
-
-                1 -> raspisanieShowLayout.startAnimation(MainActivity.animScale)
-                2 -> raspisanieShowLayout.startAnimation(MainActivity.animUehalVl)
-                3 -> raspisanieShowLayout.startAnimation(MainActivity.animUehalVp)
-            }
+            FichaAchievements().playFichaRefresh(view.context, raspisanieShowLayout)
         }
 
         // Смена недельного режима и дневного

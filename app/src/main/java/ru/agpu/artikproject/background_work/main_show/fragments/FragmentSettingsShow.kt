@@ -15,7 +15,6 @@ import ru.agpu.artikproject.background_work.CheckAppUpdate
 import ru.agpu.artikproject.background_work.CustomAlertDialog
 import ru.agpu.artikproject.background_work.debug.DeviceInfo
 import ru.agpu.artikproject.background_work.debug.LeaveReview
-import ru.agpu.artikproject.background_work.settings_layout.ficha.BackgroundDarkerListener
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaShow
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.background_work.settings_layout.theme_radio_group.ThemeRadioButtonSetting
@@ -73,8 +72,8 @@ class FragmentSettingsShow: Fragment(R.layout.fragment_main_activity_settings_sh
         // Прослушка изменения ползунка темного затемнителя
         UserSeekBarListener(activity, view.findViewById(R.id.seekBarDark), false)
 
-        // Прослушка нажатий на BackgroundDarker
-        BackgroundDarkerListener(activity)
+        // Прослушка нажатий на BackgroundDarker (Ficha Settings Logo)
+        FichaAchievements().playSettingsLogoFicha(activity)
 
         // Прослушка нажатий на userBackgroundLightSelector
         UserBackgroundSelectorListener(activity, userBackgroundLightSelector, "background_light")

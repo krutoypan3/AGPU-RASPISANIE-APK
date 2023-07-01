@@ -1,16 +1,10 @@
 package ru.agpu.artikproject.background_work.rasp_show
 
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.graphics.drawable.GradientDrawable
-import android.media.AudioManager
-import android.media.MediaPlayer
-import android.net.Uri
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
-import com.bumptech.glide.Glide
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.CustomAlertDialog
 import ru.agpu.artikproject.background_work.GetCorpFromAudNumber
@@ -18,9 +12,8 @@ import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
 import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite.Companion.getSqliteDatabase
 import ru.agpu.artikproject.background_work.rasp_show.recycler_view.DayShowRVItems
-import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements.Companion.put
+import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.presentation.layout.MainActivity
-import java.util.Random
 
 class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
 
@@ -94,26 +87,7 @@ class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
                                  sss.contains("экзамен") ||
                                  sss.contains("зачет") ||
                                  sss.contains("зачёт"))
-                            ) {
-                                put(act.applicationContext, "ficha_god")
-                                val cdd2 = CustomAlertDialog(act, "para_pasha")
-                                cdd2.show()
-                                cdd2.window!!.setBackgroundDrawableResource(android.R.color.transparent)
-                                cdd2.findViewById<View>(R.id.scrollViewCustom).background = shape
-                                val molitva = ArrayList<ListViewItems>()
-                                molitva.add(ListViewItems("Да восвятится имя твое"))
-                                molitva.add(ListViewItems("Да покаешься ты в грехах своих"))
-                                molitva.add(ListViewItems("Да закроешь ты сессию эту"))
-                                val adapter2 = ListViewAdapter(act.applicationContext, molitva)
-                                cdd2.list_view.adapter = adapter2
-                                Glide.with(act).load("https://i.ibb.co/4pqtKcY/ficha-god.png")
-                                    .into(cdd2.para_info_photo)
-                                val audioManager = act.applicationContext
-                                    .getSystemService(Context.AUDIO_SERVICE) as AudioManager
-                                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)
-                                val mp = MediaPlayer.create(act, R.raw.ficha_god)
-                                mp.start()
-                            }
+                            ) { FichaAchievements().playFichaGod(act, shape) }
                         }
 
                         3 -> {
@@ -134,15 +108,7 @@ class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
 
                             // Этот блок кода созда исключительно в развлекательных целях и не несет в себе цель кого-то задеть или обидеть
                             if ((sss == "Лапшин Н.А.")) {
-                                if (Random().nextInt(5) == 0) { put(act.applicationContext, "ficha_para_lapshin")
-                                    val audioManager: AudioManager = act.applicationContext
-                                        .getSystemService(Context.AUDIO_SERVICE) as AudioManager
-                                    audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)
-                                    val mp = MediaPlayer.create(act, R.raw.povezlo_povezlo)
-                                    mp.start()
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://i.ibb.co/jLRpZ1B/2022-04-29-203438.png"))
-                                    act.startActivity(intent)
-                                }
+                                FichaAchievements().playFichaLapshin(act)
                             }
                         }
                     }

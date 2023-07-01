@@ -10,9 +10,9 @@ import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 import ru.agpu.artikproject.background_work.main_show.ChangeDay
 import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearchListener
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener
-import ru.agpu.artikproject.background_work.main_show.TodayClickListener
 import ru.agpu.artikproject.background_work.main_show.UpdateDateInMainActivity
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp
+import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.presentation.layout.MainActivity
 
 class FragmentMainShow: Fragment(R.layout.fragment_main_activity_main_show) {
@@ -20,8 +20,8 @@ class FragmentMainShow: Fragment(R.layout.fragment_main_activity_main_show) {
         super.onViewCreated(view, savedInstanceState)
         val activity = view.context as Activity
 
-        // Прослушка нажатий на текущую дату
-        TodayClickListener(activity, view.findViewById(R.id.main_activity_text))
+        // Прослушка нажатий на текущую дату (Ficha Today)
+        FichaAchievements().playFichaToday(activity, view.findViewById(R.id.main_activity_text))
 
         // Отслеживание нажатий и зажатий на список групп и аудиторий
         ListViewGroupListener(activity, view.findViewById(R.id.listview))
@@ -40,8 +40,8 @@ class FragmentMainShow: Fragment(R.layout.fragment_main_activity_main_show) {
             ChangeDay(activity).setDate()
             it.startAnimation(MainActivity.animScale)
         }
-        if (MySharedPreferences[context, "IsFirstAppStart", true]) {
-            MySharedPreferences.put(context, "IsFirstAppStart", false)
+        if (MySharedPreferences.getPref(context, "IsFirstAppStart", true)) {
+            MySharedPreferences.putPref(context, "IsFirstAppStart", false)
             FirstAppStartHelper(view.context as Activity)
         }
     }

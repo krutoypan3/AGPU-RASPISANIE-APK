@@ -40,7 +40,7 @@ class FragmentLoginFirebase: Fragment(R.layout.fragment_admin_panel_login_fireba
                 if ((loginFirebaseText == "") || (passwordFirebaseText == "")) // Выводим сообщение об ошибке
                     Toast.makeText(view.context, R.string.Error, Toast.LENGTH_SHORT).show()
                 else if (loginFirebaseText.lowercase() == "admin" && passwordFirebaseText.lowercase() == "admin") {
-                    FichaAchievements().playAdminFicha(act)
+                    FichaAchievements().playFichaAdmin(act)
                 } else { // Авторизируемся в системе по логину и паролю
                     mAuth.signInWithEmailAndPassword(loginFirebaseText, passwordFirebaseText)
                         .addOnCompleteListener(act) { task ->

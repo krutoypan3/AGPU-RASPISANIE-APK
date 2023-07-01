@@ -11,7 +11,7 @@ import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
  */
 class UserBackgroundCheckBoxSetting(act: Activity, userBackgroundCheckBox: CheckBox) {
     init {
-        if (MySharedPreferences[act.applicationContext, "enable_background_user", false]) {
+        if (MySharedPreferences.getPref(act.applicationContext, "enable_background_user", false)) {
             userBackgroundCheckBox.isChecked = true
             UserBackgroundCheckboxSetVisible(act, true)
         }

@@ -13,7 +13,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.background_work.datebase.MySharedPreferences.put
+import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 import ru.agpu.artikproject.background_work.debug.DeviceInfo.getDeviceHeight
 import ru.agpu.artikproject.background_work.debug.DeviceInfo.getDeviceWidth
 import java.io.ByteArrayInputStream
@@ -108,7 +108,7 @@ class ImageSelector: Activity() {
                     val file = File(filesDir, "$type.jpg")
 
                     // И сохраняем путь к картинке в приложении
-                    put(applicationContext, type, file.path)
+                    MySharedPreferences.putPref(applicationContext, type, file.path)
                     Toast.makeText(applicationContext, R.string.theme_apply, Toast.LENGTH_SHORT).show()
                 } catch (e: Exception) {
                     Toast.makeText(applicationContext, R.string.Error_image_selection, Toast.LENGTH_SHORT).show()

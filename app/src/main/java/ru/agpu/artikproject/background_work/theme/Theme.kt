@@ -24,7 +24,7 @@ object Theme {
      * @param new_theme Id новой темы
      */
     operator fun set(context: Context?, new_theme: Int) {
-        MySharedPreferences.put(context, "currentTheme", new_theme)
+        MySharedPreferences.putPref(context, "currentTheme", new_theme)
     }
 
     /**
@@ -33,7 +33,7 @@ object Theme {
      * @return Id сохраненной темы
      */
     operator fun get(context: Context?): Int {
-        return MySharedPreferences[context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM]
+        return MySharedPreferences.getPref(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
     }
 
     /**
@@ -43,7 +43,7 @@ object Theme {
      * @return Id сохраненной темы
      */
     fun getApplicationTheme(context: Context): Int {
-        var theme = MySharedPreferences[context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM]
+        var theme = MySharedPreferences.getPref(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         if (theme == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             theme = getCurrentSystemTheme(context)
         return theme

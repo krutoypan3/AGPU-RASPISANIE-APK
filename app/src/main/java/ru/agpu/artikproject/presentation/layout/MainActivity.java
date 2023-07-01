@@ -34,6 +34,7 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecycler
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow;
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty;
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList;
+import ru.agpu.artikproject.background_work.service.PlayService;
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements;
 import ru.agpu.artikproject.background_work.site_parse.GetRasp;
 import ru.agpu.artikproject.background_work.theme.CustomBackground;
@@ -154,9 +155,9 @@ public class MainActivity extends AppCompatActivity {
         startService(new Intent(getApplicationContext(), PlayService.class)); // ЗАПУСК СЛУЖБЫ
 
         // Выгружаем данные о последнем открытом расписании в главное активити
-        selectedItem = MySharedPreferences.INSTANCE.get(getApplicationContext(), "selectedItem", "");
-        selectedItem_type = MySharedPreferences.INSTANCE.get(getApplicationContext(), "selectedItem_type", "");
-        selectedItem_id = MySharedPreferences.INSTANCE.get(getApplicationContext(), "selectedItem_id", "");
+        selectedItem = MySharedPreferences.INSTANCE.getPref(getApplicationContext(), "selectedItem", "");
+        selectedItem_type = MySharedPreferences.INSTANCE.getPref(getApplicationContext(), "selectedItem_type", "");
+        selectedItem_id = MySharedPreferences.INSTANCE.getPref(getApplicationContext(), "selectedItem_id", "");
 
 
         Observable<Integer> observable = Observable.create(subscriber -> { // Создаем observable, который будет выполняться в отдельном потоке
@@ -184,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (!MySharedPreferences.INSTANCE.get(getApplicationContext(), "IsFirstAppStart", true) && !Objects.equals(selectedItem, "")) {
+        if (!MySharedPreferences.INSTANCE.getPref(getApplicationContext(), "IsFirstAppStart", true) && !Objects.equals(selectedItem, "")) {
             IS_MAIN_SHOWED = false;
             FRAGMENT = BACK_TO_MAIN_SHOW;
             bottomNavigationView.setSelectedItemId(R.id.details_page_Schedule);

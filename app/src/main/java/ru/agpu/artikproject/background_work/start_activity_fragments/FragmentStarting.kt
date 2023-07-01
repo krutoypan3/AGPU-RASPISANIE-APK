@@ -24,7 +24,7 @@ class FragmentStarting: Fragment(R.layout.fragment_start_activity_starting) {
         super.onViewCreated(view, savedInstanceState)
 
         // Если это первый запуск приложения
-        if (MySharedPreferences.get(context, "IsFirstAppStart", true)) {
+        if (MySharedPreferences.getPref(context, "IsFirstAppStart", true)) {
             GetDirectionsList().getDirectionsFromFirebase()
             // Запускаем фрагмент с приветствием
             parentFragmentManager.beginTransaction().replace(
