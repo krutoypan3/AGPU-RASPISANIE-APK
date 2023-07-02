@@ -113,13 +113,13 @@ class GetRasp(
                                 if (paraList.isEmpty()) {
                                     raspisanieList.add(raspisanie)
                                 } else {
-                                    if (predmetName == paraList.first().paraName &&
-                                        predmetPrepod == paraList.first().paraPrepod &&
-                                        predmetDistant == paraList.first().paraDistant &&
-                                        predmetGroup == paraList.first().paraGroup &&
-                                        predmetPodgroup == paraList.first().paraPodgroup &&
-                                        predmetAud == paraList.first().paraAud &&
-                                        predmetTime == paraList.first().paraRazmer
+                                    if (predmetName != paraList.first().paraName ||
+                                        predmetPrepod != paraList.first().paraPrepod ||
+                                        predmetDistant != paraList.first().paraDistant ||
+                                        predmetGroup != paraList.first().paraGroup ||
+                                        predmetPodgroup != paraList.first().paraPodgroup ||
+                                        predmetAud != paraList.first().paraAud ||
+                                        predmetTime != paraList.first().paraRazmer
                                     ) {
                                         raspisanieRepository.deletePara(paraList)
                                         raspisanieList.add(raspisanie)
