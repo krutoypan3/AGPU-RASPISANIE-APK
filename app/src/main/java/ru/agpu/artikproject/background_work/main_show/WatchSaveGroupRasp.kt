@@ -7,7 +7,6 @@ import android.widget.TextView
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
-import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite
 import ru.agpu.artikproject.background_work.datebase.Raspisanie
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
 import ru.agpu.artikproject.presentation.layout.MainActivity
@@ -25,36 +24,34 @@ class WatchSaveGroupRasp(context: Context, widget: Boolean? = null) {
 
     init {
         val raspisanieRepository = RaspisanieRepository()
-        DataBaseSqlite.withSQLiteDataBase(context) {
-            raspisanie = raspisanieRepository.getAll()
-            if (widget == true) {
-                if (raspisanie.isNotEmpty()) {
-                    watch()
-                }
-            } else {
-                val act = context as Activity
-                val listview = act.findViewById<ListView>(R.id.listview)
-                val result = act.findViewById<TextView>(R.id.result)
+        raspisanie = raspisanieRepository.getAll()
+        if (widget == true) {
+            if (raspisanie.isNotEmpty()) {
+                watch()
+            }
+        } else {
+            val act = context as Activity
+            val listview = act.findViewById<ListView>(R.id.listview)
+            val result = act.findViewById<TextView>(R.id.result)
 
-                if (raspisanie.isNotEmpty()) {
-                    watch()
-                    MainActivity.group_listed = groupList
-                    MainActivity.group_listed_type = groupListType.toTypedArray()
-                    MainActivity.group_listed_id = groupListId.toTypedArray()
-                } // Вывод SELECT запроса
-                act.runOnUiThread {
-                    try {
-                        if (MainActivity.group_listed == null || raspisanie.isEmpty()) {
-                            result.setText(R.string.no_saved_group)
-                        } else {
-                            val adapter =
-                                ListViewAdapter(act.applicationContext, MainActivity.group_listed)
-                            listview.adapter = adapter
-                            result.text = ""
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
+            if (raspisanie.isNotEmpty()) {
+                watch()
+                MainActivity.group_listed = groupList
+                MainActivity.group_listed_type = groupListType.toTypedArray()
+                MainActivity.group_listed_id = groupListId.toTypedArray()
+            }
+            act.runOnUiThread {
+                try {
+                    if (MainActivity.group_listed == null || raspisanie.isEmpty()) {
+                        result.setText(R.string.no_saved_group)
+                    } else {
+                        val adapter =
+                            ListViewAdapter(act.applicationContext, MainActivity.group_listed)
+                        listview.adapter = adapter
+                        result.text = ""
                     }
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
         }
