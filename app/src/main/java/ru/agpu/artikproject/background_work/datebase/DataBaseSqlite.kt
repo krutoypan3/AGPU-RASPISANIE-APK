@@ -1,17 +1,18 @@
 package ru.agpu.artikproject.background_work.datebase
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import java.lang.ref.WeakReference
+import java.util.UUID
 
 /**
  * Класс отвечающий за первичное создание \ подключение к локальной базе данных
  *
  * @param context Контекст приложения
  */
-class DataBaseSqlite(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DataBaseSqlite(val context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     override fun onCreate(sqLiteDatabase: SQLiteDatabase) {
         createDB(sqLiteDatabase)
     }
@@ -103,17 +104,45 @@ class DataBaseSqlite(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAM
         }
     }
 
+    fun init() {
+        updateDbContext(context = this.context)
+    }
+
     companion object {
-        private val DATABASE_NAME = "raspisanie.db"
-        val TABLE_NAME_SEMANTIC_GROUP = "semantic_group"
-        private val DATABASE_VERSION = 8
+        private const val DATABASE_NAME = "raspisanie.db"
+        private const val DATABASE_VERSION = 8
+        const val TABLE_NAME_SEMANTIC_GROUP = "semantic_group"
 
         private var sqLiteDatabase: SQLiteDatabase? = null
             @Synchronized get
             @Synchronized set
 
-        private var dbContext: WeakReference<Context?> = WeakReference(null)
+        var dbContext: WeakReference<Context?> = WeakReference(null)
 
+        private fun updateDbContext(context: Context?) {
+            if (dbContext.get() == null) {
+                dbContext = WeakReference(context)
+            }
+        }
+
+        /**
+         * Это переехало в BaseRepository (Нужно будет удалить отсюда, когда все будет сделано через репозитории)
+         */
+        fun <T> withSQLiteDataBase(context: Context? = null, db: (sqLiteDatabase: SQLiteDatabase) -> T): T {
+            updateDbContext(context)
+            var sqlite: SQLiteDatabase? = null
+            val hashTest = UUID.randomUUID().toString()
+            try {
+                println("OpenDb -> $hashTest")
+                sqlite = DataBaseSqlite(context ?: dbContext.get()).writableDatabase
+                return db(sqlite)
+            } finally {
+                println("CloseDb <- $hashTest")
+                sqlite?.close()
+            }
+        }
+
+        @Deprecated("Заменено на лямбда функцию withSQLiteDataBase. Kotlin only")
         @Synchronized
         fun getSqliteDatabase(context: Context? = null): SQLiteDatabase {
             sqLiteDatabase = DataBaseSqlite(context ?: dbContext.get()).writableDatabase

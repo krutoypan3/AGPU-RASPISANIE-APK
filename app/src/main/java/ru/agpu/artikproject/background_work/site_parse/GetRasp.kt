@@ -100,13 +100,14 @@ class GetRasp(
                                          paraDistant = predmetDistant,
                                     )
 
-                                    val paraList = raspisanieRepository.getParaByParams(
+                                    val paraList = raspisanieRepository.getParaByParams(Raspisanie(
                                         groupCode = selectedItemId.toInt(),
                                         weekNumber = weekIdUpd + weekNumberOffset,
                                         weekDay = weekDay,
                                         paraNumber = paraNumber,
                                         searchType = selectedItemType,
-                                    )
+                                    ))
+
 
                                     if (paraList.isEmpty()) {
                                         raspisanieRepository.saveRaspisanie(raspisanie)

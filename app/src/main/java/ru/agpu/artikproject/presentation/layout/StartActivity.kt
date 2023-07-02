@@ -55,7 +55,7 @@ class StartActivity : AppCompatActivity() {
         // --------------------------------------------------------------------------
 
 
-        DataBaseSqlite.getSqliteDatabase(applicationContext) // Подключаемся к базе данных
+        DataBaseSqlite.withSQLiteDataBase(applicationContext) {} // Подключаемся к базе данных
         Theme.setting(this) // Применяем тему к приложению
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_activity)

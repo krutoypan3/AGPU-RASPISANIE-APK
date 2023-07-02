@@ -6,10 +6,10 @@ import android.content.Intent
 import android.graphics.*
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService.RemoteViewsFactory
-import androidx.core.database.getStringOrNull
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
+import ru.agpu.artikproject.background_work.datebase.Raspisanie
+import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
 import ru.agpu.artikproject.background_work.image_utils.RoundedCornersUtil
 import ru.agpu.artikproject.background_work.theme.ColorChanger
 import ru.agpu.artikproject.background_work.widget.WidgetGridViewItem
@@ -99,31 +99,30 @@ class NewWidgetAdapter(val context: Context, intent: Intent) : RemoteViewsFactor
     override fun onDataSetChanged() {
         try {
             data.clear() // Обнуляем список
-            val week_day = CurrentWeekDayGetUseCase(CurrentWeekDayImpl()).execute()
-            val week_id = CurrentWeekIdGetUseCase(CurrentWeekIdImpl(context)).execute()
-            val selectedItem_id =
-                MySharedPreferences.getPref(context, widgetID.toString() + "_selected_item_id", "")
-            if (selectedItem_id != "") {
-                val r = DataBaseSqlite.getSqliteDatabase(context).rawQuery(
-                    "SELECT * FROM raspisanie WHERE " +
-                            "r_group_code = " + selectedItem_id + " AND " +
-                            "r_week_number = " + week_id + " AND " +
-                            "r_week_day = " + week_day + " ORDER BY r_para_number", null
-                )
-                if (r.count != 0) {
+            val weekDay = CurrentWeekDayGetUseCase(CurrentWeekDayImpl()).execute()
+            val weekId = CurrentWeekIdGetUseCase(CurrentWeekIdImpl(context)).execute()
+            val selectedItemId = MySharedPreferences.getPref(context, widgetID.toString() + "_selected_item_id", "")
+            if (selectedItemId != "") {
+                val raspisanieRepository = RaspisanieRepository()
+                val raspisanie = raspisanieRepository.getParaByParams(Raspisanie(
+                    groupCode = selectedItemId.toIntOrNull(),
+                    weekNumber = weekId,
+                    weekDay = weekDay,
+                )).sortedBy { it.paraNumber }
+
+                if (raspisanie.isNotEmpty()) {
                     var str: String
-                    r.moveToFirst()
-                    do {
+                    raspisanie.forEach { r ->
                         str = ""
-                        if (r.getString(4) != null) {
+                        if (r.paraName != null) {
+                            r.paraName?.let { str += it }
+                            r.paraPrepod?.let { str += it }
+                            r.paraGroup?.let { str += it }
+                            r.paraPodgroup?.let { str += it }
+                            r.paraDistant?.let { str += it }
+                            str = str.trimIndent()
 
-                            if (r.getString(5) != null) str += r.getString(5).trimIndent()
-                            if (r.getString(6) != null) str += r.getString(6).trimIndent()
-                            if (r.getString(7) != null) str += r.getString(7).trimIndent()
-                            if (r.getString(8) != null) str += r.getString(8).trimIndent()
-                            if (r.getString(15) != null) str += r.getString(15).trimIndent()
-
-                            val timeRange = r.getString(9)
+                            val timeRange = r.paraRazmer ?: ""
                             val newTimeRange = timeRange.trimIndent().split("-")[0] +
                                     "\n\n\n\n" + timeRange.trimIndent().split("-")[1]
 
@@ -132,15 +131,15 @@ class NewWidgetAdapter(val context: Context, intent: Intent) : RemoteViewsFactor
                                 timeRange = newTimeRange,
                                 separator = 0,
                                 backgroundConstraint = Color.parseColor(
-                                    r.getStringOrNull(14) ?: CONSTRAINT_BACKGROUND_DEFAULT
+                                    r.paraColor ?: CONSTRAINT_BACKGROUND_DEFAULT
                                 ),
-                                itemName = r.getStringOrNull(4)?.trimIndent() ?: PARA_NAME_DEFAULT,
+                                itemName = r.paraName?.trimIndent() ?: PARA_NAME_DEFAULT,
                                 itemPrepodAndTime = str,
-                                itemGroup = r.getStringOrNull(6)?.trimIndent() ?: GROUP_NAME_DEFAULT
+                                itemGroup = r.paraGroup?.trimIndent() ?: GROUP_NAME_DEFAULT
                             )
                             data.add(currentItem)
                         }
-                    } while (r.moveToNext())
+                    }
                     if (data.isEmpty()) {
                         data.add(
                             WidgetGridViewItem(
