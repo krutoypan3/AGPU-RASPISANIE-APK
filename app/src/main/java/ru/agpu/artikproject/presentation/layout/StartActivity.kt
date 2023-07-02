@@ -1,6 +1,5 @@
 package ru.agpu.artikproject.presentation.layout
 
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.realm.Realm
@@ -55,7 +54,7 @@ class StartActivity : AppCompatActivity() {
         // --------------------------------------------------------------------------
 
 
-        DataBaseSqlite.withSQLiteDataBase(applicationContext) {} // Подключаемся к базе данных
+        DataBaseSqlite(applicationContext).init() // Подключаемся к базе данных
         Theme.setting(this) // Применяем тему к приложению
         super.onCreate(savedInstanceState)
         setContentView(R.layout.start_activity)

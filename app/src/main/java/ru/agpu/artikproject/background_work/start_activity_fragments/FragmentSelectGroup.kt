@@ -14,8 +14,8 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.ObservableEmitter
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
@@ -25,11 +25,15 @@ import ru.agpu.artikproject.presentation.layout.MainActivity
 import ru.agpu.artikproject.presentation.layout.StartActivity
 import ru.oganesyanartem.core.data.repository.groups_list.GroupsListImpl
 import ru.oganesyanartem.core.domain.models.GroupsListItem
-import ru.oganesyanartem.core.domain.repository.GroupsListRepository
 import ru.oganesyanartem.core.domain.usecase.groups_list.GroupsListGetUseCase
 
 class FragmentSelectGroup: Fragment(R.layout.fragment_start_activity_select_group) {
-    var groupsListItems: List<GroupsListItem?> = java.util.ArrayList()
+    var groupsListItems: List<GroupsListItem?> = emptyList()
+    private var disposable: Disposable? = null
+    override fun onDetach() {
+        super.onDetach()
+        disposable?.dispose()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,23 +54,19 @@ class FragmentSelectGroup: Fragment(R.layout.fragment_start_activity_select_grou
                 .commit() // Переходим к фрагменты с помощью с группой
         }
 
-        // Создаем observable, который будет выполняться в отдельном потоке
-        Observable.create { subscriber: ObservableEmitter<List<GroupsListItem?>> ->
-            val groupsListRepository: GroupsListRepository = GroupsListImpl(view.context)
-            subscriber.onNext(GroupsListGetUseCase(groupsListRepository).execute())
-            subscriber.onComplete()
-        }.subscribeOn(Schedulers.newThread()) // Выбираем ядро на котором будет выполняться наш observable
-        .observeOn(AndroidSchedulers.mainThread()) // Выбираем ядро на котором будет выполняться наш код после observable
-        .subscribe { items: List<GroupsListItem?> ->  // Код, выполняющийся после observable
-            groupsListItems = items
-        }.dispose()
+        disposable = Single.just(GroupsListGetUseCase(GroupsListImpl(view.context)).execute())
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { list ->
+                groupsListItems = list
+            }
 
         // Прослушиваем изменения текстового поля ввода группы
         groupNameET.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val searchGroup = groupNameET.text.toString().trim().lowercase()
+                val searchGroup = groupNameET.text.toString().trim().lowercase().textDetranlit()
                 groupsName.clear() // Очищаем списки с ранее отсортированными результатами
                 groupsId.clear() // Так же очищаем отсортированные id
                 if (searchGroup.isNotBlank()) { // Если строка поиска не пустая
@@ -75,8 +75,7 @@ class FragmentSelectGroup: Fragment(R.layout.fragment_start_activity_select_grou
                         val currentGroup = groupsListItems[i]?.groupName
                             ?.lowercase()
                             ?.textDetranlit()
-                            ?: continue
-                        if (currentGroup.contains(searchGroup.textDetranlit())) {
+                        if (currentGroup?.contains(searchGroup) == true) {
                             groupsId.add(groupsListItems[i]?.groupId
                                 ?: "-1") // Добавляем ID группы в отсортированный массив
                             groupsName.add(ListViewItems(groupsListItems[i]?.groupName

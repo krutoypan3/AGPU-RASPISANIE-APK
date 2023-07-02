@@ -1,5 +1,6 @@
 package ru.oganesyanartem.core.data.repository.groups_list
 
+import android.util.Log
 import org.jsoup.Jsoup
 import ru.oganesyanartem.core.domain.models.GroupsListItem
 import java.io.IOException
@@ -56,6 +57,7 @@ class GroupsListGetFromApi {
         catch (e: Exception) {
             e.printStackTrace()
         }
+        Log.i("GroupsListGetFromApi", "groups list size: ${groupsListItems.size}")
         return groupsListItems
     }
 }

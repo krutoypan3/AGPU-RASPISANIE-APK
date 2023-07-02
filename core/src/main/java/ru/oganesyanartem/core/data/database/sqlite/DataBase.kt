@@ -12,6 +12,19 @@ import android.database.sqlite.SQLiteOpenHelper
 class DataBase
     (context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
+
+
+
+    // TODO УДАЛИТЬ НАФИГ ЭТОТ КЛАСС
+
+    // @see DataBaseSqlite
+
+
+
+
+
+
+
     override fun onCreate(sqLiteDatabase: SQLiteDatabase) {
         createDB(sqLiteDatabase)
     }
@@ -104,7 +117,7 @@ class DataBase
     }
 
     companion object {
-        private const val DATABASE_NAME = "raspisanie.db"
+        private const val DATABASE_NAME = "raspisanie_fucking_delete.db"
         const val TABLE_NAME_SEMANTIC_GROUP = "semantic_group"
         const val TABLE_NAME_WEEKS_LIST = "weeks_list"
         private const val DATABASE_VERSION = 8

@@ -11,7 +11,7 @@ class RaspisanieRepository: BaseRepository() {
     fun getByGroupCodeAndWeekNumberAndWeekDay(groupCode: Int?, weekId: Int?, weekDay: Int?): List<Raspisanie> {
         return withSQLiteDatabase {
             val r = it.rawQuery(
-                "SELECT * FROM raspisanie WHERE r_group_code = $groupCode AND r_week_number = " +
+                "SELECT * FROM ${DataBaseSqlite.TABLE_RASPISANIE} WHERE r_group_code = $groupCode AND r_week_number = " +
                         "$weekId AND r_week_day = $weekDay ORDER BY r_para_number", null
             )
             return@withSQLiteDatabase r.toData()
@@ -24,14 +24,14 @@ class RaspisanieRepository: BaseRepository() {
     fun getAll(): List<Raspisanie> {
         return withSQLiteDatabase {
             it.rawQuery(
-                "SELECT * FROM raspisanie WHERE r_group NOT NULL AND r_prepod NOT NULL AND r_search_type NOT NULL GROUP BY r_group_code",
+                "SELECT * FROM ${DataBaseSqlite.TABLE_RASPISANIE} WHERE r_group NOT NULL AND r_prepod NOT NULL AND r_search_type NOT NULL GROUP BY r_group_code",
                 null
             ).toData()
         } ?: emptyList()
     }
 
     fun getParaByParams(raspisanie: Raspisanie): List<Raspisanie> {
-        val sqlQueryBuilder = StringBuilder("SELECT * FROM raspisanie WHERE")
+        val sqlQueryBuilder = StringBuilder("SELECT * FROM ${DataBaseSqlite.TABLE_RASPISANIE} WHERE")
 
         raspisanie.groupCode?.let { sqlQueryBuilder.append(" r_group_code = '$it' AND") }
         raspisanie.weekDay?.let { sqlQueryBuilder.append(" r_week_day = '$it' AND") }
@@ -58,7 +58,7 @@ class RaspisanieRepository: BaseRepository() {
                            searchType: String?) {
         withSQLiteDatabase {
             it.delete(
-                "raspisanie", "r_group_code = $groupCode AND r_week_number = " +
+                DataBaseSqlite.TABLE_RASPISANIE, "r_group_code = $groupCode AND r_week_number = " +
                         "$weekNumber AND r_week_day = $weekDay AND r_para_number = $paraNumber AND" +
                         " r_search_type = '$searchType'", null
             )
@@ -107,7 +107,7 @@ class RaspisanieRepository: BaseRepository() {
             rowValues.put("r_last_update", Date().time)
             rowValues.put("r_color", paraColor)
             rowValues.put("r_distant", paraDistant)
-            it.insert("raspisanie", null, rowValues)
+            it.insert(DataBaseSqlite.TABLE_RASPISANIE, null, rowValues)
         }
     }
 
