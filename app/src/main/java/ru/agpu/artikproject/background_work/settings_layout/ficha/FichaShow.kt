@@ -21,14 +21,15 @@ class FichaShow(act: Activity) {
         val fichaCountTV = act.findViewById<TextView>(R.id.ficha_count)
         val fichaNyanIV = act.findViewById<ImageView>(R.id.ficha_nyan)
         val fichaCount = FichaAchievements.getFicha(act.applicationContext)
+        val fichaProgress = "$fichaCount / ${FichaAchievements.MAX_FICHA_COUNT}"
         if (fichaCount > 0) { // Если найдена хоть одна фича, делаем информацию о фичах видимой
             fichaCountTextTV.visibility = View.VISIBLE // Основной текст
             fichaCountTV.visibility = View.VISIBLE // Количество фич
-            val newText = "$fichaCount / ${FichaAchievements.MAX_FICHA_COUNT}"
-            fichaCountTV.text = newText
+            fichaCountTV.text = fichaProgress
         }
         if (fichaCount >= FichaAchievements.MAX_FICHA_COUNT) { // Если собранны все фичи
-            fichaCountTextTV.text = "Пасхалки?.Ты собрал их все: "
+            val newText = "Пасхалки?.Ты собрал их все: $fichaProgress"
+            fichaCountTextTV.text = newText
             if (mp == null)
                 mp = MediaPlayer.create(act.applicationContext, R.raw.nyan_cat)
             else if (!mp!!.isPlaying) {
@@ -41,7 +42,8 @@ class FichaShow(act: Activity) {
                 .into(DrawableImageViewTarget(fichaNyanIV))
         }
         if (fichaCount > FichaAchievements.MAX_FICHA_COUNT) { // Если собраны все фичи + хоть одна секретка
-            fichaCountTextTV.text = "Ого, да ты собрал все пасхалки и даже больше: "
+            val newText = "Ого, да ты собрал все пасхалки и даже больше: $fichaProgress"
+            fichaCountTextTV.text = newText
         }
     }
 }

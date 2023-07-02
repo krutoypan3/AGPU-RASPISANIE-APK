@@ -26,7 +26,7 @@ enum class Ficha(
          * @return список фич
          */
         fun filterByLevel(level: FichaLevel): List<Ficha> {
-            return values().filter { it.securityLevel.value >= level.value }
+            return values().filter { it.securityLevel.value <= level.value }
         }
     }
 }
