@@ -15,17 +15,14 @@ class RaspUpdateCheckBoxListener(view: View?) {
         try {
             val raspUpdateRepository = RaspUpdateRepository()
             val checkBox = view?.findViewById<CheckBox>(R.id.checkBox)
-            checkBox?.isChecked = raspUpdateRepository.getByParams(RaspUpdate(
-                groupCode = MainActivity.selectedItem_id.toIntOrNull()
-            )).isNotEmpty()
-            checkBox?.setOnClickListener {
+            checkBox?.setOnCheckedChangeListener { _, isChecked ->
                 val raspUpdate = RaspUpdate(
                     groupCode = MainActivity.selectedItem_id.toIntOrNull(),
                     searchType = MainActivity.selectedItem_type,
                     paraName = MainActivity.selectedItem,
                 )
 
-                if (checkBox.isChecked) {
+                if (isChecked) {
                     checkBox.setTextColor(Color.GREEN)
                     raspUpdateRepository.saveRaspUpdate(raspUpdate)
                 } else {
@@ -33,6 +30,9 @@ class RaspUpdateCheckBoxListener(view: View?) {
                     raspUpdateRepository.deleteRaspUpdate(raspUpdate)
                 }
             }
+            checkBox?.isChecked = raspUpdateRepository.getByParams(RaspUpdate(
+                groupCode = MainActivity.selectedItem_id.toIntOrNull()
+            )).isNotEmpty()
         } catch (e: Exception) {
             e.printStackTrace()
         }

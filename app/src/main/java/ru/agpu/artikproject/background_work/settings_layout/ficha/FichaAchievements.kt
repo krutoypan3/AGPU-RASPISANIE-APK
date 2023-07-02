@@ -57,7 +57,7 @@ class FichaAchievements {
         /**
          * Добавить собранную пасхалку
          * @param context Контекст приложения
-         * @param name Пасхалка
+         * @param ficha Пасхалка
          */
         fun putFicha(context: Context?, ficha: Ficha) {
             if (!MySharedPreferences.getPref(context, ficha.prefName, false)) {
