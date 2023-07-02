@@ -1,11 +1,9 @@
 package ru.agpu.artikproject.background_work.rasp_show
 
-import android.content.ContentValues
 import android.graphics.Color
 import android.view.View
 import android.widget.CheckBox
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite
 import ru.agpu.artikproject.background_work.datebase.RaspUpdate
 import ru.agpu.artikproject.background_work.datebase.RaspUpdateRepository
 import ru.agpu.artikproject.presentation.layout.MainActivity

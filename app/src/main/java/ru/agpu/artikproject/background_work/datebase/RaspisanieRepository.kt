@@ -83,31 +83,31 @@ class RaspisanieRepository: BaseRepository() {
         saveRaspisanie(listOf(raspisanie))
     }
     fun saveRaspisanie(raspisanie: List<Raspisanie>) {
-        raspisanie.forEach {
-            it.putToDB()
-        }
+        raspisanie.putToDB()
     }
 
-    private fun Raspisanie.putToDB() {
-        withSQLiteDatabase {
-            val rowValues = ContentValues()
-            rowValues.put("r_group_code", groupCode)
-            rowValues.put("r_week_day", weekDay)
-            rowValues.put("r_week_number", weekNumber)
-            rowValues.put("r_para_number", paraNumber)
-            rowValues.put("r_name", paraName)
-            rowValues.put("r_prepod", paraPrepod)
-            rowValues.put("r_group", paraGroup)
-            rowValues.put("r_podgroup", paraPodgroup)
-            rowValues.put("r_aud", paraAud)
-            rowValues.put("r_razmer", paraRazmer)
-            rowValues.put("r_week_day_name", weekDayName)
-            rowValues.put("r_week_day_date", weekDayDate)
-            rowValues.put("r_search_type", searchType)
-            rowValues.put("r_last_update", Date().time)
-            rowValues.put("r_color", paraColor)
-            rowValues.put("r_distant", paraDistant)
-            it.insert(DataBaseSqlite.TABLE_RASPISANIE, null, rowValues)
+    private fun List<Raspisanie>.putToDB() {
+        withSQLiteDatabase { sqlDatabase ->
+            forEach { raspisanie ->
+                val rowValues = ContentValues()
+                rowValues.put("r_group_code", raspisanie.groupCode)
+                rowValues.put("r_week_day", raspisanie.weekDay)
+                rowValues.put("r_week_number", raspisanie.weekNumber)
+                rowValues.put("r_para_number", raspisanie.paraNumber)
+                rowValues.put("r_name", raspisanie.paraName)
+                rowValues.put("r_prepod", raspisanie.paraPrepod)
+                rowValues.put("r_group", raspisanie.paraGroup)
+                rowValues.put("r_podgroup", raspisanie.paraPodgroup)
+                rowValues.put("r_aud", raspisanie.paraAud)
+                rowValues.put("r_razmer", raspisanie.paraRazmer)
+                rowValues.put("r_week_day_name", raspisanie.weekDayName)
+                rowValues.put("r_week_day_date", raspisanie.weekDayDate)
+                rowValues.put("r_search_type", raspisanie.searchType)
+                rowValues.put("r_last_update", Date().time)
+                rowValues.put("r_color", raspisanie.paraColor)
+                rowValues.put("r_distant", raspisanie.paraDistant)
+                sqlDatabase.insert(DataBaseSqlite.TABLE_RASPISANIE, null, rowValues)
+            }
         }
     }
 

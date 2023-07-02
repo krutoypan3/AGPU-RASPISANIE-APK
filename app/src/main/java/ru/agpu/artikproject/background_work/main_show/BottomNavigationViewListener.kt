@@ -19,8 +19,6 @@ class BottomNavigationViewListener(activity: Activity) {
     init {
         val bottomNavigationView: BottomNavigationView = activity.findViewById(R.id.bottom_navigatin_view)
 
-        bottomNavigationView.setOnItemReselectedListener {}
-
         bottomNavigationView.selectedItemId = R.id.details_page_Home_page
         bottomNavigationView.setOnItemReselectedListener { item: MenuItem ->
             when (item.itemId) {
