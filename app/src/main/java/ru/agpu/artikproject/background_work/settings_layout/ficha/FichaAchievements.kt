@@ -103,6 +103,8 @@ class FichaAchievements {
             fichaKeyBuild += "Down"
         } else if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
             fichaKeyBuild += "Up"
+        } else {
+            return
         }
         if (fichaKey == fichaKeyBuild) {
             putFicha(activity, Ficha.FICHA_KEYS)

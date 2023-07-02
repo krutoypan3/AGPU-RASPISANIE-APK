@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import java.lang.ref.WeakReference
-import java.util.UUID
 
 /**
  * Класс отвечающий за первичное создание \ подключение к локальной базе данных
@@ -43,7 +42,7 @@ class DataBaseSqlite(val context: Context?) : SQLiteOpenHelper(context, DATABASE
         }
         try { // @see RaspisanieDto
             db.execSQL(
-                ("CREATE TABLE IF NOT EXISTS \"$TABLE_RASPISANIE\" (\n" +
+                "CREATE TABLE IF NOT EXISTS \"$TABLE_RASPISANIE\" (\n" +
                         "\t\"r_group_code\"\tINTEGER,\n" +  // 0
                         "\t\"r_week_day\"\tINTEGER,\n" +  // 1
                         "\t\"r_week_number\"\tINTEGER,\n" +
@@ -60,7 +59,7 @@ class DataBaseSqlite(val context: Context?) : SQLiteOpenHelper(context, DATABASE
                         "\t\"r_last_update\"\tNUMERIC,\n" +  // 13
                         "\t\"r_color\"\tTEXT,\n" +  // 14
                         "\t\"r_distant\"\tTEXT\n" +  // 15
-                        ")")
+                        ")"
             )
         } catch (e: Exception) {
             Log.e(DATABASE_NAME, "CREATE TABLE ERROR: ${e.message}")
