@@ -19,7 +19,7 @@ import ru.oganesyanartem.core.domain.usecase.CurrentWeekDayGetUseCase
 import ru.oganesyanartem.core.domain.usecase.CurrentWeekIdGetUseCase
 
 
-class NewWidgetAdapter(val context: Context, intent: Intent) : RemoteViewsFactory {
+class WidgetAdapter(val context: Context, intent: Intent) : RemoteViewsFactory {
     private var data: ArrayList<WidgetGridViewItem> = ArrayList() // Список с парами
     private val widgetID: Int // Номер виджета
     val textColor: Int

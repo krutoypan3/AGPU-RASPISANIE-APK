@@ -94,7 +94,7 @@ class FragmentSettingsShow: Fragment(R.layout.fragment_main_activity_settings_sh
         val aboutVersionText = view.findViewById<TextView>(R.id.about_version_text)
         try {
             var newVersionText = getString(R.string.app_name) + " " + DeviceInfo.getAppVersion(view.context)
-            if (CheckAppUpdate.app_have_update) {
+            if (CheckAppUpdate.isAppHaveUpdate) {
                 newVersionText += " " + getString(R.string.an_update_is_available)
             }
             aboutVersionText.text = newVersionText
