@@ -15,7 +15,7 @@ import ru.oganesyanartem.core.domain.models.GroupsListItem
 import ru.oganesyanartem.core.domain.repository.GroupsListRepository
 import ru.oganesyanartem.core.domain.usecase.groups_list.GroupsListGetUseCase
 import ru.agpu.artikproject.background_work.GetDirectionsList
-import ru.agpu.artikproject.background_work.Starter_MainActivity
+import ru.agpu.artikproject.background_work.StarterMainActivity
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 
 
@@ -33,7 +33,7 @@ class FragmentStarting: Fragment(R.layout.fragment_start_activity_starting) {
             ).commit()
         } else { // Иначе показываем анимацию запуска и переходим в приложение
             val loading_ico = view.findViewById<ImageView>(R.id.loading_ico)
-            Starter_MainActivity(view.context as Activity, loading_ico).start()
+            StarterMainActivity(view.context as Activity, loading_ico).start()
         }
         Observable.create { subscriber: ObservableEmitter<List<GroupsListItem?>> ->  // Создаем observable, который будет выполняться в отдельном потоке
                 val groupsListRepository: GroupsListRepository = GroupsListImpl(view.context)
