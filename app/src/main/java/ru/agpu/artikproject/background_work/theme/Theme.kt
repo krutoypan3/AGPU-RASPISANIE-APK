@@ -14,7 +14,7 @@ object Theme {
      * @param act Активити
      */
     fun setting(act: Activity) {
-        current_theme = get(act.applicationContext)
+        current_theme = getTheme(act.applicationContext)
         AppCompatDelegate.setDefaultNightMode(current_theme)
     }
 
@@ -23,7 +23,7 @@ object Theme {
      * @param context Контекст приложения
      * @param new_theme Id новой темы
      */
-    operator fun set(context: Context?, new_theme: Int) {
+    fun setTheme(context: Context?, new_theme: Int) {
         MySharedPreferences.putPref(context, "currentTheme", new_theme)
     }
 
@@ -32,7 +32,7 @@ object Theme {
      * @param context Контекст приложения
      * @return Id сохраненной темы
      */
-    operator fun get(context: Context?): Int {
+    fun getTheme(context: Context?): Int {
         return MySharedPreferences.getPref(context, "currentTheme", AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
     }
 

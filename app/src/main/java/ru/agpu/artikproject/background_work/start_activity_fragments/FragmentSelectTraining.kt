@@ -13,11 +13,12 @@ import android.widget.ListView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.background_work.CustomAlertDialog
+import ru.agpu.artikproject.background_work.CustomDialog
+import ru.agpu.artikproject.background_work.CustomDialogType
 import ru.agpu.artikproject.background_work.GetDirectionsList
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
-import ru.agpu.artikproject.background_work.textDetranlit
+import ru.agpu.artikproject.background_work.textDetranslit
 import ru.agpu.artikproject.presentation.layout.StartActivity
 
 class FragmentSelectTraining: Fragment(R.layout.fragment_start_activity_select_training) {
@@ -38,11 +39,11 @@ class FragmentSelectTraining: Fragment(R.layout.fragment_start_activity_select_t
                 val searchDirection = trainingNameET.text.toString().trim().lowercase()
                 sortedDirections.clear() // Очищаем ранее сформированный список
                 if (searchDirection != "") { // Если строка поиска не пустая
-                    for (i in finalDirectionsList.indices) { // Проходимся по всему списку с направлениями
-                        if (finalDirectionsList[i][1].lowercase().contains(searchDirection)) { // Если в направлении есть строка поиска
+                    for (currentDirections in finalDirectionsList) { // Проходимся по всему списку с направлениями
+                        if (currentDirections.directionName?.lowercase()?.contains(searchDirection) == true) { // Если в направлении есть строка поиска
                             // То добавляем её в новый отсортированный массив
                             sortedDirections.add(ListViewItems(
-                            "${view.context.getString(R.string.Group)}: ${finalDirectionsList[i][0]}\n${finalDirectionsList[i][1]}"
+                            "${view.context.getString(R.string.Group)}: ${currentDirections.groupName}\n${currentDirections.directionName}"
                             ))
                         }
                     }
@@ -60,18 +61,18 @@ class FragmentSelectTraining: Fragment(R.layout.fragment_start_activity_select_t
         listView.onItemClickListener =
             OnItemClickListener { _: AdapterView<*>?, view1: View, i: Int, _: Long ->
                 // Выводим новый всплывающий диалог
-                val dialogConfirm = CustomAlertDialog(view1.context as Activity, "update")
+                val dialogConfirm = CustomDialog(view1.context as Activity, CustomDialogType.UPDATE)
                 dialogConfirm.window!!.setBackgroundDrawableResource(R.drawable.custom_dialog_background)
                 dialogConfirm.show()
 
                 // Ставим в главный текст название группы
-                dialogConfirm.main_text.text = sortedDirections[i].item.split("\n")[0]
-                dialogConfirm.body_text.text = view.context.getString(R.string.if_understand_group_name)
-                dialogConfirm.yes.text = view.context.getString(R.string.go)
-                dialogConfirm.no.text = view.context.getString(R.string.Back)
+                dialogConfirm.mainTextTV?.text = sortedDirections[i].item.split("\n")[0]
+                dialogConfirm.bodyTextTV?.text = view.context.getString(R.string.if_understand_group_name)
+                dialogConfirm.yesBtn?.text = view.context.getString(R.string.go)
+                dialogConfirm.noBtn?.text = view.context.getString(R.string.Back)
 
                 // Устанавливаем слушатель нажатий на кнопку перехода к группе
-                dialogConfirm.yes.setOnClickListener {
+                dialogConfirm.yesBtn?.setOnClickListener {
                     dialogConfirm.dismiss() // Закрываем диалог
 
                     // Удаляем первую букву Z и S (Удаляем сокращенки и заочки
@@ -84,7 +85,7 @@ class FragmentSelectTraining: Fragment(R.layout.fragment_start_activity_select_t
                             .uppercase()
                             .replaceFirst("Z", "")
                             .replaceFirst("S", "")
-                            .textDetranlit()
+                            .textDetranslit()
 
                     // Открываем фрагмент с выбором группы
                     parentFragmentManager.beginTransaction()

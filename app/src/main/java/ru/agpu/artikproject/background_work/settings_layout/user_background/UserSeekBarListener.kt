@@ -30,7 +30,7 @@ class UserSeekBarListener(act: Activity, seekBar: SeekBar, isLightSeekBar: Boole
                     act.findViewById<View>(R.id.background_dark_image_selector_darker)
                         .setBackgroundColor(color) // Затемняем мини-фон
                 }
-                var theme = Theme.get(act.applicationContext)
+                var theme = Theme.getTheme(act.applicationContext)
                 if (theme == AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM) {
                     theme = Theme.getCurrentSystemTheme(act.applicationContext)
                 }

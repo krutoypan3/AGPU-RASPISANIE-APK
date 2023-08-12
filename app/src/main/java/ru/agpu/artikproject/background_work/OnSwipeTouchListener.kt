@@ -12,7 +12,7 @@ import kotlin.math.abs
 /**
  * Класс отвечающий за отслеживание жестов
  */
-class OnSwipeTouchListener(ctx: Context?): OnTouchListener {
+open class OnSwipeTouchListener(ctx: Context?): OnTouchListener {
     private val gestureDetector: GestureDetector
 
     init {
@@ -65,8 +65,8 @@ class OnSwipeTouchListener(ctx: Context?): OnTouchListener {
         private const val SWIPE_VELOCITY_THRESHOLD = 100
     }
 
-    fun onSwipeRight() {}
-    fun onSwipeLeft() {}
-    fun onSwipeTop() {}
-    fun onSwipeBottom() {}
+    open fun onSwipeRight() {}
+    open fun onSwipeLeft() {}
+    open fun onSwipeTop() {}
+    open fun onSwipeBottom() {}
 }

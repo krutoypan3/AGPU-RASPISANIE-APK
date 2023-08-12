@@ -7,7 +7,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.background_work.CustomAlertDialog
+import ru.agpu.artikproject.background_work.CustomDialog
+import ru.agpu.artikproject.background_work.CustomDialogType
 import ru.agpu.artikproject.background_work.GetCorpFromAudNumber
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
@@ -92,17 +93,17 @@ class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
             }
             val adapter = ListViewAdapter(act, groupList)
             try {
-                val cdd = CustomAlertDialog(act, "para_info")
+                val cdd = CustomDialog(act, CustomDialogType.PARA_INFO)
                 cdd.show()
                 cdd.window!!.setBackgroundDrawableResource(android.R.color.transparent)
                 cdd.findViewById<View>(R.id.scrollViewCustom).background = shape
-                cdd.list_view.adapter = adapter
-                cdd.list_view.onItemClickListener =
+                cdd.listViewLV?.adapter = adapter
+                cdd.listViewLV?.onItemClickListener =
                     OnItemClickListener { _: AdapterView<*>?, _: View?, pos: Int, _: Long ->
                         val sss: String
                         when (pos) {
                             1 -> {
-                                sss = (cdd.list_view.getItemAtPosition(pos) as ListViewItems).item
+                                sss = (cdd.listViewLV?.getItemAtPosition(pos) as ListViewItems).item
                                 if ((sss.contains("практика") ||
                                             sss.contains("экз.") ||
                                             sss.contains("зач.") ||
@@ -116,10 +117,10 @@ class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
 
                             3 -> {
                                 var aud: String =
-                                    (cdd.list_view.getItemAtPosition(pos) as ListViewItems).item
+                                    (cdd.listViewLV?.getItemAtPosition(pos) as ListViewItems).item
                                 aud = aud.split(": ")[1]
                                 finalCorp = GetCorpFromAudNumber().getCorp(act, aud)
-                                val dialogConfirm = CustomAlertDialog(act, "map_confirm")
+                                val dialogConfirm = CustomDialog(act, CustomDialogType.MAP_CONFIRM)
                                 dialogConfirm.show()
                                 dialogConfirm.window!!
                                     .setBackgroundDrawableResource(android.R.color.transparent)
@@ -128,7 +129,7 @@ class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
                             }
 
                             2 -> {
-                                sss = (cdd.list_view.getItemAtPosition(pos) as ListViewItems).item
+                                sss = (cdd.listViewLV?.getItemAtPosition(pos) as ListViewItems).item
                                     .split(",")[0]
                                     .split(": ")[1]
 

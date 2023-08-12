@@ -15,7 +15,7 @@ class ThemeRadioButtonSetting(act: Activity) {
         val radiobuttonSystem = act.findViewById<RadioButton>(R.id.theme_system)
         val radiobuttonDark = act.findViewById<RadioButton>(R.id.theme_dark)
         val radiobuttonLight = act.findViewById<RadioButton>(R.id.theme_light)
-        when (Theme.get(act.applicationContext)) {
+        when (Theme.getTheme(act.applicationContext)) {
             AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM -> radiobuttonSystem.isChecked = true
             AppCompatDelegate.MODE_NIGHT_YES -> radiobuttonDark.isChecked = true
             AppCompatDelegate.MODE_NIGHT_NO -> radiobuttonLight.isChecked = true

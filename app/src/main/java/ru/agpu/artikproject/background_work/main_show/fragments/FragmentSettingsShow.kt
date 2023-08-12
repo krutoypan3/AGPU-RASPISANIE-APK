@@ -12,7 +12,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.CheckAppUpdate
-import ru.agpu.artikproject.background_work.CustomAlertDialog
+import ru.agpu.artikproject.background_work.CustomDialog
+import ru.agpu.artikproject.background_work.CustomDialogType
 import ru.agpu.artikproject.background_work.debug.DeviceInfo
 import ru.agpu.artikproject.background_work.debug.LeaveReview
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaShow
@@ -83,7 +84,7 @@ class FragmentSettingsShow: Fragment(R.layout.fragment_main_activity_settings_sh
 
         // Отслеживание нажатий на кнопку условий использования
         view.findViewById<View>(R.id.terms_of_use_btn).setOnClickListener {
-            val cdd = CustomAlertDialog(activity, "about")
+            val cdd = CustomDialog(activity, CustomDialogType.ABOUT)
             cdd.window!!.setBackgroundDrawableResource(R.drawable.custom_dialog_background)
             cdd.show()
         }

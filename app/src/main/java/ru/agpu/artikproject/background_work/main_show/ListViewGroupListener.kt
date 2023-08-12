@@ -10,7 +10,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.CheckInternetConnection
-import ru.agpu.artikproject.background_work.CustomAlertDialog
+import ru.agpu.artikproject.background_work.CustomDialog
+import ru.agpu.artikproject.background_work.CustomDialogType
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow
 import ru.agpu.artikproject.background_work.site_parse.GetRasp
 import ru.agpu.artikproject.presentation.layout.MainActivity
@@ -73,7 +74,7 @@ class ListViewGroupListener(act: Activity, listView: ListView) {
      */
     private fun longClick(act: Activity, position: Int): Boolean {
         ListViewGroupListener.position = position
-        val cdd = CustomAlertDialog(act, "delete_one_saved_group")
+        val cdd = CustomDialog(act, CustomDialogType.DELETE_SAVED_GROUP)
         cdd.window!!.setBackgroundDrawableResource(R.drawable.custom_dialog_background)
         cdd.show()
         return true

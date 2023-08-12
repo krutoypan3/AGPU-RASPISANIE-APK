@@ -63,8 +63,8 @@ object CustomBackground {
     }
 
     // Микрофункция возвращающая картинку в зависимости от темы
-    private fun getBackgroundDrawable(context: Context, background_type: String): Drawable? {
-        val file = File(MySharedPreferences.getPref(context, background_type, "")) // Получаем картинку фона
+    private fun getBackgroundDrawable(context: Context, backgroundType: String): Drawable? {
+        val file = File(MySharedPreferences.getPref(context, backgroundType, "")) // Получаем картинку фона
         if (file != File("")) { // Если путь к файлу не пустой, то возвращаем картинку
             return BitmapDrawable(context.resources, BitmapFactory.decodeFile(file.absolutePath))
         } // Если файл пустой - возвращаем стандартные обои

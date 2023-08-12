@@ -1,10 +1,10 @@
 package ru.agpu.artikproject.background_work
 
 /**
- * Преобразует английские символы в русские.
+ * Преобразует английские символы в русские. EN -> RU
  * Пример: BM-ИBT-3-1 (символы B,M,T написаны на английском) -> ВМ-ИВТ-3-1 (все символы написаны на русском)
  */
-fun String.textDetranlit() = this.apply {
+fun String.textDetranslit() = this.apply {
     replace(oldValue = "A", newValue = "А", ignoreCase = true)
     replace(oldValue = "B", newValue = "В", ignoreCase = true)
     replace(oldValue = "C", newValue = "С", ignoreCase = true)

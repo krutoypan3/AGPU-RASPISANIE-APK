@@ -9,16 +9,16 @@ import ru.agpu.artikproject.background_work.image_utils.ImageSelector
  * Прослушивает нажатия на картинку с выбором фонового изображения
  * @param act Активити
  * @param userBackgroundLightSelector Изменяемый ImageView
- * @param dark_ot_light Светлый фон(background_light) или темный(background_dark)
+ * @param darkOrLight Светлый фон(background_light) или темный(background_dark)
  */
-class UserBackgroundSelectorListener(act: Activity, userBackgroundLightSelector: ImageView, dark_ot_light: String) {
+class UserBackgroundSelectorListener(act: Activity, userBackgroundLightSelector: ImageView, darkOrLight: String) {
     init {
         userBackgroundLightSelector.setOnClickListener {
             val imageSelector = Intent(
                 act.applicationContext,
                 ImageSelector::class.java
             )
-            imageSelector.putExtra("background", dark_ot_light)
+            imageSelector.putExtra("background", darkOrLight)
             act.startActivityForResult(imageSelector, 1)
         }
     }

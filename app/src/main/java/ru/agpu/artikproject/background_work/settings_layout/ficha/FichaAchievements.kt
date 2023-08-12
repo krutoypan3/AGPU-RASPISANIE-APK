@@ -18,7 +18,8 @@ import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.background_work.CustomAlertDialog
+import ru.agpu.artikproject.background_work.CustomDialog
+import ru.agpu.artikproject.background_work.CustomDialogType
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
@@ -167,13 +168,15 @@ class FichaAchievements {
 
     fun playFichaAdmin(act: Activity) {
         putFicha(act, Ficha.FICHA_ADMIN)
-        val cdd = CustomAlertDialog(act, "ricardo_pasha")
+        val cdd = CustomDialog(act, CustomDialogType.RICARDO_PASHA)
         cdd.window!!.setBackgroundDrawableResource(R.drawable.custom_dialog_background)
         cdd.show()
+        cdd.paraInfoPhotoIV.let {
         Glide.with(act)
             .asGif()
             .load("https://i.ibb.co/5hTJ4fQ/image.gif")
-            .into(cdd.para_info_photo)
+            .into(it!!)
+        }
         val audioManager = act.applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)
         val url = "https://ruo.morsmusic.org/load/185629960/INSTASAMKA_-_LIPSI_HA_(musmore.com).mp3" // your URL here
@@ -190,13 +193,15 @@ class FichaAchievements {
 
     fun playFichaRicardo(act: Activity) {
         putFicha(act.applicationContext, Ficha.FICHA_RICARDO)
-        val cdd = CustomAlertDialog(act, "ricardo_pasha")
+        val cdd = CustomDialog(act, CustomDialogType.RICARDO_PASHA)
         cdd.window!!.setBackgroundDrawableResource(R.drawable.custom_dialog_background)
         cdd.show()
+        cdd.paraInfoPhotoIV.let {
         Glide.with(act)
             .asGif()
             .load("https://i.ibb.co/JHf4whr/ricardo-ricardo-milos.gif")
-            .into(cdd.para_info_photo)
+            .into(it!!)
+        }
         val audioManager = act.applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)
         val url = "https://ruo.morsmusic.org/load/1602697468/Halogen_-_U_Got_That_(musmore.com).mp3" // your URL here
@@ -236,7 +241,7 @@ class FichaAchievements {
 
     fun playFichaGod(act: Activity, shape: GradientDrawable) {
         putFicha(act.applicationContext, Ficha.FICHA_GOD)
-        val cdd2 = CustomAlertDialog(act, "para_pasha")
+        val cdd2 = CustomDialog(act, CustomDialogType.PARA_PASHA)
         cdd2.show()
         cdd2.window!!.setBackgroundDrawableResource(android.R.color.transparent)
         cdd2.findViewById<View>(R.id.scrollViewCustom).background = shape
@@ -245,9 +250,11 @@ class FichaAchievements {
         molitva.add(ListViewItems("Да покаешься ты в грехах своих"))
         molitva.add(ListViewItems("Да закроешь ты сессию эту"))
         val adapter2 = ListViewAdapter(act.applicationContext, molitva)
-        cdd2.list_view.adapter = adapter2
+        cdd2.listViewLV?.adapter = adapter2
+        cdd2.paraInfoPhotoIV.let {
         Glide.with(act).load("https://i.ibb.co/4pqtKcY/ficha-god.png")
-            .into(cdd2.para_info_photo)
+            .into(it!!)
+        }
         val audioManager = act.applicationContext
             .getSystemService(Context.AUDIO_SERVICE) as AudioManager
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)

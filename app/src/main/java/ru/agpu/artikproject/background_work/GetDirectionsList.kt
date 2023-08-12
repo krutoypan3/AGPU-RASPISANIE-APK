@@ -1,26 +1,19 @@
 package ru.agpu.artikproject.background_work
 
-import android.content.ContentValues
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite.Companion.getSqliteDatabase
+import ru.agpu.artikproject.background_work.datebase.Directions
+import ru.agpu.artikproject.background_work.datebase.DirectionsRepository
 import java.util.concurrent.TimeUnit
 
 class GetDirectionsList {
-    val directionsFromDatabase: ArrayList<List<String>>
+    val directionsFromDatabase: List<Directions>
         get() {
-            val r = getSqliteDatabase(null).rawQuery("SELECT * FROM directions_list", null)
-            val directionsList = ArrayList<List<String>>()
-            if (r.count != 0) {
-                while (r.moveToNext()) {
-                    val list: MutableList<String> = ArrayList()
-                    list.add(r.getString(0))
-                    list.add(r.getString(1))
-                    directionsList.add(list)
-                }
-            } else {
+            val directionsRepository = DirectionsRepository()
+            val directionsList = directionsRepository.getAll()
+            if (directionsList.isEmpty()) {
                 directionsFromFirebase
                 try {
                     TimeUnit.MILLISECONDS.sleep(3000)
@@ -30,6 +23,7 @@ class GetDirectionsList {
             }
             return directionsList
         }
+
     private val directionsFromFirebase: Unit
         get() {
             val databaseReference = FirebaseDatabase.getInstance()
@@ -38,10 +32,13 @@ class GetDirectionsList {
                 // При использовании этих функций не пострадал ни один ребенок
                 override fun onChildAdded(dataSnapshot: DataSnapshot, prevChildKey: String?) {
                     if (dataSnapshot.value != null) {
-                        val rowValues = ContentValues() // Значения для вставки в базу данных
-                        rowValues.put("direction_name", dataSnapshot.value.toString().split("group_name=")[1].split(",")[0])
-                        rowValues.put("group_name", dataSnapshot.value.toString().split("direction_name=")[1].replace("}", ""))
-                        getSqliteDatabase(null).insert("directions_list", null, rowValues)
+                        val directionsRepository = DirectionsRepository()
+                        directionsRepository.saveDirections(
+                            Directions(
+                                directionName = dataSnapshot.value.toString().split("group_name=")[1].split(",")[0],
+                                groupName = dataSnapshot.value.toString().split("direction_name=")[1].replace("}", ""),
+                            )
+                        )
                     }
                 }
 

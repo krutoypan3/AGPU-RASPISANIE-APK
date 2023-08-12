@@ -16,17 +16,17 @@ class ThemeRadioGroupListener(act: Activity) {
         val themeRadioGroup = act.findViewById<RadioGroup>(R.id.theme_radio_group)
         themeRadioGroup.setOnCheckedChangeListener { _: RadioGroup?, checkedId: Int ->
             when (checkedId) {
-                R.id.theme_system -> Theme.set(
+                R.id.theme_system -> Theme.setTheme(
                     act.applicationContext,
                     AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
                 )
 
-                R.id.theme_dark -> Theme.set(
+                R.id.theme_dark -> Theme.setTheme(
                     act.applicationContext,
                     AppCompatDelegate.MODE_NIGHT_YES
                 )
 
-                R.id.theme_light -> Theme.set(
+                R.id.theme_light -> Theme.setTheme(
                     act.applicationContext,
                     AppCompatDelegate.MODE_NIGHT_NO
                 )

@@ -2,7 +2,6 @@ package ru.agpu.artikproject.background_work
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.DownloadManager.Request
 import android.net.Uri
 import android.os.Handler
 import android.os.Looper
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.browser.trusted.sharing.ShareTarget.RequestMethod
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
@@ -72,8 +70,12 @@ class CheckAppUpdate(private val act: Activity, private val showNoUpdateMessage:
     }
 
     private fun showUpdateMessage() {
-        val cdd = CustomAlertDialog(
-            act, act.resources.getString(R.string.new_app_version), whatsNew, Uri.parse(urlDownload)
+        val cdd = CustomDialog(
+            act = act,
+            dialogType = CustomDialogType.UPDATE,
+            newMainText = act.resources.getString(R.string.new_app_version),
+            newBodyText = whatsNew,
+            uri = Uri.parse(urlDownload)
         )
         cdd.window!!.setBackgroundDrawableResource(R.drawable.custom_dialog_background)
         cdd.show()

@@ -20,7 +20,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
-import ru.agpu.artikproject.background_work.textDetranlit
+import ru.agpu.artikproject.background_work.textDetranslit
 import ru.agpu.artikproject.presentation.layout.MainActivity
 import ru.agpu.artikproject.presentation.layout.StartActivity
 import ru.oganesyanartem.core.data.repository.groups_list.GroupsListImpl
@@ -66,7 +66,7 @@ class FragmentSelectGroup: Fragment(R.layout.fragment_start_activity_select_grou
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                val searchGroup = groupNameET.text.toString().trim().lowercase().textDetranlit()
+                val searchGroup = groupNameET.text.toString().trim().lowercase().textDetranslit()
                 groupsName.clear() // Очищаем списки с ранее отсортированными результатами
                 groupsId.clear() // Так же очищаем отсортированные id
                 if (searchGroup.isNotBlank()) { // Если строка поиска не пустая
@@ -74,7 +74,7 @@ class FragmentSelectGroup: Fragment(R.layout.fragment_start_activity_select_grou
                         // Сравниваем "детранслированный" текст сохраненных групп с "детранслированным" текстом строки поиска
                         val currentGroup = groupsListItems[i]?.groupName
                             ?.lowercase()
-                            ?.textDetranlit()
+                            ?.textDetranslit()
                         if (currentGroup?.contains(searchGroup) == true) {
                             groupsId.add(groupsListItems[i]?.groupId
                                 ?: "-1") // Добавляем ID группы в отсортированный массив
