@@ -86,7 +86,7 @@
         <activity android:name=".presentation.layout.MainActivity"/>
         <activity android:name=".background_work.image_utils.ImageSelector"/>
         <activity android:name=".background_work.image_utils.GalleryUtil"/>
-        <activity android:name=".presentation.layout.Admin_panel"/>
+        <activity android:name=".presentation.layout.AdminPanel"/>
     </application>
 
 </manifest>

@@ -23,19 +23,19 @@ class SwipeRasp(direction: String, view: View) {
             when (direction) {
                 "Left" -> {
                     weekDayBt1.animation = MainActivity.animUehalVl
-                    MainActivity.week_day -= 1
-                    if (MainActivity.week_day == -1) { // Если будет воскресенье, то будет показана суббота
-                        MainActivity.week_day = 5
-                        MainActivity.week_id -= 1
+                    MainActivity.weekDay -= 1
+                    if (MainActivity.weekDay == -1) { // Если будет воскресенье, то будет показана суббота
+                        MainActivity.weekDay = 5
+                        MainActivity.weekId -= 1
                     }
                 }
 
                 "Right" -> {
                     weekDayBt2.animation = MainActivity.animUehalVp
-                    MainActivity.week_day += 1
-                    if (MainActivity.week_day == 6) { // Если будет воскресенье, то будет показана суббота
-                        MainActivity.week_day = 0
-                        MainActivity.week_id += 1
+                    MainActivity.weekDay += 1
+                    if (MainActivity.weekDay == 6) { // Если будет воскресенье, то будет показана суббота
+                        MainActivity.weekDay = 0
+                        MainActivity.weekId += 1
                     }
                 }
 
@@ -45,10 +45,10 @@ class SwipeRasp(direction: String, view: View) {
                     refreshBtn.startAnimation(MainActivity.animRotate)
                     refreshBtn.setBackgroundResource(R.drawable.refresh_1)
                     GetRasp(
-                        MainActivity.selectedItem_id,
-                        MainActivity.selectedItem_type,
-                        MainActivity.selectedItem,
-                        MainActivity.week_id,
+                        MainActivity.selectedItemId ?: "",
+                        MainActivity.selectedItemType ?: "",
+                        MainActivity.selectedItem ?: "",
+                        MainActivity.weekId,
                         view.context,
                         null
                     ).start()
@@ -64,15 +64,15 @@ class SwipeRasp(direction: String, view: View) {
             refreshBtn.startAnimation(MainActivity.animRotate)
             refreshBtn.setBackgroundResource(R.drawable.refresh_1)
             when (direction) {
-                "Left" -> MainActivity.week_id -= 1
-                "Right" -> MainActivity.week_id += 1
+                "Left" -> MainActivity.weekId -= 1
+                "Right" -> MainActivity.weekId += 1
             }
             if (CheckInternetConnection.getState(view.context)) {
                 GetRasp(
-                    MainActivity.selectedItem_id,
-                    MainActivity.selectedItem_type,
-                    MainActivity.selectedItem,
-                    MainActivity.week_id,
+                    MainActivity.selectedItemId ?: "",
+                    MainActivity.selectedItemType ?: "",
+                    MainActivity.selectedItem ?: "",
+                    MainActivity.weekId,
                     view.context,
                     null
                 ).start()

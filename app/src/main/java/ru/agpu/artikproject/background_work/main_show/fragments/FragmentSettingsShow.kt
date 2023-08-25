@@ -26,7 +26,7 @@ import ru.agpu.artikproject.background_work.settings_layout.user_background.User
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserBackgroundSelectorListener
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserSeekBarListener
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserSeekBarSetting
-import ru.agpu.artikproject.presentation.layout.Admin_panel
+import ru.agpu.artikproject.presentation.layout.AdminPanel
 
 class FragmentSettingsShow: Fragment(R.layout.fragment_main_activity_settings_show) {
 
@@ -116,7 +116,7 @@ class FragmentSettingsShow: Fragment(R.layout.fragment_main_activity_settings_sh
         }
 
         view.findViewById<View>(R.id.admin_btn).setOnClickListener {
-            startActivity(Intent(view.context, Admin_panel::class.java))
+            startActivity(Intent(view.context, AdminPanel::class.java))
         }
     }
 }

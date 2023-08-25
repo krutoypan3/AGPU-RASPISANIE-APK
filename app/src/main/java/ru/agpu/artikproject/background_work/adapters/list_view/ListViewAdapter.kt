@@ -11,7 +11,7 @@ import ru.agpu.artikproject.background_work.theme.GetTextColor
 
 class ListViewAdapter(
     private val ctx: Context,
-    private val objects: ArrayList<ListViewItems>,
+    private val objects: List<ListViewItems>,
     val widget: Boolean = false
 ): BaseAdapter() {
 

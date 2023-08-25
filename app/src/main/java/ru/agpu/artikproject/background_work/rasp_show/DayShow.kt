@@ -34,7 +34,7 @@ class DayShow(view: View) {
         val observable: Observable<String> = Observable.create { subscriber -> // Создаем observable, который будет выполняться в отдельном потоке
 
         val raspisanieList = RaspisanieRepository().getByGroupCodeAndWeekNumberAndWeekDay(
-            MainActivity.selectedItem_id.toInt(), MainActivity.week_id, MainActivity.week_day
+            MainActivity.selectedItemId?.toInt(), MainActivity.weekId, MainActivity.weekDay
         )
         if (raspisanieList.isNotEmpty()) {
             var prevTime = ""
@@ -97,7 +97,14 @@ class DayShow(view: View) {
             }
         } else {
             if (CheckInternetConnection.getState(view.context)) {
-                GetRasp(MainActivity.selectedItem_id, MainActivity.selectedItem_type, MainActivity.selectedItem, MainActivity.week_id, view.context, null)
+                GetRasp(
+                    MainActivity.selectedItemId ?: "",
+                    MainActivity.selectedItemType ?: "",
+                    MainActivity.selectedItem ?: "",
+                    MainActivity.weekId,
+                    view.context,
+                    null
+                )
             }
         }
             subscriber.onNext("")

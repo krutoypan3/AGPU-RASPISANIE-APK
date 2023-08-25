@@ -42,9 +42,9 @@ class BuildingsItemClick(recyclerView: RecyclerView, itemView: View, datas: List
         pictureUrl = item.imageResourceUrl
 
         MainActivity.FRAGMENT = MainActivity.BACK_TO_BUILDINGS_SHOW
-        MainActivity.fragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.fragment_container_view, FragmentBuildingInfo::class.java, null)
-            .commit()
+        MainActivity.myFragmentManager?.beginTransaction()
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            ?.replace(R.id.fragment_container_view, FragmentBuildingInfo::class.java, null)
+            ?.commit()
     }
 }

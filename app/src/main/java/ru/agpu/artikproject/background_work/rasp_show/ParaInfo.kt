@@ -40,9 +40,9 @@ class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
         val raspisanieRepository = RaspisanieRepository()
         val r = raspisanieRepository.getParaByParams(
             Raspisanie(
-                groupCode = MainActivity.selectedItem_id.toIntOrNull(),
-                weekNumber = MainActivity.week_id,
-                weekDay = MainActivity.week_day,
+                groupCode = MainActivity.selectedItemId?.toIntOrNull(),
+                weekNumber = MainActivity.weekId,
+                weekDay = MainActivity.weekDay,
                 paraRazmer = paraTime,
             )
         ).firstOrNull { prepodAud.split(".")[0] in (it.paraPrepod ?: "") }

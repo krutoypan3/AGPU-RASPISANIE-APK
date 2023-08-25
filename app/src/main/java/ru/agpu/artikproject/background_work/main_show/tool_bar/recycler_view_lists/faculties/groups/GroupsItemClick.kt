@@ -35,24 +35,24 @@ class GroupsItemClick(recyclerView: RecyclerView, itemView: View, act: Activity)
             .collect(Collectors.toList())
 
         MainActivity.selectedItem = groupsListItems[itemPosition].groupName
-        MainActivity.selectedItem_type = "Group"
-        MainActivity.selectedItem_id = groupsListItems[itemPosition].groupId
+        MainActivity.selectedItemType = "Group"
+        MainActivity.selectedItemId = groupsListItems[itemPosition].groupId
 
         if (CheckInternetConnection.getState(act.applicationContext)) {
             GetRasp(
-                MainActivity.selectedItem_id,
-                MainActivity.selectedItem_type,
-                MainActivity.selectedItem,
-                MainActivity.week_id,
+                MainActivity.selectedItemId ?: "",
+                MainActivity.selectedItemType ?: "",
+                MainActivity.selectedItem ?: "",
+                MainActivity.weekId,
                 act.applicationContext,
                 null
             ).start()
         }
 
-        MainActivity.fragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.fragment_container_view, FragmentScheduleShow::class.java, null)
-            .commit()
+        MainActivity.myFragmentManager?.beginTransaction()
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            ?.replace(R.id.fragment_container_view, FragmentScheduleShow::class.java, null)
+            ?.commit()
         MainActivity.IS_MAIN_SHOWED = false
         MainActivity.FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW
 

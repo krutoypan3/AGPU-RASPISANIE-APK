@@ -18,10 +18,8 @@ import ru.agpu.artikproject.background_work.rasp_show.RefreshRaspWeekOrDayStarte
 import ru.agpu.artikproject.background_work.rasp_show.SwipeRasp
 import ru.agpu.artikproject.background_work.rasp_show.WeekDayChange
 import ru.agpu.artikproject.background_work.rasp_show.WeekShowResize
-import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.presentation.layout.MainActivity
-import java.util.Random
 
 class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_show) {
     companion object {
@@ -41,8 +39,8 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
 
         // Сохраняем последнее открытое расписание
         MySharedPreferences.putPref(view.context, "selectedItem", MainActivity.selectedItem)
-        MySharedPreferences.putPref(view.context, "selectedItem_type", MainActivity.selectedItem_type)
-        MySharedPreferences.putPref(view.context, "selectedItem_id", MainActivity.selectedItem_id)
+        MySharedPreferences.putPref(view.context, "selectedItem_type", MainActivity.selectedItemType)
+        MySharedPreferences.putPref(view.context, "selectedItem_id", MainActivity.selectedItemId)
 
         val weekDayBt1 = view.findViewById<Button>(R.id.week_day_bt1) // Кнопка перехода к предыдущему дню
         val weekDayBt2 = view.findViewById<Button>(R.id.week_day_bt2) // Кнопка перехода к следующему дню
@@ -75,10 +73,10 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
                 Intent.ACTION_VIEW,
                 Uri.parse(
                     "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?" +
-                            "OwnerId=118&SearchId=" + MainActivity.selectedItem_id + "&" +
+                            "OwnerId=118&SearchId=" + MainActivity.selectedItemId + "&" +
                             "SearchString=" + MainActivity.selectedItem + "&" +
-                            "Type=" + MainActivity.selectedItem_type + "&" +
-                            "WeekId=" + MainActivity.week_id
+                            "Type=" + MainActivity.selectedItemType + "&" +
+                            "WeekId=" + MainActivity.weekId
                 ))
             )
         }

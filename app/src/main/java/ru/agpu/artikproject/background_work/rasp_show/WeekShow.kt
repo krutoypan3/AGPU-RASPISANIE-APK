@@ -31,8 +31,8 @@ class WeekShow(context: Context) {
             val raspisanieRepository = RaspisanieRepository()
 
             val raspisanie = raspisanieRepository.getParaByParams(Raspisanie(
-                groupCode = MainActivity.selectedItem_id.toIntOrNull(),
-                weekNumber = MainActivity.week_id,
+                groupCode = MainActivity.selectedItemId?.toIntOrNull(),
+                weekNumber = MainActivity.weekId,
             )).sortedWith(compareBy({ it.weekDay }, { it.paraNumber }))
 
             if (raspisanie.isNotEmpty()) {

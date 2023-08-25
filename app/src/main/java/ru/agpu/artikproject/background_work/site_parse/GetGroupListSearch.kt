@@ -72,9 +72,9 @@ class GetGroupListSearch(private val urlQ: String, private val act: Activity): T
                     i++
                 }
             }
-            MainActivity.group_listed = groupList
-            MainActivity.group_listed_type = groupListType.toTypedArray()
-            MainActivity.group_listed_id = groupListId.toTypedArray()
+            MainActivity.groupListed = groupList
+            MainActivity.groupListedType = groupListType.toTypedArray()
+            MainActivity.groupListedId = groupListId.toTypedArray()
         } catch (e: JSONException) {
             e.printStackTrace()
         } catch (e: IOException) {
@@ -93,7 +93,7 @@ class GetGroupListSearch(private val urlQ: String, private val act: Activity): T
         Handler(Looper.getMainLooper()).post {
             val listview = act.findViewById<ListView>(R.id.listview)
             if (listview != null) {
-                val adapter = ListViewAdapter(act.applicationContext, MainActivity.group_listed)
+                val adapter = ListViewAdapter(act.applicationContext, MainActivity.groupListed ?: emptyList())
                 listview.adapter = adapter
                 result.text = ""
                 listview.visibility = View.VISIBLE

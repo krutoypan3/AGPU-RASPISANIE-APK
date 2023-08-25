@@ -158,7 +158,7 @@ class CustomDialog(
                     raspisanieRepository.deleteAll()
                     val raspUpdateRepository = RaspUpdateRepository()
                     raspUpdateRepository.deleteAll()
-                    MainActivity.group_listed = null
+                    MainActivity.groupListed = null
                     WatchSaveGroupRasp(act, null)
                 }
                 CustomDialogType.MAP_CONFIRM -> ShowBuildingsOnTheMap(finalCorp, act)
@@ -166,8 +166,8 @@ class CustomDialog(
                     val raspisanieRepository = RaspisanieRepository()
                     raspisanieRepository.deletePara(
                         Raspisanie(
-                            groupCode = MainActivity.group_listed_id[position].toIntOrNull(),
-                            searchType = MainActivity.group_listed_type[position],
+                            groupCode = MainActivity.groupListedId[position].toIntOrNull(),
+                            searchType = MainActivity.groupListedType[position],
                         )
                     )
                     WatchSaveGroupRasp(act, null) // Первичный вывод групп которые были открыты ранее

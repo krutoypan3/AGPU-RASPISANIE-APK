@@ -29,50 +29,50 @@ class BottomNavigationViewListener(activity: Activity) {
         }
         bottomNavigationView.setOnItemSelectedListener { item: MenuItem ->
             when (item.itemId) {
-                R.id.details_page_Faculties_list -> MainActivity.fragmentManager.beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .replace(R.id.fragment_container_view, FragmentSelectGroupDirectionFaculty::class.java, null)
-                    .commit()
+                R.id.details_page_Faculties_list -> MainActivity.myFragmentManager?.beginTransaction()
+                    ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    ?.replace(R.id.fragment_container_view, FragmentSelectGroupDirectionFaculty::class.java, null)
+                    ?.commit()
 
                 R.id.details_page_Home_page -> {
                     MainActivity.IS_MAIN_SHOWED = true
-                    MainActivity.fragmentManager.beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .replace(R.id.fragment_container_view, FragmentMainShow::class.java, null)
-                        .commit()
+                    MainActivity.myFragmentManager?.beginTransaction()
+                        ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        ?.replace(R.id.fragment_container_view, FragmentMainShow::class.java, null)
+                        ?.commit()
                     return@setOnItemSelectedListener true
                 }
 
                 R.id.details_page_Schedule -> { // Если данные не пустые - показываем расписание по ним
                     if (MainActivity.selectedItem != "") {
-                        MainActivity.fragmentManager.beginTransaction()
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .replace(R.id.fragment_container_view, FragmentScheduleShow::class.java, null)
-                            .commit()
+                        MainActivity.myFragmentManager?.beginTransaction()
+                            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            ?.replace(R.id.fragment_container_view, FragmentScheduleShow::class.java, null)
+                            ?.commit()
                     } else { // Иначе - выводим сообщение о том, что тут будет показано расписание
-                        MainActivity.fragmentManager.beginTransaction()
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                            .replace(
+                        MainActivity.myFragmentManager?.beginTransaction()
+                            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                            ?.replace(
                                 R.id.fragment_container_view,
                                 FragmentNoHaveFavoriteSchedule::class.java,
                                 null
-                            ).commit()
+                            )?.commit()
                     }
                 }
 
                 R.id.details_page_Audiences -> {
                     SELECTED_LIST = 1
-                    MainActivity.fragmentManager.beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .replace(R.id.fragment_container_view, FragmentRecyclerviewShow::class.java, null)
-                        .commit()
+                    MainActivity.myFragmentManager?.beginTransaction()
+                        ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        ?.replace(R.id.fragment_container_view, FragmentRecyclerviewShow::class.java, null)
+                        ?.commit()
                 }
 
                 R.id.details_page_Settings -> // Кнопка 'Настройки'
-                    MainActivity.fragmentManager.beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .replace(R.id.fragment_container_view, FragmentSettingsShow::class.java, null)
-                        .commit()
+                    MainActivity.myFragmentManager?.beginTransaction()
+                        ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        ?.replace(R.id.fragment_container_view, FragmentSettingsShow::class.java, null)
+                        ?.commit()
 
                 else -> return@setOnItemSelectedListener false
             }

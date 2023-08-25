@@ -19,7 +19,7 @@ class UpdateDateInMainActivity(val act: Activity): Thread() {
     override fun run() {
         try {
             val weeksListRepository: WeeksListRepository = WeeksListImpl(act.applicationContext)
-            val weekList = WeeksListGetByWeekIdUseCase(weeksListRepository, MainActivity.week_id).execute()
+            val weekList = WeeksListGetByWeekIdUseCase(weeksListRepository, MainActivity.weekId).execute()
             if (weekList.isNotEmpty()) {
                 val sPo = weekList[0].startDate + " " + weekList[0].endDate
                 act.runOnUiThread {

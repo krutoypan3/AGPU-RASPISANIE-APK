@@ -44,8 +44,8 @@ class ChangeDay(var act: Activity) {
         val weekStartCalendar = Calendar.getInstance()
         weekStartCalendar.timeInMillis = chosenDateCalendar.timeInMillis
 
-        if (weekday == 1) MainActivity.week_day = 5
-        else MainActivity.week_day = weekday - 2 // Устанавливаем выбранный день на главной странице
+        if (weekday == 1) MainActivity.weekDay = 5
+        else MainActivity.weekDay = weekday - 2 // Устанавливаем выбранный день на главной странице
 
         // Считаем дату понедельника
         while (weekday != dayOfWeek) { // Если выбран не понедельник
@@ -68,7 +68,7 @@ class ChangeDay(var act: Activity) {
         val weeksListItems = WeeksListGetByLikeStartDateUseCase(weeksListRepository, dateStr).execute()
         if (weeksListItems.isNotEmpty()) { // Если неделя есть
             // Берем первую полученную позицию выборки
-            MainActivity.week_id = weeksListItems[0].weekId // Устанавливаем новый номер недели
+            MainActivity.weekId = weeksListItems[0].weekId // Устанавливаем новый номер недели
             UpdateDateInMainActivity(act).start() // Обновляем текст на главном экране
         } else { // Если недели нет в базе данных
             Toast.makeText(act, R.string.Not_find_week, Toast.LENGTH_LONG).show() // Выводим сообщение об ошибке выбора даты

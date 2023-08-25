@@ -44,15 +44,15 @@ class ListViewGroupListener(act: Activity, listView: ListView) {
      * @param act Активити
      */
     private fun shortClick(act: Activity, position: Int) {
-        MainActivity.selectedItem = MainActivity.group_listed[position].item
-        MainActivity.selectedItem_type = MainActivity.group_listed_type[position]
-        MainActivity.selectedItem_id = MainActivity.group_listed_id[position]
+        MainActivity.selectedItem = MainActivity.groupListed?.get(position)?.item
+        MainActivity.selectedItemType = MainActivity.groupListedType[position]
+        MainActivity.selectedItemId = MainActivity.groupListedId[position]
         if (CheckInternetConnection.getState(act.applicationContext)) {
             GetRasp(
-                MainActivity.selectedItem_id,
-                MainActivity.selectedItem_type,
-                MainActivity.selectedItem,
-                MainActivity.week_id,
+                MainActivity.selectedItemId ?: "",
+                MainActivity.selectedItemType ?: "",
+                MainActivity.selectedItem ?: "",
+                MainActivity.weekId,
                 act.applicationContext,
                 null
             ).start()
@@ -61,10 +61,10 @@ class ListViewGroupListener(act: Activity, listView: ListView) {
         MainActivity.FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW
         val bottomNavigationView = act.findViewById<BottomNavigationView>(R.id.bottom_navigatin_view)
         bottomNavigationView.selectedItemId = R.id.details_page_Schedule
-        MainActivity.fragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.fragment_container_view, FragmentScheduleShow::class.java, null)
-            .commit()
+        MainActivity.myFragmentManager?.beginTransaction()
+            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            ?.replace(R.id.fragment_container_view, FragmentScheduleShow::class.java, null)
+            ?.commit()
     }
 
     /**

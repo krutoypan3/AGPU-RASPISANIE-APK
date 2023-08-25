@@ -15,24 +15,24 @@ class FragmentSelectGroupDirectionFaculty: Fragment(R.layout.fragment_main_activ
         view.findViewById<View>(R.id.fac_btn).setOnClickListener {
             FragmentRecyclerviewShow.SELECTED_LIST = 2
             MainActivity.FRAGMENT = MainActivity.BACK_TO_SELECT_GROUP_DIRECTION_FACULTY
-            MainActivity.fragmentManager.beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container_view, FragmentRecyclerviewShow::class.java, null)
-                .commit()
+            MainActivity.myFragmentManager?.beginTransaction()
+                ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                ?.replace(R.id.fragment_container_view, FragmentRecyclerviewShow::class.java, null)
+                ?.commit()
         }
         view.findViewById<View>(R.id.dir_btn).setOnClickListener {
             MainActivity.FRAGMENT = MainActivity.BACK_TO_SELECT_GROUP_DIRECTION_FACULTY
-            MainActivity.fragmentManager.beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container_view, FragmentSelectTraining::class.java, null)
-                .commit()
+            MainActivity.myFragmentManager?.beginTransaction()
+                ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                ?.replace(R.id.fragment_container_view, FragmentSelectTraining::class.java, null)
+                ?.commit()
         }
         view.findViewById<View>(R.id.grp_btn).setOnClickListener {
             MainActivity.FRAGMENT = MainActivity.BACK_TO_SELECT_GROUP_DIRECTION_FACULTY
-            MainActivity.fragmentManager.beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container_view, FragmentSelectGroup::class.java, null)
-                .commit()
+            MainActivity.myFragmentManager?.beginTransaction()
+                ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                ?.replace(R.id.fragment_container_view, FragmentSelectGroup::class.java, null)
+                ?.commit()
         }
     }
 }

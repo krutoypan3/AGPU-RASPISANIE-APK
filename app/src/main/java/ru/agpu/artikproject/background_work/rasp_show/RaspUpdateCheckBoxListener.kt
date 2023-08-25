@@ -15,8 +15,8 @@ class RaspUpdateCheckBoxListener(view: View?) {
             val checkBox = view?.findViewById<CheckBox>(R.id.checkBox)
             checkBox?.setOnCheckedChangeListener { _, isChecked ->
                 val raspUpdate = RaspUpdate(
-                    groupCode = MainActivity.selectedItem_id.toIntOrNull(),
-                    searchType = MainActivity.selectedItem_type,
+                    groupCode = MainActivity.selectedItemId?.toIntOrNull(),
+                    searchType = MainActivity.selectedItemType,
                     paraName = MainActivity.selectedItem,
                 )
 
@@ -29,7 +29,7 @@ class RaspUpdateCheckBoxListener(view: View?) {
                 }
             }
             checkBox?.isChecked = raspUpdateRepository.getByParams(RaspUpdate(
-                groupCode = MainActivity.selectedItem_id.toIntOrNull()
+                groupCode = MainActivity.selectedItemId?.toIntOrNull()
             )).isNotEmpty()
         } catch (e: Exception) {
             e.printStackTrace()

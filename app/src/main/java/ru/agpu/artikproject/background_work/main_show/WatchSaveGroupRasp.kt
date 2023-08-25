@@ -36,17 +36,16 @@ class WatchSaveGroupRasp(context: Context, widget: Boolean? = null) {
 
             if (raspisanie.isNotEmpty()) {
                 watch()
-                MainActivity.group_listed = groupList
-                MainActivity.group_listed_type = groupListType.toTypedArray()
-                MainActivity.group_listed_id = groupListId.toTypedArray()
+                MainActivity.groupListed = groupList
+                MainActivity.groupListedType = groupListType.toTypedArray()
+                MainActivity.groupListedId = groupListId.toTypedArray()
             }
             act.runOnUiThread {
                 try {
-                    if (MainActivity.group_listed == null || raspisanie.isEmpty()) {
+                    if (MainActivity.groupListed == null || raspisanie.isEmpty()) {
                         result.setText(R.string.no_saved_group)
                     } else {
-                        val adapter =
-                            ListViewAdapter(act.applicationContext, MainActivity.group_listed)
+                        val adapter = ListViewAdapter(act.applicationContext, MainActivity.groupListed ?: emptyList())
                         listview.adapter = adapter
                         result.text = ""
                     }
