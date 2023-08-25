@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import ru.agpu.artikproject.R
+import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_MAIN_SHOW
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentMainShow
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentNoHaveFavoriteSchedule
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow
@@ -77,7 +78,7 @@ class BottomNavigationViewListener(activity: Activity) {
                 else -> return@setOnItemSelectedListener false
             }
             MainActivity.IS_MAIN_SHOWED = false
-            MainActivity.FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW
+            MainActivity.FRAGMENT = BACK_TO_MAIN_SHOW
             true
         }
     }

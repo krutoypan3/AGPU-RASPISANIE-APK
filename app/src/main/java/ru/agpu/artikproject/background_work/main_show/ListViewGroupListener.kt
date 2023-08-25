@@ -12,6 +12,7 @@ import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.CheckInternetConnection
 import ru.agpu.artikproject.background_work.CustomDialog
 import ru.agpu.artikproject.background_work.CustomDialogType
+import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_MAIN_SHOW
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow
 import ru.agpu.artikproject.background_work.site_parse.GetRasp
 import ru.agpu.artikproject.presentation.layout.MainActivity
@@ -58,7 +59,7 @@ class ListViewGroupListener(act: Activity, listView: ListView) {
             ).start()
         }
         MainActivity.IS_MAIN_SHOWED = false
-        MainActivity.FRAGMENT = MainActivity.BACK_TO_MAIN_SHOW
+        MainActivity.FRAGMENT = BACK_TO_MAIN_SHOW
         val bottomNavigationView = act.findViewById<BottomNavigationView>(R.id.bottom_navigatin_view)
         bottomNavigationView.selectedItemId = R.id.details_page_Schedule
         MainActivity.myFragmentManager?.beginTransaction()

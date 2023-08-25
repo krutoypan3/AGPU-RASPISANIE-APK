@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewItems
+import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_BUILDINGS_SHOW
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo.Companion.mainText
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo.Companion.pictureByteArrayOutputArray
@@ -41,7 +42,7 @@ class BuildingsItemClick(recyclerView: RecyclerView, itemView: View, datas: List
 
         pictureUrl = item.imageResourceUrl
 
-        MainActivity.FRAGMENT = MainActivity.BACK_TO_BUILDINGS_SHOW
+        MainActivity.FRAGMENT = BACK_TO_BUILDINGS_SHOW
         MainActivity.myFragmentManager?.beginTransaction()
             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             ?.replace(R.id.fragment_container_view, FragmentBuildingInfo::class.java, null)

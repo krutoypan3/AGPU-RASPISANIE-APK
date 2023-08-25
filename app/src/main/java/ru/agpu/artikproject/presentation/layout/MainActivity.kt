@@ -25,6 +25,9 @@ import ru.agpu.artikproject.background_work.CheckAppUpdate
 import ru.agpu.artikproject.background_work.CheckInternetConnection.getState
 import ru.agpu.artikproject.background_work.FirstAppStartHelper
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
+import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_BUILDINGS_SHOW
+import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_MAIN_SHOW
+import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_SELECT_GROUP_DIRECTION_FACULTY
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences.getPref
 import ru.agpu.artikproject.background_work.main_show.BottomNavigationViewListener
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow
@@ -106,7 +109,7 @@ class MainActivity: AppCompatActivity() {
 
         weekDay = CurrentWeekDayGetUseCase(CurrentWeekDayImpl()).execute()
         myFragmentManager = supportFragmentManager
-        bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigatin_view)
+        bottomNavigationView = findViewById(R.id.bottom_navigatin_view)
         BottomNavigationViewListener(this) // Слушатель нажатий на нижний тулбар
         CheckAppUpdate(this, false).start() // Запуск проверки обновлений при входе в приложение
         LoadBuildingsList(this).start() // Загрузка данных об строениях в адаптер
@@ -173,15 +176,12 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
-    var disposable: Disposable? = null
-    var bottomNavigationView: BottomNavigationView? = null
+    private var disposable: Disposable? = null
+    private var bottomNavigationView: BottomNavigationView? = null
 
     companion object {
         var FRAGMENT: Int = 0
         var IS_MAIN_SHOWED = true
-        const val BACK_TO_SELECT_GROUP_DIRECTION_FACULTY = 1
-        const val BACK_TO_BUILDINGS_SHOW = 3
-        const val BACK_TO_MAIN_SHOW = 2
         var groupListed: ArrayList<ListViewItems>? = null
         var groupListedType: Array<String> = emptyArray()
         var groupListedId: Array<String> = emptyArray()
