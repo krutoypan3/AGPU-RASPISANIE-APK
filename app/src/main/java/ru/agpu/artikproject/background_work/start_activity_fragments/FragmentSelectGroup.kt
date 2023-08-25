@@ -20,6 +20,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_ID
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_TYPE
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_START_RASP
 import ru.agpu.artikproject.background_work.textDetranslit
 import ru.agpu.artikproject.presentation.layout.MainActivity
 import ru.agpu.artikproject.presentation.layout.StartActivity
@@ -99,10 +103,10 @@ class FragmentSelectGroup: Fragment(R.layout.fragment_start_activity_select_grou
                 // При нажатии на группу - открывается расписание с выбранной группой
                 val intent = Intent(act.applicationContext, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                intent.putExtra("start_rasp", true)
-                intent.putExtra("selectedItem_id", groupsId[i])
-                intent.putExtra("selectedItem_type", "Group")
-                intent.putExtra("selectedItem", groupsName[i].item)
+                intent.putExtra(PREF_START_RASP, true)
+                intent.putExtra(PREF_SELECTED_ITEM_ID, groupsId[i])
+                intent.putExtra(PREF_SELECTED_ITEM_TYPE, "Group")
+                intent.putExtra(PREF_SELECTED_ITEM, groupsName[i].item)
                 act.startActivity(intent)
             }
     }

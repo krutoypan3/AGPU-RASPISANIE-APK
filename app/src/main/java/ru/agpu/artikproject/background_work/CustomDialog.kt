@@ -16,6 +16,9 @@ import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import ru.agpu.artikproject.R
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListed
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedId
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedType
 import ru.agpu.artikproject.background_work.datebase.RaspUpdateRepository
 import ru.agpu.artikproject.background_work.datebase.Raspisanie
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
@@ -23,7 +26,6 @@ import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener.Comp
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap
 import ru.agpu.artikproject.background_work.rasp_show.ParaInfo.Companion.finalCorp
-import ru.agpu.artikproject.presentation.layout.MainActivity
 
 /**
  * Кастомный диалог
@@ -158,7 +160,7 @@ class CustomDialog(
                     raspisanieRepository.deleteAll()
                     val raspUpdateRepository = RaspUpdateRepository()
                     raspUpdateRepository.deleteAll()
-                    MainActivity.groupListed = null
+                    groupListed = null
                     WatchSaveGroupRasp(act, null)
                 }
                 CustomDialogType.MAP_CONFIRM -> ShowBuildingsOnTheMap(finalCorp, act)
@@ -166,8 +168,8 @@ class CustomDialog(
                     val raspisanieRepository = RaspisanieRepository()
                     raspisanieRepository.deletePara(
                         Raspisanie(
-                            groupCode = MainActivity.groupListedId[position].toIntOrNull(),
-                            searchType = MainActivity.groupListedType[position],
+                            groupCode = groupListedId[position].toIntOrNull(),
+                            searchType = groupListedType[position],
                         )
                     )
                     WatchSaveGroupRasp(act, null) // Первичный вывод групп которые были открыты ранее

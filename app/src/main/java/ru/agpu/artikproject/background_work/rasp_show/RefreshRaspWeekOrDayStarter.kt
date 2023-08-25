@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import ru.agpu.artikproject.R
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animRotate_ok
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow.Companion.refresh_on_off
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow.Companion.refresh_successful
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow.Companion.week_day_on_off
@@ -36,7 +37,7 @@ class RefreshRaspWeekOrDayStarter(val view: View): Thread() {
                     else refreshBtn.setBackgroundResource(R.drawable.refresh_0)
                     refreshBtn.isClickable = true
                     refreshBtnFicha.visibility = View.INVISIBLE
-                    refreshBtn.startAnimation(MainActivity.animRotate_ok)
+                    refreshBtn.startAnimation(animRotate_ok)
                     weekDayBt1.isClickable = true
                     weekDayBt2.isClickable = true
                     refreshBtnFicha.visibility = View.INVISIBLE

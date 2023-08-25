@@ -12,6 +12,16 @@ import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.CheckInternetConnection
 import ru.agpu.artikproject.background_work.CustomDialog
 import ru.agpu.artikproject.background_work.CustomDialogType
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
+import ru.agpu.artikproject.background_work.datebase.AppData.FragmentData.FRAGMENT
+import ru.agpu.artikproject.background_work.datebase.AppData.FragmentData.IS_MAIN_SHOWED
+import ru.agpu.artikproject.background_work.datebase.AppData.FragmentData.myFragmentManager
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListed
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedId
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedType
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItem
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemType
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_MAIN_SHOW
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow
 import ru.agpu.artikproject.background_work.site_parse.GetRasp
@@ -45,24 +55,24 @@ class ListViewGroupListener(act: Activity, listView: ListView) {
      * @param act Активити
      */
     private fun shortClick(act: Activity, position: Int) {
-        MainActivity.selectedItem = MainActivity.groupListed?.get(position)?.item
-        MainActivity.selectedItemType = MainActivity.groupListedType[position]
-        MainActivity.selectedItemId = MainActivity.groupListedId[position]
+        selectedItem = groupListed?.get(position)?.item
+        selectedItemType = groupListedType[position]
+        selectedItemId = groupListedId[position]
         if (CheckInternetConnection.getState(act.applicationContext)) {
             GetRasp(
-                MainActivity.selectedItemId ?: "",
-                MainActivity.selectedItemType ?: "",
-                MainActivity.selectedItem ?: "",
-                MainActivity.weekId,
+                selectedItemId ?: "",
+                selectedItemType ?: "",
+                selectedItem ?: "",
+                weekId,
                 act.applicationContext,
                 null
             ).start()
         }
-        MainActivity.IS_MAIN_SHOWED = false
-        MainActivity.FRAGMENT = BACK_TO_MAIN_SHOW
+        IS_MAIN_SHOWED = false
+        FRAGMENT = BACK_TO_MAIN_SHOW
         val bottomNavigationView = act.findViewById<BottomNavigationView>(R.id.bottom_navigatin_view)
         bottomNavigationView.selectedItemId = R.id.details_page_Schedule
-        MainActivity.myFragmentManager?.beginTransaction()
+        myFragmentManager?.beginTransaction()
             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             ?.replace(R.id.fragment_container_view, FragmentScheduleShow::class.java, null)
             ?.commit()

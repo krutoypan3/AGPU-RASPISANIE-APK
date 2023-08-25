@@ -5,6 +5,14 @@ import android.widget.Button
 import android.widget.ImageView
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.CheckInternetConnection
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animRotate
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVl
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVp
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekDay
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItem
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemType
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow.Companion.refresh_on_off
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow.Companion.week_day_on_off
 import ru.agpu.artikproject.background_work.site_parse.GetRasp
@@ -22,33 +30,33 @@ class SwipeRasp(direction: String, view: View) {
         if (!week_day_on_off) {
             when (direction) {
                 "Left" -> {
-                    weekDayBt1.animation = MainActivity.animUehalVl
-                    MainActivity.weekDay -= 1
-                    if (MainActivity.weekDay == -1) { // Если будет воскресенье, то будет показана суббота
-                        MainActivity.weekDay = 5
-                        MainActivity.weekId -= 1
+                    weekDayBt1.animation = animUehalVl
+                    weekDay -= 1
+                    if (weekDay == -1) { // Если будет воскресенье, то будет показана суббота
+                        weekDay = 5
+                        weekId -= 1
                     }
                 }
 
                 "Right" -> {
-                    weekDayBt2.animation = MainActivity.animUehalVp
-                    MainActivity.weekDay += 1
-                    if (MainActivity.weekDay == 6) { // Если будет воскресенье, то будет показана суббота
-                        MainActivity.weekDay = 0
-                        MainActivity.weekId += 1
+                    weekDayBt2.animation = animUehalVp
+                    weekDay += 1
+                    if (weekDay == 6) { // Если будет воскресенье, то будет показана суббота
+                        weekDay = 0
+                        weekId += 1
                     }
                 }
 
                 "Bottom" -> if (!refresh_on_off) {
                     refreshBtn.isClickable = false
                     refreshBtnFicha.visibility = View.VISIBLE
-                    refreshBtn.startAnimation(MainActivity.animRotate)
+                    refreshBtn.startAnimation(animRotate)
                     refreshBtn.setBackgroundResource(R.drawable.refresh_1)
                     GetRasp(
-                        MainActivity.selectedItemId ?: "",
-                        MainActivity.selectedItemType ?: "",
-                        MainActivity.selectedItem ?: "",
-                        MainActivity.weekId,
+                        selectedItemId ?: "",
+                        selectedItemType ?: "",
+                        selectedItem ?: "",
+                        weekId,
                         view.context,
                         null
                     ).start()
@@ -61,18 +69,18 @@ class SwipeRasp(direction: String, view: View) {
         } else {
             refreshBtn.isClickable = false
             refreshBtnFicha.visibility = View.VISIBLE
-            refreshBtn.startAnimation(MainActivity.animRotate)
+            refreshBtn.startAnimation(animRotate)
             refreshBtn.setBackgroundResource(R.drawable.refresh_1)
             when (direction) {
-                "Left" -> MainActivity.weekId -= 1
-                "Right" -> MainActivity.weekId += 1
+                "Left" -> weekId -= 1
+                "Right" -> weekId += 1
             }
             if (CheckInternetConnection.getState(view.context)) {
                 GetRasp(
-                    MainActivity.selectedItemId ?: "",
-                    MainActivity.selectedItemType ?: "",
-                    MainActivity.selectedItem ?: "",
-                    MainActivity.weekId,
+                    selectedItemId ?: "",
+                    selectedItemType ?: "",
+                    selectedItem ?: "",
+                    weekId,
                     view.context,
                     null
                 ).start()

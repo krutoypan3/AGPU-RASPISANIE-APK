@@ -7,6 +7,8 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.widget.DatePicker
 import android.widget.Toast
 import ru.agpu.artikproject.R
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekDay
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
 import ru.agpu.artikproject.presentation.layout.MainActivity
 import ru.oganesyanartem.core.data.repository.weeks_list.WeeksListImpl
 import ru.oganesyanartem.core.domain.repository.WeeksListRepository
@@ -44,8 +46,8 @@ class ChangeDay(var act: Activity) {
         val weekStartCalendar = Calendar.getInstance()
         weekStartCalendar.timeInMillis = chosenDateCalendar.timeInMillis
 
-        if (weekday == 1) MainActivity.weekDay = 5
-        else MainActivity.weekDay = weekday - 2 // Устанавливаем выбранный день на главной странице
+        if (weekday == 1) weekDay = 5
+        else weekDay = weekday - 2 // Устанавливаем выбранный день на главной странице
 
         // Считаем дату понедельника
         while (weekday != dayOfWeek) { // Если выбран не понедельник
@@ -68,7 +70,7 @@ class ChangeDay(var act: Activity) {
         val weeksListItems = WeeksListGetByLikeStartDateUseCase(weeksListRepository, dateStr).execute()
         if (weeksListItems.isNotEmpty()) { // Если неделя есть
             // Берем первую полученную позицию выборки
-            MainActivity.weekId = weeksListItems[0].weekId // Устанавливаем новый номер недели
+            weekId = weeksListItems[0].weekId // Устанавливаем новый номер недели
             UpdateDateInMainActivity(act).start() // Обновляем текст на главном экране
         } else { // Если недели нет в базе данных
             Toast.makeText(act, R.string.Not_find_week, Toast.LENGTH_LONG).show() // Выводим сообщение об ошибке выбора даты

@@ -20,6 +20,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animScale
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVl
 import ru.agpu.artikproject.background_work.debug.DeviceInfo
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap
 import ru.agpu.artikproject.background_work.settings_layout.ficha.Ficha
@@ -74,12 +76,12 @@ class FragmentBuildingInfo : Fragment(R.layout.fragment_main_activity_building_i
 
         // Отслеживание нажатий на иконку университета в тулбаре (фича)
         mainTextView.setOnClickListener {
-            mainTextView.startAnimation(MainActivity.animScale)
+            mainTextView.startAnimation(animScale)
             FichaAchievements().playFichaBuildingMainText(view.context)
         }
         imageView.setOnTouchListener(object : OnSwipeTouchListener(view.context) {
             override fun onSwipeLeft() {
-                imageView.startAnimation(MainActivity.animUehalVl)
+                imageView.startAnimation(animUehalVl)
                 FichaAchievements().playFichaBuildingIco(view.context)
             }
         })

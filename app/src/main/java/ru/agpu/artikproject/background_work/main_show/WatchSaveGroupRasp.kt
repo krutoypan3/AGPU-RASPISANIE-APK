@@ -7,9 +7,11 @@ import android.widget.TextView
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListed
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedId
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedType
 import ru.agpu.artikproject.background_work.datebase.Raspisanie
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
-import ru.agpu.artikproject.presentation.layout.MainActivity
 
 
 /**
@@ -36,16 +38,16 @@ class WatchSaveGroupRasp(context: Context, widget: Boolean? = null) {
 
             if (raspisanie.isNotEmpty()) {
                 watch()
-                MainActivity.groupListed = groupList
-                MainActivity.groupListedType = groupListType.toTypedArray()
-                MainActivity.groupListedId = groupListId.toTypedArray()
+                groupListed = groupList
+                groupListedType = groupListType.toTypedArray()
+                groupListedId = groupListId.toTypedArray()
             }
             act.runOnUiThread {
                 try {
-                    if (MainActivity.groupListed == null || raspisanie.isEmpty()) {
+                    if (groupListed == null || raspisanie.isEmpty()) {
                         result.setText(R.string.no_saved_group)
                     } else {
-                        val adapter = ListViewAdapter(act.applicationContext, MainActivity.groupListed ?: emptyList())
+                        val adapter = ListViewAdapter(act.applicationContext, groupListed ?: emptyList())
                         listview.adapter = adapter
                         result.text = ""
                     }

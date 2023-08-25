@@ -9,6 +9,8 @@ import android.widget.TableRow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import ru.agpu.artikproject.R
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
 import ru.agpu.artikproject.background_work.datebase.Raspisanie
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
 import ru.agpu.artikproject.background_work.theme.GetTextColor
@@ -31,8 +33,8 @@ class WeekShow(context: Context) {
             val raspisanieRepository = RaspisanieRepository()
 
             val raspisanie = raspisanieRepository.getParaByParams(Raspisanie(
-                groupCode = MainActivity.selectedItemId?.toIntOrNull(),
-                weekNumber = MainActivity.weekId,
+                groupCode = selectedItemId?.toIntOrNull(),
+                weekNumber = weekId,
             )).sortedWith(compareBy({ it.weekDay }, { it.paraNumber }))
 
             if (raspisanie.isNotEmpty()) {

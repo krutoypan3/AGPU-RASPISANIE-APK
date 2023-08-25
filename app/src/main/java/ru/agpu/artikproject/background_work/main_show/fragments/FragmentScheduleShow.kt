@@ -12,6 +12,15 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animRotate
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animRotate_ok
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItem
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemType
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_ID
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_TYPE
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 import ru.agpu.artikproject.background_work.rasp_show.RaspUpdateCheckBoxListener
 import ru.agpu.artikproject.background_work.rasp_show.RefreshRaspWeekOrDayStarter
@@ -38,9 +47,9 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         super.onViewCreated(view, savedInstanceState)
 
         // Сохраняем последнее открытое расписание
-        MySharedPreferences.putPref(view.context, "selectedItem", MainActivity.selectedItem)
-        MySharedPreferences.putPref(view.context, "selectedItem_type", MainActivity.selectedItemType)
-        MySharedPreferences.putPref(view.context, "selectedItem_id", MainActivity.selectedItemId)
+        MySharedPreferences.putPref(view.context, PREF_SELECTED_ITEM, selectedItem)
+        MySharedPreferences.putPref(view.context, PREF_SELECTED_ITEM_TYPE, selectedItemType)
+        MySharedPreferences.putPref(view.context, PREF_SELECTED_ITEM_ID, selectedItemId)
 
         val weekDayBt1 = view.findViewById<Button>(R.id.week_day_bt1) // Кнопка перехода к предыдущему дню
         val weekDayBt2 = view.findViewById<Button>(R.id.week_day_bt2) // Кнопка перехода к следующему дню
@@ -59,7 +68,7 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         // Кнопка уменьшающая размер текста в режиме недели
         weekDayChangeBtnSizeDown.setOnClickListener { WeekShowResize().sizeDec() }
 
-        refreshBtn.startAnimation(MainActivity.animRotate)
+        refreshBtn.startAnimation(animRotate)
         refreshBtn.setBackgroundResource(R.drawable.refresh_1)
 
         // Первичный вывод расписания
@@ -68,15 +77,15 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         // Функция перехода на сайт с расписанием при нажатии на кнопку
         val raspSite = view.findViewById<ImageView>(R.id.rasp_site)
         raspSite.setOnClickListener {
-            raspSite.animation = MainActivity.animRotate_ok
+            raspSite.animation = animRotate_ok
             startActivity(Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse(
                     "https://www.it-institut.ru/Raspisanie/SearchedRaspisanie?" +
-                            "OwnerId=118&SearchId=" + MainActivity.selectedItemId + "&" +
-                            "SearchString=" + MainActivity.selectedItem + "&" +
-                            "Type=" + MainActivity.selectedItemType + "&" +
-                            "WeekId=" + MainActivity.weekId
+                            "OwnerId=118&SearchId=" + selectedItemId + "&" +
+                            "SearchString=" + selectedItem + "&" +
+                            "Type=" + selectedItemType + "&" +
+                            "WeekId=" + weekId
                 ))
             )
         }

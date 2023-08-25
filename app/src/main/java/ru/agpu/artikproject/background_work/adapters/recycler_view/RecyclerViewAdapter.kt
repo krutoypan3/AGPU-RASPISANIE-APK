@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import ru.agpu.artikproject.R
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVl
 import ru.agpu.artikproject.background_work.debug.DeviceInfo
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.BuildingsItemClick
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.faculties.FacultiesItemClick
@@ -44,7 +45,7 @@ class RecyclerViewAdapter(
                 IS_FACULTIES_ADAPTER -> FacultiesItemClick((parent as RecyclerView), v, datas, act)
                 IS_FACULTIES_GROUPS_ADAPTER -> {
                     GroupsItemClick((parent as RecyclerView), v, act)
-                    parent.startAnimation(MainActivity.animUehalVl)
+                    parent.startAnimation(animUehalVl)
                 }
             }
         }

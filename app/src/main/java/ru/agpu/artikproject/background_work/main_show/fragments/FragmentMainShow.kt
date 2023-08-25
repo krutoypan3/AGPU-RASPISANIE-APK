@@ -6,6 +6,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.FirstAppStartHelper
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animScale
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_IF_FIRST_APP_START
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 import ru.agpu.artikproject.background_work.main_show.ChangeDay
 import ru.agpu.artikproject.background_work.main_show.EditTextRaspSearchListener
@@ -38,10 +40,10 @@ class FragmentMainShow: Fragment(R.layout.fragment_main_activity_main_show) {
         // Отслеживание нажатий на смену даты
         view.findViewById<View>(R.id.subtitle).setOnClickListener {
             ChangeDay(activity).setDate()
-            it.startAnimation(MainActivity.animScale)
+            it.startAnimation(animScale)
         }
-        if (MySharedPreferences.getPref(context, "IsFirstAppStart", true)) {
-            MySharedPreferences.putPref(context, "IsFirstAppStart", false)
+        if (MySharedPreferences.getPref(context, PREF_IF_FIRST_APP_START, true)) {
+            MySharedPreferences.putPref(context, PREF_IF_FIRST_APP_START, false)
             FirstAppStartHelper(view.context as Activity)
         }
     }

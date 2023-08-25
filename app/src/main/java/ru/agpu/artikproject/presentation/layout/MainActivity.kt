@@ -9,10 +9,8 @@ import android.os.StrictMode.VmPolicy
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -24,10 +22,32 @@ import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.CheckAppUpdate
 import ru.agpu.artikproject.background_work.CheckInternetConnection.getState
 import ru.agpu.artikproject.background_work.FirstAppStartHelper
-import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animPriehalSleva
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animPriehalSprava
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animRotate
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animRotate_ok
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animScale
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVl
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVlPriehalSprava
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVp
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVpPriehalSleva
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVpravo
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekDay
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
+import ru.agpu.artikproject.background_work.datebase.AppData.FragmentData.FRAGMENT
+import ru.agpu.artikproject.background_work.datebase.AppData.FragmentData.IS_MAIN_SHOWED
+import ru.agpu.artikproject.background_work.datebase.AppData.FragmentData.myFragmentManager
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItem
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemType
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_BUILDINGS_SHOW
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_MAIN_SHOW
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_SELECT_GROUP_DIRECTION_FACULTY
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_IF_FIRST_APP_START
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_ID
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_TYPE
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_START_RASP
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences.getPref
 import ru.agpu.artikproject.background_work.main_show.BottomNavigationViewListener
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow
@@ -47,7 +67,6 @@ import ru.oganesyanartem.core.domain.usecase.CurrentWeekDayGetUseCase
 import ru.oganesyanartem.core.domain.usecase.CurrentWeekIdGetUseCase
 
 class MainActivity: AppCompatActivity() {
-
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         Log.i("onKeyMultiple", "kc=$keyCode")
         FichaAchievements().playKeysFicha(this, keyCode)
@@ -118,17 +137,17 @@ class MainActivity: AppCompatActivity() {
         // Выгружаем данные о последнем открытом расписании в главное активити
         selectedItem = getPref(
             context = applicationContext,
-            name = "selectedItem",
+            name = PREF_SELECTED_ITEM,
             default_value = ""
         )
         selectedItemType = getPref(
             context = applicationContext,
-            name = "selectedItem_type",
+            name = PREF_SELECTED_ITEM_TYPE,
             default_value = ""
         )
         selectedItemId = getPref(
             context = applicationContext,
-            name = "selectedItem_id",
+            name = PREF_SELECTED_ITEM_ID,
             default_value = ""
         )
         val observable = Observable.create { subscriber: ObservableEmitter<Int> ->  // Создаем observable, который будет выполняться в отдельном потоке
@@ -143,11 +162,11 @@ class MainActivity: AppCompatActivity() {
             .subscribe { newWeekId: Int ->  // Код, выполняющийся после observable
                 weekId = newWeekId
             }
-        if (intent.getBooleanExtra("start_rasp", false)) {
+        if (intent.getBooleanExtra(PREF_START_RASP, false)) {
             if (getState(applicationContext)) {
-                selectedItem = intent.getStringExtra("selectedItem")
-                selectedItemType = intent.getStringExtra("selectedItem_type")
-                selectedItemId = intent.getStringExtra("selectedItem_id")
+                selectedItem = intent.getStringExtra(PREF_SELECTED_ITEM)
+                selectedItemType = intent.getStringExtra(PREF_SELECTED_ITEM_TYPE)
+                selectedItemId = intent.getStringExtra(PREF_SELECTED_ITEM_ID)
                 GetRasp(
                     selectedItemId = selectedItemId ?: "",
                     selectedItemType = selectedItemType ?: "",
@@ -159,7 +178,7 @@ class MainActivity: AppCompatActivity() {
         }
         val isFirstAppStart = getPref(
             context = applicationContext,
-            name ="IsFirstAppStart",
+            name = PREF_IF_FIRST_APP_START,
             default_value = true
         )
         if (!isFirstAppStart && selectedItem != "") {
@@ -178,28 +197,4 @@ class MainActivity: AppCompatActivity() {
 
     private var disposable: Disposable? = null
     private var bottomNavigationView: BottomNavigationView? = null
-
-    companion object {
-        var FRAGMENT: Int = 0
-        var IS_MAIN_SHOWED = true
-        var groupListed: ArrayList<ListViewItems>? = null
-        var groupListedType: Array<String> = emptyArray()
-        var groupListedId: Array<String> = emptyArray()
-        var selectedItem: String? = null
-        var selectedItemType: String? = null
-        var selectedItemId: String? = null
-        var weekId = 0
-        var weekDay = 0
-        var animRotate: Animation? = null
-        var animUehalVp: Animation? = null
-        var animUehalVl: Animation? = null
-        var animUehalVlPriehalSprava: Animation? = null
-        var animUehalVpPriehalSleva: Animation? = null
-        var animPriehalSprava: Animation? = null
-        var animUehalVpravo: Animation? = null
-        var animPriehalSleva: Animation? = null
-        var animScale: Animation? = null
-        var animRotate_ok: Animation? = null
-        var myFragmentManager: FragmentManager? = null
-    }
 }

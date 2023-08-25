@@ -12,6 +12,9 @@ import ru.agpu.artikproject.background_work.CustomDialogType
 import ru.agpu.artikproject.background_work.GetCorpFromAudNumber
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekDay
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
 import ru.agpu.artikproject.background_work.datebase.Raspisanie
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
 import ru.agpu.artikproject.background_work.rasp_show.recycler_view.DayShowRVItems
@@ -40,9 +43,9 @@ class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
         val raspisanieRepository = RaspisanieRepository()
         val r = raspisanieRepository.getParaByParams(
             Raspisanie(
-                groupCode = MainActivity.selectedItemId?.toIntOrNull(),
-                weekNumber = MainActivity.weekId,
-                weekDay = MainActivity.weekDay,
+                groupCode = selectedItemId?.toIntOrNull(),
+                weekNumber = weekId,
+                weekDay = weekDay,
                 paraRazmer = paraTime,
             )
         ).firstOrNull { prepodAud.split(".")[0] in (it.paraPrepod ?: "") }

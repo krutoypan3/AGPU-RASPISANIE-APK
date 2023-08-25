@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TableLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import ru.agpu.artikproject.R
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animScale
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow.Companion.week_day_on_off
 import ru.agpu.artikproject.presentation.layout.MainActivity
 
@@ -23,7 +24,7 @@ class WeekDayChange(view: View) {
 
         if (!week_day_on_off) {
             weekDayChangeBtn.setImageResource(R.drawable.ic_baseline_today_24)
-            weekDayChangeBtn.animation = MainActivity.animScale
+            weekDayChangeBtn.animation = animScale
             week_day_on_off = true
             WeekShow(view.context)
             view.findViewById<View>(R.id.day_para_view_rec).visibility = View.INVISIBLE
@@ -33,7 +34,7 @@ class WeekDayChange(view: View) {
             weekDayChangeBtnSizeDown.visibility = View.VISIBLE
         } else {
             weekDayChangeBtn.setImageResource(R.drawable.ic_baseline_date_range_24)
-            weekDayChangeBtn.animation = MainActivity.animScale
+            weekDayChangeBtn.animation = animScale
             view.findViewById<View>(R.id.day_para_view_rec).visibility = View.VISIBLE
             weekParaView.visibility = View.INVISIBLE
             week_day_on_off = false

@@ -16,6 +16,7 @@ import ru.oganesyanartem.core.domain.repository.GroupsListRepository
 import ru.oganesyanartem.core.domain.usecase.groups_list.GroupsListGetUseCase
 import ru.agpu.artikproject.background_work.GetDirectionsList
 import ru.agpu.artikproject.background_work.StarterMainActivity
+import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_IF_FIRST_APP_START
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 
 
@@ -24,7 +25,7 @@ class FragmentStarting: Fragment(R.layout.fragment_start_activity_starting) {
         super.onViewCreated(view, savedInstanceState)
 
         // Если это первый запуск приложения
-        if (MySharedPreferences.getPref(context, "IsFirstAppStart", true)) {
+        if (MySharedPreferences.getPref(context, PREF_IF_FIRST_APP_START, true)) {
             GetDirectionsList().directionsFromDatabase
             // Запускаем фрагмент с приветствием
             parentFragmentManager.beginTransaction().replace(

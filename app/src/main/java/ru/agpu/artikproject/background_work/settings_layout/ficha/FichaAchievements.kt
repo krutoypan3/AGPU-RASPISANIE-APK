@@ -22,6 +22,10 @@ import ru.agpu.artikproject.background_work.CustomDialog
 import ru.agpu.artikproject.background_work.CustomDialogType
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animRotate_ok
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animScale
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVl
+import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVp
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 import ru.agpu.artikproject.presentation.layout.MainActivity
 import java.io.IOException
@@ -223,7 +227,7 @@ class FichaAchievements {
      */
     fun playFichaToday(act: Activity, today: TextView) {
         today.setOnClickListener {
-            today.startAnimation(MainActivity.animScale)
+            today.startAnimation(animScale)
             if (Random().nextInt(30) == 0) {
                 putFicha(act.applicationContext, Ficha.FICHA_TODAY)
                 val audioManager = act.applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -277,12 +281,12 @@ class FichaAchievements {
     fun playFichaRefresh(context: Context, layout: RelativeLayout) {
         when (Random().nextInt(4)) {
             0 -> {
-                layout.startAnimation(MainActivity.animRotate_ok)
+                layout.startAnimation(animRotate_ok)
                 putFicha(context, Ficha.FICHA_REFRESH)
             }
-            1 -> layout.startAnimation(MainActivity.animScale)
-            2 -> layout.startAnimation(MainActivity.animUehalVl)
-            3 -> layout.startAnimation(MainActivity.animUehalVp)
+            1 -> layout.startAnimation(animScale)
+            2 -> layout.startAnimation(animUehalVl)
+            3 -> layout.startAnimation(animUehalVp)
         }
     }
 

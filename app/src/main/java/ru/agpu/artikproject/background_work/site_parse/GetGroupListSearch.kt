@@ -12,6 +12,9 @@ import org.json.JSONException
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListed
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedId
+import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedType
 import ru.agpu.artikproject.presentation.layout.MainActivity
 import java.io.BufferedReader
 import java.io.IOException
@@ -72,9 +75,9 @@ class GetGroupListSearch(private val urlQ: String, private val act: Activity): T
                     i++
                 }
             }
-            MainActivity.groupListed = groupList
-            MainActivity.groupListedType = groupListType.toTypedArray()
-            MainActivity.groupListedId = groupListId.toTypedArray()
+            groupListed = groupList
+            groupListedType = groupListType.toTypedArray()
+            groupListedId = groupListId.toTypedArray()
         } catch (e: JSONException) {
             e.printStackTrace()
         } catch (e: IOException) {
@@ -93,7 +96,7 @@ class GetGroupListSearch(private val urlQ: String, private val act: Activity): T
         Handler(Looper.getMainLooper()).post {
             val listview = act.findViewById<ListView>(R.id.listview)
             if (listview != null) {
-                val adapter = ListViewAdapter(act.applicationContext, MainActivity.groupListed ?: emptyList())
+                val adapter = ListViewAdapter(act.applicationContext, groupListed ?: emptyList())
                 listview.adapter = adapter
                 result.text = ""
                 listview.visibility = View.VISIBLE

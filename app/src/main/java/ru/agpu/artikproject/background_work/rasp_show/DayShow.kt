@@ -13,6 +13,11 @@ import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.CheckInternetConnection
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekDay
+import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItem
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
+import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemType
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
 import ru.agpu.artikproject.background_work.rasp_show.recycler_view.DayShowRVAdapter
 import ru.agpu.artikproject.background_work.rasp_show.recycler_view.DayShowRVItems
@@ -34,7 +39,7 @@ class DayShow(view: View) {
         val observable: Observable<String> = Observable.create { subscriber -> // Создаем observable, который будет выполняться в отдельном потоке
 
         val raspisanieList = RaspisanieRepository().getByGroupCodeAndWeekNumberAndWeekDay(
-            MainActivity.selectedItemId?.toInt(), MainActivity.weekId, MainActivity.weekDay
+            selectedItemId?.toInt(), weekId, weekDay
         )
         if (raspisanieList.isNotEmpty()) {
             var prevTime = ""
@@ -98,10 +103,10 @@ class DayShow(view: View) {
         } else {
             if (CheckInternetConnection.getState(view.context)) {
                 GetRasp(
-                    MainActivity.selectedItemId ?: "",
-                    MainActivity.selectedItemType ?: "",
-                    MainActivity.selectedItem ?: "",
-                    MainActivity.weekId,
+                    selectedItemId ?: "",
+                    selectedItemType ?: "",
+                    selectedItem ?: "",
+                    weekId,
                     view.context,
                     null
                 )
