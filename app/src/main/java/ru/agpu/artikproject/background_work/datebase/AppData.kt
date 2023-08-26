@@ -5,6 +5,10 @@ import androidx.fragment.app.FragmentManager
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
 import javax.inject.Singleton
 
+/**
+ * Данный класс служит базой данных для хранения данных только в момент работы приложения
+ * для использования разными классами
+ */
 @Singleton
 object AppData {
     object Animations {

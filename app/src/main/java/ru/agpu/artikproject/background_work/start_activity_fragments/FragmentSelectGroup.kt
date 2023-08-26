@@ -20,6 +20,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
+import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_GROUP
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_ID
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_TYPE
@@ -42,7 +43,7 @@ class FragmentSelectGroup: Fragment(R.layout.fragment_start_activity_select_grou
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        StartActivity.FRAGMENT = StartActivity.BACK_TO_GROUP
+        StartActivity.FRAGMENT = BACK_TO_GROUP
         val act = view.context as Activity
         val listView = view.findViewById<ListView>(R.id.list_groups)
         val groupNameET = view.findViewById<EditText>(R.id.group_name)

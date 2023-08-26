@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.realm.Realm
 import ru.agpu.artikproject.R
+import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_GROUP
+import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_WELCOME
 import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite
 import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentGroup
 import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentWelcome
@@ -61,11 +63,7 @@ class StartActivity : AppCompatActivity() {
         }
 
     companion object {
-        @JvmField // Это нужно для совместимости кода Kotlin и Java
         var FRAGMENT = 0 // Номер открытого фрагмента
-        @JvmField
         var SELECTED_GROUP = "" // Выбранная группа
-        const val BACK_TO_GROUP = 2
-        const val BACK_TO_WELCOME = 5
     }
 }

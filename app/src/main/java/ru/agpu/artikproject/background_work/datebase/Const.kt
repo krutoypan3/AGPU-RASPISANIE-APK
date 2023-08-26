@@ -5,6 +5,8 @@ object Const {
         const val BACK_TO_SELECT_GROUP_DIRECTION_FACULTY = 1
         const val BACK_TO_BUILDINGS_SHOW = 3
         const val BACK_TO_MAIN_SHOW = 2
+        const val BACK_TO_GROUP = 101
+        const val BACK_TO_WELCOME = 102
     }
     object Prefs {
         const val PREF_SELECTED_ITEM = "selectedItem"

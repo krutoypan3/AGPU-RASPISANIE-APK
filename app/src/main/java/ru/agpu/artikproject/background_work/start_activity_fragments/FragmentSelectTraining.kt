@@ -18,13 +18,14 @@ import ru.agpu.artikproject.background_work.CustomDialogType
 import ru.agpu.artikproject.background_work.GetDirectionsList
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
+import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_GROUP
 import ru.agpu.artikproject.background_work.textDetranslit
 import ru.agpu.artikproject.presentation.layout.StartActivity
 
 class FragmentSelectTraining: Fragment(R.layout.fragment_start_activity_select_training) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        StartActivity.FRAGMENT = StartActivity.BACK_TO_GROUP
+        StartActivity.FRAGMENT = BACK_TO_GROUP
 
         val listView = view.findViewById<ListView>(R.id.list_training)
         val trainingNameET = view.findViewById<EditText>(R.id.training_name)
