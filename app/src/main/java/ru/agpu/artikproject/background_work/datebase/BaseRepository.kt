@@ -22,9 +22,7 @@ open class BaseRepository {
     fun <T> withSQLiteDatabase(context: Context? = null, db: (sqLiteDatabase: SQLiteDatabase) -> T): T? {
         updateDbContext(context)
         var sqlite: SQLiteDatabase? = null
-        val hashTest = UUID.randomUUID().toString()
         return try {
-            println("OpenDb  -> $hashTest")
             sqlite = DataBaseSqlite(context ?: DataBaseSqlite.dbContext.get()).writableDatabase
             db(sqlite)
         } catch (e: Exception) {
@@ -34,7 +32,6 @@ open class BaseRepository {
             )
             null
         } finally {
-            println("CloseDb <- $hashTest")
             sqlite?.close()
         }
     }

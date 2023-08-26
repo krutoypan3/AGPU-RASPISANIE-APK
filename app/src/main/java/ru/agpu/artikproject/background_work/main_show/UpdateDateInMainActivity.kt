@@ -41,6 +41,15 @@ class UpdateDateInMainActivity(val act: Activity): Thread() {
                         e.printStackTrace()
                     }
                 }
+            } else {
+                act.runOnUiThread {
+                    try {
+                        val currentWeek: TextView = act.findViewById(R.id.subtitle)
+                        currentWeek.text = act.getString(R.string.weeks_not_found)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
             }
         } catch (e: Exception) {
             e.printStackTrace()

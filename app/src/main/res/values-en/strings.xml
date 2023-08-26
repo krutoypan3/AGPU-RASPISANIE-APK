@@ -91,7 +91,7 @@
     <string name="Password">Password</string>
     <string name="Enter">Enter</string>
     <string name="zachetka_see">To view the record book, enter the login and password of the EIOS AGPU</string>
-    <string name="find_zach_book">We are looking for your record book...</string>
+    <string name="find_zach_book">We are looking for your record book…</string>
     <string name="Record_book">Record book</string>
     <string name="your_record_book">your record book</string>
     <string name="Incorrect_data_entered">Incorrect data entered, please try again</string>
@@ -129,7 +129,7 @@
     <string name="I_know_group_name">I know the name of my group</string>
     <string name="I_know_the_direction_of_training">I know the direction of training</string>
     <string name="Enter_group_name">Enter the name of the group</string>
-    <string name="group_name_example">For example: ВМ-ИВТ-1-1</string>
+    <string name="group_name_example">For example: ВМ–ИВТ–1–1</string>
     <string name="Choose_the_direction_of_training">Choose the direction of training</string>
     <string name="training_name_example">For example: 09.03.01 Computer Science</string>
     <string name="Restore_password">Restore password</string>
@@ -159,5 +159,6 @@
     <string name="Schedule_description">The last open schedule will be displayed on this page</string>
     <string name="Audiences_description">On this page you can find out about the buildings and classrooms that they contain</string>
     <string name="settings_description">Here you can change the theme and background of the application</string>
-    <string name="Open_all_ficha">Открыть все пасхалки</string>
+    <string name="Open_all_ficha">Open all Easter eggs</string>
+    <string name="weeks_not_found">The school week was not found in the schedule :(\nThis is normal during the summer holidays.</string>
 </resources>
