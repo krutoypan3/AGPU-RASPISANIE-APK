@@ -35,8 +35,8 @@ class GetDirectionsList {
                         val directionsRepository = DirectionsRepository()
                         directionsRepository.saveDirections(
                             Directions(
-                                directionName = dataSnapshot.value.toString().split("group_name=")[1].split(",")[0],
-                                groupName = dataSnapshot.value.toString().split("direction_name=")[1].replace("}", ""),
+                                groupName = dataSnapshot.value.toString().split("group_name=")[1].split(",")[0],
+                                directionName = dataSnapshot.value.toString().split("direction_name=")[1].replace("}", ""),
                             )
                         )
                     }

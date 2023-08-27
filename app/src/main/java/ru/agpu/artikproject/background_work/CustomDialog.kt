@@ -50,7 +50,7 @@ class CustomDialog(
     var noBtn: Button? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         setContentView(R.layout.custom_dialog)

@@ -97,7 +97,7 @@ class WidgetProvider: AppWidgetProvider() {
                 val selectedItemType = getPref(context, appWidgetId.toString() + "_selected_item_type", "")
                 if (selectedItemId != "") {
                     if (getState(context)) { // Обновляем расписание для этой группы
-                        GetRasp(selectedItemId, selectedItemType, selectedItemName, weekId, context, "widget").start()
+                        GetRasp(selectedItemId, selectedItemType, selectedItemName, weekId, context).start()
                     }
                     rv.setTextViewText(R.id.tvUpdate, selectedItemName) // Устанавливаем название группы на кнопку
 

@@ -39,7 +39,7 @@ class FragmentSelectTraining: Fragment(R.layout.fragment_start_activity_select_t
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 val searchDirection = trainingNameET.text.toString().trim().lowercase()
                 sortedDirections.clear() // Очищаем ранее сформированный список
-                if (searchDirection != "") { // Если строка поиска не пустая
+                if (searchDirection.isNotBlank()) { // Если строка поиска не пустая
                     for (currentDirections in finalDirectionsList) { // Проходимся по всему списку с направлениями
                         if (currentDirections.directionName?.lowercase()?.contains(searchDirection) == true) { // Если в направлении есть строка поиска
                             // То добавляем её в новый отсортированный массив
@@ -60,9 +60,9 @@ class FragmentSelectTraining: Fragment(R.layout.fragment_start_activity_select_t
 
         // Прослушиваем нажатия на направления в списке
         listView.onItemClickListener =
-            OnItemClickListener { _: AdapterView<*>?, view1: View, i: Int, _: Long ->
+            OnItemClickListener { _: AdapterView<*>?, _: View, i: Int, _: Long ->
                 // Выводим новый всплывающий диалог
-                val dialogConfirm = CustomDialog(view1.context as Activity, CustomDialogType.UPDATE)
+                val dialogConfirm = CustomDialog(context as Activity, CustomDialogType.UPDATE)
                 dialogConfirm.window!!.setBackgroundDrawableResource(R.drawable.custom_dialog_background)
                 dialogConfirm.show()
 

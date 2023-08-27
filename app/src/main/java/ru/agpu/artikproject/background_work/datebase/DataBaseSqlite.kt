@@ -17,7 +17,11 @@ class DataBaseSqlite(val context: Context?) : SQLiteOpenHelper(context, DATABASE
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        Log.e("DataBaseSqlite", "DROP TABLE $TABLE_RASP_UPDATE")
+
+        if (oldVersion == 19) {
+            db.execSQL("DROP TABLE IF EXISTS $TABLE_DIRECTIONS")
+            Log.i("DataBaseSqlite", "DROP TABLE $TABLE_DIRECTIONS")
+        }
 
         createDB(db)
     }
@@ -118,7 +122,7 @@ class DataBaseSqlite(val context: Context?) : SQLiteOpenHelper(context, DATABASE
 
     companion object {
         private const val DATABASE_NAME = "raspisanie.db"
-        private const val DATABASE_VERSION = 19
+        private const val DATABASE_VERSION = 20
         const val TABLE_NAME_SEMANTIC_GROUP = "semantic_group"
 
         const val TABLE_RASP_UPDATE = "rasp_update"
