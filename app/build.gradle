@@ -7,15 +7,15 @@ plugins {
 }
 apply plugin: 'realm-android'
 android {
-    compileSdkVersion 32
+    compileSdk 32
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "ru.agpu.artikproject"
         minSdkVersion 24
         targetSdkVersion 32
-        versionCode 111
-        versionName "2.6.4"
+        versionCode 112
+        versionName "2.7.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
