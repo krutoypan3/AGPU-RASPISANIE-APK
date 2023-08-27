@@ -20,14 +20,13 @@ class GetRasp(
     private var selectedItem: String,
     private var weekIdUpd: Int,
     private var context: Context,
-    private var type: String? = null,
 ): Thread() {
     private val raspisanieRepository = RaspisanieRepository()
 
     override fun run() {
         if (!FragmentScheduleShow.refresh_on_off) {
             FragmentScheduleShow.refresh_on_off = true
-            println("Был сделан запрос на обновление расписания для $selectedItem")
+            Log.i(LOG_TAG, "Был сделан запрос на обновление расписания для $selectedItem")
             val raspisanieList: MutableList<Raspisanie> = mutableListOf()
             try {
                 for (weekNumberOffset in -1..1) {
@@ -50,8 +49,13 @@ class GetRasp(
                         for (weekDay in 0..5) {
                             var prohod = false
                             var schet = 0
-                            val predmetDataNed = days[weekDay][0].split("row\">")[1].split("<br>")[0]
-                            val predmetDataChi = days[weekDay][0].split("<br>")[1].split("</th>")[0]
+                            var predmetDataNed = days[weekDay][0].split("row\">")[1].split("<br>")[0]
+                            var predmetDataChi = days[weekDay][0].split("<br>")[1].split("</th>")[0]
+
+                            if (!dateIsCorrect(predmetDataChi)) {
+                                predmetDataNed = ""
+                                predmetDataChi = context.getString(R.string.weeks_not_found)
+                            }
 
                             for (paraNumber in 0 until 9) {
                                 val para = days[weekDay][paraNumber]
@@ -109,33 +113,18 @@ class GetRasp(
                                     searchType = selectedItemType,
                                 ))
 
+                                raspisanieRepository.deletePara(paraList)
+                                raspisanieList.add(raspisanie)
 
-                                if (paraList.isEmpty()) {
-                                    raspisanieList.add(raspisanie)
-                                } else {
-                                    if (predmetName != paraList.first().paraName ||
-                                        predmetPrepod != paraList.first().paraPrepod ||
-                                        predmetDistant != paraList.first().paraDistant ||
-                                        predmetGroup != paraList.first().paraGroup ||
-                                        predmetPodgroup != paraList.first().paraPodgroup ||
-                                        predmetAud != paraList.first().paraAud ||
-                                        predmetTime != paraList.first().paraRazmer
-                                    ) {
-                                        raspisanieRepository.deletePara(paraList)
-                                        raspisanieList.add(raspisanie)
-                                        // Это нужно для вызова вне основного потока
-                                        Handler(Looper.getMainLooper()).post { // Выводим уведомление о наличии нового расписания
-                                            ShowNotification(
-                                                context,
-                                                "$selectedItem ${context.resources.getString(R.string.new_rasp)}!",
-                                                "$predmetDataNed $predmetDataChi. ${context.resources.getString(R.string.new_rasp_sub)}",
-                                                selectedItemId.toInt()
-                                            ).start()
-                                        }
-                                    }
-                                    if (type == TYPE_WIDGET) {
-                                        raspisanieRepository.deletePara(paraList)
-                                        raspisanieList.add(raspisanie)
+                                if (raspIsChange(paraList.first(), raspisanie)) {
+                                    // Это нужно для вызова вне основного потока
+                                    Handler(Looper.getMainLooper()).post { // Выводим уведомление о наличии нового расписания
+                                        ShowNotification(
+                                            context,
+                                            "$selectedItem ${context.resources.getString(R.string.new_rasp)}!",
+                                            "$predmetDataNed $predmetDataChi. ${context.resources.getString(R.string.new_rasp_sub)}",
+                                            selectedItemId.toInt()
+                                        ).start()
                                     }
                                 }
                             }
@@ -143,7 +132,7 @@ class GetRasp(
                         }
                     } catch (e: IOException) {
                         // Прерывание функции, если нет интернета
-                        Log.e("GetRaspK run", e.message ?: "")
+                        Log.e(LOG_TAG, e.message ?: "")
                         FragmentScheduleShow.refresh_on_off = false
                         FragmentScheduleShow.refresh_successful = false
                         return
@@ -153,13 +142,35 @@ class GetRasp(
                 e.printStackTrace()
             } finally {
                 raspisanieRepository.saveRaspisanie(raspisanieList)
-                println("Расписание для $selectedItem было обновлено")
+                Log.i(LOG_TAG, "Расписание для $selectedItem было обновлено")
                 FragmentScheduleShow.refresh_on_off = false
             }
         }
     }
 
+    /**
+     * Проверка даты на корректность.
+     * Проверяет даты типа 01.01.0001 или 06.01.0001
+     */
+    private fun dateIsCorrect(date: String?) = date?.split(".")?.last() != "0001"
+
+
+    /**
+     * Проверка изменения в расписании
+     */
+    private fun raspIsChange(oldRasp: Raspisanie, newRasp: Raspisanie): Boolean {
+        return (oldRasp.paraName != newRasp.paraName ||
+            oldRasp.paraPrepod != newRasp.paraPrepod ||
+            oldRasp.paraDistant != newRasp.paraDistant ||
+            oldRasp.paraGroup != newRasp.paraGroup ||
+            oldRasp.paraPodgroup != newRasp.paraPodgroup ||
+            oldRasp.paraAud != newRasp.paraAud ||
+            oldRasp.paraRazmer != newRasp.paraRazmer
+        )
+
+    }
+
     companion object {
-        const val TYPE_WIDGET = "widget"
+        const val LOG_TAG = "GetRasp"
     }
 }

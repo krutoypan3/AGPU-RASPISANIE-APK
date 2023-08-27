@@ -107,8 +107,7 @@ class DayShow(view: View) {
                     selectedItemType ?: "",
                     selectedItem ?: "",
                     weekId,
-                    view.context,
-                    null
+                    view.context
                 )
             }
         }

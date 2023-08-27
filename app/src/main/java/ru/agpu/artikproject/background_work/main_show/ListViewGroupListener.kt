@@ -64,8 +64,7 @@ class ListViewGroupListener(act: Activity, listView: ListView) {
                 selectedItemType ?: "",
                 selectedItem ?: "",
                 weekId,
-                act.applicationContext,
-                null
+                act.applicationContext
             ).start()
         }
         IS_MAIN_SHOWED = false

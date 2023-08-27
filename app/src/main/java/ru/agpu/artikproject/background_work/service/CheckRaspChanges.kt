@@ -18,8 +18,7 @@ class CheckRaspChanges(context: Context) {
                     selectedItemType = it.searchType ?: "",
                     selectedItem = it.paraName ?: "",
                     weekIdUpd = weekIdUpd,
-                    context = context,
-                    type = "CheckRaspChanges"
+                    context = context
                 ).start()
             }
         }

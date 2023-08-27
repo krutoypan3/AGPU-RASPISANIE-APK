@@ -52,8 +52,7 @@ class GroupsItemClick(recyclerView: RecyclerView, itemView: View, act: Activity)
                 selectedItemType ?: "",
                 selectedItem ?: "",
                 weekId,
-                act.applicationContext,
-                null
+                act.applicationContext
             ).start()
         }
 

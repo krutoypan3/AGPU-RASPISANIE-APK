@@ -57,8 +57,7 @@ class SwipeRasp(direction: String, view: View) {
                         selectedItemType ?: "",
                         selectedItem ?: "",
                         weekId,
-                        view.context,
-                        null
+                        view.context
                     ).start()
                     RefreshRaspWeekOrDayStarter(view).start()
                 }
@@ -81,8 +80,7 @@ class SwipeRasp(direction: String, view: View) {
                     selectedItemType ?: "",
                     selectedItem ?: "",
                     weekId,
-                    view.context,
-                    null
+                    view.context
                 ).start()
             }
             RefreshRaspWeekOrDayStarter(view).start()
