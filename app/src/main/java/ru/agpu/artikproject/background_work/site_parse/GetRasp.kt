@@ -116,7 +116,7 @@ class GetRasp(
                                 raspisanieRepository.deletePara(paraList)
                                 raspisanieList.add(raspisanie)
 
-                                if (raspIsChange(paraList.first(), raspisanie)) {
+                                if (raspIsChange(paraList.firstOrNull(), raspisanie)) {
                                     // Это нужно для вызова вне основного потока
                                     Handler(Looper.getMainLooper()).post { // Выводим уведомление о наличии нового расписания
                                         ShowNotification(
@@ -158,14 +158,14 @@ class GetRasp(
     /**
      * Проверка изменения в расписании
      */
-    private fun raspIsChange(oldRasp: Raspisanie, newRasp: Raspisanie): Boolean {
-        return (oldRasp.paraName != newRasp.paraName ||
-            oldRasp.paraPrepod != newRasp.paraPrepod ||
-            oldRasp.paraDistant != newRasp.paraDistant ||
-            oldRasp.paraGroup != newRasp.paraGroup ||
-            oldRasp.paraPodgroup != newRasp.paraPodgroup ||
-            oldRasp.paraAud != newRasp.paraAud ||
-            oldRasp.paraRazmer != newRasp.paraRazmer
+    private fun raspIsChange(oldRasp: Raspisanie?, newRasp: Raspisanie?): Boolean {
+        return (oldRasp?.paraName != newRasp?.paraName ||
+            oldRasp?.paraPrepod != newRasp?.paraPrepod ||
+            oldRasp?.paraDistant != newRasp?.paraDistant ||
+            oldRasp?.paraGroup != newRasp?.paraGroup ||
+            oldRasp?.paraPodgroup != newRasp?.paraPodgroup ||
+            oldRasp?.paraAud != newRasp?.paraAud ||
+            oldRasp?.paraRazmer != newRasp?.paraRazmer
         )
 
     }

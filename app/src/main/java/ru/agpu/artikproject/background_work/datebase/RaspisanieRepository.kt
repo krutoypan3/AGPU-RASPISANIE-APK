@@ -59,11 +59,11 @@ class RaspisanieRepository: BaseRepository() {
     fun deletePara(raspisanie: Raspisanie) {
 
         val queryWhereClause = StringBuilder()
-        raspisanie.groupCode?.let { queryWhereClause.append("${RaspisanieEntry.COLUMN_GROUP_CODE} = '$it' AND") }
-        raspisanie.weekNumber?.let { queryWhereClause.append("${RaspisanieEntry.COLUMN_WEEK_NUMBER} = '$it' AND") }
-        raspisanie.weekDay?.let { queryWhereClause.append("${RaspisanieEntry.COLUMN_WEEK_DAY} = '$it' AND") }
-        raspisanie.paraNumber?.let { queryWhereClause.append("${RaspisanieEntry.COLUMN_PARA_NUMBER} = '$it' AND") }
-        raspisanie.searchType?.let { queryWhereClause.append("${RaspisanieEntry.COLUMN_SEARCH_TYPE} = '$it' AND") }
+        raspisanie.groupCode?.let { queryWhereClause.append(" ${RaspisanieEntry.COLUMN_GROUP_CODE} = '$it' AND") }
+        raspisanie.weekNumber?.let { queryWhereClause.append(" ${RaspisanieEntry.COLUMN_WEEK_NUMBER} = '$it' AND") }
+        raspisanie.weekDay?.let { queryWhereClause.append(" ${RaspisanieEntry.COLUMN_WEEK_DAY} = '$it' AND") }
+        raspisanie.paraNumber?.let { queryWhereClause.append(" ${RaspisanieEntry.COLUMN_PARA_NUMBER} = '$it' AND") }
+        raspisanie.searchType?.let { queryWhereClause.append(" ${RaspisanieEntry.COLUMN_SEARCH_TYPE} = '$it' AND") }
 
         withSQLiteDatabase {
             it.delete(
