@@ -114,6 +114,19 @@ class DataBaseSqlite(val context: Context?) : SQLiteOpenHelper(context, DATABASE
         } catch (e: Exception) {
             Log.e(DATABASE_NAME, "CREATE TABLE ERROR: ${e.message}")
         }
+        // Таблица со строениями и корпусами
+        try {
+            db.execSQL(
+                ("CREATE TABLE IF NOT EXIST \"$TABLE_BUILDINGS\" (\n" +
+                        "\t\"${BuildingsEntry.COLUMN_BUILDING_NAME}\"\tTEXT,\n" +
+                        "\t\"${BuildingsEntry.COLUMN_BUILDING_ADDRESS}\"\tTEXT,\n" +
+                        "\t\"${BuildingsEntry.COLUMN_BUILDING_ADDRESS_MAP_URL}\"\tTEXT,\n" +
+                        "\t\"${BuildingsEntry.COLUMN_BUILDING_AUDIENCES}\"\tTEXT,\n" +
+                        "\t\"${BuildingsEntry.COLUMN_BUILDING_PHOTOS_URL}\"\tTEXT,\n")
+            )
+        } catch (e: Exception) {
+            Log.e(DATABASE_NAME, "CREATE TABLE ERROR: ${e.message}")
+        }
     }
 
     fun init() {
@@ -129,6 +142,7 @@ class DataBaseSqlite(val context: Context?) : SQLiteOpenHelper(context, DATABASE
         const val TABLE_WEEKS_LIST = "weeks_list"
         const val TABLE_RASPISANIE = "raspisanie"
         const val TABLE_DIRECTIONS = "directions"
+        const val TABLE_BUILDINGS = "buildings"
 
         var dbContext: WeakReference<Context?> = WeakReference(null)
 

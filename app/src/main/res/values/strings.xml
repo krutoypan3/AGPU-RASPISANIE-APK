@@ -42,13 +42,13 @@
     <string name="CoupleName">Название пары</string>
     <string name="Audience">Аудитория</string>
     <string name="PodGroup">Подгруппа</string>
-    <string name="adress_main_aud" translatable="false">1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 14а, 15, 15а, 16, 17, 18,  21, 22, 23</string>
+    <string name="adress_main_aud" translatable="false">1, 2, 3, 4, 5, 6, 7, 8, 9, 10в, 12, 13, 14, 14а, 15, 16, 17, 18, 19, 20, 21, 22, 23, 23а, 23в</string>
     <string name="adress_zaochka_aud" translatable="false">24, 25, 26, 27, 28</string>
-    <string name="adress_spf_aud" translatable="false">40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50</string>
-    <string name="adress_foc_aud" translatable="false">85, 85а, 86, Спортзал ФОК</string>
-    <string name="adress_tehfak_aud" translatable="false">51, 52, 53, 57, 58 а, 58 б, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68</string>
+    <string name="adress_spf_aud" translatable="false">41, 42, 43, 44, 45, 46, 47, 48, 49, 50</string>
+    <string name="adress_foc_aud" translatable="false">85, 85а, 86, 86а, 87, 89, Спортзал ФОК</string>
+    <string name="adress_tehfak_aud" translatable="false">51, 52, 53, 54, 55, 56, 57, 60, 61, 62, 63, 64, 65, 67, 68, 103т, 104т, 105т</string>
     <string name="adress_obshaga_aud" translatable="false">30, 31, 32, 33, 34, 35, 36, 37, 38, ЛК-1 – ЛК-6, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121</string>
-    <string name="adress_istfak_aud" translatable="false">201, 202, 203, 204, 205, 206, 207, 208, 209, 210</string>
+    <string name="adress_istfak_aud" translatable="false">201, 202, 203, 204, 205, 206, 207, 208</string>
     <string name="map_confirm">Показать аудиторию на карте?</string>
     <string name="go">Перейти</string>
     <string name="new_app_version">Доступна новая версия приложения!</string>
