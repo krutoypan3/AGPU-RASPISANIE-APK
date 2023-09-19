@@ -15,7 +15,6 @@ import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener
 import ru.agpu.artikproject.background_work.main_show.UpdateDateInMainActivity
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
-import ru.agpu.artikproject.presentation.layout.MainActivity
 
 class FragmentMainShow: Fragment(R.layout.fragment_main_activity_main_show) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

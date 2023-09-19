@@ -15,6 +15,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
+import android.widget.Toast
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListed
 import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedId
@@ -24,7 +25,6 @@ import ru.agpu.artikproject.background_work.datebase.Raspisanie
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
 import ru.agpu.artikproject.background_work.main_show.ListViewGroupListener.Companion.position
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp
-import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.ShowBuildingsOnTheMap
 import ru.agpu.artikproject.background_work.rasp_show.ParaInfo.Companion.finalCorp
 
 /**
@@ -163,7 +163,15 @@ class CustomDialog(
                     groupListed = null
                     WatchSaveGroupRasp(act, null)
                 }
-                CustomDialogType.MAP_CONFIRM -> ShowBuildingsOnTheMap(finalCorp, act)
+                CustomDialogType.MAP_CONFIRM -> {
+                    val mapUrl = finalCorp?.buildingAddressMapUrl
+                    if (mapUrl == null) {
+                        Toast.makeText(context, "Мы не смогли найти аудиторию :(", Toast.LENGTH_SHORT).show()
+                    } else {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(mapUrl))
+                        context.startActivity(intent)
+                    }
+                }
                 CustomDialogType.DELETE_SAVED_GROUP -> {
                     val raspisanieRepository = RaspisanieRepository()
                     raspisanieRepository.deletePara(

@@ -16,7 +16,6 @@ import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuilding
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo.Companion.pictureByteArrayOutputArray
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo.Companion.pictureUrl
 import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo.Companion.subText
-import ru.agpu.artikproject.presentation.layout.MainActivity
 import java.io.ByteArrayOutputStream
 
 /**
@@ -30,7 +29,7 @@ class BuildingsItemClick(recyclerView: RecyclerView, itemView: View, datas: List
         val itemPosition = recyclerView.getChildLayoutPosition(itemView) // Получаем позицию нажатого элемента
         val item = datas[itemPosition] // Получаем сам нажатый элемент
         FragmentBuildingInfo.itemPosition = itemPosition // Позицию
-        mainText = item.mainText // Основной текс
+        mainText = item.mainText // Основной текст
         subText = item.subText // Дополнительный текст
 
         val imageView = itemView.findViewById<ImageView>(R.id.cardViewAudImage) // Картинка

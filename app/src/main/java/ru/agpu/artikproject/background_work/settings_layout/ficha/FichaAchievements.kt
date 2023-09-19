@@ -291,7 +291,7 @@ class FichaAchievements {
     }
 
     fun playFichaBuildingIco(context: Context) {
-        val randomInt = Random().nextInt(10)
+        val randomInt = Random().nextInt(30)
         if (randomInt == 0) {
             putFicha(context, Ficha.FICHA_BUILDING_ICO)
             val audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager

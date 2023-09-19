@@ -15,6 +15,7 @@ import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
 import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekDay
 import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
+import ru.agpu.artikproject.background_work.datebase.Buildings
 import ru.agpu.artikproject.background_work.datebase.Raspisanie
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
 import ru.agpu.artikproject.background_work.rasp_show.recycler_view.DayShowRVItems
@@ -24,7 +25,7 @@ import ru.agpu.artikproject.presentation.layout.MainActivity
 class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
 
     companion object {
-        var finalCorp = 0
+        var finalCorp: Buildings? = null
     }
 
     init {
@@ -122,7 +123,7 @@ class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
                                 var aud: String =
                                     (cdd.listViewLV?.getItemAtPosition(pos) as ListViewItems).item
                                 aud = aud.split(": ")[1]
-                                finalCorp = GetCorpFromAudNumber().getCorp(act, aud)
+                                finalCorp = GetCorpFromAudNumber().getCorp(aud)
                                 val dialogConfirm = CustomDialog(act, CustomDialogType.MAP_CONFIRM)
                                 dialogConfirm.show()
                                 dialogConfirm.window!!

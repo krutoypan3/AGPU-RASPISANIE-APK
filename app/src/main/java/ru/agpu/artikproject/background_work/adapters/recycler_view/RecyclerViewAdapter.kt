@@ -69,12 +69,8 @@ class RecyclerViewAdapter(
         // Отображаем картинку в адаптере
         Glide.with(act.applicationContext)
             .load(imageResUrl)
-            .apply(
-                RequestOptions().override(
-                    DeviceInfo.getDeviceWidth(act.applicationContext), 360
-                )
-            )
             .placeholder(R.drawable.agpu_ico)
+            .centerCrop()
             .into(holder.image)
     }
 }

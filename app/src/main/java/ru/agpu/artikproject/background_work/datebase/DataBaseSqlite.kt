@@ -117,12 +117,12 @@ class DataBaseSqlite(val context: Context?) : SQLiteOpenHelper(context, DATABASE
         // Таблица со строениями и корпусами
         try {
             db.execSQL(
-                ("CREATE TABLE IF NOT EXIST \"$TABLE_BUILDINGS\" (\n" +
+                ("CREATE TABLE IF NOT EXISTS \"$TABLE_BUILDINGS\" (\n" +
                         "\t\"${BuildingsEntry.COLUMN_BUILDING_NAME}\"\tTEXT,\n" +
                         "\t\"${BuildingsEntry.COLUMN_BUILDING_ADDRESS}\"\tTEXT,\n" +
                         "\t\"${BuildingsEntry.COLUMN_BUILDING_ADDRESS_MAP_URL}\"\tTEXT,\n" +
                         "\t\"${BuildingsEntry.COLUMN_BUILDING_AUDIENCES}\"\tTEXT,\n" +
-                        "\t\"${BuildingsEntry.COLUMN_BUILDING_PHOTOS_URL}\"\tTEXT,\n")
+                        "\t\"${BuildingsEntry.COLUMN_BUILDING_PHOTOS_URL}\"\tTEXT\n)")
             )
         } catch (e: Exception) {
             Log.e(DATABASE_NAME, "CREATE TABLE ERROR: ${e.message}")
@@ -135,7 +135,7 @@ class DataBaseSqlite(val context: Context?) : SQLiteOpenHelper(context, DATABASE
 
     companion object {
         private const val DATABASE_NAME = "raspisanie.db"
-        private const val DATABASE_VERSION = 20
+        private const val DATABASE_VERSION = 24
         const val TABLE_NAME_SEMANTIC_GROUP = "semantic_group"
 
         const val TABLE_RASP_UPDATE = "rasp_update"

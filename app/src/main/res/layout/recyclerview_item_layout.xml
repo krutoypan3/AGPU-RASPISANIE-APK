@@ -23,6 +23,7 @@
             app:cardBackgroundColor="#00000000"
             app:cardElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
             <ImageView
                 android:id="@+id/cardViewAudImage"
