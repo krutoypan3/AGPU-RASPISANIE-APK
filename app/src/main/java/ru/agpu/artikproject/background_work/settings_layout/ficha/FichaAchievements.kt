@@ -27,7 +27,6 @@ import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animScal
 import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVl
 import ru.agpu.artikproject.background_work.datebase.AppData.Animations.animUehalVp
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
-import ru.agpu.artikproject.presentation.layout.MainActivity
 import java.io.IOException
 import java.util.Random
 

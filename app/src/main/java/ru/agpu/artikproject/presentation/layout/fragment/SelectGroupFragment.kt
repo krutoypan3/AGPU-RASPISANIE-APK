@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.start_activity_fragments
+package ru.agpu.artikproject.presentation.layout.fragment
 
 import android.app.Activity
 import android.content.Intent
@@ -26,13 +26,13 @@ import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_I
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_TYPE
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_START_RASP
 import ru.agpu.artikproject.background_work.textDetranslit
-import ru.agpu.artikproject.presentation.layout.MainActivity
-import ru.agpu.artikproject.presentation.layout.StartActivity
+import ru.agpu.artikproject.presentation.layout.activity.MainActivity
+import ru.agpu.artikproject.presentation.layout.activity.StartActivity
 import ru.oganesyanartem.core.data.repository.groups_list.GroupsListImpl
 import ru.oganesyanartem.core.domain.models.GroupsListItem
 import ru.oganesyanartem.core.domain.usecase.groups_list.GroupsListGetUseCase
 
-class FragmentSelectGroup: Fragment(R.layout.fragment_start_activity_select_group) {
+class SelectGroupFragment: Fragment(R.layout.fragment_start_activity_select_group) {
     var groupsListItems: List<GroupsListItem?> = emptyList()
     private var disposable: Disposable? = null
     override fun onDetach() {
@@ -55,7 +55,7 @@ class FragmentSelectGroup: Fragment(R.layout.fragment_start_activity_select_grou
             helpGroupBtn.startAnimation(AnimationUtils.loadAnimation(view.context, R.anim.scale))
             parentFragmentManager.beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .replace(R.id.fragment_container_view, FragmentGroupHelp::class.java, null)
+                .replace(R.id.fragment_container_view, GroupHelpFragment::class.java, null)
                 .commit() // Переходим к фрагменты с помощью с группой
         }
 

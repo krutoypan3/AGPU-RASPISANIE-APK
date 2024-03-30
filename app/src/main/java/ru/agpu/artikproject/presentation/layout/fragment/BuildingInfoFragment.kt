@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.main_show.fragments
+package ru.agpu.artikproject.presentation.layout.fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -18,7 +18,7 @@ import ru.agpu.artikproject.background_work.datebase.BuildingsRepository
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.background_work.theme.CustomBackground
 
-class FragmentBuildingInfo : Fragment(R.layout.fragment_main_activity_building_info) {
+class BuildingInfoFragment : Fragment(R.layout.fragment_main_activity_building_info) {
 
     companion object {
         var itemPosition = 0

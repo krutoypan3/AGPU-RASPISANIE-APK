@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.main_show.fragments
+package ru.agpu.artikproject.presentation.layout.fragment
 
 import android.app.Activity
 import android.os.Bundle
@@ -14,7 +14,7 @@ import ru.oganesyanartem.core.data.repository.groups_list.GroupsListImpl
 import ru.oganesyanartem.core.domain.repository.GroupsListRepository
 import ru.oganesyanartem.core.domain.usecase.groups_list.GroupsListGetFacultiesUseCase
 
-class FragmentRecyclerviewShow: Fragment(R.layout.fragment_main_activity_recyclerview_show) {
+class RecyclerviewShowFragment: Fragment(R.layout.fragment_main_activity_recyclerview_show) {
     companion object {
         var SELECTED_LIST = 0
     }

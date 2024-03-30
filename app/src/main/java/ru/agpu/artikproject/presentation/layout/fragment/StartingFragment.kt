@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.start_activity_fragments
+package ru.agpu.artikproject.presentation.layout.fragment
 
 import android.app.Activity
 import android.os.Bundle
@@ -15,12 +15,12 @@ import ru.oganesyanartem.core.domain.models.GroupsListItem
 import ru.oganesyanartem.core.domain.repository.GroupsListRepository
 import ru.oganesyanartem.core.domain.usecase.groups_list.GroupsListGetUseCase
 import ru.agpu.artikproject.background_work.GetDirectionsList
-import ru.agpu.artikproject.background_work.StarterMainActivity
+import ru.agpu.artikproject.background_work.MainActivityStarter
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_IF_FIRST_APP_START
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences
 
 
-class FragmentStarting: Fragment(R.layout.fragment_start_activity_starting) {
+class StartingFragment: Fragment(R.layout.fragment_start_activity_starting) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -30,11 +30,11 @@ class FragmentStarting: Fragment(R.layout.fragment_start_activity_starting) {
             // Запускаем фрагмент с приветствием
             parentFragmentManager.beginTransaction().replace(
                 R.id.fragment_container_view,
-                FragmentWelcome::class.java, null
+                WelcomeFragment::class.java, null
             ).commit()
         } else { // Иначе показываем анимацию запуска и переходим в приложение
             val loading_ico = view.findViewById<ImageView>(R.id.loading_ico)
-            StarterMainActivity(view.context as Activity, loading_ico).start()
+            MainActivityStarter(view.context as Activity, loading_ico).start()
         }
         Observable.create { subscriber: ObservableEmitter<List<GroupsListItem?>> ->  // Создаем observable, который будет выполняться в отдельном потоке
                 val groupsListRepository: GroupsListRepository = GroupsListImpl(view.context)

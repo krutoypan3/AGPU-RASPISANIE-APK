@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.presentation.layout.MainActivity
+import ru.agpu.artikproject.presentation.layout.activity.MainActivity
 import java.util.concurrent.TimeUnit
 
 /**
@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
  * @param act Активити
  * @param loadingIco ImageView
  */
-class StarterMainActivity(val act: Activity, private val loadingIco: ImageView) : Thread() {
+class MainActivityStarter(val act: Activity, private val loadingIco: ImageView) : Thread() {
     override fun run() {
         try {
             val animRotate = AnimationUtils.loadAnimation(act.applicationContext, R.anim.scale_long)

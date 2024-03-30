@@ -15,7 +15,6 @@ import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
 import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListed
 import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedId
 import ru.agpu.artikproject.background_work.datebase.AppData.Groups.groupListedType
-import ru.agpu.artikproject.presentation.layout.MainActivity
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader

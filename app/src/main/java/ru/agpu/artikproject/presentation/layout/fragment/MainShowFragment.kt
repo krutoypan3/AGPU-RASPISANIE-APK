@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.main_show.fragments
+package ru.agpu.artikproject.presentation.layout.fragment
 
 import android.app.Activity
 import android.os.Bundle
@@ -16,7 +16,7 @@ import ru.agpu.artikproject.background_work.main_show.UpdateDateInMainActivity
 import ru.agpu.artikproject.background_work.main_show.WatchSaveGroupRasp
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 
-class FragmentMainShow: Fragment(R.layout.fragment_main_activity_main_show) {
+class MainShowFragment: Fragment(R.layout.fragment_main_activity_main_show) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val activity = view.context as Activity

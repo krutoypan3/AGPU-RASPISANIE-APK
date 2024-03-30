@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.admin_panel
+package ru.agpu.artikproject.presentation.layout.fragment.admin_panel
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 
-class FragmentShowListDirections: Fragment(R.layout.fragment_admin_panel_show_list_directions) {
+class ShowListDirectionsFragment: Fragment(R.layout.fragment_admin_panel_show_list_directions) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

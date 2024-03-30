@@ -14,7 +14,6 @@ import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
 import ru.agpu.artikproject.background_work.datebase.Raspisanie
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
 import ru.agpu.artikproject.background_work.theme.GetTextColor
-import ru.agpu.artikproject.presentation.layout.MainActivity
 
 class WeekShow(context: Context) {
     companion object {

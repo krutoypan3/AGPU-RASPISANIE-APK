@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.start_activity_fragments
+package ru.agpu.artikproject.presentation.layout.fragment
 
 import android.os.Bundle
 import android.view.View
@@ -6,12 +6,12 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_WELCOME
-import ru.agpu.artikproject.presentation.layout.StartActivity
+import ru.agpu.artikproject.presentation.layout.activity.StartActivity
 
 /**
  * Фрагмент, на котором предоставляется выбор: "Выбор группы" или "Выбор направления"
  */
-class FragmentGroup: Fragment(R.layout.fragment_start_activity_group) {
+class GroupFragment: Fragment(R.layout.fragment_start_activity_group) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         StartActivity.FRAGMENT = BACK_TO_WELCOME
@@ -22,7 +22,7 @@ class FragmentGroup: Fragment(R.layout.fragment_start_activity_group) {
             groupNameBtn.isClickable = false
             groupNameBtn.startAnimation(AnimationUtils.loadAnimation(view.context, R.anim.scale))
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, FragmentSelectGroup::class.java, null)
+                .replace(R.id.fragment_container_view, SelectGroupFragment::class.java, null)
                 .commit()
         }
 
@@ -32,7 +32,7 @@ class FragmentGroup: Fragment(R.layout.fragment_start_activity_group) {
             directionBtn.isClickable = false
             directionBtn.startAnimation(AnimationUtils.loadAnimation(view.context, R.anim.scale))
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, FragmentSelectTraining::class.java, null)
+                .replace(R.id.fragment_container_view, SelectTrainingFragment::class.java, null)
                 .commit()
         }
     }

@@ -5,7 +5,6 @@ import android.app.Activity
 import android.widget.TextView
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
-import ru.agpu.artikproject.presentation.layout.MainActivity
 import ru.oganesyanartem.core.data.repository.weeks_list.WeeksListImpl
 import ru.oganesyanartem.core.domain.repository.WeeksListRepository
 import ru.oganesyanartem.core.domain.usecase.weeks_list.WeeksListGetByWeekIdUseCase

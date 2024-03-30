@@ -10,7 +10,7 @@ import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.ShowNotification
 import ru.agpu.artikproject.background_work.datebase.Raspisanie
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow
+import ru.agpu.artikproject.presentation.layout.fragment.ScheduleShowFragment
 import java.util.*
 
 
@@ -24,8 +24,8 @@ class GetRasp(
     private val raspisanieRepository = RaspisanieRepository()
 
     override fun run() {
-        if (!FragmentScheduleShow.refresh_on_off) {
-            FragmentScheduleShow.refresh_on_off = true
+        if (!ScheduleShowFragment.refresh_on_off) {
+            ScheduleShowFragment.refresh_on_off = true
             Log.i(LOG_TAG, "Был сделан запрос на обновление расписания для $selectedItem")
             val raspisanieList: MutableList<Raspisanie> = mutableListOf()
             try {
@@ -128,13 +128,13 @@ class GetRasp(
                                     }
                                 }
                             }
-                            FragmentScheduleShow.refresh_successful = true
+                            ScheduleShowFragment.refresh_successful = true
                         }
                     } catch (e: IOException) {
                         // Прерывание функции, если нет интернета
                         Log.e(LOG_TAG, e.message ?: "")
-                        FragmentScheduleShow.refresh_on_off = false
-                        FragmentScheduleShow.refresh_successful = false
+                        ScheduleShowFragment.refresh_on_off = false
+                        ScheduleShowFragment.refresh_successful = false
                         return
                     }
                 }
@@ -143,7 +143,7 @@ class GetRasp(
             } finally {
                 raspisanieRepository.saveRaspisanie(raspisanieList)
                 Log.i(LOG_TAG, "Расписание для $selectedItem было обновлено")
-                FragmentScheduleShow.refresh_on_off = false
+                ScheduleShowFragment.refresh_on_off = false
             }
         }
     }

@@ -11,11 +11,11 @@ import ru.agpu.artikproject.background_work.adapters.recycler_view.RecyclerViewI
 import ru.agpu.artikproject.background_work.datebase.AppData.FragmentData.FRAGMENT
 import ru.agpu.artikproject.background_work.datebase.AppData.FragmentData.myFragmentManager
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_BUILDINGS_SHOW
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo.Companion.mainText
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo.Companion.pictureByteArrayOutputArray
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo.Companion.pictureUrl
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentBuildingInfo.Companion.subText
+import ru.agpu.artikproject.presentation.layout.fragment.BuildingInfoFragment
+import ru.agpu.artikproject.presentation.layout.fragment.BuildingInfoFragment.Companion.mainText
+import ru.agpu.artikproject.presentation.layout.fragment.BuildingInfoFragment.Companion.pictureByteArrayOutputArray
+import ru.agpu.artikproject.presentation.layout.fragment.BuildingInfoFragment.Companion.pictureUrl
+import ru.agpu.artikproject.presentation.layout.fragment.BuildingInfoFragment.Companion.subText
 import java.io.ByteArrayOutputStream
 
 /**
@@ -28,7 +28,7 @@ class BuildingsItemClick(recyclerView: RecyclerView, itemView: View, datas: List
     init {
         val itemPosition = recyclerView.getChildLayoutPosition(itemView) // Получаем позицию нажатого элемента
         val item = datas[itemPosition] // Получаем сам нажатый элемент
-        FragmentBuildingInfo.itemPosition = itemPosition // Позицию
+        BuildingInfoFragment.itemPosition = itemPosition // Позицию
         mainText = item.mainText // Основной текст
         subText = item.subText // Дополнительный текст
 
@@ -46,7 +46,7 @@ class BuildingsItemClick(recyclerView: RecyclerView, itemView: View, datas: List
         FRAGMENT = BACK_TO_BUILDINGS_SHOW
         myFragmentManager?.beginTransaction()
             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            ?.replace(R.id.fragment_container_view, FragmentBuildingInfo::class.java, null)
+            ?.replace(R.id.fragment_container_view, BuildingInfoFragment::class.java, null)
             ?.commit()
     }
 }

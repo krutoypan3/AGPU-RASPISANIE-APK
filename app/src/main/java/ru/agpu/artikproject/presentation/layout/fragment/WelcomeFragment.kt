@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.start_activity_fragments
+package ru.agpu.artikproject.presentation.layout.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.presentation.layout.MainActivity
+import ru.agpu.artikproject.presentation.layout.activity.MainActivity
 
-class FragmentWelcome: Fragment(R.layout.fragment_start_activity_welcome) {
+class WelcomeFragment: Fragment(R.layout.fragment_start_activity_welcome) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -18,7 +18,7 @@ class FragmentWelcome: Fragment(R.layout.fragment_start_activity_welcome) {
             iJustGotInBtn.isClickable = false
             iJustGotInBtn.startAnimation(AnimationUtils.loadAnimation(view.context, R.anim.scale))
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, FragmentGroup::class.java, null)
+                .replace(R.id.fragment_container_view, GroupFragment::class.java, null)
                 .commit()
         }
 
@@ -28,7 +28,7 @@ class FragmentWelcome: Fragment(R.layout.fragment_start_activity_welcome) {
             imStudentBtn.isClickable = false
             imStudentBtn.startAnimation(AnimationUtils.loadAnimation(view.context, R.anim.scale))
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, FragmentGroup::class.java, null)
+                .replace(R.id.fragment_container_view, GroupFragment::class.java, null)
                 .commit()
         }
 

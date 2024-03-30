@@ -16,9 +16,8 @@ import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItem
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemType
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_MAIN_SHOW
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow
+import ru.agpu.artikproject.presentation.layout.fragment.ScheduleShowFragment
 import ru.agpu.artikproject.background_work.site_parse.GetRasp
-import ru.agpu.artikproject.presentation.layout.MainActivity
 import ru.oganesyanartem.core.data.repository.groups_list.GroupsListImpl
 import ru.oganesyanartem.core.domain.repository.GroupsListRepository
 import ru.oganesyanartem.core.domain.usecase.groups_list.GroupsListGetUseCase
@@ -58,7 +57,7 @@ class GroupsItemClick(recyclerView: RecyclerView, itemView: View, act: Activity)
 
         myFragmentManager?.beginTransaction()
             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            ?.replace(R.id.fragment_container_view, FragmentScheduleShow::class.java, null)
+            ?.replace(R.id.fragment_container_view, ScheduleShowFragment::class.java, null)
             ?.commit()
         IS_MAIN_SHOWED = false
         FRAGMENT = BACK_TO_MAIN_SHOW

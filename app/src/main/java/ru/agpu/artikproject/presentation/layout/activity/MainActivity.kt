@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.presentation.layout
+package ru.agpu.artikproject.presentation.layout.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -50,10 +50,10 @@ import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_I
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_START_RASP
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences.getPref
 import ru.agpu.artikproject.background_work.main_show.BottomNavigationViewListener
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentRecyclerviewShow.Companion.SELECTED_LIST
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentSelectGroupDirectionFaculty
+import ru.agpu.artikproject.presentation.layout.fragment.RecyclerviewShowFragment
+import ru.agpu.artikproject.presentation.layout.fragment.RecyclerviewShowFragment.Companion.SELECTED_LIST
+import ru.agpu.artikproject.presentation.layout.fragment.ScheduleShowFragment
+import ru.agpu.artikproject.presentation.layout.fragment.SelectGroupDirectionFacultyFragment
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList
 import ru.agpu.artikproject.background_work.service.PlayService
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
@@ -79,7 +79,7 @@ class MainActivity: AppCompatActivity() {
                 FRAGMENT = BACK_TO_MAIN_SHOW
                 supportFragmentManager.beginTransaction().replace(
                     R.id.fragment_container_view,
-                    FragmentSelectGroupDirectionFaculty::class.java, null
+                    SelectGroupDirectionFacultyFragment::class.java, null
                 ).commit()
             }
 
@@ -93,7 +93,7 @@ class MainActivity: AppCompatActivity() {
                 SELECTED_LIST = 1
                 supportFragmentManager.beginTransaction()
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                    .replace(R.id.fragment_container_view, FragmentRecyclerviewShow::class.java, null)
+                    .replace(R.id.fragment_container_view, RecyclerviewShowFragment::class.java, null)
                     .commit()
             }
         }
@@ -187,7 +187,7 @@ class MainActivity: AppCompatActivity() {
             bottomNavigationView?.selectedItemId = R.id.details_page_Schedule
             myFragmentManager?.beginTransaction()
                 ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                ?.replace(R.id.fragment_container_view, FragmentScheduleShow::class.java, null)
+                ?.replace(R.id.fragment_container_view, ScheduleShowFragment::class.java, null)
                 ?.commit()
         }
         findViewById<View>(R.id.main_app_text).setOnClickListener {

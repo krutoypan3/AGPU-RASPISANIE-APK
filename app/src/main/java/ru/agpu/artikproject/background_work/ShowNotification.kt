@@ -11,7 +11,7 @@ import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
 import ru.agpu.artikproject.R
-import ru.agpu.artikproject.presentation.layout.MainActivity
+import ru.agpu.artikproject.presentation.layout.activity.MainActivity
 
 /**
  * Класс отвечающий за показ уведомлений

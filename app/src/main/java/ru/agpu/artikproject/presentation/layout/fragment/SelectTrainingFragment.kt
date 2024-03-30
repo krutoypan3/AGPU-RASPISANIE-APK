@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.start_activity_fragments
+package ru.agpu.artikproject.presentation.layout.fragment
 
 import android.app.Activity
 import android.os.Bundle
@@ -20,9 +20,9 @@ import ru.agpu.artikproject.background_work.adapters.list_view.ListViewAdapter
 import ru.agpu.artikproject.background_work.adapters.list_view.ListViewItems
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_GROUP
 import ru.agpu.artikproject.background_work.textDetranslit
-import ru.agpu.artikproject.presentation.layout.StartActivity
+import ru.agpu.artikproject.presentation.layout.activity.StartActivity
 
-class FragmentSelectTraining: Fragment(R.layout.fragment_start_activity_select_training) {
+class SelectTrainingFragment: Fragment(R.layout.fragment_start_activity_select_training) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         StartActivity.FRAGMENT = BACK_TO_GROUP
@@ -91,7 +91,7 @@ class FragmentSelectTraining: Fragment(R.layout.fragment_start_activity_select_t
                     // Открываем фрагмент с выбором группы
                     parentFragmentManager.beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .replace(R.id.fragment_container_view, FragmentSelectGroup::class.java, null)
+                        .replace(R.id.fragment_container_view, SelectGroupFragment::class.java, null)
                         .commit()
                 }
             }
@@ -102,7 +102,7 @@ class FragmentSelectTraining: Fragment(R.layout.fragment_start_activity_select_t
             helpGroupBtn.isClickable = false // Отключаем кнопку после нажатия
             helpGroupBtn.startAnimation(AnimationUtils.loadAnimation(view.context, R.anim.scale))
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, FragmentGroupHelp::class.java, null)
+                .replace(R.id.fragment_container_view, GroupHelpFragment::class.java, null)
                 .commit() // Переходим к фрагменты с помощью с группой
         }
     }

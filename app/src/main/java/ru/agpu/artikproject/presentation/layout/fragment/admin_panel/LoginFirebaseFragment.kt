@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.admin_panel
+package ru.agpu.artikproject.presentation.layout.fragment.admin_panel
 
 import android.app.Activity
 import android.os.Bundle
@@ -14,7 +14,7 @@ import ru.agpu.artikproject.background_work.theme.CustomBackground
 /**
  * Фрагмент с авторизацией пользователя в Google Firebase
  */
-class FragmentLoginFirebase: Fragment(R.layout.fragment_admin_panel_login_firebase) {
+class LoginFirebaseFragment: Fragment(R.layout.fragment_admin_panel_login_firebase) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -46,7 +46,7 @@ class FragmentLoginFirebase: Fragment(R.layout.fragment_admin_panel_login_fireba
                         .addOnCompleteListener(act) { task ->
                             if (task.isSuccessful) { // Если авторизация успешна - переходим к следующему фрагменту
                                 parentFragmentManager.beginTransaction()
-                                    .replace(R.id.fragment_container_view, FragmentShowListDirections::class.java, null)
+                                    .replace(R.id.fragment_container_view, ShowListDirectionsFragment::class.java, null)
                                     .commit()
                             } else { // Если авторизация не удалась - выводим сообщение об ошибке
                                 Toast.makeText(act, R.string.Firebase_login_error, Toast.LENGTH_SHORT).show()
@@ -58,7 +58,7 @@ class FragmentLoginFirebase: Fragment(R.layout.fragment_admin_panel_login_fireba
             // Если пользователь авторизирован, то сразу переходим к следующему фрагменту
             parentFragmentManager.beginTransaction().replace(
                 R.id.fragment_container_view,
-                FragmentShowListDirections::class.java, null
+                ShowListDirectionsFragment::class.java, null
             ).commit()
         }
     }

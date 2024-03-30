@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.presentation.layout
+package ru.agpu.artikproject.presentation.layout.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,8 @@ import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_GROUP
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_WELCOME
 import ru.agpu.artikproject.background_work.datebase.DataBaseSqlite
-import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentGroup
-import ru.agpu.artikproject.background_work.start_activity_fragments.FragmentWelcome
+import ru.agpu.artikproject.presentation.layout.fragment.GroupFragment
+import ru.agpu.artikproject.presentation.layout.fragment.WelcomeFragment
 import ru.agpu.artikproject.background_work.theme.Theme
 
 /**
@@ -20,11 +20,11 @@ class StartActivity : AppCompatActivity() {
         when (FRAGMENT) {
             BACK_TO_GROUP -> supportFragmentManager.beginTransaction().replace(
                 R.id.fragment_container_view,
-                FragmentGroup::class.java, null
+                GroupFragment::class.java, null
             ).commit()
             BACK_TO_WELCOME -> supportFragmentManager.beginTransaction().replace(
                 R.id.fragment_container_view,
-                FragmentWelcome::class.java, null
+                WelcomeFragment::class.java, null
             ).commit()
         }
     }

@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.main_show.fragments
+package ru.agpu.artikproject.presentation.layout.fragment
 
 import android.app.Activity
 import android.content.Intent
@@ -26,9 +26,9 @@ import ru.agpu.artikproject.background_work.settings_layout.user_background.User
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserBackgroundSelectorListener
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserSeekBarListener
 import ru.agpu.artikproject.background_work.settings_layout.user_background.UserSeekBarSetting
-import ru.agpu.artikproject.presentation.layout.AdminPanel
+import ru.agpu.artikproject.presentation.layout.activity.AdminPanelActivity
 
-class FragmentSettingsShow: Fragment(R.layout.fragment_main_activity_settings_show) {
+class SettingsShowFragment: Fragment(R.layout.fragment_main_activity_settings_show) {
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -116,7 +116,7 @@ class FragmentSettingsShow: Fragment(R.layout.fragment_main_activity_settings_sh
         }
 
         view.findViewById<View>(R.id.admin_btn).setOnClickListener {
-            startActivity(Intent(view.context, AdminPanel::class.java))
+            startActivity(Intent(view.context, AdminPanelActivity::class.java))
         }
     }
 }

@@ -9,7 +9,6 @@ import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemType
 import ru.agpu.artikproject.background_work.datebase.RaspUpdate
 import ru.agpu.artikproject.background_work.datebase.RaspUpdateRepository
-import ru.agpu.artikproject.presentation.layout.MainActivity
 
 class RaspUpdateCheckBoxListener(view: View?) {
     init {

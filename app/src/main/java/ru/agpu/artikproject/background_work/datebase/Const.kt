@@ -16,4 +16,13 @@ object Const {
         const val PREF_START_RASP = "start_rasp"
         const val PREF_IF_FIRST_APP_START = "IsFirstAppStart"
     }
+    object SwipeDirections {
+        const val LEFT = "left"
+        const val RIGHT = "right"
+        const val UP = "up"
+        const val BOTTOM = "bottom"
+    }
+    object Calendar {
+        const val NAME = "Расписание АГПУ"
+    }
 }

@@ -13,10 +13,10 @@ import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItem
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemType
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow.Companion.refresh_on_off
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow.Companion.week_day_on_off
+import ru.agpu.artikproject.background_work.datebase.Const
+import ru.agpu.artikproject.presentation.layout.fragment.ScheduleShowFragment.Companion.refresh_on_off
+import ru.agpu.artikproject.presentation.layout.fragment.ScheduleShowFragment.Companion.week_day_on_off
 import ru.agpu.artikproject.background_work.site_parse.GetRasp
-import ru.agpu.artikproject.presentation.layout.MainActivity
 
 class SwipeRasp(direction: String, view: View) {
     init {
@@ -29,7 +29,7 @@ class SwipeRasp(direction: String, view: View) {
         weekDayBt2.isClickable = false
         if (!week_day_on_off) {
             when (direction) {
-                "Left" -> {
+                Const.SwipeDirections.LEFT -> {
                     weekDayBt1.animation = animUehalVl
                     weekDay -= 1
                     if (weekDay == -1) { // Если будет воскресенье, то будет показана суббота
@@ -38,7 +38,7 @@ class SwipeRasp(direction: String, view: View) {
                     }
                 }
 
-                "Right" -> {
+                Const.SwipeDirections.RIGHT -> {
                     weekDayBt2.animation = animUehalVp
                     weekDay += 1
                     if (weekDay == 6) { // Если будет воскресенье, то будет показана суббота
@@ -47,7 +47,7 @@ class SwipeRasp(direction: String, view: View) {
                     }
                 }
 
-                "Bottom" -> if (!refresh_on_off) {
+                Const.SwipeDirections.BOTTOM -> if (!refresh_on_off) {
                     refreshBtn.isClickable = false
                     refreshBtnFicha.visibility = View.VISIBLE
                     refreshBtn.startAnimation(animRotate)
@@ -71,8 +71,8 @@ class SwipeRasp(direction: String, view: View) {
             refreshBtn.startAnimation(animRotate)
             refreshBtn.setBackgroundResource(R.drawable.refresh_1)
             when (direction) {
-                "Left" -> weekId -= 1
-                "Right" -> weekId += 1
+                Const.SwipeDirections.LEFT -> weekId -= 1
+                Const.SwipeDirections.RIGHT -> weekId += 1
             }
             if (CheckInternetConnection.getState(view.context)) {
                 GetRasp(

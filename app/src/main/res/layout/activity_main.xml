@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main_activity_layout"
     android:background="@drawable/background_light"
-    tools:context=".presentation.layout.MainActivity">
+    tools:context=".presentation.layout.activity.MainActivity">
 
     <RelativeLayout
         android:id="@+id/background_darker"
@@ -38,7 +38,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container_view"
-            android:name="ru.agpu.artikproject.background_work.main_show.fragments.FragmentMainShow"
+            android:name="ru.agpu.artikproject.presentation.layout.fragment.MainShowFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="15dp"

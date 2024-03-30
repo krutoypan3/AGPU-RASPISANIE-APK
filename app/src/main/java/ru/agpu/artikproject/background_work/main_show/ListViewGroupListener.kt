@@ -23,9 +23,8 @@ import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItem
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemType
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_MAIN_SHOW
-import ru.agpu.artikproject.background_work.main_show.fragments.FragmentScheduleShow
+import ru.agpu.artikproject.presentation.layout.fragment.ScheduleShowFragment
 import ru.agpu.artikproject.background_work.site_parse.GetRasp
-import ru.agpu.artikproject.presentation.layout.MainActivity
 
 /**
  * Слушатель нажатия на список групп
@@ -73,7 +72,7 @@ class ListViewGroupListener(act: Activity, listView: ListView) {
         bottomNavigationView.selectedItemId = R.id.details_page_Schedule
         myFragmentManager?.beginTransaction()
             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            ?.replace(R.id.fragment_container_view, FragmentScheduleShow::class.java, null)
+            ?.replace(R.id.fragment_container_view, ScheduleShowFragment::class.java, null)
             ?.commit()
     }
 

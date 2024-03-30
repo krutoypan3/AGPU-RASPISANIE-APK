@@ -1,4 +1,4 @@
-package ru.agpu.artikproject.background_work.main_show.fragments
+package ru.agpu.artikproject.presentation.layout.fragment
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -18,6 +18,7 @@ import ru.agpu.artikproject.background_work.datebase.AppData.AppDate.weekId
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItem
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemId
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItemType
+import ru.agpu.artikproject.background_work.datebase.Const
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_ID
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_ITEM_TYPE
@@ -28,9 +29,8 @@ import ru.agpu.artikproject.background_work.rasp_show.SwipeRasp
 import ru.agpu.artikproject.background_work.rasp_show.WeekDayChange
 import ru.agpu.artikproject.background_work.rasp_show.WeekShowResize
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
-import ru.agpu.artikproject.presentation.layout.MainActivity
 
-class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_show) {
+class ScheduleShowFragment: Fragment(R.layout.fragment_main_activity_schedule_show) {
     companion object {
         var refresh_on_off = false
         var week_day_on_off = false
@@ -72,7 +72,7 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         refreshBtn.setBackgroundResource(R.drawable.refresh_1)
 
         // Первичный вывод расписания
-        SwipeRasp("Bottom", view)
+        SwipeRasp(Const.SwipeDirections.BOTTOM, view)
 
         // Функция перехода на сайт с расписанием при нажатии на кнопку
         val raspSite = view.findViewById<ImageView>(R.id.rasp_site)
@@ -91,11 +91,11 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         }
 
         // Переход к предыдущему дню
-        weekDayBt1.setOnClickListener { SwipeRasp("Left", view) }
+        weekDayBt1.setOnClickListener { SwipeRasp(Const.SwipeDirections.LEFT, view) }
         // Переход к следующему дню
-        weekDayBt2.setOnClickListener { SwipeRasp("Right", view) }
+        weekDayBt2.setOnClickListener { SwipeRasp(Const.SwipeDirections.RIGHT, view) }
         // Обновить расписание
-        refreshBtn.setOnClickListener { SwipeRasp("Bottom", view) }
+        refreshBtn.setOnClickListener { SwipeRasp(Const.SwipeDirections.BOTTOM, view) }
 
         refreshBtnFicha.setOnClickListener {
             FichaAchievements().playFichaRefresh(view.context, raspisanieShowLayout)
@@ -107,16 +107,16 @@ class FragmentScheduleShow: Fragment(R.layout.fragment_main_activity_schedule_sh
         // Отслеживание жестов по расписанию
         view.findViewById<View>(R.id.day_para_view_rec)
             .setOnTouchListener(object : OnSwipeTouchListener(view.context) {
-                override fun onSwipeRight() { SwipeRasp("Left", view) }
-                override fun onSwipeLeft() { SwipeRasp("Right", view) }
+                override fun onSwipeRight() { SwipeRasp(Const.SwipeDirections.LEFT, view) }
+                override fun onSwipeLeft() { SwipeRasp(Const.SwipeDirections.RIGHT, view) }
             })
 
 
         // Отслеживание жестов под дневным расписанием
         gestureLayout.setOnTouchListener(object : OnSwipeTouchListener(view.context) {
-            override fun onSwipeRight() { SwipeRasp("Left", view) }
-            override fun onSwipeLeft() { SwipeRasp("Right", view) }
-            override fun onSwipeBottom() { SwipeRasp("Bottom", view) }
+            override fun onSwipeRight() { SwipeRasp(Const.SwipeDirections.LEFT, view) }
+            override fun onSwipeLeft() { SwipeRasp(Const.SwipeDirections.RIGHT, view) }
+            override fun onSwipeBottom() { SwipeRasp(Const.SwipeDirections.BOTTOM, view) }
         })
     }
 }

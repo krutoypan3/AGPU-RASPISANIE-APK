@@ -20,7 +20,6 @@ import ru.agpu.artikproject.background_work.datebase.Raspisanie
 import ru.agpu.artikproject.background_work.datebase.RaspisanieRepository
 import ru.agpu.artikproject.background_work.rasp_show.recycler_view.DayShowRVItems
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
-import ru.agpu.artikproject.presentation.layout.MainActivity
 
 class ParaInfo(position: Int, act: Activity, datas: List<DayShowRVItems>) {
 
