@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.presentation.layout.activity.MainActivity
 
+/**
+ * Приветственный экран приложения (отображается при первом запуске приложения)
+ */
 class WelcomeFragment: Fragment(R.layout.fragment_start_activity_welcome) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

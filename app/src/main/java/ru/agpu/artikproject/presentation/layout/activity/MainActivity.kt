@@ -50,16 +50,17 @@ import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_SELECTED_I
 import ru.agpu.artikproject.background_work.datebase.Const.Prefs.PREF_START_RASP
 import ru.agpu.artikproject.background_work.datebase.MySharedPreferences.getPref
 import ru.agpu.artikproject.background_work.main_show.BottomNavigationViewListener
-import ru.agpu.artikproject.presentation.layout.fragment.RecyclerviewShowFragment
-import ru.agpu.artikproject.presentation.layout.fragment.RecyclerviewShowFragment.Companion.SELECTED_LIST
-import ru.agpu.artikproject.presentation.layout.fragment.ScheduleShowFragment
-import ru.agpu.artikproject.presentation.layout.fragment.SelectGroupDirectionFacultyFragment
 import ru.agpu.artikproject.background_work.main_show.tool_bar.recycler_view_lists.buildings.LoadBuildingsList
 import ru.agpu.artikproject.background_work.service.PlayService
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.background_work.site_parse.GetRasp
 import ru.agpu.artikproject.background_work.theme.CustomBackground.getBackground
 import ru.agpu.artikproject.background_work.theme.CustomBackground.getBackgroundDarker
+import ru.agpu.artikproject.databinding.ActivityMainBinding
+import ru.agpu.artikproject.presentation.layout.fragment.RecyclerviewShowFragment
+import ru.agpu.artikproject.presentation.layout.fragment.RecyclerviewShowFragment.Companion.SELECTED_LIST
+import ru.agpu.artikproject.presentation.layout.fragment.ScheduleShowFragment
+import ru.agpu.artikproject.presentation.layout.fragment.SelectGroupDirectionFacultyFragment
 import ru.oganesyanartem.core.data.repository.CurrentWeekDayImpl
 import ru.oganesyanartem.core.data.repository.current_week_id.CurrentWeekIdImpl
 import ru.oganesyanartem.core.domain.repository.CurrentWeekIdRepository
@@ -67,6 +68,8 @@ import ru.oganesyanartem.core.domain.usecase.CurrentWeekDayGetUseCase
 import ru.oganesyanartem.core.domain.usecase.CurrentWeekIdGetUseCase
 
 class MainActivity: AppCompatActivity() {
+    private var binding: ActivityMainBinding? = null
+
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         Log.i("onKeyMultiple", "kc=$keyCode")
         FichaAchievements().playKeysFicha(this, keyCode)
@@ -102,11 +105,12 @@ class MainActivity: AppCompatActivity() {
     @SuppressLint("NonConstantResourceId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding!!.root)
 
         // Установка нового фона и затемнителя | Должно быть после setContentView
-        findViewById<View>(R.id.main_activity_layout).background = getBackground(applicationContext)
-        findViewById<View>(R.id.background_darker).setBackgroundColor(
+        binding?.mainActivityLayout?.background = getBackground(applicationContext)
+        binding?.backgroundDarker?.setBackgroundColor(
             getBackgroundDarker(applicationContext)
         )
         val policy = ThreadPolicy.Builder().permitAll().build() // Без этих двух строк
@@ -128,7 +132,7 @@ class MainActivity: AppCompatActivity() {
 
         weekDay = CurrentWeekDayGetUseCase(CurrentWeekDayImpl()).execute()
         myFragmentManager = supportFragmentManager
-        bottomNavigationView = findViewById(R.id.bottom_navigatin_view)
+        bottomNavigationView = binding?.bottomNavigatinView
         BottomNavigationViewListener(this) // Слушатель нажатий на нижний тулбар
         CheckAppUpdate(this, false).start() // Запуск проверки обновлений при входе в приложение
         LoadBuildingsList(this).start() // Загрузка данных об строениях в адаптер
@@ -190,7 +194,7 @@ class MainActivity: AppCompatActivity() {
                 ?.replace(R.id.fragment_container_view, ScheduleShowFragment::class.java, null)
                 ?.commit()
         }
-        findViewById<View>(R.id.main_app_text).setOnClickListener {
+        binding?.mainAppText?.setOnClickListener {
             if (IS_MAIN_SHOWED) FirstAppStartHelper(this)
         }
     }

@@ -161,7 +161,7 @@ class CustomDialog(
                     val raspUpdateRepository = RaspUpdateRepository()
                     raspUpdateRepository.deleteAll()
                     groupListed = null
-                    WatchSaveGroupRasp(act, null)
+                    WatchSaveGroupRasp(null)
                 }
                 CustomDialogType.MAP_CONFIRM -> {
                     val mapUrl = finalCorp?.buildingAddressMapUrl
@@ -180,7 +180,7 @@ class CustomDialog(
                             searchType = groupListedType[position],
                         )
                     )
-                    WatchSaveGroupRasp(act, null) // Первичный вывод групп которые были открыты ранее
+                    WatchSaveGroupRasp(null) // Первичный вывод групп которые были открыты ранее
                 }
                 else -> {}
             }

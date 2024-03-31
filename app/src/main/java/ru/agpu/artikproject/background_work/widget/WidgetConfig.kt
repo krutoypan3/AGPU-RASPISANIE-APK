@@ -18,7 +18,7 @@ class WidgetConfig : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.widget_config)
         val configWidgetListView: ListView? = findViewById(R.id.configWidgetListView) // Список с ранее открытыми группами при создании виджета
-        val sap = WatchSaveGroupRasp(applicationContext, true) // Получаем список сохраненных групп из базы данных
+        val sap = WatchSaveGroupRasp(true) // Получаем список сохраненных групп из базы данных
         try {
             if (sap.groupList.size != 0) { // Если в списке есть группы \ аудитории \ преподаватели
                 val adapter = ListViewAdapter(applicationContext, sap.groupList, true)

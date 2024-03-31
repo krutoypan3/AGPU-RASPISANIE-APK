@@ -89,16 +89,16 @@ class FichaAchievements {
         }
     }
 
-    fun playWindowsFicha(activity: Activity) {
+    fun playWindowsFicha(view: View) {
         if (Random().nextInt(5) == 0) {
-            putFicha(activity, Ficha.FICHA_WINDOWS)
-            val audioManager = activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            putFicha(view.context, Ficha.FICHA_WINDOWS)
+            val audioManager = view.context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
             audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 30, 0)
-            mp = MediaPlayer.create(activity, R.raw.windows)
+            mp = MediaPlayer.create(view.context, R.raw.windows)
             mp?.start()
-            Toast.makeText(activity, R.string.touch_up_scam, Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, R.string.touch_up_scam, Toast.LENGTH_LONG).show()
         } else {
-            Toast.makeText(activity, R.string.touch_up, Toast.LENGTH_SHORT).show()
+            Toast.makeText(view.context, R.string.touch_up, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -144,20 +144,20 @@ class FichaAchievements {
      * @param act Активити
      */
     @SuppressLint("ClickableViewAccessibility")
-    fun playSettingsLogoFicha(act: Activity){
-        val updateLayout = act.findViewById<RelativeLayout>(R.id.update_layout) // Находим сам фон
-        val animImage = act.findViewById<ImageView>(R.id.animImage) // Находим изначально невидимое пустое изображение
+    fun playSettingsLogoFicha(view: View){
+        val updateLayout = view.findViewById<RelativeLayout>(R.id.update_layout) // Находим сам фон
+        val animImage = view.findViewById<ImageView>(R.id.animImage) // Находим изначально невидимое пустое изображение
         updateLayout.setOnTouchListener { _: View?, event: MotionEvent ->  // При нажатии на фон
             animImage.x = event.x - 100 // Определяем позицию нажатия по X
             animImage.y = event.y - 100 // Определяем позицию нажатия по Y
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    putFicha(act.applicationContext, Ficha.FICHA_SETTING_LOGO) // Засчитываем фичу с плавающим логотипом
-                    FichaShow(act) // Обновляем список найденных фич, т.к. находимся на слое настроек
+                    putFicha(view.context, Ficha.FICHA_SETTING_LOGO) // Засчитываем фичу с плавающим логотипом
+                    FichaShow(view) // Обновляем список найденных фич, т.к. находимся на слое настроек
                     animImage.visibility = View.VISIBLE // Делаем невидимую картинку видимой
                     if (Random().nextInt(20) == 0) { // С шансом 1 к 20 устанавливаем другое фото вместо логотипа
                         animImage.setImageResource(R.drawable.ficha_leonardo) // Ставим фото Леонардо
-                        putFicha(act.applicationContext, Ficha.FICHA_SETTING_LEONARDO) // Засчитываем фичу
+                        putFicha(view.context, Ficha.FICHA_SETTING_LEONARDO) // Засчитываем фичу
                     }
                 }
                 MotionEvent.ACTION_UP -> {

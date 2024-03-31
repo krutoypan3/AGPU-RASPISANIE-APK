@@ -32,6 +32,9 @@ import ru.oganesyanartem.core.data.repository.groups_list.GroupsListImpl
 import ru.oganesyanartem.core.domain.models.GroupsListItem
 import ru.oganesyanartem.core.domain.usecase.groups_list.GroupsListGetUseCase
 
+/**
+ * Экран выбора группы
+ */
 class SelectGroupFragment: Fragment(R.layout.fragment_start_activity_select_group) {
     var groupsListItems: List<GroupsListItem?> = emptyList()
     private var disposable: Disposable? = null

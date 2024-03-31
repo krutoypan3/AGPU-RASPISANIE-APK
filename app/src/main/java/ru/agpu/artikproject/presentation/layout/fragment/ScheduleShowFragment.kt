@@ -4,11 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ru.agpu.artikproject.R
 import ru.agpu.artikproject.background_work.OnSwipeTouchListener
@@ -29,8 +27,14 @@ import ru.agpu.artikproject.background_work.rasp_show.SwipeRasp
 import ru.agpu.artikproject.background_work.rasp_show.WeekDayChange
 import ru.agpu.artikproject.background_work.rasp_show.WeekShowResize
 import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
+import ru.agpu.artikproject.databinding.FragmentMainActivityScheduleShowBinding
 
+/**
+ * Фрагмент на котором отображается основное расписание
+ */
 class ScheduleShowFragment: Fragment(R.layout.fragment_main_activity_schedule_show) {
+    private var binding: FragmentMainActivityScheduleShowBinding? = null
+
     companion object {
         var refresh_on_off = false
         var week_day_on_off = false
@@ -43,41 +47,30 @@ class ScheduleShowFragment: Fragment(R.layout.fragment_main_activity_schedule_sh
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentMainActivityScheduleShowBinding.inflate(inflater, container, false)
 
         // Сохраняем последнее открытое расписание
-        MySharedPreferences.putPref(view.context, PREF_SELECTED_ITEM, selectedItem)
-        MySharedPreferences.putPref(view.context, PREF_SELECTED_ITEM_TYPE, selectedItemType)
-        MySharedPreferences.putPref(view.context, PREF_SELECTED_ITEM_ID, selectedItemId)
+        MySharedPreferences.putPref(context, PREF_SELECTED_ITEM, selectedItem)
+        MySharedPreferences.putPref(context, PREF_SELECTED_ITEM_TYPE, selectedItemType)
+        MySharedPreferences.putPref(context, PREF_SELECTED_ITEM_ID, selectedItemId)
 
-        val weekDayBt1 = view.findViewById<Button>(R.id.week_day_bt1) // Кнопка перехода к предыдущему дню
-        val weekDayBt2 = view.findViewById<Button>(R.id.week_day_bt2) // Кнопка перехода к следующему дню
-        val weekDayChangeBtn = view.findViewById<ImageView>(R.id.week_day_change_btn) // Кнопка смены режима просмотра расписания [День / Неделя]
-        val refreshBtnFicha = view.findViewById<ImageView>(R.id.refresh_btn_all) // Кнопка перекручивания расп (фича)
-        val refreshBtn = view.findViewById<ImageView>(R.id.refresh_btn) // Кнопка обновления расписания
-        val weekDayChangeBtnSizeUp = view.findViewById<ImageView>(R.id.week_day_change_btn_size_up) // Кнопка увеличения размера текста в недельном режиме
-        val weekDayChangeBtnSizeDown = view.findViewById<ImageView>(R.id.week_day_change_btn_size_down) // Кнопка уменьшения размера текста в недельном режиме
-        val gestureLayout = view.findViewById<ConstraintLayout>(R.id.raspisanie_day) // Слой для отслеживания жестов
-        val raspisanieShowLayout = view.findViewById<RelativeLayout>(R.id.raspisanie_show) // Основной слой
-
-        RefreshRaspWeekOrDayStarter(view).start() // Обновляем расписание
+        RefreshRaspWeekOrDayStarter(binding?.root!!).start() // Обновляем расписание
 
         // Кнопка увеличивающая размер текста в режиме недели
-        weekDayChangeBtnSizeUp.setOnClickListener { WeekShowResize().sizeAdd() }
+        binding?.weekDayChangeBtnSizeUp?.setOnClickListener { WeekShowResize().sizeAdd() }
         // Кнопка уменьшающая размер текста в режиме недели
-        weekDayChangeBtnSizeDown.setOnClickListener { WeekShowResize().sizeDec() }
+        binding?.weekDayChangeBtnSizeDown?.setOnClickListener { WeekShowResize().sizeDec() }
 
-        refreshBtn.startAnimation(animRotate)
-        refreshBtn.setBackgroundResource(R.drawable.refresh_1)
+        binding?.refreshBtn?.startAnimation(animRotate)
+        binding?.refreshBtn?.setBackgroundResource(R.drawable.refresh_1)
 
         // Первичный вывод расписания
-        SwipeRasp(Const.SwipeDirections.BOTTOM, view)
+        SwipeRasp(Const.SwipeDirections.BOTTOM, binding?.root!!)
 
         // Функция перехода на сайт с расписанием при нажатии на кнопку
-        val raspSite = view.findViewById<ImageView>(R.id.rasp_site)
-        raspSite.setOnClickListener {
-            raspSite.animation = animRotate_ok
+        binding?.raspSite?.setOnClickListener {
+            binding?.raspSite?.animation = animRotate_ok
             startActivity(Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse(
@@ -91,32 +84,35 @@ class ScheduleShowFragment: Fragment(R.layout.fragment_main_activity_schedule_sh
         }
 
         // Переход к предыдущему дню
-        weekDayBt1.setOnClickListener { SwipeRasp(Const.SwipeDirections.LEFT, view) }
+        binding?.weekDayBt1?.setOnClickListener { SwipeRasp(Const.SwipeDirections.LEFT, binding?.root!!) }
         // Переход к следующему дню
-        weekDayBt2.setOnClickListener { SwipeRasp(Const.SwipeDirections.RIGHT, view) }
+        binding?.weekDayBt2?.setOnClickListener { SwipeRasp(Const.SwipeDirections.RIGHT, binding?.root!!) }
         // Обновить расписание
-        refreshBtn.setOnClickListener { SwipeRasp(Const.SwipeDirections.BOTTOM, view) }
+        binding?.refreshBtn?.setOnClickListener { SwipeRasp(Const.SwipeDirections.BOTTOM, binding?.root!!) }
 
-        refreshBtnFicha.setOnClickListener {
-            FichaAchievements().playFichaRefresh(view.context, raspisanieShowLayout)
+        binding?.refreshBtnAll?.setOnClickListener {
+            FichaAchievements().playFichaRefresh(requireContext(), binding?.raspisanieShow!!)
         }
 
         // Смена недельного режима и дневного
-        weekDayChangeBtn.setOnClickListener { WeekDayChange(view) }
+        binding?.weekDayChangeBtn?.setOnClickListener { WeekDayChange(binding?.root!!) }
 
         // Отслеживание жестов по расписанию
-        view.findViewById<View>(R.id.day_para_view_rec)
-            .setOnTouchListener(object : OnSwipeTouchListener(view.context) {
-                override fun onSwipeRight() { SwipeRasp(Const.SwipeDirections.LEFT, view) }
-                override fun onSwipeLeft() { SwipeRasp(Const.SwipeDirections.RIGHT, view) }
+        binding?.dayParaViewRec
+            ?.setOnTouchListener(object : OnSwipeTouchListener(requireContext()) {
+                override fun onSwipeRight() { SwipeRasp(Const.SwipeDirections.LEFT, binding?.root!!) }
+                override fun onSwipeLeft() { SwipeRasp(Const.SwipeDirections.RIGHT, binding?.root!!) }
             })
 
 
         // Отслеживание жестов под дневным расписанием
-        gestureLayout.setOnTouchListener(object : OnSwipeTouchListener(view.context) {
-            override fun onSwipeRight() { SwipeRasp(Const.SwipeDirections.LEFT, view) }
-            override fun onSwipeLeft() { SwipeRasp(Const.SwipeDirections.RIGHT, view) }
-            override fun onSwipeBottom() { SwipeRasp(Const.SwipeDirections.BOTTOM, view) }
+        binding?.raspisanieDay?.setOnTouchListener(
+        object : OnSwipeTouchListener(requireContext()) {
+            override fun onSwipeRight() { SwipeRasp(Const.SwipeDirections.LEFT, binding?.root!!) }
+            override fun onSwipeLeft() { SwipeRasp(Const.SwipeDirections.RIGHT, binding?.root!!) }
+            override fun onSwipeBottom() { SwipeRasp(Const.SwipeDirections.BOTTOM, binding?.root!!) }
         })
+
+        return binding?.root
     }
 }

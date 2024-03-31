@@ -10,14 +10,14 @@ import ru.agpu.artikproject.background_work.datebase.AppData.FragmentData.IS_MAI
 import ru.agpu.artikproject.background_work.datebase.AppData.FragmentData.myFragmentManager
 import ru.agpu.artikproject.background_work.datebase.AppData.Rasp.selectedItem
 import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BACK_TO_MAIN_SHOW
+import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
 import ru.agpu.artikproject.presentation.layout.fragment.MainShowFragment
 import ru.agpu.artikproject.presentation.layout.fragment.NoHaveFavoriteScheduleFragment
 import ru.agpu.artikproject.presentation.layout.fragment.RecyclerviewShowFragment
 import ru.agpu.artikproject.presentation.layout.fragment.RecyclerviewShowFragment.Companion.SELECTED_LIST
 import ru.agpu.artikproject.presentation.layout.fragment.ScheduleShowFragment
 import ru.agpu.artikproject.presentation.layout.fragment.SelectGroupDirectionFacultyFragment
-import ru.agpu.artikproject.presentation.layout.fragment.SettingsShowFragment
-import ru.agpu.artikproject.background_work.settings_layout.ficha.FichaAchievements
+import ru.agpu.artikproject.presentation.layout.fragment.SettingsFragment
 
 class BottomNavigationViewListener(activity: Activity) {
     init {
@@ -75,7 +75,7 @@ class BottomNavigationViewListener(activity: Activity) {
                 R.id.details_page_Settings -> // Кнопка 'Настройки'
                     myFragmentManager?.beginTransaction()
                         ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        ?.replace(R.id.fragment_container_view, SettingsShowFragment::class.java, null)
+                        ?.replace(R.id.fragment_container_view, SettingsFragment::class.java, null)
                         ?.commit()
 
                 else -> return@setOnItemSelectedListener false

@@ -22,6 +22,10 @@ import ru.agpu.artikproject.background_work.datebase.Const.FragmentDirection.BAC
 import ru.agpu.artikproject.background_work.textDetranslit
 import ru.agpu.artikproject.presentation.layout.activity.StartActivity
 
+
+/**
+ * Фрагмент выбора направления подготовки
+ */
 class SelectTrainingFragment: Fragment(R.layout.fragment_start_activity_select_training) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
